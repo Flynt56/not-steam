@@ -60,7 +60,7 @@ namespace NotSteam.Controllers
 
         // PUT api/companies/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Company>> PutCompany(int id, [FromBody] Company item)
+        public async Task<IActionResult> PutCompany(int id, [FromBody] Company item)
         {
             if (id != item.Id)
             {
