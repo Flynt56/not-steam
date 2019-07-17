@@ -21,8 +21,8 @@ namespace NotSteam.Controllers
             // Add default entries
             if (_context.Games.Count() < 2)
             {
-                _context.Games.Add(new Game { Title = "World of Minecraft", CompanyId = 1 });
-                _context.Games.Add(new Game { Title = "C4ll of $$$$", CompanyId = 2 });
+                _context.Games.Add(new Game { Title = "World of Minecraft", CompanyId = 5 });
+                _context.Games.Add(new Game { Title = "C4ll of $$$$", CompanyId = 6 });
                 _context.SaveChanges();
             }
         }
