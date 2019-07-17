@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,14 @@ namespace NotSteam.Controllers
         public CompaniesController(NotSteamContext context)
         {
             _context = context;
+
+            // Add default entries
+            if (_context.Companies.Count() < 2)
+            {
+                _context.Companies.Add(new Company { Name = "Methesda Softworks" });
+                _context.Companies.Add(new Company { Name = "CD Projekt Blue" });
+                _context.SaveChanges();
+            }
         }
 
         // GET api/companies
