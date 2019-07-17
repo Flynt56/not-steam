@@ -6,8 +6,8 @@ namespace NotSteam.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Uri HomepageUri { get; set; }
+        public string HomepageUri { get; set; }
         public string Description { get; set; }
-        public Uri LogoImageUri { get; set; }
+        public string LogoImageUri { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace NotSteam.Models
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Nickname { get; set; }
-        public Uri ProfileImageUri { get; set; }
+        public string ProfileImageUri { get; set; }
     }
 }
