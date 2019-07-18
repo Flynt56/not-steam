@@ -21,9 +21,9 @@ namespace NotSteam.Controllers
             // Add default entries
             if (_context.Purchases.Count() < 3)
             {
-                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 7, TotalPrice = 29.99M });
-                _context.Purchases.Add(new Purchase { UserId = 2, GameId = 6, TotalPrice = 59.99M });
-                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 6, TotalPrice = 44.99M });
+                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 2, TotalPrice = 29.99M });
+                _context.Purchases.Add(new Purchase { UserId = 2, GameId = 1, TotalPrice = 59.99M });
+                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 1, TotalPrice = 44.99M });
                 _context.SaveChanges();
             }
         }

@@ -21,9 +21,9 @@ namespace NotSteam.Controllers
             // Add default entries
             if (_context.Reviews.Count() < 3)
             {
-                _context.Reviews.Add(new Review { UserId = 1, GameId = 6, Rating = 8 });
-                _context.Reviews.Add(new Review { UserId = 2, GameId = 6, Rating = 6 });
-                _context.Reviews.Add(new Review { UserId = 1, GameId = 7, Rating = 5 });
+                _context.Reviews.Add(new Review { UserId = 1, GameId = 1, Rating = 8 });
+                _context.Reviews.Add(new Review { UserId = 2, GameId = 1, Rating = 6 });
+                _context.Reviews.Add(new Review { UserId = 1, GameId = 2, Rating = 5 });
                 _context.SaveChanges();
             }
         }

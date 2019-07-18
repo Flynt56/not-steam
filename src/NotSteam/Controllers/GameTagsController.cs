@@ -21,9 +21,9 @@ namespace NotSteam.Controllers
             // Add default entries
             if (_context.GameTags.Count() < 3)
             {
-                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 7 });
-                _context.GameTags.Add(new GameTag { TagId = 2, GameId = 7 });
-                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 6 });
+                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 1 });
+                _context.GameTags.Add(new GameTag { TagId = 2, GameId = 1 });
+                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 2 });
                 _context.SaveChanges();
             }
         }

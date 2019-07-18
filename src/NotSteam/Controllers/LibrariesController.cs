@@ -21,9 +21,9 @@ namespace NotSteam.Controllers
             // Add default entries
             if (_context.Libraries.Count() < 3)
             {
-                _context.Libraries.Add(new Library { UserId = 1, GameId = 6, TotalPlayTimeHours = 321 });
-                _context.Libraries.Add(new Library { UserId = 2, GameId = 6, TotalPlayTimeHours = 40 });
-                _context.Libraries.Add(new Library { UserId = 1, GameId = 7, TotalPlayTimeHours = 10 });
+                _context.Libraries.Add(new Library { UserId = 1, GameId = 2, TotalPlayTimeHours = 321 });
+                _context.Libraries.Add(new Library { UserId = 2, GameId = 2, TotalPlayTimeHours = 40 });
+                _context.Libraries.Add(new Library { UserId = 1, GameId = 1, TotalPlayTimeHours = 10 });
                 _context.SaveChanges();
             }
         }
