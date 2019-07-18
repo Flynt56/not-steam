@@ -1045,6 +1045,172 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "DeletePurchase",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{purchases}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{purchases}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteLibrary",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{libraries}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{libraries}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteGameTag",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{gametags}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{gametags}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteReview",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{reviews}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{reviews}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteGame",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{games}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{games}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteTag",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{tags}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{tags}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCompany",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{companies}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{companies}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{rootUrl}}{{users}}/{{deleteId}}",
+									"host": [
+										"{{rootUrl}}{{users}}"
+									],
+									"path": [
+										"{{deleteId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "96d61d78-c662-402f-ad24-98743dee1e81",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "85d60ae0-0fad-4a5f-b9b9-e463388390e8",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,202,204]);",
+									"});"
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			],
 			"event": [
@@ -1096,63 +1262,69 @@
 	],
 	"variable": [
 		{
-			"id": "85d6a173-908c-4352-ba45-4d23c39804f0",
+			"id": "4866cbe4-e07b-4e22-8b07-0ca653932549",
 			"key": "rootUrl",
 			"value": "https://localhost:5001/api",
 			"type": "string"
 		},
 		{
-			"id": "1e499b74-10df-4952-ab38-dabdd704f395",
+			"id": "0360b0c5-a36c-47dd-94bf-f54ad0135302",
 			"key": "games",
 			"value": "/games",
 			"type": "string"
 		},
 		{
-			"id": "29bb0afa-fb14-432e-bdd4-6b14a1171174",
+			"id": "7f6ef92f-66fc-4ae3-bc5a-146c0b115869",
 			"key": "users",
 			"value": "/users",
 			"type": "string"
 		},
 		{
-			"id": "0436c677-52c3-471b-928d-890bcce97f25",
+			"id": "51cf94e9-e816-4f98-ad2c-f38f88065382",
 			"key": "companies",
 			"value": "/companies",
 			"type": "string"
 		},
 		{
-			"id": "ef58be03-8c36-44ff-a9da-193a25bf83e0",
+			"id": "041d2cfd-8aed-4234-b357-29aad7147ee8",
 			"key": "reviews",
 			"value": "/reviews",
 			"type": "string"
 		},
 		{
-			"id": "203293d8-002f-4013-bedf-e7bfad92a25f",
+			"id": "09a972dd-b147-46bf-9a22-8a64f26b9344",
 			"key": "tags",
 			"value": "/tags",
 			"type": "string"
 		},
 		{
-			"id": "1a33d1ad-c9a1-404d-92a8-840c083d23fb",
+			"id": "72a7ff69-3409-49f2-a730-b0abd152b754",
 			"key": "gametags",
 			"value": "/gametags",
 			"type": "string"
 		},
 		{
-			"id": "603e36b5-b9aa-4d3a-8a61-9a0bb961dd1f",
+			"id": "43da5025-e0ba-4234-8136-21a9c1d71fef",
 			"key": "libraries",
 			"value": "/libraries",
 			"type": "string"
 		},
 		{
-			"id": "8493bad9-170b-432b-a17a-754822461e6f",
+			"id": "3dcfe876-0baa-4705-a38f-bd71e55b35f9",
 			"key": "purchases",
 			"value": "/purchases",
 			"type": "string"
 		},
 		{
-			"id": "575d9e10-35bc-43ab-bf45-d450effb3ce4",
+			"id": "63d6d6ff-f6de-4653-938c-fab1335d447c",
 			"key": "testId",
 			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "8c139899-1a97-4f2a-a2d0-a604afb67495",
+			"key": "deleteId",
+			"value": "2",
 			"type": "string"
 		}
 	]
