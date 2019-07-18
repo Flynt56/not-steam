@@ -512,7 +512,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"A REALLY GOOD Game\",\n    \"description\": \"Almost original! Never seen before!\",\n    \"companyId\": 2\n}"
+									"raw": "{\n    \"title\": \"A REALLY GOOD Game\",\n    \"description\": \"Almost original! Never seen before!\",\n    \"companyId\": 1\n}"
 								},
 								"url": {
 									"raw": "{{rootUrl}}{{games}}",
@@ -1262,67 +1262,67 @@
 	],
 	"variable": [
 		{
-			"id": "4866cbe4-e07b-4e22-8b07-0ca653932549",
+			"id": "f4764772-ebda-4102-8576-1bf84c3cb047",
 			"key": "rootUrl",
 			"value": "https://localhost:5001/api",
 			"type": "string"
 		},
 		{
-			"id": "0360b0c5-a36c-47dd-94bf-f54ad0135302",
+			"id": "04fdfebf-7708-4920-b1e4-6f01fceb467f",
 			"key": "games",
 			"value": "/games",
 			"type": "string"
 		},
 		{
-			"id": "7f6ef92f-66fc-4ae3-bc5a-146c0b115869",
+			"id": "958be14e-c79c-4ca1-b874-c16a27ca6ac7",
 			"key": "users",
 			"value": "/users",
 			"type": "string"
 		},
 		{
-			"id": "51cf94e9-e816-4f98-ad2c-f38f88065382",
+			"id": "7a354d2b-59b4-4382-8e1e-f835b3d2bfaf",
 			"key": "companies",
 			"value": "/companies",
 			"type": "string"
 		},
 		{
-			"id": "041d2cfd-8aed-4234-b357-29aad7147ee8",
+			"id": "803fa966-6995-4125-99cf-d90eb69ea364",
 			"key": "reviews",
 			"value": "/reviews",
 			"type": "string"
 		},
 		{
-			"id": "09a972dd-b147-46bf-9a22-8a64f26b9344",
+			"id": "a9a296d1-dc9b-47f9-b1e7-f2d4be859f67",
 			"key": "tags",
 			"value": "/tags",
 			"type": "string"
 		},
 		{
-			"id": "72a7ff69-3409-49f2-a730-b0abd152b754",
+			"id": "7b8368a9-8a43-49c8-bcbd-c1758dc6b647",
 			"key": "gametags",
 			"value": "/gametags",
 			"type": "string"
 		},
 		{
-			"id": "43da5025-e0ba-4234-8136-21a9c1d71fef",
+			"id": "ca0883c9-b523-4c5e-9817-f634429a0253",
 			"key": "libraries",
 			"value": "/libraries",
 			"type": "string"
 		},
 		{
-			"id": "3dcfe876-0baa-4705-a38f-bd71e55b35f9",
+			"id": "49d9eb21-ffbb-436e-8859-443d6d117a26",
 			"key": "purchases",
 			"value": "/purchases",
 			"type": "string"
 		},
 		{
-			"id": "63d6d6ff-f6de-4653-938c-fab1335d447c",
+			"id": "263dea91-426a-46c9-a4d7-9e9a961b0da9",
 			"key": "testId",
 			"value": "1",
 			"type": "string"
 		},
 		{
-			"id": "8c139899-1a97-4f2a-a2d0-a604afb67495",
+			"id": "60b29b19-735f-4dcd-95a0-fa9fa6d22ac5",
 			"key": "deleteId",
 			"value": "2",
 			"type": "string"
