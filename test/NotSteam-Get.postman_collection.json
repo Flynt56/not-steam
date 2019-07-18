@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "79ae6ce5-25dc-436c-8510-4b8e4e0c7e20",
+		"name": "NotSteam-Get",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All",
+			"item": [
+				{
+					"name": "GetUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cfdcad52-57b4-47d7-a4e0-17e0c01020f6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{users}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{users}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCompanies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8019f30f-c87a-4342-939a-54b3e0a177ec",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{companies}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{companies}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGames",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4267e02-8878-4aae-a395-a18cd4126697",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{games}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{games}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReviews",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37f3c21d-7145-4084-b099-69fdb21baaa8",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{reviews}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{reviews}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9adb3f88-4293-45c1-be44-0cea00b1b1c6",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{tags}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{tags}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGameTags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "acd8a94f-982f-4e92-abfa-0be3b27be84f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{gametags}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{gametags}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLibraries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8edfa866-4258-49ca-a32f-495dba84d610",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{libraries}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{libraries}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPurchases",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a9928eee-7887-4c32-9f98-7529cff6aaf4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{purchases}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{purchases}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Individual",
+			"item": [
+				{
+					"name": "GetUserId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ffc4ba50-13aa-4f6a-ae1b-b5848a0cfad3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{users}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{users}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCompanyId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b734f6d5-c686-4102-859f-9815e4b4b42c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{companies}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{companies}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGameId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "092f7ecc-ccbb-4524-8f8a-80fd0f5e0081",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{games}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{games}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReviewId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18a58816-b890-46a7-ad6d-1477be66660f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{reviews}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{reviews}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTagId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fff0507e-70fe-4396-b00c-fe2c88933c4a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{tags}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{tags}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGameTagId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e00c28a0-d65f-4e2b-a851-a2bdb038a82b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{gametags}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{gametags}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLibraryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "31970fe8-0fcf-4157-8534-5076d24cd965",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{libraries}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{libraries}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPurchaseId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64547e26-1372-4e41-a2ae-f9f311fc2b16",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rootUrl}}/{{purchases}}/{{testId}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{purchases}}",
+								"{{testId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "553d03b2-6273-4d9e-a360-3ba352e98b6c",
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({key: 'Accept', value: 'application/json' });",
+					"pm.request.headers.add({key: 'Content-Type', value: 'application/json' });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6cd2e40b-85af-4bde-83e3-988336bf437e",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5527ba9d-763e-4afc-9985-464709ab3881",
+			"key": "testId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
