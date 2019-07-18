@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,6 @@ namespace NotSteam.Controllers
         public PurchasesController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Purchases.Count() < 3)
-            {
-                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 2, TotalPrice = 29.99M });
-                _context.Purchases.Add(new Purchase { UserId = 2, GameId = 1, TotalPrice = 59.99M });
-                _context.Purchases.Add(new Purchase { UserId = 1, GameId = 1, TotalPrice = 44.99M });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/tags

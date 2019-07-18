@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,6 @@ namespace NotSteam.Controllers
         public TagsController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Tags.Count() < 3)
-            {
-                _context.Tags.Add(new Tag { Name = "Single-Player" });
-                _context.Tags.Add(new Tag { Name = "Multi-Player" });
-                _context.Tags.Add(new Tag { Name = "Co-Op" });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/tags

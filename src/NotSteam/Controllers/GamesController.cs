@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +16,6 @@ namespace NotSteam.Controllers
         public GamesController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Games.Count() < 2)
-            {
-                _context.Games.Add(new Game { Title = "World of Minecraft", CompanyId = 1 });
-                _context.Games.Add(new Game { Title = "C4ll of $$$$", CompanyId = 2 });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/games
