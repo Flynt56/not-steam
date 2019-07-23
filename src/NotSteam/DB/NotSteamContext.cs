@@ -32,7 +32,14 @@ namespace NotSteam.DB
                 builder.Entity<User>().HasData(
                     new { Id = 1, Username = "Player123", Password = "ReallySecurePlaintextStorage", Email = "Player123@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1996, 4, 23), DateTimeKind.Utc), Nickname = "xXSlayerXx", ProfileImageUri = "https://cdn.notsteam.com/images/1" },
                     new { Id = 2, Username = "cool_username2", Password = "super_secure_pass123", Email = "NobodyReally@outlook.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1992, 2, 12), DateTimeKind.Utc), Nickname = "Sgt. Harry", ProfileImageUri = "https://cdn.notsteam.com/images/2" },
-                    new { Id = 3, Username = "tru_41iam", Password = "no1C4nGU3sSm3", Email = "SampleText@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1989, 8, 30), DateTimeKind.Utc), Nickname = "Mr.Boom", ProfileImageUri = "https://cdn.notsteam.com/images/3" });
+                    new { Id = 3, Username = "tru_41iam", Password = "no1C4nGU3sSm3", Email = "SampleText@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1989, 8, 30), DateTimeKind.Utc), Nickname = "Mr.Boom", ProfileImageUri = "https://cdn.notsteam.com/images/3" }
+                );
+
+                builder.Entity<Company>().HasData(
+                    new { Id = 1, Name = "Methesda Softworks Inc.", HomepageUri = "https://www.methesda-softworks.com", Description = "We make really cool games!", LogoImageUri = "https://cdn.notsteam.com/images/101" },
+                    new { Id = 2, Name = "CryMeARiverTek GmbH", HomepageUri = "https://www.crymearivertek.com", Description = "We make tech demos!", LogoImageUri = "https://cdn.notsteam.com/images/102" },
+                    new { Id = 3, Name = "DVD Projekt Blue", HomepageUri = "https://www.dvd-projekt-blue.com", Description = "We make great action-adventure, role-playing games!", LogoImageUri = "https://cdn.notsteam.com/images/103" }
+                );
             }
         }
     }
