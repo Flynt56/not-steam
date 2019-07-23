@@ -27,7 +27,7 @@ namespace NotSteam.DB
 
             base.OnModelCreating(builder);
 
-            // Initialize db with fake data
+            // Seed db
             {
                 builder.Entity<User>().HasData(
                     new { Id = 1, Username = "Player123", Password = "ReallySecurePlaintextStorage", Email = "Player123@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1996, 4, 23), DateTimeKind.Utc), Nickname = "xXSlayerXx", ProfileImageUri = "https://cdn.notsteam.com/images/1" },
@@ -39,6 +39,12 @@ namespace NotSteam.DB
                     new { Id = 1, Name = "Methesda Softworks Inc.", HomepageUri = "https://www.methesda-softworks.com", Description = "We make really cool games!", LogoImageUri = "https://cdn.notsteam.com/images/101" },
                     new { Id = 2, Name = "CryMeARiverTek GmbH", HomepageUri = "https://www.crymearivertek.com", Description = "We make tech demos!", LogoImageUri = "https://cdn.notsteam.com/images/102" },
                     new { Id = 3, Name = "DVD Projekt Blue", HomepageUri = "https://www.dvd-projekt-blue.com", Description = "We make great action-adventure, role-playing games!", LogoImageUri = "https://cdn.notsteam.com/images/103" }
+                );
+
+                builder.Entity<Tag>().HasData(
+                    new { Id = 1, Name = "Single-Player", Description = "This item contains single-player content (e.g. campaign, story mode, etc.)" },
+                    new { Id = 2, Name = "Multi-Player", Description = "This item contains multi-player content. Requires an internet connection." },
+                    new { Id = 3, Name = "Co-Op", Description = "This item contains ce-op content. Requires an internet connection. A limited amount of players can group up and play!" }
                 );
             }
         }
