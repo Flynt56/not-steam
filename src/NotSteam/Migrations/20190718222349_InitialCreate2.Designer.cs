@@ -10,8 +10,8 @@ using NotSteam.DB;
 namespace NotSteam.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
-    [Migration("20190717183225_NewMigration1")]
-    partial class NewMigration1
+    [Migration("20190718222349_InitialCreate2")]
+    partial class InitialCreate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

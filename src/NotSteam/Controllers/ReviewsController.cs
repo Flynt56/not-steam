@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,6 @@ namespace NotSteam.Controllers
         public ReviewsController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Reviews.Count() < 3)
-            {
-                _context.Reviews.Add(new Review { UserId = 1, GameId = 6, Rating = 8 });
-                _context.Reviews.Add(new Review { UserId = 2, GameId = 6, Rating = 6 });
-                _context.Reviews.Add(new Review { UserId = 1, GameId = 7, Rating = 5 });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/tags

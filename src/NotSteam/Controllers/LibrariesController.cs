@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,6 @@ namespace NotSteam.Controllers
         public LibrariesController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Libraries.Count() < 3)
-            {
-                _context.Libraries.Add(new Library { UserId = 1, GameId = 6, TotalPlayTimeHours = 321 });
-                _context.Libraries.Add(new Library { UserId = 2, GameId = 6, TotalPlayTimeHours = 40 });
-                _context.Libraries.Add(new Library { UserId = 1, GameId = 7, TotalPlayTimeHours = 10 });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/tags

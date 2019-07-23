@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +16,6 @@ namespace NotSteam.Controllers
         public UsersController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.Users.Count() < 2)
-            {
-                _context.Users.Add(new User { Username = "Player123" });
-                _context.Users.Add(new User { Username = "rEaIIy_w3ird" });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/users

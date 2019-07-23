@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,6 @@ namespace NotSteam.Controllers
         public GameTagsController(NotSteamContext context)
         {
             _context = context;
-
-            // Add default entries
-            if (_context.GameTags.Count() < 3)
-            {
-                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 7 });
-                _context.GameTags.Add(new GameTag { TagId = 2, GameId = 7 });
-                _context.GameTags.Add(new GameTag { TagId = 1, GameId = 6 });
-                _context.SaveChanges();
-            }
         }
 
         // GET api/tags
