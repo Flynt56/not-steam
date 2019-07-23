@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "63ac5582-f6af-41c7-a855-3e8533abf5bb",
+		"_postman_id": "c8c3b19f-212b-4b4b-8f77-313c8d7d54ba",
 		"name": "NotSteam-Put",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -316,7 +316,7 @@
 				"type": "text/javascript",
 				"exec": [
 					"pm.test(\"Successful PUT request\", function () {",
-					"    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+					"    pm.expect(pm.response.code).to.be.oneOf([200,202,204]);",
 					"});"
 				]
 			}
@@ -324,7 +324,7 @@
 	],
 	"variable": [
 		{
-			"id": "e32714c3-7367-4488-8666-24695fbeb8bf",
+			"id": "f24b608a-5a79-495c-9a25-643893efa39c",
 			"key": "testId",
 			"value": "1",
 			"type": "string"
