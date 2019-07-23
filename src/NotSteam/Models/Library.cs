@@ -12,6 +12,8 @@ namespace NotSteam.Models
         public Game Game { get; set; }
         [Required(ErrorMessage = "You must provide a {0}!")]
         [DataType(DataType.Date, ErrorMessage = "Input must be date formatted!")]
+        // Preorders?
+        // Must be >= game's release date?
         public DateTime DateAcquired { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "{0} must be greater than 0!")]
         public int TotalPlayTimeHours { get; set; }
