@@ -1,5 +1,4 @@
 using System;
-using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Models;
 
@@ -29,7 +28,11 @@ namespace NotSteam.DB
             base.OnModelCreating(builder);
 
             // Initialize db with fake data
-            builder.Entity<User>().HasData(new User { Id = 1, Username = "Player123", Password = "ReallySecurePlaintextStorage", Email = "Player123@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1996, 4, 23), DateTimeKind.Utc), Nickname = "xXSlayerXx", ProfileImageUri = "https://cdn.notsteam.com/images/1" });
+            {
+                builder.Entity<User>().HasData(new User { Id = 1, Username = "Player123", Password = "ReallySecurePlaintextStorage", Email = "Player123@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1996, 4, 23), DateTimeKind.Utc), Nickname = "xXSlayerXx", ProfileImageUri = "https://cdn.notsteam.com/images/1" });
+
+                builder.Entity<User>().HasData(new User { Id = 2, Username = "cool_username2", Password = "super_secure_pass123", Email = "NobodyReally@outlook.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1992, 2, 12), DateTimeKind.Utc), Nickname = "Sgt. Harry", ProfileImageUri = "https://cdn.notsteam.com/images/2" });
+            }
         }
     }
 }
