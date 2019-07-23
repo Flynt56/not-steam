@@ -25,8 +25,6 @@ namespace NotSteam.DB
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
-            base.OnModelCreating(builder);
-
             // Seed db
             {
                 builder.Entity<User>().HasData(
@@ -45,6 +43,12 @@ namespace NotSteam.DB
                     new { Id = 1, Name = "Single-Player", Description = "This item contains single-player content (e.g. campaign, story mode, etc.)" },
                     new { Id = 2, Name = "Multi-Player", Description = "This item contains multi-player content. Requires an internet connection." },
                     new { Id = 3, Name = "Co-Op", Description = "This item contains ce-op content. Requires an internet connection. A limited amount of players can group up and play!" }
+                );
+
+                builder.Entity<Game>().HasData(
+                    new { Id = 1, Name = "C4ll of $$$$: Covert Ops", Description = "New year, new game!", ReleaseDate = DateTime.SpecifyKind(new DateTime(2019, 6, 22), DateTimeKind.Utc), BasePrice = 59.99, CompanyId = 3 },
+                    new { Id = 2, Name = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99, CompanyId = 1 },
+                    new { Id = 3, Name = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69, CompanyId = 2 }
                 );
             }
         }
