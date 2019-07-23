@@ -50,6 +50,15 @@ namespace NotSteam.DB
                     new { Id = 2, Name = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99, CompanyId = 1 },
                     new { Id = 3, Name = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69, CompanyId = 2 }
                 );
+
+                builder.Entity<GameTag>().HasData(
+                    new { Id = 1, GameId = 1, TagId = 1 },
+                    new { Id = 2, GameId = 1, TagId = 2 },
+                    new { Id = 3, GameId = 2, TagId = 1 },
+                    new { Id = 4, GameId = 2, TagId = 2 },
+                    new { Id = 5, GameId = 2, TagId = 3 },
+                    new { Id = 6, GameId = 3, TagId = 1 }
+                );
             }
         }
     }
