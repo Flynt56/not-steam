@@ -61,7 +61,7 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return AcceptedAtAction(nameof(GetPurchase), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
