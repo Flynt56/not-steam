@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/games
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Game>>> GetGames()
+        public async Task<ActionResult<IEnumerable<Game>>> GetGamesAsync()
         {
             return await _context.Games.ToListAsync();
         }
 
         // GET api/games/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(int id)
+        public async Task<ActionResult<Game>> GetGameAsync(int id)
         {
             var game = await _context.Games.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/games
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame([FromBody] Game item)
+        public async Task<ActionResult<Game>> PostGameAsync([FromBody] Game item)
         {
             await _context.Games.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGame), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetGameAsync), new { id = item.Id }, item);
         }
 
         // PUT api/games/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGame(int id, [FromBody] Game item)
+        public async Task<IActionResult> PutGameAsync(int id, [FromBody] Game item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetGame), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetGameAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/games/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGame(int id)
+        public async Task<IActionResult> DeleteGameAsync(int id)
         {
             var game = await _context.Games.FindAsync(id);
 

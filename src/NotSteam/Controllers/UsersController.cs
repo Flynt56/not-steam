@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersAsync()
         {
             return await _context.Users.ToListAsync();
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUserAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromBody] User item)
+        public async Task<ActionResult<User>> PostUserAsync([FromBody] User item)
         {
             await _context.Users.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetUserAsync), new { id = item.Id }, item);
         }
 
         // PUT api/users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, [FromBody] User item)
+        public async Task<IActionResult> PutUserAsync(int id, [FromBody] User item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetUser), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetUserAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUserAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
 

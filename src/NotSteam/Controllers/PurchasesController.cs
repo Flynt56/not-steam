@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Purchase>>> GetPurchases()
+        public async Task<ActionResult<IEnumerable<Purchase>>> GetPurchasesAsync()
         {
             return await _context.Purchases.ToListAsync();
         }
 
         // GET api/tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Purchase>> GetPurchase(int id)
+        public async Task<ActionResult<Purchase>> GetPurchaseAsync(int id)
         {
             var tag = await _context.Purchases.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/tags
         [HttpPost]
-        public async Task<ActionResult<Purchase>> PostPurchase([FromBody] Purchase item)
+        public async Task<ActionResult<Purchase>> PostPurchaseAsync([FromBody] Purchase item)
         {
             await _context.Purchases.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPurchase), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetPurchaseAsync), new { id = item.Id }, item);
         }
 
         // PUT api/tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPurchase(int id, [FromBody] Purchase item)
+        public async Task<IActionResult> PutPurchaseAsync(int id, [FromBody] Purchase item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetPurchase), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetPurchaseAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePurchase(int id)
+        public async Task<IActionResult> DeletePurchaseAsync(int id)
         {
             var tag = await _context.Purchases.FindAsync(id);
 

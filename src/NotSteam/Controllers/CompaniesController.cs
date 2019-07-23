@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/companies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesAsync()
         {
             return await _context.Companies.ToListAsync();
         }
 
         // GET api/companies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompany(int id)
+        public async Task<ActionResult<Company>> GetCompanyAsync(int id)
         {
             var company = await _context.Companies.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/companies
         [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany([FromBody] Company item)
+        public async Task<ActionResult<Company>> PostCompanyAsync([FromBody] Company item)
         {
             await _context.Companies.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCompany), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetCompanyAsync), new { id = item.Id }, item);
         }
 
         // PUT api/companies/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(int id, [FromBody] Company item)
+        public async Task<IActionResult> PutCompanyAsync(int id, [FromBody] Company item)
         {
             if (id != item.Id)
             {
@@ -61,7 +61,7 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetCompany), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetCompanyAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/companies/5

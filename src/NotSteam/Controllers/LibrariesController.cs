@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Library>>> GetLibraries()
+        public async Task<ActionResult<IEnumerable<Library>>> GetLibrariesAsync()
         {
             return await _context.Libraries.ToListAsync();
         }
 
         // GET api/tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Library>> GetLibrary(int id)
+        public async Task<ActionResult<Library>> GetLibraryAsync(int id)
         {
             var tag = await _context.Libraries.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/tags
         [HttpPost]
-        public async Task<ActionResult<Library>> PostLibrary([FromBody] Library item)
+        public async Task<ActionResult<Library>> PostLibraryAsync([FromBody] Library item)
         {
             await _context.Libraries.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLibrary), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetLibraryAsync), new { id = item.Id }, item);
         }
 
         // PUT api/tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLibrary(int id, [FromBody] Library item)
+        public async Task<IActionResult> PutLibraryAsync(int id, [FromBody] Library item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetLibrary), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetLibraryAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLibrary(int id)
+        public async Task<IActionResult> DeleteLibraryAsync(int id)
         {
             var tag = await _context.Libraries.FindAsync(id);
 

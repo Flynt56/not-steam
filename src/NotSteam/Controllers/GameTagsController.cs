@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTags()
+        public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTagsAsync()
         {
             return await _context.GameTags.ToListAsync();
         }
 
         // GET api/tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GameTag>> GetGameTag(int id)
+        public async Task<ActionResult<GameTag>> GetGameTagAsync(int id)
         {
             var tag = await _context.GameTags.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/tags
         [HttpPost]
-        public async Task<ActionResult<GameTag>> PostGameTag([FromBody] GameTag item)
+        public async Task<ActionResult<GameTag>> PostGameTagAsync([FromBody] GameTag item)
         {
             await _context.GameTags.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGameTag), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetGameTagAsync), new { id = item.Id }, item);
         }
 
         // PUT api/tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGameTag(int id, [FromBody] GameTag item)
+        public async Task<IActionResult> PutGameTagAsync(int id, [FromBody] GameTag item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetGameTag), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetGameTagAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGameTag(int id)
+        public async Task<IActionResult> DeleteGameTagAsync(int id)
         {
             var tag = await _context.GameTags.FindAsync(id);
 

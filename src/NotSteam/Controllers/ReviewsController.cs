@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsAsync()
         {
             return await _context.Reviews.ToListAsync();
         }
 
         // GET api/tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Review>> GetReview(int id)
+        public async Task<ActionResult<Review>> GetReviewAsync(int id)
         {
             var tag = await _context.Reviews.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/tags
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview([FromBody] Review item)
+        public async Task<ActionResult<Review>> PostReviewAsync([FromBody] Review item)
         {
             await _context.Reviews.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetReview), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetReviewAsync), new { id = item.Id }, item);
         }
 
         // PUT api/tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReview(int id, [FromBody] Review item)
+        public async Task<IActionResult> PutReviewAsync(int id, [FromBody] Review item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetReview), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetReviewAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeleteReviewAsync(int id)
         {
             var tag = await _context.Reviews.FindAsync(id);
 

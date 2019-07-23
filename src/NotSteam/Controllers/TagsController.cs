@@ -20,14 +20,14 @@ namespace NotSteam.Controllers
 
         // GET api/tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
+        public async Task<ActionResult<IEnumerable<Tag>>> GetTagsAsync()
         {
             return await _context.Tags.ToListAsync();
         }
 
         // GET api/tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(int id)
+        public async Task<ActionResult<Tag>> GetTagAsync(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
 
@@ -41,17 +41,17 @@ namespace NotSteam.Controllers
 
         // POST api/tags
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag([FromBody] Tag item)
+        public async Task<ActionResult<Tag>> PostTagAsync([FromBody] Tag item)
         {
             await _context.Tags.AddAsync(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTag), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetTagAsync), new { id = item.Id }, item);
         }
 
         // PUT api/tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, [FromBody] Tag item)
+        public async Task<IActionResult> PutTagAsync(int id, [FromBody] Tag item)
         {
             if (id != item.Id)
             {
@@ -61,12 +61,12 @@ namespace NotSteam.Controllers
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return AcceptedAtAction(nameof(GetTag), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetTagAsync), new { id = item.Id }, item);
         }
 
         // DELETE api/tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTag(int id)
+        public async Task<IActionResult> DeleteTagAsync(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
 
