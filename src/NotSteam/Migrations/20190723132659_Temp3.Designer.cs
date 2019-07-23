@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotSteam.DB;
 
 namespace NotSteam.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
-    partial class NotSteamContextModelSnapshot : ModelSnapshot
+    [Migration("20190723132659_Temp3")]
+    partial class Temp3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,8 +208,8 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfBirth = new DateTime(1996, 4, 23, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Email = "Player123@gmail.com",
+                            DateOfBirth = new DateTime(1996, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "wdwd@dwdwd.com",
                             Nickname = "xXSlayerXx",
                             Password = "ReallySecurePlaintextStorage",
                             ProfileImageUri = "https://cdn.notsteam.com/images/1",

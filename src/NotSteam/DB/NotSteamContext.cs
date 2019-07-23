@@ -1,3 +1,5 @@
+using System;
+using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Models;
 
@@ -23,6 +25,11 @@ namespace NotSteam.DB
             builder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            base.OnModelCreating(builder);
+
+            // Initialize db with fake data
+            builder.Entity<User>().HasData(new User { Id = 1, Username = "Player123", Password = "ReallySecurePlaintextStorage", Email = "Player123@gmail.com", DateOfBirth = DateTime.SpecifyKind(new DateTime(1996, 4, 23), DateTimeKind.Utc), Nickname = "xXSlayerXx", ProfileImageUri = "https://cdn.notsteam.com/images/1" });
         }
     }
 }
