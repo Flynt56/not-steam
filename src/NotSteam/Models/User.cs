@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class User
+    public class User : BaseClass
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "You must provide a {0}!")]
         public string Username { get; set; }
 
@@ -25,6 +23,7 @@ namespace NotSteam.Models
 
         public string Nickname { get; set; }
 
+        [Url]
         public string ProfileImageUri { get; set; }
     }
 }

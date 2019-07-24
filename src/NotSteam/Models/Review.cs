@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Review
+    public class Review : BaseClass
     {
-        public int Id { get; set; }
-
         public int UserId { get; set; }
 
         public User User { get; set; }
