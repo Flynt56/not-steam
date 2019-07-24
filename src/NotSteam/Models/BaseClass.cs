@@ -7,10 +7,11 @@ namespace NotSteam.Models
     {
         public int Id { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "You must provide a creation date!")]
+        [DataType(DataType.DateTime, ErrorMessage = "Input must be date formatted!")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.DateTime, ErrorMessage = "Input must be date formatted!")]
         public DateTime LastModifiedAt { get; set; }
     }
 }
