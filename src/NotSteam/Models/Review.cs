@@ -18,9 +18,5 @@ namespace NotSteam.Models
         public int Rating { get; set; }
 
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "You must specify a {0}!")]
-        [DataType(DataType.Date)]
-        public DateTime DateCreated { get; set; }
     }
 }

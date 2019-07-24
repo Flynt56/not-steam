@@ -25,6 +25,10 @@ namespace NotSteam.DB
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
+            builder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+
             // Seed db
             {
                 builder.Entity<User>().HasData(
