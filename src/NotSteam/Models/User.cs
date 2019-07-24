@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class User : BaseClass
+    public class User : BaseModel
     {
         [Required(ErrorMessage = "You must provide a {0}!")]
         public string Username { get; set; }

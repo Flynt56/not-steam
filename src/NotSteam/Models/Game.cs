@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Game : BaseClass
+    public class Game : BaseModel
     {
         [Required(ErrorMessage = "You must provide a {0}!")]
         public string Title { get; set; }

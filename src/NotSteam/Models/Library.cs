@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Library : BaseClass
+    public class Library : BaseModel
     {
         public int UserId { get; set; }
 

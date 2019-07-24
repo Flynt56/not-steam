@@ -1,6 +1,6 @@
 namespace NotSteam.Models
 {
-    public class GameTag : BaseClass
+    public class GameTag : BaseModel
     {
         // One game can have only one of each tag.
         // There must not be duplicate tags per game.

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Purchase : BaseClass
+    public class Purchase : BaseModel
     {
         public int UserId { get; set; }
 
