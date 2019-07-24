@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,16 +19,16 @@ namespace NotSteam.Controllers
             _context = context;
         }
 
-        // GET api/companies
+        // GET: api/Companies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesAsync()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
             return await _context.Companies.ToListAsync();
         }
 
-        // GET api/companies/5
+        // GET: api/Companies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompanyAsync(int id)
+        public async Task<ActionResult<Company>> GetCompany(int id)
         {
             var company = await _context.Companies.FindAsync(id);
 
@@ -39,39 +40,51 @@ namespace NotSteam.Controllers
             return company;
         }
 
-        // POST api/companies
-        [HttpPost]
-        public async Task<ActionResult<Company>> PostCompanyAsync([FromBody] Company item)
-        {
-            await _context.Companies.AddAsync(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCompanyAsync), new { id = item.Id }, item);
-        }
-
-        // PUT api/companies/5
+        // PUT: api/Companies/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompanyAsync(int id, [FromBody] Company item)
+        public async Task<IActionResult> PutCompany(int id, Company company)
         {
-            if (id != item.Id)
+            if (id != company.Id)
             {
                 return BadRequest();
             }
 
-            item.UpdateModificationDate();
+            _context.Entry(company).State = EntityState.Modified;
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CompanyExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return AcceptedAtAction(nameof(GetCompanyAsync), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
 
-        // DELETE api/companies/5
+        // POST: api/Companies
+        [HttpPost]
+        public async Task<ActionResult<Company>> PostCompany(Company company)
+        {
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
+        }
+
+        // DELETE: api/Companies/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompany(int id)
+        public async Task<ActionResult<Company>> DeleteCompany(int id)
         {
             var company = await _context.Companies.FindAsync(id);
-
             if (company == null)
             {
                 return NotFound();
@@ -80,7 +93,12 @@ namespace NotSteam.Controllers
             _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return company;
+        }
+
+        private bool CompanyExists(int id)
+        {
+            return _context.Companies.Any(e => e.Id == id);
         }
     }
 }

@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,16 +19,16 @@ namespace NotSteam.Controllers
             _context = context;
         }
 
-        // GET api/tags
+        // GET: api/Tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTagsAsync()
+        public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
             return await _context.Tags.ToListAsync();
         }
 
-        // GET api/tags/5
+        // GET: api/Tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTagAsync(int id)
+        public async Task<ActionResult<Tag>> GetTag(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
 
@@ -39,39 +40,51 @@ namespace NotSteam.Controllers
             return tag;
         }
 
-        // POST api/tags
-        [HttpPost]
-        public async Task<ActionResult<Tag>> PostTagAsync([FromBody] Tag item)
-        {
-            await _context.Tags.AddAsync(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTagAsync), new { id = item.Id }, item);
-        }
-
-        // PUT api/tags/5
+        // PUT: api/Tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTagAsync(int id, [FromBody] Tag item)
+        public async Task<IActionResult> PutTag(int id, Tag tag)
         {
-            if (id != item.Id)
+            if (id != tag.Id)
             {
                 return BadRequest();
             }
 
-            item.UpdateModificationDate();
+            _context.Entry(tag).State = EntityState.Modified;
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TagExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return AcceptedAtAction(nameof(GetTagAsync), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
         }
 
-        // DELETE api/tags/5
+        // POST: api/Tags
+        [HttpPost]
+        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        {
+            _context.Tags.Add(tag);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
+        }
+
+        // DELETE: api/Tags/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTagAsync(int id)
+        public async Task<ActionResult<Tag>> DeleteTag(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
-
             if (tag == null)
             {
                 return NotFound();
@@ -80,7 +93,12 @@ namespace NotSteam.Controllers
             _context.Tags.Remove(tag);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return tag;
+        }
+
+        private bool TagExists(int id)
+        {
+            return _context.Tags.Any(e => e.Id == id);
         }
     }
 }

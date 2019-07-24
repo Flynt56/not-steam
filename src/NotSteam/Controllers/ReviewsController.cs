@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,69 +19,86 @@ namespace NotSteam.Controllers
             _context = context;
         }
 
-        // GET api/tags
+        // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsAsync()
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
         {
             return await _context.Reviews.ToListAsync();
         }
 
-        // GET api/tags/5
+        // GET: api/Reviews/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Review>> GetReviewAsync(int id)
+        public async Task<ActionResult<Review>> GetReview(int id)
         {
-            var tag = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews.FindAsync(id);
 
-            if (tag == null)
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return review;
         }
 
-        // POST api/tags
-        [HttpPost]
-        public async Task<ActionResult<Review>> PostReviewAsync([FromBody] Review item)
-        {
-            await _context.Reviews.AddAsync(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetReviewAsync), new { id = item.Id }, item);
-        }
-
-        // PUT api/tags/5
+        // PUT: api/Reviews/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReviewAsync(int id, [FromBody] Review item)
+        public async Task<IActionResult> PutReview(int id, Review review)
         {
-            if (id != item.Id)
+            if (id != review.Id)
             {
                 return BadRequest();
             }
 
-            item.UpdateModificationDate();
+            _context.Entry(review).State = EntityState.Modified;
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ReviewExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return AcceptedAtAction(nameof(GetReviewAsync), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetReview), new { id = review.Id }, review);
         }
 
-        // DELETE api/tags/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReviewAsync(int id)
+        // POST: api/Reviews
+        [HttpPost]
+        public async Task<ActionResult<Review>> PostReview(Review review)
         {
-            var tag = await _context.Reviews.FindAsync(id);
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
 
-            if (tag == null)
+            return CreatedAtAction(nameof(GetReview), new { id = review.Id }, review);
+        }
+
+        // DELETE: api/Reviews/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Review>> DeleteReview(int id)
+        {
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
             {
                 return NotFound();
             }
 
-            _context.Reviews.Remove(tag);
+            _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return review;
+        }
+
+        private bool ReviewExists(int id)
+        {
+            return _context.Reviews.Any(e => e.Id == id);
         }
     }
 }

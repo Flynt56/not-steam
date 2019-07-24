@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,69 +19,86 @@ namespace NotSteam.Controllers
             _context = context;
         }
 
-        // GET api/tags
+        // GET: api/GameTags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTagsAsync()
+        public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTags()
         {
             return await _context.GameTags.ToListAsync();
         }
 
-        // GET api/tags/5
+        // GET: api/GameTags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GameTag>> GetGameTagAsync(int id)
+        public async Task<ActionResult<GameTag>> GetGameTag(int id)
         {
-            var tag = await _context.GameTags.FindAsync(id);
+            var gameTag = await _context.GameTags.FindAsync(id);
 
-            if (tag == null)
+            if (gameTag == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return gameTag;
         }
 
-        // POST api/tags
-        [HttpPost]
-        public async Task<ActionResult<GameTag>> PostGameTagAsync([FromBody] GameTag item)
-        {
-            await _context.GameTags.AddAsync(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetGameTagAsync), new { id = item.Id }, item);
-        }
-
-        // PUT api/tags/5
+        // PUT: api/GameTags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGameTagAsync(int id, [FromBody] GameTag item)
+        public async Task<IActionResult> PutGameTag(int id, GameTag gameTag)
         {
-            if (id != item.Id)
+            if (id != gameTag.Id)
             {
                 return BadRequest();
             }
 
-            item.UpdateModificationDate();
+            _context.Entry(gameTag).State = EntityState.Modified;
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GameTagExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return AcceptedAtAction(nameof(GetGameTagAsync), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetGameTag), new { id = gameTag.Id }, gameTag);
         }
 
-        // DELETE api/tags/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGameTagAsync(int id)
+        // POST: api/GameTags
+        [HttpPost]
+        public async Task<ActionResult<GameTag>> PostGameTag(GameTag gameTag)
         {
-            var tag = await _context.GameTags.FindAsync(id);
+            _context.GameTags.Add(gameTag);
+            await _context.SaveChangesAsync();
 
-            if (tag == null)
+            return CreatedAtAction(nameof(GetGameTag), new { id = gameTag.Id }, gameTag);
+        }
+
+        // DELETE: api/GameTags/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<GameTag>> DeleteGameTag(int id)
+        {
+            var gameTag = await _context.GameTags.FindAsync(id);
+            if (gameTag == null)
             {
                 return NotFound();
             }
 
-            _context.GameTags.Remove(tag);
+            _context.GameTags.Remove(gameTag);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return gameTag;
+        }
+
+        private bool GameTagExists(int id)
+        {
+            return _context.GameTags.Any(e => e.Id == id);
         }
     }
 }

@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,69 +19,86 @@ namespace NotSteam.Controllers
             _context = context;
         }
 
-        // GET api/tags
+        // GET: api/Libraries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Library>>> GetLibrariesAsync()
+        public async Task<ActionResult<IEnumerable<Library>>> GetLibraries()
         {
             return await _context.Libraries.ToListAsync();
         }
 
-        // GET api/tags/5
+        // GET: api/Libraries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Library>> GetLibraryAsync(int id)
+        public async Task<ActionResult<Library>> GetLibrary(int id)
         {
-            var tag = await _context.Libraries.FindAsync(id);
+            var library = await _context.Libraries.FindAsync(id);
 
-            if (tag == null)
+            if (library == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return library;
         }
 
-        // POST api/tags
-        [HttpPost]
-        public async Task<ActionResult<Library>> PostLibraryAsync([FromBody] Library item)
-        {
-            await _context.Libraries.AddAsync(item);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetLibraryAsync), new { id = item.Id }, item);
-        }
-
-        // PUT api/tags/5
+        // PUT: api/Libraries/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLibraryAsync(int id, [FromBody] Library item)
+        public async Task<IActionResult> PutLibrary(int id, Library library)
         {
-            if (id != item.Id)
+            if (id != library.Id)
             {
                 return BadRequest();
             }
 
-            item.UpdateModificationDate();
+            _context.Entry(library).State = EntityState.Modified;
 
-            _context.Entry(item).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!LibraryExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return AcceptedAtAction(nameof(GetLibraryAsync), new { id = item.Id }, item);
+            return AcceptedAtAction(nameof(GetLibrary), new { id = library.Id }, library);
         }
 
-        // DELETE api/tags/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLibraryAsync(int id)
+        // POST: api/Libraries
+        [HttpPost]
+        public async Task<ActionResult<Library>> PostLibrary(Library library)
         {
-            var tag = await _context.Libraries.FindAsync(id);
+            _context.Libraries.Add(library);
+            await _context.SaveChangesAsync();
 
-            if (tag == null)
+            return CreatedAtAction(nameof(GetLibrary), new { id = library.Id }, library);
+        }
+
+        // DELETE: api/Libraries/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Library>> DeleteLibrary(int id)
+        {
+            var library = await _context.Libraries.FindAsync(id);
+            if (library == null)
             {
                 return NotFound();
             }
 
-            _context.Libraries.Remove(tag);
+            _context.Libraries.Remove(library);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return library;
+        }
+
+        private bool LibraryExists(int id)
+        {
+            return _context.Libraries.Any(e => e.Id == id);
         }
     }
 }
