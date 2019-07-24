@@ -13,5 +13,10 @@ namespace NotSteam.Models
 
         [DataType(DataType.DateTime, ErrorMessage = "Input must be date formatted!")]
         public DateTime LastModifiedAt { get; set; }
+
+        public void UpdateModificationDate()
+        {
+            LastModifiedAt = DateTime.UtcNow;
+        }
     }
 }

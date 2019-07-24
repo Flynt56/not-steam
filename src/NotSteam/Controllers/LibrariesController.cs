@@ -58,6 +58,8 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
+            item.UpdateModificationDate();
+
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
