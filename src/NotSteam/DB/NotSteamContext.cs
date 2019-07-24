@@ -46,9 +46,9 @@ namespace NotSteam.DB
                 );
 
                 builder.Entity<Game>().HasData(
-                    new { Id = 1, Name = "C4ll of $$$$: Covert Ops", Description = "New year, new game!", ReleaseDate = DateTime.SpecifyKind(new DateTime(2019, 6, 22), DateTimeKind.Utc), BasePrice = 59.99, CompanyId = 3 },
-                    new { Id = 2, Name = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99, CompanyId = 1 },
-                    new { Id = 3, Name = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69, CompanyId = 2 }
+                    new { Id = 1, Name = "C4ll of $$$$: Covert Ops", Description = "New year, new game!", ReleaseDate = DateTime.SpecifyKind(new DateTime(2019, 6, 22), DateTimeKind.Utc), BasePrice = 59.99M, CompanyId = 3 },
+                    new { Id = 2, Name = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99M, CompanyId = 1 },
+                    new { Id = 3, Name = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69M, CompanyId = 2 }
                 );
 
                 builder.Entity<GameTag>().HasData(
@@ -67,9 +67,9 @@ namespace NotSteam.DB
                 );
 
                 builder.Entity<Purchase>().HasData(
-                    new { Id = 1, UserId = 1, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc), TotalPrice = 59.99 },
-                    new { Id = 2, UserId = 1, GameId = 2, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 10), DateTimeKind.Utc), TotalPrice = 64.99 },
-                    new { Id = 3, UserId = 2, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 1), DateTimeKind.Utc), TotalPrice = 24.99 }
+                    new { Id = 1, UserId = 1, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc), TotalPrice = 59.99M },
+                    new { Id = 2, UserId = 1, GameId = 2, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 10), DateTimeKind.Utc), TotalPrice = 64.99M },
+                    new { Id = 3, UserId = 2, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 1), DateTimeKind.Utc), TotalPrice = 24.99M }
                 );
 
                 builder.Entity<Review>().HasData(
