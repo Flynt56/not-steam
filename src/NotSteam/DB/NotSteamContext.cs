@@ -46,9 +46,9 @@ namespace NotSteam.DB
                 );
 
                 builder.Entity<Game>().HasData(
-                    new { Id = 1, Name = "C4ll of $$$$: Covert Ops", Description = "New year, new game!", ReleaseDate = DateTime.SpecifyKind(new DateTime(2019, 6, 22), DateTimeKind.Utc), BasePrice = 59.99M, CompanyId = 3 },
-                    new { Id = 2, Name = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99M, CompanyId = 1 },
-                    new { Id = 3, Name = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69M, CompanyId = 2 }
+                    new { Id = 1, Title = "C4ll of $$$$: Covert Ops", Description = "New year, new game!", ReleaseDate = DateTime.SpecifyKind(new DateTime(2019, 6, 22), DateTimeKind.Utc), BasePrice = 59.99M, CompanyId = 3 },
+                    new { Id = 2, Title = "Need for Speed: Underground 3", Description = "What we really want from EA.", ReleaseDate = DateTime.SpecifyKind(new DateTime(2018, 12, 12), DateTimeKind.Utc), BasePrice = 79.99M, CompanyId = 1 },
+                    new { Id = 3, Title = "Age of Empires 4", Description = "One of these days…", ReleaseDate = DateTime.SpecifyKind(new DateTime(2022, 10, 10), DateTimeKind.Utc), BasePrice = 69.69M, CompanyId = 2 }
                 );
 
                 builder.Entity<GameTag>().HasData(
