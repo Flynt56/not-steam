@@ -65,6 +65,12 @@ namespace NotSteam.DB
                     new { Id = 2, UserId = 1, GameId = 2, DateAcquired = DateTime.UtcNow, TotalPlayTimeHours = 0, LastPlayedDate = new DateTime() },
                     new { Id = 3, UserId = 2, GameId = 1, DateAcquired = DateTime.SpecifyKind(new DateTime(2019, 7, 18), DateTimeKind.Utc), TotalPlayTimeHours = (DateTime.UtcNow - DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc)).TotalHours, LastPlayedDate = DateTime.UtcNow }
                 );
+
+                builder.Entity<Purchase>().HasData(
+                    new { Id = 1, UserId = 1, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc), TotalPrice = 59.99 },
+                    new { Id = 2, UserId = 1, GameId = 2, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 10), DateTimeKind.Utc), TotalPrice = 64.99 },
+                    new { Id = 3, UserId = 2, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 1), DateTimeKind.Utc), TotalPrice = 24.99 }
+                );
             }
         }
     }
