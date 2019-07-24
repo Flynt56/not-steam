@@ -71,6 +71,11 @@ namespace NotSteam.DB
                     new { Id = 2, UserId = 1, GameId = 2, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 10), DateTimeKind.Utc), TotalPrice = 64.99 },
                     new { Id = 3, UserId = 2, GameId = 1, DateOfPurchase = DateTime.SpecifyKind(new DateTime(2019, 7, 1), DateTimeKind.Utc), TotalPrice = 24.99 }
                 );
+
+                builder.Entity<Review>().HasData(
+                    new { Id = 1, UserId = 1, GameId = 1, Rating = 8, Description = "This is a really good game! You should get it too!", DateCreated = DateTime.UtcNow },
+                    new { Id = 2, UserId = 2, GameId = 1, Rating = 6, Description = "It's a good game, but I don't like \"surprise mechanics\".", DateCreated = DateTime.SpecifyKind(new DateTime(2019, 7, 20), DateTimeKind.Utc) }
+                );
             }
         }
     }
