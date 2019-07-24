@@ -63,7 +63,7 @@ namespace NotSteam.DB
                 builder.Entity<Library>().HasData(
                     new { Id = 1, UserId = 1, GameId = 1, DateAcquired = DateTime.SpecifyKind(new DateTime(2019, 7, 20), DateTimeKind.Utc), TotalPlayTimeHours = 20, LastPlayedDate = DateTime.UtcNow },
                     new { Id = 2, UserId = 1, GameId = 2, DateAcquired = DateTime.UtcNow, TotalPlayTimeHours = 0, LastPlayedDate = new DateTime() },
-                    new { Id = 3, UserId = 2, GameId = 1, DateAcquired = DateTime.SpecifyKind(new DateTime(2019, 7, 18), DateTimeKind.Utc), TotalPlayTimeHours = (DateTime.UtcNow - DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc)).TotalHours, LastPlayedDate = DateTime.UtcNow }
+                    new { Id = 3, UserId = 2, GameId = 1, DateAcquired = DateTime.SpecifyKind(new DateTime(2019, 7, 18), DateTimeKind.Utc), TotalPlayTimeHours = (int)((DateTime.UtcNow - DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc)).TotalHours), LastPlayedDate = DateTime.UtcNow }
                 );
 
                 builder.Entity<Purchase>().HasData(
