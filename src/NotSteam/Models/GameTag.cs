@@ -7,9 +7,13 @@ namespace NotSteam.Models
         // Any game can have any tags as long as there are no duplicates.
 
         public int Id { get; set; }
+
         public int GameId { get; set; }
+
         public Game Game { get; set; }
+
         public int TagId { get; set; }
+
         public Tag Tag { get; set; }
     }
 }
