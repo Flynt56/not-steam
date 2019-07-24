@@ -17,6 +17,8 @@ namespace NotSteam.Models
         [EmailAddress(ErrorMessage = "You must provide a valid email address!")]
         public string Email { get; set; }
 
+        // Add a date range
+        // Cannot insert a future date or today
         [Required(ErrorMessage = "You must provide a {0}!")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
