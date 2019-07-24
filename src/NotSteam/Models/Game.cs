@@ -7,12 +7,13 @@ namespace NotSteam.Models
     public class Game : BaseModel
     {
         [Required(ErrorMessage = "You must provide a {0}!")]
+        [StringLength(250, ErrorMessage = "{0} is limited to {1} characters!")]
         public string Title { get; set; }
 
         public string Description { get; set; }
 
         [Required(ErrorMessage = "You must provide a {0}!")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Input must be date formatted!")]
         public DateTime ReleaseDate { get; set; }
 
         [Required(ErrorMessage = "You must provide a {0}!")]
