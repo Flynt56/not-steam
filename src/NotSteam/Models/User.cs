@@ -5,23 +5,26 @@ namespace NotSteam.Models
 {
     public class User : BaseModel
     {
-        [Required(ErrorMessage = "You must provide a {0}!")]
+        [Required(ErrorMessage = "{0} is required!")]
+        [StringLength(32, MinimumLength = 1, ErrorMessage = "{0} requires {1} to {2} characters!")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "You must provide a {0}!")]
+        [StringLength(32, MinimumLength = 8, ErrorMessage = "{0} requires {1} to {2} characters!")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "You must provide an {0} address!")]
-        [EmailAddress(ErrorMessage = "You must provide a valid {0} address!")]
-        [StringLength(254, ErrorMessage = "{0} must not exceed {1} characters!")]
+        [Required(ErrorMessage = "{0} is required!")]
+        [EmailAddress(ErrorMessage = "{0} incorrectly formatted!")]
+        [StringLength(254, ErrorMessage = "{0} restricted to {1} characters!")]
         public string Email { get; set; }
 
         // Add a date range
         // Cannot insert a future date or today
-        [Required(ErrorMessage = "You must provide a {0}!")]
-        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "{0} is required!")]
+        [DataType(DataType.Date, ErrorMessage = "{0} incorrectly formatted!")]
         public DateTime DateOfBirth { get; set; }
 
+        [StringLength(48, ErrorMessage = "{0} must not exceed {1} characters!")]
         public string Nickname { get; set; }
 
         [Url]
