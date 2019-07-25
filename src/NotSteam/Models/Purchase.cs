@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Purchase : BaseModel
+    public class Purchase
     {
         public int UserId { get; set; }
 
@@ -14,13 +14,14 @@ namespace NotSteam.Models
 
         public Game Game { get; set; }
 
-        [Required(ErrorMessage = "You must provide a {0}!")]
-        [DataType(DataType.Date, ErrorMessage = "Input must be date formatted!")]
-        public DateTime DateOfPurchase { get; set; }
+        [Required(ErrorMessage = "{0} is required!")]
+        [DataType(DataType.Date)]
+        public DateTime DateOfPurchase { get; set; } = DateTime.UtcNow;
 
-        [Required(ErrorMessage = "You must provide a {0}!")]
-        [Range(0, 99.99, ErrorMessage = "{0} must be between {1} and {2}!")]
+        [Required(ErrorMessage = "{0} is required!")]
+        [Range(0, 99.99, ErrorMessage = "{0} restricted from {1} to {2}!")]
         [Column(TypeName = "decimal(19,4)")]
+        [DataType(DataType.Currency)]
         public decimal TotalPrice { get; set; }
     }
 }

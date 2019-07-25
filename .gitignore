@@ -37,6 +37,10 @@ bld/
 .vscode/
 *.code-workspace
 
+# Contains connection strings
+# Might contain credentials
+appsettings.Development.json
+
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
