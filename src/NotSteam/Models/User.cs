@@ -1,7 +1,8 @@
+using NotSteam.Attributes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
-using NotSteam.Attributes;
 
 namespace NotSteam.Models
 {
@@ -34,7 +35,11 @@ namespace NotSteam.Models
         public string Nickname { get; set; }
 
         [DataType(DataType.ImageUrl)]
-        [Url]
+        [Url(ErrorMessage = "Input must be a valid URL!")]
         public Uri ProfileImageUri { get; set; }
+
+        public ICollection<Library> Libraries { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

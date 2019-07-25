@@ -2,14 +2,11 @@ using System;
 
 namespace NotSteam.Models
 {
-    public class BaseModel : IBaseDates
+    public class BaseModel : IBaseDateable
     {
         public int Id { get; set; }
 
-        private DateTime createdAt = DateTime.UtcNow;
-        public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
-
-        private DateTime? lastModifiedAt;
-        public DateTime? LastModifiedAt { get => lastModifiedAt; set => lastModifiedAt = value; }
+        DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
+        DateTime? IBaseDateable.LastModifiedAt { get; set; }
     }
 }

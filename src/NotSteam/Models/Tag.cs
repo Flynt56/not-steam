@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
@@ -12,5 +13,7 @@ namespace NotSteam.Models
         [StringLength(250, ErrorMessage = "{0} restricted to {1} characters!")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        public ICollection<GameTag> GameTags { get; set; }
     }
 }

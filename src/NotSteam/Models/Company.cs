@@ -1,19 +1,26 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
     public class Company : BaseModel
     {
-        [Required(ErrorMessage = "You must provide a {0}!")]
-        [StringLength(250, ErrorMessage = "{0} is limited to {1} characters!")]
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(64, ErrorMessage = "{0} is limited to {1} characters!")]
         public string Name { get; set; }
 
-        [Url(ErrorMessage = "Input must be a valid URL!")]
+        [Url(ErrorMessage = "{0} must be a valid URL!")]
         public string HomepageUri { get; set; }
 
+        [DataType(DataType.MultilineText)]
+        [StringLength(1500, ErrorMessage = "{0} is limited to {1} characters!")]
         public string Description { get; set; }
 
-        [Url(ErrorMessage = "Input must be a valid URL!")]
+        [DataType(DataType.ImageUrl)]
+        [Url(ErrorMessage = "{0} must be a valid URL!")]
         public string LogoImageUri { get; set; }
+
+        public ICollection<Game> Games { get; set; }
     }
 }

@@ -1,9 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Review : BaseModelDates
+    public class Review : IBaseDateable
     {
         public int UserId { get; set; }
 
@@ -22,5 +23,8 @@ namespace NotSteam.Models
         [StringLength(1500, ErrorMessage = "{0} restricted to {1} characters!")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
+        DateTime? IBaseDateable.LastModifiedAt { get; set; }
     }
 }
