@@ -43,3 +43,4 @@ namespace NotSteam.Models
         public ICollection<Review> Reviews { get; set; }
     }
 }
+

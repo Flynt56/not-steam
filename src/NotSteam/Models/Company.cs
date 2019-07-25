@@ -24,3 +24,4 @@ namespace NotSteam.Models
         public ICollection<Game> Games { get; set; }
     }
 }
+

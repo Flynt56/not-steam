@@ -17,3 +17,4 @@ namespace NotSteam.Models
         public ICollection<GameTag> GameTags { get; set; }
     }
 }
+
