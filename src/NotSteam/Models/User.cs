@@ -9,13 +9,13 @@ namespace NotSteam.Models
         [Required(ErrorMessage = "{0} is required!")]
         [StringLength(32, MinimumLength = 1, ErrorMessage = "{0} requires {1} to {2} characters!")]
         [DataType(DataType.Text)]
-        [RegularExpression("[a-zA-Z0-9_]{1,32}", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '_'!")]
+        [RegularExpression("^[a-zA-Z0-9_]{1,32}$", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '_'!")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "{0} is required!")]
         [StringLength(32, MinimumLength = 8, ErrorMessage = "{0} requires {1} to {2} characters!")]
         [DataType(DataType.Password)]
-        [RegularExpression("[a-zA-Z0-9.!?@#$+_=-]{8,32}", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '.','!','?','@','#','$','+','-','=','_'!")]
+        [RegularExpression("^[a-zA-Z0-9.!?@#$+_=-]{8,32}$", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '.','!','?','@','#','$','+','-','=','_'!")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "{0} is required!")]
