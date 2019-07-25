@@ -11,8 +11,9 @@ namespace NotSteam.Models
         [Required(ErrorMessage = "You must provide a {0}!")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "You must provide a {0}!")]
-        [EmailAddress(ErrorMessage = "You must provide a valid email address!")]
+        [Required(ErrorMessage = "You must provide an {0} address!")]
+        [EmailAddress(ErrorMessage = "You must provide a valid {0} address!")]
+        [StringLength(254, ErrorMessage = "{0} must not exceed {1} characters!")]
         public string Email { get; set; }
 
         // Add a date range
