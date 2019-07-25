@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class BaseModelDates
+    public interface IBaseDates
     {
         [Required(ErrorMessage = "Creation date is required!")]
         [DataType(DataType.DateTime)]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+         DateTime CreatedAt { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime? LastModifiedAt { get; set; } = DateTime.UtcNow;
+         DateTime? LastModifiedAt { get; set; }
     }
 }
