@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace NotSteam.Migrations
 {
@@ -14,9 +14,9 @@ namespace NotSteam.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 64, nullable: false),
                     HomepageUri = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(maxLength: 1500, nullable: true),
                     LogoImageUri = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace NotSteam.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 48, nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,11 +44,11 @@ namespace NotSteam.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Username = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(maxLength: 32, nullable: false),
+                    Password = table.Column<string>(maxLength: 32, nullable: false),
+                    Email = table.Column<string>(maxLength: 254, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
-                    Nickname = table.Column<string>(nullable: true),
+                    Nickname = table.Column<string>(maxLength: 32, nullable: true),
                     ProfileImageUri = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -62,8 +62,8 @@ namespace NotSteam.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 250, nullable: false),
+                    Description = table.Column<string>(maxLength: 1500, nullable: true),
                     ReleaseDate = table.Column<DateTime>(nullable: false),
                     BasePrice = table.Column<decimal>(type: "decimal(19,4)", nullable: false),
                     CompanyId = table.Column<int>(nullable: false)
@@ -83,14 +83,12 @@ namespace NotSteam.Migrations
                 name: "GameTags",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GameId = table.Column<int>(nullable: false),
                     TagId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameTags", x => x.Id);
+                    table.PrimaryKey("PK_GameTags", x => new { x.GameId, x.TagId });
                     table.ForeignKey(
                         name: "FK_GameTags_Games_GameId",
                         column: x => x.GameId,
@@ -109,17 +107,15 @@ namespace NotSteam.Migrations
                 name: "Libraries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     GameId = table.Column<int>(nullable: false),
                     DateAcquired = table.Column<DateTime>(nullable: false),
                     TotalPlayTimeHours = table.Column<int>(nullable: false),
-                    LastPlayedDate = table.Column<DateTime>(nullable: false)
+                    LastPlayedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Libraries", x => x.Id);
+                    table.PrimaryKey("PK_Libraries", x => new { x.UserId, x.GameId });
                     table.ForeignKey(
                         name: "FK_Libraries_Games_GameId",
                         column: x => x.GameId,
@@ -138,8 +134,6 @@ namespace NotSteam.Migrations
                 name: "Purchases",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     GameId = table.Column<int>(nullable: false),
                     DateOfPurchase = table.Column<DateTime>(nullable: false),
@@ -147,7 +141,7 @@ namespace NotSteam.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purchases", x => x.Id);
+                    table.PrimaryKey("PK_Purchases", x => new { x.UserId, x.GameId });
                     table.ForeignKey(
                         name: "FK_Purchases_Games_GameId",
                         column: x => x.GameId,
@@ -166,17 +160,14 @@ namespace NotSteam.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
                     GameId = table.Column<int>(nullable: false),
                     Rating = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false)
+                    Description = table.Column<string>(maxLength: 1500, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.PrimaryKey("PK_Reviews", x => new { x.UserId, x.GameId });
                     table.ForeignKey(
                         name: "FK_Reviews_Games_GameId",
                         column: x => x.GameId,
@@ -238,55 +229,50 @@ namespace NotSteam.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameTags",
-                columns: new[] { "Id", "GameId", "TagId" },
+                columns: new[] { "GameId", "TagId" },
                 values: new object[,]
                 {
-                    { 3, 2, 1 },
-                    { 4, 2, 2 },
-                    { 5, 2, 3 },
-                    { 6, 3, 1 },
-                    { 1, 1, 1 },
-                    { 2, 1, 2 }
+                    { 2, 1 },
+                    { 2, 2 },
+                    { 2, 3 },
+                    { 3, 1 },
+                    { 1, 1 },
+                    { 1, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Libraries",
-                columns: new[] { "Id", "DateAcquired", "GameId", "LastPlayedDate", "TotalPlayTimeHours", "UserId" },
+                columns: new[] { "UserId", "GameId", "DateAcquired", "LastPlayedDate", "TotalPlayTimeHours" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2019, 7, 24, 6, 48, 31, 623, DateTimeKind.Utc).AddTicks(1780), 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 1 },
-                    { 1, new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc), 1, new DateTime(2019, 7, 24, 6, 48, 31, 623, DateTimeKind.Utc).AddTicks(125), 20, 1 },
-                    { 3, new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc), 1, new DateTime(2019, 7, 24, 6, 48, 31, 623, DateTimeKind.Utc).AddTicks(1813), 126, 2 }
+                    { 1, 2, new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1177), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { 1, 1, new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(95), 20 },
+                    { 2, 1, new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1244), 186 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Purchases",
-                columns: new[] { "Id", "DateOfPurchase", "GameId", "TotalPrice", "UserId" },
+                columns: new[] { "UserId", "GameId", "DateOfPurchase", "TotalPrice" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Utc), 2, 64.99m, 1 },
-                    { 1, new DateTime(2019, 7, 19, 0, 0, 0, 0, DateTimeKind.Utc), 1, 59.99m, 1 },
-                    { 3, new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc), 1, 24.99m, 2 }
+                    { 1, 2, new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Utc), 64.99m },
+                    { 1, 1, new DateTime(2019, 7, 19, 0, 0, 0, 0, DateTimeKind.Utc), 59.99m },
+                    { 2, 1, new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc), 24.99m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "Id", "DateCreated", "Description", "GameId", "Rating", "UserId" },
+                columns: new[] { "UserId", "GameId", "Description", "Rating" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2019, 7, 24, 6, 48, 31, 623, DateTimeKind.Utc).AddTicks(6291), "This is a really good game! You should get it too!", 1, 8, 1 },
-                    { 2, new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc), "It's a good game, but I don't like \"surprise mechanics\".", 1, 6, 2 }
+                    { 1, 1, "This is a really good game! You should get it too!", 8 },
+                    { 2, 1, "It's a good game, but I don't like \"surprise mechanics\".", 6 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Games_CompanyId",
                 table: "Games",
                 column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GameTags_GameId",
-                table: "GameTags",
-                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameTags_TagId",
@@ -299,19 +285,9 @@ namespace NotSteam.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Libraries_UserId",
-                table: "Libraries",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Purchases_GameId",
                 table: "Purchases",
                 column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Purchases_UserId",
-                table: "Purchases",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_GameId",
@@ -319,14 +295,15 @@ namespace NotSteam.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserId",
-                table: "Reviews",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
                 unique: true);
         }
 

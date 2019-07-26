@@ -10,8 +10,8 @@ using NotSteam.DB;
 namespace NotSteam.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
-    [Migration("20190724091217_Temp2")]
-    partial class Temp2
+    [Migration("20190726184229_Temp1")]
+    partial class Temp1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,18 +27,16 @@ namespace NotSteam.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasMaxLength(1500);
 
                     b.Property<string>("HomepageUri");
-
-                    b.Property<DateTime>("LastModifiedAt");
 
                     b.Property<string>("LogoImageUri");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(64);
 
                     b.HasKey("Id");
 
@@ -48,30 +46,24 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(111),
                             Description = "We make really cool games!",
                             HomepageUri = "https://www.methesda-softworks.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LogoImageUri = "https://cdn.notsteam.com/images/101",
                             Name = "Methesda Softworks Inc."
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(2184),
                             Description = "We make tech demos!",
                             HomepageUri = "https://www.crymearivertek.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LogoImageUri = "https://cdn.notsteam.com/images/102",
                             Name = "CryMeARiverTek GmbH"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(2211),
                             Description = "We make great action-adventure, role-playing games!",
                             HomepageUri = "https://www.dvd-projekt-blue.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LogoImageUri = "https://cdn.notsteam.com/images/103",
                             Name = "DVD Projekt Blue"
                         });
@@ -88,16 +80,14 @@ namespace NotSteam.Migrations
 
                     b.Property<int>("CompanyId");
 
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModifiedAt");
+                    b.Property<string>("Description")
+                        .HasMaxLength(1500);
 
                     b.Property<DateTime>("ReleaseDate");
 
                     b.Property<string>("Title")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 
@@ -111,9 +101,7 @@ namespace NotSteam.Migrations
                             Id = 1,
                             BasePrice = 59.99m,
                             CompanyId = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(7052),
                             Description = "New year, new game!",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReleaseDate = new DateTime(2019, 6, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "C4ll of $$$$: Covert Ops"
                         },
@@ -122,9 +110,7 @@ namespace NotSteam.Migrations
                             Id = 2,
                             BasePrice = 79.99m,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(9210),
                             Description = "What we really want from EA.",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReleaseDate = new DateTime(2018, 12, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "Need for Speed: Underground 3"
                         },
@@ -133,9 +119,7 @@ namespace NotSteam.Migrations
                             Id = 3,
                             BasePrice = 69.69m,
                             CompanyId = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(9237),
                             Description = "One of these days…",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReleaseDate = new DateTime(2022, 10, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "Age of Empires 4"
                         });
@@ -143,21 +127,11 @@ namespace NotSteam.Migrations
 
             modelBuilder.Entity("NotSteam.Models.GameTag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt");
-
                     b.Property<int>("GameId");
-
-                    b.Property<DateTime>("LastModifiedAt");
 
                     b.Property<int>("TagId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
+                    b.HasKey("GameId", "TagId");
 
                     b.HasIndex("TagId");
 
@@ -166,224 +140,153 @@ namespace NotSteam.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(603),
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 1
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(2147),
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 2
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(2171),
                             GameId = 2,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 1
                         },
                         new
                         {
-                            Id = 4,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(2173),
                             GameId = 2,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 2
                         },
                         new
                         {
-                            Id = 5,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(2174),
                             GameId = 2,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 3
                         },
                         new
                         {
-                            Id = 6,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(2175),
                             GameId = 3,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TagId = 1
                         });
                 });
 
             modelBuilder.Entity("NotSteam.Models.Library", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<DateTime>("DateAcquired");
+                    b.Property<int>("UserId");
 
                     b.Property<int>("GameId");
 
-                    b.Property<DateTime>("LastModifiedAt");
+                    b.Property<DateTime>("DateAcquired");
 
-                    b.Property<DateTime>("LastPlayedDate");
+                    b.Property<DateTime?>("LastPlayedDate");
 
                     b.Property<int>("TotalPlayTimeHours");
 
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GameId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Libraries");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(3495),
+                            UserId = 1,
+                            GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
-                            GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastPlayedDate = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(3494),
-                            TotalPlayTimeHours = 20,
-                            UserId = 1
+                            LastPlayedDate = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(95),
+                            TotalPlayTimeHours = 20
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(5360),
-                            DateAcquired = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(5359),
+                            UserId = 1,
                             GameId = 2,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateAcquired = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1177),
                             LastPlayedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalPlayTimeHours = 0,
-                            UserId = 1
+                            TotalPlayTimeHours = 0
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(5393),
-                            DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            UserId = 2,
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastPlayedDate = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(5392),
-                            TotalPlayTimeHours = 129,
-                            UserId = 2
+                            DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
+                            LastPlayedDate = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1244),
+                            TotalPlayTimeHours = 186
                         });
                 });
 
             modelBuilder.Entity("NotSteam.Models.Purchase", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<DateTime>("DateOfPurchase");
+                    b.Property<int>("UserId");
 
                     b.Property<int>("GameId");
 
-                    b.Property<DateTime>("LastModifiedAt");
+                    b.Property<DateTime>("DateOfPurchase");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(19,4)");
 
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GameId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Purchases");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(6856),
+                            UserId = 1,
+                            GameId = 1,
                             DateOfPurchase = new DateTime(2019, 7, 19, 0, 0, 0, 0, DateTimeKind.Utc),
-                            GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalPrice = 59.99m,
-                            UserId = 1
+                            TotalPrice = 59.99m
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(8717),
-                            DateOfPurchase = new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            UserId = 1,
                             GameId = 2,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalPrice = 64.99m,
-                            UserId = 1
+                            DateOfPurchase = new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            TotalPrice = 64.99m
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 563, DateTimeKind.Utc).AddTicks(8743),
-                            DateOfPurchase = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            UserId = 2,
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalPrice = 24.99m,
-                            UserId = 2
+                            DateOfPurchase = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            TotalPrice = 24.99m
                         });
                 });
 
             modelBuilder.Entity("NotSteam.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Description");
+                    b.Property<int>("UserId");
 
                     b.Property<int>("GameId");
 
-                    b.Property<DateTime>("LastModifiedAt");
+                    b.Property<string>("Description")
+                        .HasMaxLength(1500);
 
                     b.Property<int>("Rating");
 
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GameId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 564, DateTimeKind.Utc).AddTicks(223),
-                            Description = "This is a really good game! You should get it too!",
+                            UserId = 1,
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Rating = 8,
-                            UserId = 1
+                            Description = "This is a really good game! You should get it too!",
+                            Rating = 8
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 564, DateTimeKind.Utc).AddTicks(2114),
-                            Description = "It's a good game, but I don't like \"surprise mechanics\".",
+                            UserId = 2,
                             GameId = 1,
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Rating = 6,
-                            UserId = 2
+                            Description = "It's a good game, but I don't like \"surprise mechanics\".",
+                            Rating = 6
                         });
                 });
 
@@ -393,11 +296,8 @@ namespace NotSteam.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Description");
-
-                    b.Property<DateTime>("LastModifiedAt");
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -411,25 +311,19 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(3907),
                             Description = "This item contains single-player content (e.g. campaign, story mode, etc.)",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Single-Player"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(5678),
                             Description = "This item contains multi-player content. Requires an internet connection.",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Multi-Player"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 562, DateTimeKind.Utc).AddTicks(5705),
                             Description = "This item contains ce-op content. Requires an internet connection. A limited amount of players can group up and play!",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Co-Op"
                         });
                 });
@@ -440,24 +334,24 @@ namespace NotSteam.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt");
-
                     b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(254);
 
-                    b.Property<DateTime>("LastModifiedAt");
-
-                    b.Property<string>("Nickname");
+                    b.Property<string>("Nickname")
+                        .HasMaxLength(32);
 
                     b.Property<string>("Password")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(32);
 
                     b.Property<string>("ProfileImageUri");
 
                     b.Property<string>("Username")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(32);
 
                     b.HasKey("Id");
 
@@ -473,10 +367,8 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 561, DateTimeKind.Utc).AddTicks(1727),
                             DateOfBirth = new DateTime(1996, 4, 23, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "Player123@gmail.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nickname = "xXSlayerXx",
                             Password = "ReallySecurePlaintextStorage",
                             ProfileImageUri = "https://cdn.notsteam.com/images/1",
@@ -485,10 +377,8 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 561, DateTimeKind.Utc).AddTicks(4568),
                             DateOfBirth = new DateTime(1992, 2, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "NobodyReally@outlook.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nickname = "Sgt. Harry",
                             Password = "super_secure_pass123",
                             ProfileImageUri = "https://cdn.notsteam.com/images/2",
@@ -497,10 +387,8 @@ namespace NotSteam.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2019, 7, 24, 9, 12, 16, 561, DateTimeKind.Utc).AddTicks(4601),
                             DateOfBirth = new DateTime(1989, 8, 30, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "SampleText@gmail.com",
-                            LastModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nickname = "Mr.Boom",
                             Password = "no1C4nGU3sSm3",
                             ProfileImageUri = "https://cdn.notsteam.com/images/3",
@@ -511,7 +399,7 @@ namespace NotSteam.Migrations
             modelBuilder.Entity("NotSteam.Models.Game", b =>
                 {
                     b.HasOne("NotSteam.Models.Company", "Company")
-                        .WithMany()
+                        .WithMany("Games")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -519,12 +407,12 @@ namespace NotSteam.Migrations
             modelBuilder.Entity("NotSteam.Models.GameTag", b =>
                 {
                     b.HasOne("NotSteam.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("GameTags")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NotSteam.Models.Tag", "Tag")
-                        .WithMany()
+                        .WithMany("GameTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -532,12 +420,12 @@ namespace NotSteam.Migrations
             modelBuilder.Entity("NotSteam.Models.Library", b =>
                 {
                     b.HasOne("NotSteam.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Libraries")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NotSteam.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Libraries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -545,12 +433,12 @@ namespace NotSteam.Migrations
             modelBuilder.Entity("NotSteam.Models.Purchase", b =>
                 {
                     b.HasOne("NotSteam.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NotSteam.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -558,12 +446,12 @@ namespace NotSteam.Migrations
             modelBuilder.Entity("NotSteam.Models.Review", b =>
                 {
                     b.HasOne("NotSteam.Models.Game", "Game")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("NotSteam.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

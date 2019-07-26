@@ -45,8 +45,8 @@ namespace NotSteam.DB
 
         private void OnBeforeOnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.ValidationSetup();
+            modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.Seed();
             // TODO (@IBenko): Add query filter setup call
         }

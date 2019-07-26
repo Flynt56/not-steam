@@ -2,7 +2,6 @@ using NotSteam.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
 
 namespace NotSteam.Models
 {
@@ -23,7 +22,7 @@ namespace NotSteam.Models
         [Required(ErrorMessage = "{0} is required!")]
         [EmailAddress(ErrorMessage = "{0} incorrectly formatted!")]
         [StringLength(254, ErrorMessage = "{0} restricted to {1} characters!")]
-        public MailAddress Email { get; set; } = new MailAddress("example@example.com");
+        public string Email { get; set; }
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "{0} is required!")]
@@ -36,7 +35,7 @@ namespace NotSteam.Models
 
         [DataType(DataType.ImageUrl)]
         [Url(ErrorMessage = "Input must be a valid URL!")]
-        public Uri ProfileImageUri { get; set; }
+        public string ProfileImageUri { get; set; }
 
         public ICollection<Library> Libraries { get; set; }
         public ICollection<Purchase> Purchases { get; set; }
