@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class GamesController : ControllerBase
+    public class GamesController : BaseController
     {
         private readonly NotSteamContext _context;
 
