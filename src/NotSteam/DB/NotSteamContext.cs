@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Extensions.ModelBuilder;
+using NotSteam.Extensions.NotSteamContext;
 using NotSteam.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NotSteam.DB
 {
@@ -21,9 +24,37 @@ namespace NotSteam.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            OnBeforeOnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            OnBeforeSaving();
+
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            OnBeforeSaving();
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        private void OnBeforeOnModelCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.ValidationSetup();
             modelBuilder.Seed();
+            // TODO (@IBenko): Add query filter setup call
+        }
+
+        private void OnBeforeSaving()
+        {
+            this.UpdateBaseDateable();
+            // this.UpdateSoftDeletable();
         }
     }
 }
