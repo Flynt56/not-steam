@@ -10,8 +10,8 @@ namespace NotSteam.Models
     public class Game : BaseModel
     {
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "You must provide a {0}!")]
         [StringLength(250, ErrorMessage = "{0} is limited to {1} characters!")]
+        [Required(ErrorMessage = "{0} is required!")]
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -19,14 +19,14 @@ namespace NotSteam.Models
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "{0} is required!")]
         [CustomDateRange]
+        [Required(ErrorMessage = "{0} is required!")]
         public DateTime ReleaseDate { get; set; } = DateTime.UtcNow;
 
-        [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "{0} is required!")]
         [Column(TypeName = "decimal(19,4)")]
+        [DataType(DataType.Currency)]
         [Range(0.0, 99.99, ErrorMessage = "{0} restricted from {1} to {2}!")]
+        [Required(ErrorMessage = "{0} is required!")]
         public decimal BasePrice { get; set; }
 
         public int CompanyId { get; set; }
