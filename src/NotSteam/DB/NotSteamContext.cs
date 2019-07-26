@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Extensions;
+using NotSteam.Extensions.ModelBuilder;
 using NotSteam.Models;
 
 namespace NotSteam.DB
@@ -21,6 +21,7 @@ namespace NotSteam.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.ValidationSetup();
             modelBuilder.Seed();
         }
