@@ -18,10 +18,10 @@ namespace NotSteam.Controllers
             return await _context.Purchases.ToListAsync();
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "GetPurchase")]
-        public async Task<ActionResult<Purchase>> GetPurchase([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpGet("{idUser}/{idGame}")]
+        public async Task<ActionResult<Purchase>> GetPurchase(int idUser, int idGame)
         {
-            var purchase = await _context.Purchases.FindAsync(new { idUser, idGame });
+            var purchase = await _context.Purchases.FindAsync(idUser, idGame);
 
             if (purchase == null)
             {
@@ -31,8 +31,8 @@ namespace NotSteam.Controllers
             return purchase;
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "PutPurchase")]
-        public async Task<IActionResult> PutPurchase([FromQuery]int idUser, [FromQuery]int idGame, [FromBody]Purchase purchase)
+        [HttpPut("{idUser}/{idGame}")]
+        public async Task<IActionResult> PutPurchase(int idUser, int idGame, [FromBody]Purchase purchase)
         {
             if (idUser == purchase.UserId && idGame == purchase.GameId)
             {
@@ -69,10 +69,10 @@ namespace NotSteam.Controllers
             return CreatedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
         }
 
-        [HttpDelete("{idUser:int}/{idGame:int}", Name = "DeletePurchase")]
-        public async Task<ActionResult<Purchase>> DeletePurchase([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpDelete("{idUser}/{idGame}")]
+        public async Task<ActionResult<Purchase>> DeletePurchase(int idUser, int idGame)
         {
-            var purchase = await _context.Purchases.FindAsync(new { idUser, idGame });
+            var purchase = await _context.Purchases.FindAsync(idUser, idGame);
 
             if (purchase == null)
             {

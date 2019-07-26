@@ -18,10 +18,10 @@ namespace NotSteam.Controllers
             return await _context.GameTags.ToListAsync();
         }
 
-        [HttpGet("{idGame:int}/{idTag:int}", Name = "GetGameTag")]
-        public async Task<ActionResult<GameTag>> GetGameTag([FromQuery]int idGame, [FromQuery]int idTag)
+        [HttpGet("{idGame}/{idTag}")]
+        public async Task<ActionResult<GameTag>> GetGameTag(int idGame, int idTag)
         {
-            var gameTag = await _context.GameTags.FindAsync(new { idGame, idTag });
+            var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
 
             if (gameTag == null)
             {
@@ -31,8 +31,8 @@ namespace NotSteam.Controllers
             return gameTag;
         }
 
-        [HttpGet("{idGame:int}/{idTag:int}", Name = "PutGameTag")]
-        public async Task<IActionResult> PutGameTag([FromQuery]int idGame, [FromQuery]int idTag, [FromBody]GameTag gameTag)
+        [HttpPut("{idGame}/{idTag}")]
+        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTag gameTag)
         {
             if (idGame == gameTag.TagId && idTag == gameTag.GameId)
             {
@@ -69,10 +69,10 @@ namespace NotSteam.Controllers
             return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.TagId, idTag = gameTag.GameId }, gameTag);
         }
 
-        [HttpDelete("{idGame:int}/{idTag:int}", Name = "DeleteGameTag")]
-        public async Task<ActionResult<GameTag>> DeleteGameTag([FromQuery]int idGame, [FromQuery]int idTag)
+        [HttpPut("{idGame}/{idTag}")]
+        public async Task<ActionResult<GameTag>> DeleteGameTag(int idGame, int idTag)
         {
-            var gameTag = await _context.GameTags.FindAsync(new { idGame, idTag });
+            var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
 
             if (gameTag == null)
             {

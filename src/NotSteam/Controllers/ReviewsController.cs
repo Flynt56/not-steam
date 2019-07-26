@@ -18,10 +18,10 @@ namespace NotSteam.Controllers
             return await _context.Reviews.ToListAsync();
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "GetReview")]
-        public async Task<ActionResult<Review>> GetReview([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpGet("{idUser}/{idGame}")]
+        public async Task<ActionResult<Review>> GetReview(int idUser, int idGame)
         {
-            var review = await _context.Reviews.FindAsync(new { idUser, idGame });
+            var review = await _context.Reviews.FindAsync(idUser, idGame);
 
             if (review == null)
             {
@@ -31,8 +31,8 @@ namespace NotSteam.Controllers
             return review;
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "PutReview")]
-        public async Task<IActionResult> PutReview([FromQuery]int idUser, [FromQuery]int idGame, [FromBody]Review review)
+        [HttpPut("{idUser}/{idGame}")]
+        public async Task<IActionResult> PutReview(int idUser, int idGame, [FromBody]Review review)
         {
             if (idUser == review.UserId && idGame == review.GameId)
             {
@@ -69,10 +69,10 @@ namespace NotSteam.Controllers
             return CreatedAtAction(nameof(GetReview), new { idUser = review.UserId, idGame = review.GameId }, review);
         }
 
-        [HttpDelete("{idUser:int}/{idGame:int}", Name = "DeleteReview")]
-        public async Task<ActionResult<Review>> DeleteReview([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpDelete("{idUser}/{idGame}")]
+        public async Task<ActionResult<Review>> DeleteReview(int idUser, int idGame)
         {
-            var review = await _context.Reviews.FindAsync(new { idUser, idGame });
+            var review = await _context.Reviews.FindAsync(idUser, idGame);
 
             if (review == null)
             {

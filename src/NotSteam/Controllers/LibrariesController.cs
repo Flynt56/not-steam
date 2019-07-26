@@ -18,10 +18,10 @@ namespace NotSteam.Controllers
             return await _context.Libraries.ToListAsync();
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "GetLibrary")]
-        public async Task<ActionResult<Library>> GetLibrary([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpGet("{idUser}/{idGame}")]
+        public async Task<ActionResult<Library>> GetLibrary(int idUser, int idGame)
         {
-            var library = await _context.Libraries.FindAsync(new { idUser, idGame });
+            var library = await _context.Libraries.FindAsync(idUser, idGame);
 
             if (library == null)
             {
@@ -31,8 +31,8 @@ namespace NotSteam.Controllers
             return library;
         }
 
-        [HttpGet("{idUser:int}/{idGame:int}", Name = "PutLibrary")]
-        public async Task<IActionResult> PutLibrary([FromQuery]int idUser, [FromQuery]int idGame, [FromBody]Library library)
+        [HttpPut("{idUser}/{idGame}")]
+        public async Task<IActionResult> PutLibrary(int idUser, int idGame, [FromBody]Library library)
         {
             if (idUser == library.UserId && idGame == library.GameId)
             {
@@ -69,10 +69,10 @@ namespace NotSteam.Controllers
             return CreatedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
         }
 
-        [HttpDelete("{idUser:int}/{idGame:int}", Name = "DeleteLibrary")]
-        public async Task<ActionResult<Library>> DeleteLibrary([FromQuery]int idUser, [FromQuery]int idGame)
+        [HttpDelete("{idUser}/{idGame}")]
+        public async Task<ActionResult<Library>> DeleteLibrary(int idUser, int idGame)
         {
-            var library = await _context.Libraries.FindAsync(new { idUser, idGame });
+            var library = await _context.Libraries.FindAsync(idUser, idGame);
 
             if (library == null)
             {
