@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,18 +12,16 @@ namespace NotSteam.Controllers
         public PurchasesController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Purchases
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Purchase>>> GetPurchases()
         {
-            return await Context.Purchases.ToListAsync();
+            return await _context.Purchases.ToListAsync();
         }
 
-        // GET: api/Purchases/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Purchase>> GetPurchase(int id)
+        [HttpGet("{idUser:int}/{idGame:int}", Name = "GetPurchase")]
+        public async Task<ActionResult<Purchase>> GetPurchase([FromQuery]int idUser, [FromQuery]int idGame)
         {
-            var purchase = await Context.Purchases.FindAsync(id);
+            var purchase = await _context.Purchases.FindAsync(new { idUser, idGame });
 
             if (purchase == null)
             {
@@ -34,65 +31,63 @@ namespace NotSteam.Controllers
             return purchase;
         }
 
-        // PUT: api/Purchases/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPurchase(int id, Purchase purchase)
+        [HttpGet("{idUser:int}/{idGame:int}", Name = "PutPurchase")]
+        public async Task<IActionResult> PutPurchase([FromQuery]int idUser, [FromQuery]int idGame, [FromBody]Purchase purchase)
         {
-            if (id != purchase.Id)
+            if (idUser == purchase.UserId && idGame == purchase.GameId)
             {
-                return BadRequest();
-            }
+                _context.Entry(purchase).State = EntityState.Modified;
 
-            Context.Entry(purchase).State = EntityState.Modified;
-
-            try
-            {
-                await Context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PurchaseExists(id))
+                try
                 {
-                    return NotFound();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (await PurchaseExists(idUser, idGame))
+                    {
+                        throw;
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
+
+                return AcceptedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
             }
 
-            return AcceptedAtAction(nameof(GetPurchase), new { id = purchase.Id }, purchase);
+            return BadRequest();
         }
 
-        // POST: api/Purchases
         [HttpPost]
-        public async Task<ActionResult<Purchase>> PostPurchase(Purchase purchase)
+        public async Task<ActionResult<Purchase>> PostPurchase([FromBody]Purchase purchase)
         {
-            Context.Purchases.Add(purchase);
-            await Context.SaveChangesAsync();
+            await _context.Purchases.AddAsync(purchase);
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPurchase), new { id = purchase.Id }, purchase);
+            return CreatedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
         }
 
-        // DELETE: api/Purchases/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Purchase>> DeletePurchase(int id)
+        [HttpDelete("{idUser:int}/{idGame:int}", Name = "DeletePurchase")]
+        public async Task<ActionResult<Purchase>> DeletePurchase([FromQuery]int idUser, [FromQuery]int idGame)
         {
-            var purchase = await Context.Purchases.FindAsync(id);
+            var purchase = await _context.Purchases.FindAsync(new { idUser, idGame });
+
             if (purchase == null)
             {
                 return NotFound();
             }
 
-            Context.Purchases.Remove(purchase);
-            await Context.SaveChangesAsync();
+            _context.Purchases.Remove(purchase);
+            await _context.SaveChangesAsync();
 
             return purchase;
         }
 
-        private bool PurchaseExists(int id)
+        private async Task<bool> PurchaseExists(int idUser, int idGame)
         {
-            return Context.Purchases.Any(e => e.Id == id);
+            return await _context.Purchases.AnyAsync(e => e.UserId == idUser && e.GameId == idGame);
         }
     }
 }

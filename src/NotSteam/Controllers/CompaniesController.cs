@@ -17,14 +17,14 @@ namespace NotSteam.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            return await Context.Companies.ToListAsync();
+            return await _context.Companies.ToListAsync();
         }
 
         // GET: api/Companies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
-            var company = await Context.Companies.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
@@ -43,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            Context.Entry(company).State = EntityState.Modified;
+            _context.Entry(company).State = EntityState.Modified;
 
             try
             {
-                await Context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -68,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Company>> PostCompany([FromBody]Company company)
         {
-            Context.Companies.Add(company);
-            await Context.SaveChangesAsync();
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
@@ -78,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(int id)
         {
-            var company = await Context.Companies.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
             }
 
-            Context.Companies.Remove(company);
-            await Context.SaveChangesAsync();
+            _context.Companies.Remove(company);
+            await _context.SaveChangesAsync();
 
             return company;
         }
 
         private bool CompanyExists(int id)
         {
-            return Context.Companies.Any(e => e.Id == id);
+            return _context.Companies.Any(e => e.Id == id);
         }
     }
 }

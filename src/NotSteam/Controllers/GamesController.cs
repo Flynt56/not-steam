@@ -17,14 +17,14 @@ namespace NotSteam.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGames()
         {
-            return await Context.Games.ToListAsync();
+            return await _context.Games.ToListAsync();
         }
 
         // GET: api/Games/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
-            var game = await Context.Games.FindAsync(id);
+            var game = await _context.Games.FindAsync(id);
 
             if (game == null)
             {
@@ -43,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            Context.Entry(game).State = EntityState.Modified;
+            _context.Entry(game).State = EntityState.Modified;
 
             try
             {
-                await Context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -68,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Game>> PostGame([FromBody]Game game)
         {
-            Context.Games.Add(game);
-            await Context.SaveChangesAsync();
+            _context.Games.Add(game);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
@@ -78,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Game>> DeleteGame(int id)
         {
-            var game = await Context.Games.FindAsync(id);
+            var game = await _context.Games.FindAsync(id);
             if (game == null)
             {
                 return NotFound();
             }
 
-            Context.Games.Remove(game);
-            await Context.SaveChangesAsync();
+            _context.Games.Remove(game);
+            await _context.SaveChangesAsync();
 
             return game;
         }
 
         private bool GameExists(int id)
         {
-            return Context.Games.Any(e => e.Id == id);
+            return _context.Games.Any(e => e.Id == id);
         }
     }
 }

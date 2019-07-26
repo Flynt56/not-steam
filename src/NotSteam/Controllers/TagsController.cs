@@ -17,14 +17,14 @@ namespace NotSteam.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
-            return await Context.Tags.ToListAsync();
+            return await _context.Tags.ToListAsync();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
-            var tag = await Context.Tags.FindAsync(id);
+            var tag = await _context.Tags.FindAsync(id);
 
             if (tag == null)
             {
@@ -43,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            Context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(tag).State = EntityState.Modified;
 
             try
             {
-                await Context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -68,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
-            Context.Tags.Add(tag);
-            await Context.SaveChangesAsync();
+            _context.Tags.Add(tag);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
         }
@@ -78,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> DeleteTag(int id)
         {
-            var tag = await Context.Tags.FindAsync(id);
+            var tag = await _context.Tags.FindAsync(id);
             if (tag == null)
             {
                 return NotFound();
             }
 
-            Context.Tags.Remove(tag);
-            await Context.SaveChangesAsync();
+            _context.Tags.Remove(tag);
+            await _context.SaveChangesAsync();
 
             return tag;
         }
 
         private bool TagExists(int id)
         {
-            return Context.Tags.Any(e => e.Id == id);
+            return _context.Tags.Any(e => e.Id == id);
         }
     }
 }

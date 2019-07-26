@@ -7,13 +7,11 @@ namespace NotSteam.Controllers
     [ApiController]
     public abstract class BaseController : ControllerBase
     {
-        private readonly NotSteamContext context;
-
-        protected NotSteamContext Context => context;
+        protected readonly NotSteamContext _context;
 
         public BaseController(NotSteamContext context)
         {
-            this.context = context;
+            _context = context;
         }
     }
 }

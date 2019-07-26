@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,18 +12,16 @@ namespace NotSteam.Controllers
         public LibrariesController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Libraries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Library>>> GetLibraries()
         {
-            return await Context.Libraries.ToListAsync();
+            return await _context.Libraries.ToListAsync();
         }
 
-        // GET: api/Libraries/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Library>> GetLibrary(int id)
+        [HttpGet("{idUser:int}/{idGame:int}", Name = "GetLibrary")]
+        public async Task<ActionResult<Library>> GetLibrary([FromQuery]int idUser, [FromQuery]int idGame)
         {
-            var library = await Context.Libraries.FindAsync(id);
+            var library = await _context.Libraries.FindAsync(new { idUser, idGame });
 
             if (library == null)
             {
@@ -34,65 +31,63 @@ namespace NotSteam.Controllers
             return library;
         }
 
-        // PUT: api/Libraries/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutLibrary(int id, Library library)
+        [HttpGet("{idUser:int}/{idGame:int}", Name = "PutLibrary")]
+        public async Task<IActionResult> PutLibrary([FromQuery]int idUser, [FromQuery]int idGame, [FromBody]Library library)
         {
-            if (id != library.Id)
+            if (idUser == library.UserId && idGame == library.GameId)
             {
-                return BadRequest();
-            }
+                _context.Entry(library).State = EntityState.Modified;
 
-            Context.Entry(library).State = EntityState.Modified;
-
-            try
-            {
-                await Context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LibraryExists(id))
+                try
                 {
-                    return NotFound();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (await LibraryExists(idUser, idGame))
+                    {
+                        throw;
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
+
+                return AcceptedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
             }
 
-            return AcceptedAtAction(nameof(GetLibrary), new { id = library.Id }, library);
+            return BadRequest();
         }
 
-        // POST: api/Libraries
         [HttpPost]
-        public async Task<ActionResult<Library>> PostLibrary(Library library)
+        public async Task<ActionResult<Library>> PostLibrary([FromBody]Library library)
         {
-            Context.Libraries.Add(library);
-            await Context.SaveChangesAsync();
+            await _context.Libraries.AddAsync(library);
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLibrary), new { id = library.Id }, library);
+            return CreatedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
         }
 
-        // DELETE: api/Libraries/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Library>> DeleteLibrary(int id)
+        [HttpDelete("{idUser:int}/{idGame:int}", Name = "DeleteLibrary")]
+        public async Task<ActionResult<Library>> DeleteLibrary([FromQuery]int idUser, [FromQuery]int idGame)
         {
-            var library = await Context.Libraries.FindAsync(id);
+            var library = await _context.Libraries.FindAsync(new { idUser, idGame });
+
             if (library == null)
             {
                 return NotFound();
             }
 
-            Context.Libraries.Remove(library);
-            await Context.SaveChangesAsync();
+            _context.Libraries.Remove(library);
+            await _context.SaveChangesAsync();
 
             return library;
         }
 
-        private bool LibraryExists(int id)
+        private async Task<bool> LibraryExists(int idUser, int idGame)
         {
-            return Context.Libraries.Any(e => e.Id == id);
+            return await _context.Libraries.AnyAsync(e => e.UserId == idUser && e.GameId == idGame);
         }
     }
 }
