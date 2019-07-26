@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class TagsController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public TagsController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public TagsController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/Tags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
-            return await _context.Tags.ToListAsync();
+            return await Context.Tags.ToListAsync();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
-            var tag = await _context.Tags.FindAsync(id);
+            var tag = await Context.Tags.FindAsync(id);
 
             if (tag == null)
             {
@@ -47,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            Context.Entry(tag).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Tag>> PostTag(Tag tag)
         {
-            _context.Tags.Add(tag);
-            await _context.SaveChangesAsync();
+            Context.Tags.Add(tag);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> DeleteTag(int id)
         {
-            var tag = await _context.Tags.FindAsync(id);
+            var tag = await Context.Tags.FindAsync(id);
             if (tag == null)
             {
                 return NotFound();
             }
 
-            _context.Tags.Remove(tag);
-            await _context.SaveChangesAsync();
+            Context.Tags.Remove(tag);
+            await Context.SaveChangesAsync();
 
             return tag;
         }
 
         private bool TagExists(int id)
         {
-            return _context.Tags.Any(e => e.Id == id);
+            return Context.Tags.Any(e => e.Id == id);
         }
     }
 }

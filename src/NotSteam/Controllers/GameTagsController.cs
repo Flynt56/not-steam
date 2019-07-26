@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class GameTagsController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public GameTagsController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public GameTagsController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/GameTags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTags()
         {
-            return await _context.GameTags.ToListAsync();
+            return await Context.GameTags.ToListAsync();
         }
 
         // GET: api/GameTags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GameTag>> GetGameTag(int id)
         {
-            var gameTag = await _context.GameTags.FindAsync(id);
+            var gameTag = await Context.GameTags.FindAsync(id);
 
             if (gameTag == null)
             {
@@ -47,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(gameTag).State = EntityState.Modified;
+            Context.Entry(gameTag).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<GameTag>> PostGameTag(GameTag gameTag)
         {
-            _context.GameTags.Add(gameTag);
-            await _context.SaveChangesAsync();
+            Context.GameTags.Add(gameTag);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGameTag), new { id = gameTag.Id }, gameTag);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<GameTag>> DeleteGameTag(int id)
         {
-            var gameTag = await _context.GameTags.FindAsync(id);
+            var gameTag = await Context.GameTags.FindAsync(id);
             if (gameTag == null)
             {
                 return NotFound();
             }
 
-            _context.GameTags.Remove(gameTag);
-            await _context.SaveChangesAsync();
+            Context.GameTags.Remove(gameTag);
+            await Context.SaveChangesAsync();
 
             return gameTag;
         }
 
         private bool GameTagExists(int id)
         {
-            return _context.GameTags.Any(e => e.Id == id);
+            return Context.GameTags.Any(e => e.Id == id);
         }
     }
 }

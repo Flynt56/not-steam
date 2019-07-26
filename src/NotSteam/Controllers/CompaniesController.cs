@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class CompaniesController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public CompaniesController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public CompaniesController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/Companies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            return await _context.Companies.ToListAsync();
+            return await Context.Companies.ToListAsync();
         }
 
         // GET: api/Companies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company = await Context.Companies.FindAsync(id);
 
             if (company == null)
             {
@@ -40,18 +36,18 @@ namespace NotSteam.Controllers
 
         // PUT: api/Companies/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(int id, Company company)
+        public async Task<IActionResult> PutCompany(int id, [FromBody]Company company)
         {
             if (id != company.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(company).State = EntityState.Modified;
+            Context.Entry(company).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,10 +66,10 @@ namespace NotSteam.Controllers
 
         // POST: api/Companies
         [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany(Company company)
+        public async Task<ActionResult<Company>> PostCompany([FromBody]Company company)
         {
-            _context.Companies.Add(company);
-            await _context.SaveChangesAsync();
+            Context.Companies.Add(company);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company = await Context.Companies.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
             }
 
-            _context.Companies.Remove(company);
-            await _context.SaveChangesAsync();
+            Context.Companies.Remove(company);
+            await Context.SaveChangesAsync();
 
             return company;
         }
 
         private bool CompanyExists(int id)
         {
-            return _context.Companies.Any(e => e.Id == id);
+            return Context.Companies.Any(e => e.Id == id);
         }
     }
 }

@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class GamesController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public GamesController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public GamesController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/Games
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGames()
         {
-            return await _context.Games.ToListAsync();
+            return await Context.Games.ToListAsync();
         }
 
         // GET: api/Games/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
-            var game = await _context.Games.FindAsync(id);
+            var game = await Context.Games.FindAsync(id);
 
             if (game == null)
             {
@@ -40,18 +36,18 @@ namespace NotSteam.Controllers
 
         // PUT: api/Games/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGame(int id, Game game)
+        public async Task<IActionResult> PutGame(int id, [FromBody]Game game)
         {
             if (id != game.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(game).State = EntityState.Modified;
+            Context.Entry(game).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,10 +66,10 @@ namespace NotSteam.Controllers
 
         // POST: api/Games
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame(Game game)
+        public async Task<ActionResult<Game>> PostGame([FromBody]Game game)
         {
-            _context.Games.Add(game);
-            await _context.SaveChangesAsync();
+            Context.Games.Add(game);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Game>> DeleteGame(int id)
         {
-            var game = await _context.Games.FindAsync(id);
+            var game = await Context.Games.FindAsync(id);
             if (game == null)
             {
                 return NotFound();
             }
 
-            _context.Games.Remove(game);
-            await _context.SaveChangesAsync();
+            Context.Games.Remove(game);
+            await Context.SaveChangesAsync();
 
             return game;
         }
 
         private bool GameExists(int id)
         {
-            return _context.Games.Any(e => e.Id == id);
+            return Context.Games.Any(e => e.Id == id);
         }
     }
 }

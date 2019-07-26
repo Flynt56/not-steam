@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class PurchasesController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public PurchasesController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public PurchasesController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/Purchases
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Purchase>>> GetPurchases()
         {
-            return await _context.Purchases.ToListAsync();
+            return await Context.Purchases.ToListAsync();
         }
 
         // GET: api/Purchases/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Purchase>> GetPurchase(int id)
         {
-            var purchase = await _context.Purchases.FindAsync(id);
+            var purchase = await Context.Purchases.FindAsync(id);
 
             if (purchase == null)
             {
@@ -47,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(purchase).State = EntityState.Modified;
+            Context.Entry(purchase).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Purchase>> PostPurchase(Purchase purchase)
         {
-            _context.Purchases.Add(purchase);
-            await _context.SaveChangesAsync();
+            Context.Purchases.Add(purchase);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetPurchase), new { id = purchase.Id }, purchase);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Purchase>> DeletePurchase(int id)
         {
-            var purchase = await _context.Purchases.FindAsync(id);
+            var purchase = await Context.Purchases.FindAsync(id);
             if (purchase == null)
             {
                 return NotFound();
             }
 
-            _context.Purchases.Remove(purchase);
-            await _context.SaveChangesAsync();
+            Context.Purchases.Remove(purchase);
+            await Context.SaveChangesAsync();
 
             return purchase;
         }
 
         private bool PurchaseExists(int id)
         {
-            return _context.Purchases.Any(e => e.Id == id);
+            return Context.Purchases.Any(e => e.Id == id);
         }
     }
 }

@@ -10,25 +10,21 @@ namespace NotSteam.Controllers
 {
     public class LibrariesController : BaseController
     {
-        private readonly NotSteamContext _context;
-
-        public LibrariesController(NotSteamContext context)
-        {
-            _context = context;
-        }
+        public LibrariesController(NotSteamContext context) : base(context)
+        { }
 
         // GET: api/Libraries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Library>>> GetLibraries()
         {
-            return await _context.Libraries.ToListAsync();
+            return await Context.Libraries.ToListAsync();
         }
 
         // GET: api/Libraries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Library>> GetLibrary(int id)
         {
-            var library = await _context.Libraries.FindAsync(id);
+            var library = await Context.Libraries.FindAsync(id);
 
             if (library == null)
             {
@@ -47,11 +43,11 @@ namespace NotSteam.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(library).State = EntityState.Modified;
+            Context.Entry(library).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,8 +68,8 @@ namespace NotSteam.Controllers
         [HttpPost]
         public async Task<ActionResult<Library>> PostLibrary(Library library)
         {
-            _context.Libraries.Add(library);
-            await _context.SaveChangesAsync();
+            Context.Libraries.Add(library);
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetLibrary), new { id = library.Id }, library);
         }
@@ -82,21 +78,21 @@ namespace NotSteam.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Library>> DeleteLibrary(int id)
         {
-            var library = await _context.Libraries.FindAsync(id);
+            var library = await Context.Libraries.FindAsync(id);
             if (library == null)
             {
                 return NotFound();
             }
 
-            _context.Libraries.Remove(library);
-            await _context.SaveChangesAsync();
+            Context.Libraries.Remove(library);
+            await Context.SaveChangesAsync();
 
             return library;
         }
 
         private bool LibraryExists(int id)
         {
-            return _context.Libraries.Any(e => e.Id == id);
+            return Context.Libraries.Any(e => e.Id == id);
         }
     }
 }
