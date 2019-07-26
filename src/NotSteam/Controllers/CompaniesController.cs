@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,14 +12,12 @@ namespace NotSteam.Controllers
         public CompaniesController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Companies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
             return await _context.Companies.ToListAsync();
         }
 
-        // GET: api/Companies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
@@ -34,7 +31,6 @@ namespace NotSteam.Controllers
             return company;
         }
 
-        // PUT: api/Companies/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCompany(int id, [FromBody]Company company)
         {
@@ -51,30 +47,28 @@ namespace NotSteam.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CompanyExists(id))
+                if (await CompanyExists(id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
-                    throw;
+                    return NotFound();
                 }
             }
 
             return AcceptedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
 
-        // POST: api/Companies
         [HttpPost]
         public async Task<ActionResult<Company>> PostCompany([FromBody]Company company)
         {
-            _context.Companies.Add(company);
+            await _context.Companies.AddAsync(company);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
         }
 
-        // DELETE: api/Companies/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(int id)
         {
@@ -90,9 +84,9 @@ namespace NotSteam.Controllers
             return company;
         }
 
-        private bool CompanyExists(int id)
+        private async Task<bool> CompanyExists(int id)
         {
-            return _context.Companies.Any(e => e.Id == id);
+            return await _context.Companies.AnyAsync(e => e.Id == id);
         }
     }
 }

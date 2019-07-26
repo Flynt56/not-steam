@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,14 +12,12 @@ namespace NotSteam.Controllers
         public UsersController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -34,9 +31,8 @@ namespace NotSteam.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(int id, [FromBody]User user)
         {
             if (id != user.Id)
             {
@@ -51,30 +47,28 @@ namespace NotSteam.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (await UserExists(id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
-                    throw;
+                    return NotFound();
                 }
             }
 
             return AcceptedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
-        // POST: api/Users
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
@@ -90,9 +84,9 @@ namespace NotSteam.Controllers
             return user;
         }
 
-        private bool UserExists(int id)
+        private async Task<bool> UserExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return await _context.Users.AnyAsync(e => e.Id == id);
         }
     }
 }

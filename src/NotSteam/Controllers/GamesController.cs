@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,14 +12,12 @@ namespace NotSteam.Controllers
         public GamesController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Games
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGames()
         {
             return await _context.Games.ToListAsync();
         }
 
-        // GET: api/Games/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
@@ -34,7 +31,6 @@ namespace NotSteam.Controllers
             return game;
         }
 
-        // PUT: api/Games/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGame(int id, [FromBody]Game game)
         {
@@ -51,30 +47,28 @@ namespace NotSteam.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GameExists(id))
+                if (await GameExists(id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
-                    throw;
+                    return NotFound();
                 }
             }
 
             return AcceptedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
 
-        // POST: api/Games
         [HttpPost]
         public async Task<ActionResult<Game>> PostGame([FromBody]Game game)
         {
-            _context.Games.Add(game);
+            await _context.Games.AddAsync(game);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
 
-        // DELETE: api/Games/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Game>> DeleteGame(int id)
         {
@@ -90,9 +84,9 @@ namespace NotSteam.Controllers
             return game;
         }
 
-        private bool GameExists(int id)
+        private async Task<bool> GameExists(int id)
         {
-            return _context.Games.Any(e => e.Id == id);
+            return await _context.Games.AnyAsync(e => e.Id == id);
         }
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotSteam.Controllers
@@ -13,14 +12,12 @@ namespace NotSteam.Controllers
         public TagsController(NotSteamContext context) : base(context)
         { }
 
-        // GET: api/Tags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
         {
             return await _context.Tags.ToListAsync();
         }
 
-        // GET: api/Tags/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Tag>> GetTag(int id)
         {
@@ -34,9 +31,8 @@ namespace NotSteam.Controllers
             return tag;
         }
 
-        // PUT: api/Tags/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, Tag tag)
+        public async Task<IActionResult> PutTag(int id, [FromBody]Tag tag)
         {
             if (id != tag.Id)
             {
@@ -51,30 +47,28 @@ namespace NotSteam.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(id))
+                if (await TagExists(id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
-                    throw;
+                    return NotFound();
                 }
             }
 
             return AcceptedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
         }
 
-        // POST: api/Tags
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        public async Task<ActionResult<Tag>> PostTag([FromBody]Tag tag)
         {
-            _context.Tags.Add(tag);
+            await _context.Tags.AddAsync(tag);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
         }
 
-        // DELETE: api/Tags/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tag>> DeleteTag(int id)
         {
@@ -90,9 +84,9 @@ namespace NotSteam.Controllers
             return tag;
         }
 
-        private bool TagExists(int id)
+        private async Task<bool> TagExists(int id)
         {
-            return _context.Tags.Any(e => e.Id == id);
+            return await _context.Tags.AnyAsync(e => e.Id == id);
         }
     }
 }
