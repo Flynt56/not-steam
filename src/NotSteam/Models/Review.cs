@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
 

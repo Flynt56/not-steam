@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Models
+namespace NotSteam.Models.Interfaces
 {
     public interface IBaseDateable
     {

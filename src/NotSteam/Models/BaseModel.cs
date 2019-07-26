@@ -1,8 +1,9 @@
+using NotSteam.Models.Interfaces;
 using System;
 
 namespace NotSteam.Models
 {
-    public class BaseModel : IBaseDateable
+    public abstract class BaseModel : IBaseDateable
     {
         public int Id { get; set; }
 
