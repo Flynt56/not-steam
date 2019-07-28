@@ -19,7 +19,8 @@ namespace NotSteam
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<NotSteamContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -40,3 +41,4 @@ namespace NotSteam
         }
     }
 }
+

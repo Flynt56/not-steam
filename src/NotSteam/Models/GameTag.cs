@@ -1,6 +1,6 @@
-using System;
 using Newtonsoft.Json;
 using NotSteam.Models.Interfaces;
+using System;
 
 namespace NotSteam.Models
 {
@@ -16,10 +16,9 @@ namespace NotSteam.Models
         [JsonIgnore]
         public Tag Tag { get; set; }
 
-        bool ISoftDeletable.IsDeleted { get; set; }
-
-        DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
-        DateTime? IBaseDateable.LastModifiedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastModifiedAt { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
 

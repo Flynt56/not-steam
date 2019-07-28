@@ -8,11 +8,11 @@ namespace NotSteam.Models
         public int Id { get; set; }
 
         // Inherited from IBaseDateable
-        DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
-        DateTime? IBaseDateable.LastModifiedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastModifiedAt { get; set; }
 
         // Inherited from ISoftDeletable
-        bool ISoftDeletable.IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
 

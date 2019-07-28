@@ -29,11 +29,10 @@ namespace NotSteam.Models
         [CustomRange(0.0, 99.99)]
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
-        
-        bool ISoftDeletable.IsDeleted { get; set; }
 
-        DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
-        DateTime? IBaseDateable.LastModifiedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? LastModifiedAt { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
 
