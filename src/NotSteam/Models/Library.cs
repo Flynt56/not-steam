@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
-using NotSteam.Attributes;
+﻿using Newtonsoft.Json;
+using NotSteam.Models.Attributes;
 using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -19,11 +19,11 @@ namespace NotSteam.Models
         public Game Game { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "{0} is required!")]
+        [CustomRequired]
         [CustomDateRange]
         public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
 
-        [Range(0, int.MaxValue, ErrorMessage = "{0} must be greater than {1}!")]
+        [Range(0, int.MaxValue, ErrorMessage = "\"{0}\" mora biti veći od {1}!")]
         public int TotalPlayTimeHours { get; set; }
 
         [DataType(DataType.Date)]

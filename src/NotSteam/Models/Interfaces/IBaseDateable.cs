@@ -1,4 +1,4 @@
-﻿using NotSteam.Attributes;
+﻿using NotSteam.Models.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +7,7 @@ namespace NotSteam.Models.Interfaces
     public interface IBaseDateable
     {
         [DataType(DataType.DateTime)]
-        [Required(ErrorMessage = "Creation date is required!")]
+        [CustomRequired]
         [CustomDateRange]
         DateTime CreatedAt { get; set; }
 

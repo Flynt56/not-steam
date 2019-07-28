@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using NotSteam.Models.Attributes;
 using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -17,11 +18,11 @@ namespace NotSteam.Models
         [JsonIgnore]
         public Game Game { get; set; }
 
-        [Required(ErrorMessage = "{0} is required!")]
-        [Range(1, 10, ErrorMessage = "{0} restricted from {1} to {2}!")]
+        [CustomRequired]
+        [CustomRange(1, 10)]
         public int Rating { get; set; }
 
-        [StringLength(1500, ErrorMessage = "{0} restricted to {1} characters!")]
+        [CustomMaxStringLength(1500)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

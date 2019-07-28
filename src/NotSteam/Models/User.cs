@@ -1,4 +1,4 @@
-using NotSteam.Attributes;
+﻿using NotSteam.Models.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,33 +8,34 @@ namespace NotSteam.Models
     public class User : BaseModel
     {
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "{0} is required!")]
-        [StringLength(32, MinimumLength = 1, ErrorMessage = "{0} requires {1} to {2} characters!")]
-        [RegularExpression("^[a-zA-Z0-9_]{1,32}$", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '_'!")]
+        [CustomRequired]
+        [StringLength(32, MinimumLength = 1, ErrorMessage = "\"{0}\" je ograničen između {1} i {2} znakova!")]
+        [RegularExpression("^[a-zA-Z0-9_]{1,32}$", ErrorMessage = "{0} smije sadržavati ASCII alfanumeričke znakove i '_'!")]
+        [Required]
         public string Username { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "{0} is required!")]
-        [StringLength(32, MinimumLength = 8, ErrorMessage = "{0} requires {1} to {2} characters!")]
-        [RegularExpression("^[a-zA-Z0-9.!?@#$+_=-]{8,32}$", ErrorMessage = "{0} can only contain ASCII alphanumeric characters and '.','!','?','@','#','$','+','-','=','_'!")]
+        [CustomRequired]
+        [StringLength(32, MinimumLength = 8, ErrorMessage = "\"{0}\" je ograničen između {1} i {2} znakova!")]
+        [RegularExpression("^[a-zA-Z0-9.!?@#$+_=-]{8,32}$", ErrorMessage = "\"{0}\" smije sadržavati ASCII alfanumeričke znakove i '.','!','?','@','#','$','+','-','=','_'!")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "{0} is required!")]
-        [EmailAddress(ErrorMessage = "{0} incorrectly formatted!")]
-        [StringLength(254, ErrorMessage = "{0} restricted to {1} characters!")]
+        [CustomRequired]
+        [EmailAddress(ErrorMessage = "\"{0}\" neispravno formatiran!")]
+        [CustomMaxStringLength(254)]
         public string Email { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "{0} is required!")]
+        [CustomRequired]
         [CustomDateRange]
         public DateTime DateOfBirth { get; set; } = DateTime.UtcNow;
 
         [DataType(DataType.Text)]
-        [StringLength(32, ErrorMessage = "{0} restricted to {1} characters!")]
+        [CustomMaxStringLength(32)]
         public string Nickname { get; set; }
 
         [DataType(DataType.ImageUrl)]
-        [Url(ErrorMessage = "Input must be a valid URL!")]
+        [Url(ErrorMessage = "\"{0}\" neispravno formatiran URL!")]
         public string ProfileImageUri { get; set; }
 
         public ICollection<Library> Libraries { get; set; }

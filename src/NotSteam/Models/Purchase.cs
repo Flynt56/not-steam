@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using NotSteam.Attributes;
+using NotSteam.Models.Attributes;
 using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -20,13 +20,13 @@ namespace NotSteam.Models
         public Game Game { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "{0} is required!")]
+        [CustomRequired]
         [CustomDateRange]
         public DateTime DateOfPurchase { get; set; } = DateTime.UtcNow;
 
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "{0} is required!")]
-        [Range(0, 99.99, ErrorMessage = "{0} restricted from {1} to {2}!")]
+        [CustomRequired]
+        [CustomRange(0.0, 99.99)]
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
 
