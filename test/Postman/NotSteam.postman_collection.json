@@ -12,7 +12,7 @@
 					"name": "All",
 					"item": [
 						{
-							"name": "GetUsers",
+							"name": "Users",
 							"event": [
 								{
 									"listen": "test",
@@ -41,7 +41,7 @@
 							"response": []
 						},
 						{
-							"name": "GetCompanies",
+							"name": "Companies",
 							"event": [
 								{
 									"listen": "test",
@@ -70,7 +70,7 @@
 							"response": []
 						},
 						{
-							"name": "GetGames",
+							"name": "Games",
 							"event": [
 								{
 									"listen": "test",
@@ -99,7 +99,7 @@
 							"response": []
 						},
 						{
-							"name": "GetReviews",
+							"name": "Reviews",
 							"event": [
 								{
 									"listen": "test",
@@ -128,7 +128,7 @@
 							"response": []
 						},
 						{
-							"name": "GetTags",
+							"name": "Tags",
 							"event": [
 								{
 									"listen": "test",
@@ -157,7 +157,7 @@
 							"response": []
 						},
 						{
-							"name": "GetGameTags",
+							"name": "GameTags",
 							"event": [
 								{
 									"listen": "test",
@@ -186,7 +186,7 @@
 							"response": []
 						},
 						{
-							"name": "GetLibraries",
+							"name": "Libraries",
 							"event": [
 								{
 									"listen": "test",
@@ -215,7 +215,7 @@
 							"response": []
 						},
 						{
-							"name": "GetPurchases",
+							"name": "Purchases",
 							"event": [
 								{
 									"listen": "test",
@@ -250,7 +250,7 @@
 					"name": "Individual",
 					"item": [
 						{
-							"name": "GetUserId",
+							"name": "User",
 							"event": [
 								{
 									"listen": "test",
@@ -280,7 +280,7 @@
 							"response": []
 						},
 						{
-							"name": "GetCompanyId",
+							"name": "Company",
 							"event": [
 								{
 									"listen": "test",
@@ -310,7 +310,7 @@
 							"response": []
 						},
 						{
-							"name": "GetGameId",
+							"name": "Game",
 							"event": [
 								{
 									"listen": "test",
@@ -340,7 +340,7 @@
 							"response": []
 						},
 						{
-							"name": "GetReviewId",
+							"name": "Review",
 							"event": [
 								{
 									"listen": "test",
@@ -371,7 +371,7 @@
 							"response": []
 						},
 						{
-							"name": "GetTagId",
+							"name": "Tag",
 							"event": [
 								{
 									"listen": "test",
@@ -401,7 +401,7 @@
 							"response": []
 						},
 						{
-							"name": "GetGameTagId",
+							"name": "GameTag",
 							"event": [
 								{
 									"listen": "test",
@@ -432,7 +432,7 @@
 							"response": []
 						},
 						{
-							"name": "GetLibraryId",
+							"name": "Library",
 							"event": [
 								{
 									"listen": "test",
@@ -463,7 +463,7 @@
 							"response": []
 						},
 						{
-							"name": "GetPurchaseId",
+							"name": "Purchase",
 							"event": [
 								{
 									"listen": "test",
@@ -526,7 +526,7 @@
 			"name": "Post",
 			"item": [
 				{
-					"name": "PostGame",
+					"name": "Game",
 					"event": [
 						{
 							"listen": "test",
@@ -559,7 +559,7 @@
 					"response": []
 				},
 				{
-					"name": "PostUser",
+					"name": "User",
 					"event": [
 						{
 							"listen": "test",
@@ -577,7 +577,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"UnknownPlayer\",\n    \"password\": \"k1-dk-102-3eidk-\",\n    \"email\": \"adadadad@dad.ddd\",\n    \"dateofbirth\": \"1989-2-2\"\n}"
+							"raw": "{\n    \"username\": \"UnknownPlayer\",\n    \"password\": \"61ue09109e0912\",\n    \"email\": \"adadadad@dad.dddssss\",\n    \"dateofbirth\": \"1989-2-2\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{users}}",
@@ -592,7 +592,7 @@
 					"response": []
 				},
 				{
-					"name": "PostCompany",
+					"name": "Company",
 					"event": [
 						{
 							"listen": "test",
@@ -625,7 +625,7 @@
 					"response": []
 				},
 				{
-					"name": "PostReview",
+					"name": "Review",
 					"event": [
 						{
 							"listen": "test",
@@ -658,7 +658,7 @@
 					"response": []
 				},
 				{
-					"name": "PostTag",
+					"name": "Tag",
 					"event": [
 						{
 							"listen": "test",
@@ -676,7 +676,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Action\"\n}"
+							"raw": "{\n    \"name\": \"Horror\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{tags}}",
@@ -691,7 +691,7 @@
 					"response": []
 				},
 				{
-					"name": "PostGameTag",
+					"name": "GameTag",
 					"event": [
 						{
 							"listen": "test",
@@ -724,7 +724,7 @@
 					"response": []
 				},
 				{
-					"name": "PostLibrary",
+					"name": "Library",
 					"event": [
 						{
 							"listen": "test",
@@ -757,7 +757,7 @@
 					"response": []
 				},
 				{
-					"name": "PostPurchase",
+					"name": "Purchase",
 					"event": [
 						{
 							"listen": "test",
@@ -819,7 +819,7 @@
 			"name": "Put",
 			"item": [
 				{
-					"name": "PutUser",
+					"name": "User",
 					"event": [
 						{
 							"listen": "test",
@@ -837,7 +837,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"username\": \"RandomUser123\",\n    \"password\": \"kH23jSj_a@djO\",\n    \"email\": \"example@example.com\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"username\": \"RandomUser123\",\n    \"password\": \"kH23jSj_a@djO\",\n    \"email\": \"example@example.com\",\n    \"dateofbirth\": \"1993-5-5\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{users}}/1",
@@ -853,7 +853,7 @@
 					"response": []
 				},
 				{
-					"name": "PutCompany",
+					"name": "Company",
 					"event": [
 						{
 							"listen": "test",
@@ -871,23 +871,23 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"name\": \"Random Company Name\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Random Company Name\"\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{companies}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{companies}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{companies}}",
-								"{{testId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PutGame",
+					"name": "Game",
 					"event": [
 						{
 							"listen": "test",
@@ -905,57 +905,23 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t        \"id\": {{testId}},\n        \"title\": \"Street Fighter VI\",\n        \"basePrice\": 59.99,\n        \"companyId\": 2\n}"
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"New Game VI\",\n    \"releasedate\": \"2019-7-25\"\n    \"basePrice\": 59.99,\n    \"companyId\": 2\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{games}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{games}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{games}}",
-								"{{testId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PutReview",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "862551ae-1c71-41f4-966d-aa8f76b47aaa",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"userId\": 1,\n    \"gameId\": 1,\n    \"rating\": 3\n}"
-						},
-						"url": {
-							"raw": "{{rootUrl}}/{{reviews}}/{{testId}}",
-							"host": [
-								"{{rootUrl}}"
-							],
-							"path": [
-								"{{reviews}}",
-								"{{testId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PutTag",
+					"name": "Tag",
 					"event": [
 						{
 							"listen": "test",
@@ -973,82 +939,120 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"name\": \"First-Person Shooter\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"First-Person Shooter\"\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{tags}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{tags}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{tags}}",
-								"{{testId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PutGameTag",
+					"name": "Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "862551ae-1c71-41f4-966d-aa8f76b47aaa",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"gameId\": 1,\n    \"tagId\": 1\n}"
+							"raw": "{\n    \"userId\": 1,\n    \"gameId\": 1,\n    \"rating\": 3\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{gametags}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{reviews}}/1/1",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{reviews}}",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GameTag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameId\": 1,\n    \"tagId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{rootUrl}}/{{gametags}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{gametags}}",
-								"{{testId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PutLibrary",
+					"name": "Library",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": {{testId}},\n    \"userId\": 1,\n    \"gameId\": 2,\n    \"totalPlayTimeHours\": 420\n}"
+							"raw": "{\n    \"userId\": 1,\n    \"gameId\": 1,\n    \"dateAcquired\": \"2019-07-20T00:00:00\",\n    \"totalPlayTimeHours\": 50,\n    \"lastPlayedDate\": \"2019-07-28T15:38:34.9757388\"\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{libraries}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{libraries}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{libraries}}",
-								"{{testId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PutPurchase",
+					"name": "Purchase",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\": {{testId}},\n    \"userId\": 1,\n    \"gameId\": 2,\n    \"totalPrice\": 39.99\n}"
+							"raw": "{\n    \"userId\": 1,\n    \"gameId\": 2,\n    \"totalPrice\": 39.99\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{purchases}}/{{testId}}",
+							"raw": "{{rootUrl}}/{{purchases}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{purchases}}",
-								"{{testId}}"
+								"1",
+								"1"
 							]
 						}
 					},
@@ -1073,7 +1077,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Successful PUT request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,202,204]);",
 							"});"
 						]
 					}
@@ -1084,144 +1088,148 @@
 			"name": "Delete",
 			"item": [
 				{
-					"name": "DeletePurchase",
+					"name": "Purchase",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{purchases}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{purchases}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{purchases}}",
-								"{{deleteId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteLibrary",
+					"name": "Library",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{libraries}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{libraries}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{libraries}}",
-								"{{deleteId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteGameTag",
+					"name": "GameTag",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{gametags}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{gametags}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{gametags}}",
-								"{{deleteId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteReview",
+					"name": "Review",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{reviews}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{reviews}}/1/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{reviews}}",
-								"{{deleteId}}"
+								"1",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteGame",
+					"name": "Game",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{games}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{games}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{games}}",
-								"{{deleteId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteTag",
+					"name": "Tag",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{tags}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{tags}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{tags}}",
-								"{{deleteId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteCompany",
+					"name": "Company",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{companies}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{companies}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{companies}}",
-								"{{deleteId}}"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteUser",
+					"name": "User",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{rootUrl}}/{{users}}/{{deleteId}}",
+							"raw": "{{rootUrl}}/{{users}}/1",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{users}}",
-								"{{deleteId}}"
+								"1"
 							]
 						}
 					},
@@ -1275,32 +1283,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"id": "fbae1f57-b712-4859-9849-b6ca6b0498be",
-			"key": "userId",
-			"value": "1",
-			"type": "string"
-		},
-		{
-			"id": "9e395377-4f55-4576-8cc0-2b7d6a2f94fa",
-			"key": "companyId",
-			"value": "2",
-			"type": "string"
-		},
-		{
-			"id": "96abe891-1bc5-455f-b883-c288ad6dc3f3",
-			"key": "gameId",
-			"value": "2",
-			"type": "string"
-		},
-		{
-			"id": "5f20e6af-d52d-461e-a69a-94f9146befe4",
-			"key": "tagId",
-			"value": "2",
-			"type": "string"
 		}
 	]
 }
