@@ -8,9 +8,6 @@ namespace NotSteam.Extensions.ModelBuilder
     {
         public static void SoftDeleteSetup(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            // builder.Entity<MyModel>().Property<bool>("isDeleted");
-            // builder.Entity<MyModel>().HasQueryFilter(m => EF.Property<bool>(m, "isDeleted") == false);
-
             SetupQueryFilter<User>(modelBuilder);
             SetupQueryFilter<Game>(modelBuilder);
             SetupQueryFilter<Company>(modelBuilder);

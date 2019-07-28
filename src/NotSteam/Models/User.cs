@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class User : BaseModel
+    public class User : BaseEntity
     {
         [DataType(DataType.Text)]
         [CustomRequired]

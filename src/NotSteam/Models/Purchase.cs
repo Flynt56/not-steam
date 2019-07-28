@@ -1,13 +1,12 @@
 using Newtonsoft.Json;
 using NotSteam.Models.Attributes;
-using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Purchase : ISoftDeletable, IBaseDateable
+    public class Purchase : BaseModel
     {
         public int UserId { get; set; }
 
@@ -29,10 +28,6 @@ namespace NotSteam.Models
         [CustomRange(0.0, 99.99)]
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? LastModifiedAt { get; set; }
-        public bool IsDeleted { get; set; } = false;
     }
 }
 

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Game : BaseModel
+    public class Game : BaseEntity
     {
         [DataType(DataType.Text)]
         [CustomMaxStringLength(250)]

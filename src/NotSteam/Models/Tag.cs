@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Tag : BaseModel
+    public class Tag : BaseEntity
     {
         [CustomRequired]
         [CustomMaxStringLength(48)]

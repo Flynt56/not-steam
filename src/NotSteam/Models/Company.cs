@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Company : BaseModel
+    public class Company : BaseEntity
     {
         [DataType(DataType.Text)]
         [CustomRequired]

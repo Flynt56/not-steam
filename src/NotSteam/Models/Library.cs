@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using NotSteam.Models.Attributes;
-using NotSteam.Models.Interfaces;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Library : ISoftDeletable, IBaseDateable
+    public class Library : BaseModel
     {
         public int UserId { get; set; }
 
@@ -29,10 +28,6 @@ namespace NotSteam.Models
         [DataType(DataType.Date)]
         [CustomDateRange]
         public DateTime? LastPlayedDate { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? LastModifiedAt { get; set; }
-        public bool IsDeleted { get; set; } = false;
     }
 }
 
