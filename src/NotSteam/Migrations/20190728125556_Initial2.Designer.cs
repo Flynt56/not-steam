@@ -10,8 +10,8 @@ using NotSteam.DB;
 namespace NotSteam.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
-    [Migration("20190726184229_Temp1")]
-    partial class Temp1
+    [Migration("20190728125556_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,14 +194,14 @@ namespace NotSteam.Migrations
                             UserId = 1,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(95),
+                            LastPlayedDate = new DateTime(2019, 7, 28, 12, 55, 56, 459, DateTimeKind.Utc).AddTicks(6183),
                             TotalPlayTimeHours = 20
                         },
                         new
                         {
                             UserId = 1,
                             GameId = 2,
-                            DateAcquired = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1177),
+                            DateAcquired = new DateTime(2019, 7, 28, 12, 55, 56, 459, DateTimeKind.Utc).AddTicks(7352),
                             LastPlayedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TotalPlayTimeHours = 0
                         },
@@ -210,8 +210,8 @@ namespace NotSteam.Migrations
                             UserId = 2,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1244),
-                            TotalPlayTimeHours = 186
+                            LastPlayedDate = new DateTime(2019, 7, 28, 12, 55, 56, 459, DateTimeKind.Utc).AddTicks(7424),
+                            TotalPlayTimeHours = 228
                         });
                 });
 

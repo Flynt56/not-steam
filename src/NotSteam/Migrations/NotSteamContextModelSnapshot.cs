@@ -33,6 +33,7 @@ namespace NotSteam.Migrations
                     b.Property<string>("LogoImageUri");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(64);
 
                     b.HasKey("Id");
@@ -83,6 +84,7 @@ namespace NotSteam.Migrations
                     b.Property<DateTime>("ReleaseDate");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(250);
 
                     b.HasKey("Id");
@@ -190,14 +192,14 @@ namespace NotSteam.Migrations
                             UserId = 1,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 28, 11, 16, 0, 16, DateTimeKind.Utc).AddTicks(7627),
+                            LastPlayedDate = new DateTime(2019, 7, 28, 13, 3, 20, 138, DateTimeKind.Utc).AddTicks(2294),
                             TotalPlayTimeHours = 20
                         },
                         new
                         {
                             UserId = 1,
                             GameId = 2,
-                            DateAcquired = new DateTime(2019, 7, 28, 11, 16, 0, 16, DateTimeKind.Utc).AddTicks(8801),
+                            DateAcquired = new DateTime(2019, 7, 28, 13, 3, 20, 138, DateTimeKind.Utc).AddTicks(3418),
                             LastPlayedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TotalPlayTimeHours = 0
                         },
@@ -206,8 +208,8 @@ namespace NotSteam.Migrations
                             UserId = 2,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 28, 11, 16, 0, 16, DateTimeKind.Utc).AddTicks(8870),
-                            TotalPlayTimeHours = 227
+                            LastPlayedDate = new DateTime(2019, 7, 28, 13, 3, 20, 138, DateTimeKind.Utc).AddTicks(3483),
+                            TotalPlayTimeHours = 229
                         });
                 });
 
@@ -296,6 +298,7 @@ namespace NotSteam.Migrations
                         .HasMaxLength(250);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(48);
 
                     b.HasKey("Id");
@@ -332,28 +335,29 @@ namespace NotSteam.Migrations
                     b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(254);
 
                     b.Property<string>("Nickname")
                         .HasMaxLength(32);
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(32);
 
                     b.Property<string>("ProfileImageUri");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasMaxLength(32);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("Username")
-                        .IsUnique()
-                        .HasFilter("[Username] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Users");
 

@@ -1,10 +1,10 @@
+using System;
 using Newtonsoft.Json;
 using NotSteam.Models.Interfaces;
-using System;
 
 namespace NotSteam.Models
 {
-    public class GameTag : IBaseDateable
+    public class GameTag : ISoftDeletable, IBaseDateable
     {
         public int GameId { get; set; }
 
@@ -15,6 +15,8 @@ namespace NotSteam.Models
 
         [JsonIgnore]
         public Tag Tag { get; set; }
+
+        bool ISoftDeletable.IsDeleted { get; set; }
 
         DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
         DateTime? IBaseDateable.LastModifiedAt { get; set; }

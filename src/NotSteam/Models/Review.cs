@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Review : IBaseDateable
+    public class Review : ISoftDeletable, IBaseDateable
     {
         public int UserId { get; set; }
 
@@ -25,6 +25,8 @@ namespace NotSteam.Models
         [CustomMaxStringLength(1500)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        bool ISoftDeletable.IsDeleted { get; set; }
 
         DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
         DateTime? IBaseDateable.LastModifiedAt { get; set; }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Models
 {
-    public class Library : IBaseDateable
+    public class Library : ISoftDeletable, IBaseDateable
     {
         public int UserId { get; set; }
 
@@ -29,6 +29,8 @@ namespace NotSteam.Models
         [DataType(DataType.Date)]
         [CustomDateRange]
         public DateTime? LastPlayedDate { get; set; }
+
+        bool ISoftDeletable.IsDeleted { get; set; }
 
         DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
         DateTime? IBaseDateable.LastModifiedAt { get; set; }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotSteam.Models
 {
-    public class Purchase : IBaseDateable
+    public class Purchase : ISoftDeletable, IBaseDateable
     {
         public int UserId { get; set; }
 
@@ -29,6 +29,8 @@ namespace NotSteam.Models
         [CustomRange(0.0, 99.99)]
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
+        
+        bool ISoftDeletable.IsDeleted { get; set; }
 
         DateTime IBaseDateable.CreatedAt { get; set; } = DateTime.UtcNow;
         DateTime? IBaseDateable.LastModifiedAt { get; set; }

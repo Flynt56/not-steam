@@ -48,13 +48,13 @@ namespace NotSteam.DB
             modelBuilder.ValidationSetup();
             modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.Seed();
-            // TODO (@IBenko): Add query filter setup call
+            modelBuilder.SoftDeleteSetup();
         }
 
         private void OnBeforeSaving()
         {
             this.UpdateBaseDateable();
-            // this.UpdateSoftDeletable();
+            this.UpdateSoftDeletable();
         }
     }
 }

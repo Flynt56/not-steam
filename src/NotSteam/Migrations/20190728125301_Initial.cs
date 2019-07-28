@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace NotSteam.Migrations
 {
-    public partial class Temp1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -245,9 +245,9 @@ namespace NotSteam.Migrations
                 columns: new[] { "UserId", "GameId", "DateAcquired", "LastPlayedDate", "TotalPlayTimeHours" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1177), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 },
-                    { 1, 1, new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(95), 20 },
-                    { 2, 1, new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 26, 18, 42, 29, 294, DateTimeKind.Utc).AddTicks(1244), 186 }
+                    { 1, 2, new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(2315), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { 1, 1, new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(941), 20 },
+                    { 2, 1, new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc), new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(2381), 228 }
                 });
 
             migrationBuilder.InsertData(

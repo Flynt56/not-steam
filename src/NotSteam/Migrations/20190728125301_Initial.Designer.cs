@@ -10,8 +10,8 @@ using NotSteam.DB;
 namespace NotSteam.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
-    [Migration("20190726210820_Temp2")]
-    partial class Temp2
+    [Migration("20190728125301_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,14 +194,14 @@ namespace NotSteam.Migrations
                             UserId = 1,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 26, 21, 8, 20, 21, DateTimeKind.Utc).AddTicks(6217),
+                            LastPlayedDate = new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(941),
                             TotalPlayTimeHours = 20
                         },
                         new
                         {
                             UserId = 1,
                             GameId = 2,
-                            DateAcquired = new DateTime(2019, 7, 26, 21, 8, 20, 21, DateTimeKind.Utc).AddTicks(7376),
+                            DateAcquired = new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(2315),
                             LastPlayedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TotalPlayTimeHours = 0
                         },
@@ -210,8 +210,8 @@ namespace NotSteam.Migrations
                             UserId = 2,
                             GameId = 1,
                             DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 7, 26, 21, 8, 20, 21, DateTimeKind.Utc).AddTicks(7446),
-                            TotalPlayTimeHours = 189
+                            LastPlayedDate = new DateTime(2019, 7, 28, 12, 53, 0, 942, DateTimeKind.Utc).AddTicks(2381),
+                            TotalPlayTimeHours = 228
                         });
                 });
 
