@@ -69,7 +69,7 @@ namespace NotSteam.Controllers
             return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.TagId, idTag = gameTag.GameId }, gameTag);
         }
 
-        [HttpPut("{idGame}/{idTag}")]
+        [HttpDelete("{idGame}/{idTag}")]
         public async Task<ActionResult<GameTag>> DeleteGameTag(int idGame, int idTag)
         {
             var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
