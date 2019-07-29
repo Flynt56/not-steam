@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "64d89e37-c748-4894-9368-e02c2cde42c8",
+		"_postman_id": "73d3619f-e2a2-431b-a44c-fb2cbef2f019",
 		"name": "NotSteam",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -577,7 +577,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"UnknownPlayer\",\n    \"password\": \"61ue09109e0912\",\n    \"email\": \"adadadad@dad.dddssss\",\n    \"dateofbirth\": \"1989-2-2\"\n}"
+							"raw": "{\n    \"username\": \"UnknownPlayer\",\n    \"password\": \"61ue09109e0912\",\n    \"email\": \"adadadad@dad.dddssss\",\n    \"dateofbirth\": \"1991-2-2\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{users}}",
@@ -742,7 +742,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userId\": 4,\n    \"gameId\": 4,\n    \"dateacquired\": \"2019-7-23\"\n}"
+							"raw": "{\n    \"userId\": 3,\n    \"gameId\": 4,\n    \"dateacquired\": \"2019-7-23\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{libraries}}",
@@ -837,7 +837,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"username\": \"RandomUser123\",\n    \"password\": \"kH23jSj_a@djO\",\n    \"email\": \"example@example.com\",\n    \"dateofbirth\": \"1993-5-5\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"username\": \"RandomUser123\",\n    \"password\": \"kH23jSj_a@djO\",\n    \"email\": \"example@example.com\",\n    \"DateOfBirth\": \"2000-5-5\"\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{users}}/1",
@@ -905,7 +905,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"title\": \"New Game VI\",\n    \"releasedate\": \"2019-7-25\"\n    \"basePrice\": 59.99,\n    \"companyId\": 2\n}"
+							"raw": "{\n    \"id\": 1,\n    \"title\": \"New Game VI\",\n    \"releasedate\": \"2019-7-25\",\n    \"basePrice\": 59.99,\n    \"companyId\": 2\n}"
 						},
 						"url": {
 							"raw": "{{rootUrl}}/{{games}}/1",
@@ -1042,17 +1042,17 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userId\": 1,\n    \"gameId\": 2,\n    \"totalPrice\": 39.99\n}"
+							"raw": "{\n    \"userId\": 1,\n    \"gameId\": 2,\n    \"totalPrice\": 39.99,\n    \"dateofpurchase\": \"2019-3-3\"\n}"
 						},
 						"url": {
-							"raw": "{{rootUrl}}/{{purchases}}/1/1",
+							"raw": "{{rootUrl}}/{{purchases}}/1/2",
 							"host": [
 								"{{rootUrl}}"
 							],
 							"path": [
 								"{{purchases}}",
 								"1",
-								"1"
+								"2"
 							]
 						}
 					},
