@@ -6,8 +6,8 @@ namespace NotSteam.Models.Attributes
     {
         public CustomDateRange()
           : base(typeof(DateTime),
-                  DateTime.SpecifyKind(new DateTime(1900, 1, 1), DateTimeKind.Utc).ToString(),
-                  DateTime.UtcNow.ToString())
+                  DateTime.SpecifyKind(new DateTime(1900, 1, 1), DateTimeKind.Utc).ToShortDateString(),
+                  DateTime.UtcNow.ToShortDateString())
         { }
     }
 }
