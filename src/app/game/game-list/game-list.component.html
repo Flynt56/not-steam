@@ -1,1 +1,8 @@
-<p>game-list works!</p>
+<div>
+    <table border="5">
+        <tr *ngFor="let game of games">
+            <td>{{ game.title }}</td>
+            <td>{{ game.releaseDate }}</td>
+        </tr>
+    </table>
+</div>
