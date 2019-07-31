@@ -1,8 +1,18 @@
 <div>
-    <table border="5">
-        <tr *ngFor="let game of games">
-            <td>{{ game.title }}</td>
-            <td>{{ game.releaseDate }}</td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of games; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{ game.title }}</td>
+                <td>{{ game.releaseDate | date: "longDate" }}</td>
+            </tr>
+        </tbody>
     </table>
 </div>
