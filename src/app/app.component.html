@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:cadetblue">
+  <a class="navbar-brand" href="#">NotSteam</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,21 +8,51 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a [routerLink]="['/']" className="nav-link">
-          Home | 
+        <a [routerLink]="['/']" class="nav-link">
+          Home
         </a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="['/games']" className="nav-link">
-          Games |
+        <a [routerLink]="['/games']" class="nav-link">
+          Games
         </a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="['/companies']" className="nav-link">
+        <a [routerLink]="['/companies']" class="nav-link">
           Companies
         </a>
       </li>
-      </ul>
+      <li class="nav-item">
+        <a [routerLink]="['/users']" class="nav-link">
+          Users
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/tags']" class="nav-link">
+          Tags
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/gametags']" class="nav-link">
+          Game Tags
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/purchases']" class="nav-link">
+          Purchases
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/libraries']" class="nav-link">
+          Libraries
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/reviews']" class="nav-link">
+          Reviews
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
 
