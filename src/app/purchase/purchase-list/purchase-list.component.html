@@ -1,1 +1,19 @@
-<p>purchase-list works!</p>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date of Purchase</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let purchase of purchases; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{purchase.dateOfPurchase | date: 'longDate'}}/10</td>
+                <td>{{purchase.totalPrice | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,1 +1,23 @@
-<p>tag-list works!</p>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tag of tags; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{tag.name}}</td>
+                <td>
+                    <div class="text-wrap text-truncate" style="width: 24em;">
+                        {{tag.description}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
