@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LibraryService } from '../library.service';
 
 @Component({
   selector: 'app-library-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LibraryListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private libraryService: LibraryService
+  ) { }
+
+  private libraries = [];
 
   ngOnInit() {
+    this.libraryService.getAll().subscribe((response: any) => {
+      this.libraries = response;
+    });
   }
 
 }

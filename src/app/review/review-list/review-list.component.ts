@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReviewService } from '../review.service';
 
 @Component({
   selector: 'app-review-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private reviewService: ReviewService
+  ) { }
+
+  private reviews = [];
 
   ngOnInit() {
+    this.reviewService.getAll().subscribe((response: any) => {
+      this.reviews = response;
+    });
   }
 
 }

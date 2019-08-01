@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchaseService } from '../purchase.service';
 
 @Component({
   selector: 'app-purchase-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private purchaseService: PurchaseService
+  ) { }
+
+  private purchases = [];
 
   ngOnInit() {
+    this.purchaseService.getAll().subscribe((response: any) => {
+      this.purchases = response;
+    });
   }
 
 }
