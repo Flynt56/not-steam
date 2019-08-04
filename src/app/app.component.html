@@ -1,61 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#295ba5">
-  <a class="navbar-brand" href="#">NotSteam</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a [routerLink]="['/']" class="nav-link">
-          Home
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/games']" class="nav-link">
-          Games
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/companies']" class="nav-link">
-          Companies
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/users']" class="nav-link">
-          Users
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/tags']" class="nav-link">
-          Tags
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/gametags']" class="nav-link">
-          Game Tags
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/purchases']" class="nav-link">
-          Purchases
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/libraries']" class="nav-link">
-          Libraries
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/reviews']" class="nav-link">
-          Reviews
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
+<header>
+  <app-navbar></app-navbar>
+</header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
