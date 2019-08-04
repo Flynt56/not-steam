@@ -12,10 +12,12 @@ import { LibraryModule } from './library/library.module';
 import { ReviewModule } from './review/review.module';
 import { TagModule } from './tag/tag.module';
 import { GametagModule } from './gametag/gametag.module';
+import { NavbarComponent } from './template/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
