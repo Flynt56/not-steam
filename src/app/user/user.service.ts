@@ -16,4 +16,20 @@ export class UserService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.USERS_URL);
   }
+
+  public getOne(id: number) {
+    return this.http.get(environment.apiUrl + this.USERS_URL + '/' + id);
+  }
+
+  public post(item: any) {
+    return this.http.post(environment.apiUrl + this.USERS_URL, item);
+  }
+
+  public put(id: number, item: any) {
+    return this.http.put(environment.apiUrl + this.USERS_URL + '/' + id, item);
+  }
+
+  public delete(id: number) {
+    return this.http.delete(environment.apiUrl + this.USERS_URL + '/' + id);
+  }
 }
