@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,13 +17,13 @@ namespace NotSteam.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Game>>> GetGames()
+        public async Task<ActionResult<IEnumerable<GamesList>>> GetGames()
         {
-            return await _context.Games.ToListAsync();
+            return await _context.Games.ProjectTo<GamesList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(int id)
+        public async Task<ActionResult<GameDetails>> GetGame(int id)
         {
             var game = await _context.Games.FindAsync(id);
 
@@ -30,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return game;
+            return GameDetails.Create(game);
         }
 
         [HttpPut("{id}")]

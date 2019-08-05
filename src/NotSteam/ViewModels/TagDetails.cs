@@ -7,9 +7,8 @@ namespace NotSteam.ViewModels
     public class TagDetails
     {
         public string Name { get; set; }
-        public string Nick { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public int UsageAmount { get; set; }
+        public string Description { get; set; }
 
         public static Expression<Func<Tag, TagDetails>> Projection
         {
@@ -17,6 +16,9 @@ namespace NotSteam.ViewModels
             {
                 return tag => new TagDetails
                 {
+                    Name = tag.Name,
+                    UsageAmount = tag.GameTags.Count,
+                    Description = tag.Description
                 };
             }
         }

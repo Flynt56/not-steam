@@ -6,10 +6,10 @@ namespace NotSteam.ViewModels
 {
     public class ReviewDetails
     {
-        public string Name { get; set; }
-        public string Nick { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string User { get; set; }
+        public string Game { get; set; }
+        public int Rating { get; set; }
+        public string Description { get; set; }
 
         public static Expression<Func<Review, ReviewDetails>> Projection
         {
@@ -17,6 +17,10 @@ namespace NotSteam.ViewModels
             {
                 return review => new ReviewDetails
                 {
+                    User = review.User.Username,
+                    Game = review.Game.Title,
+                    Rating = review.Rating,
+                    Description = review.Description
                 };
             }
         }

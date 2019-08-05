@@ -6,10 +6,10 @@ namespace NotSteam.ViewModels
 {
     public class PurchaseDetails
     {
-        public string Name { get; set; }
-        public string Nick { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string User { get; set; }
+        public string Game { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime Date { get; set; }
 
         public static Expression<Func<Purchase, PurchaseDetails>> Projection
         {
@@ -17,6 +17,10 @@ namespace NotSteam.ViewModels
             {
                 return purchase => new PurchaseDetails
                 {
+                    User = purchase.User.Username,
+                    Game = purchase.Game.Title,
+                    TotalPrice = purchase.TotalPrice,
+                    Date = purchase.DateOfPurchase
                 };
             }
         }

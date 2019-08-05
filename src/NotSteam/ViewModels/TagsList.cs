@@ -8,12 +8,13 @@ namespace NotSteam.ViewModels
     public class TagsList : IHaveCustomMapping
     {
         public string Name { get; set; }
-        public string Nick { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public int UsageAmount { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
+            configuration.CreateMap<Tag, TagsList>()
+                .ForMember(tDTO => tDTO.Name, opt => opt.MapFrom(t => t.Name))
+                .ForMember(tDTO => tDTO.UsageAmount, opt => opt.MapFrom(t => t.GameTags.Count));
         }
     }
 }

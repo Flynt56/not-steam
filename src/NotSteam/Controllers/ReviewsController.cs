@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,13 +17,13 @@ namespace NotSteam.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<ReviewsList>>> GetReviews()
         {
-            return await _context.Reviews.ToListAsync();
+            return await _context.Reviews.ProjectTo<ReviewsList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<Review>> GetReview(int idUser, int idGame)
+        public async Task<ActionResult<ReviewDetails>> GetReview(int idUser, int idGame)
         {
             var review = await _context.Reviews.FindAsync(idUser, idGame);
 
@@ -30,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return review;
+            return ReviewDetails.Create(review);
         }
 
         [HttpPut("{idUser}/{idGame}")]

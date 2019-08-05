@@ -6,10 +6,11 @@ namespace NotSteam.ViewModels
 {
     public class LibraryDetails
     {
-        public string Name { get; set; }
-        public string Nick { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string OwnerUsername { get; set; }
+        public string GameTitle { get; set; }
+        public DateTime DateAcquired { get; set; }
+        public int TotalPlayTimeHours { get; set; }
+        public DateTime? LastPlayed { get; set; }
 
         public static Expression<Func<Library, LibraryDetails>> Projection
         {
@@ -17,6 +18,11 @@ namespace NotSteam.ViewModels
             {
                 return library => new LibraryDetails
                 {
+                    OwnerUsername = library.User.Username,
+                    GameTitle = library.Game.Title,
+                    DateAcquired = library.DateAcquired,
+                    TotalPlayTimeHours = library.TotalPlayTimeHours,
+                    LastPlayed = library.LastPlayedDate
                 };
             }
         }
