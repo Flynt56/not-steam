@@ -1,10 +1,10 @@
 <div>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Description</th>
+                <th scope="col">Tags</th>
                 <th scope="col">Release Date</th>
                 <th scope="col">Base Price</th>
                 <th scope="col" rowspan="2">Actions</th>
@@ -16,7 +16,7 @@
                 <td>{{ game.title }}</td>
                 <td>
                     <div class="text-wrap text-truncate" style="width: 24em;">
-                        {{game.description}}
+                        {{game.tags}}
                     </div>
                 </td>
                 <td>{{ game.releaseDate | date: 'longDate' }}</td>

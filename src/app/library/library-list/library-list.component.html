@@ -3,16 +3,18 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Date of Purchase</th>
-                <th scope="col">Total Price</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Game</th>
+                <th scope="col">Date Acquired</th>
                 <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let purchase of purchases; let i = index">
+            <tr *ngFor="let library of libraries; let i = index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{purchase.dateOfPurchase | date: 'longDate'}}/10</td>
-                <td>{{purchase.totalPrice | currency}}</td>
+                <td>{{library.ownerUsername}}</td>
+                <td>{{library.gameTitle}}</td>
+                <td>{{library.dateAcquired | date: 'longDate'}}</td>
                 <td>
                     <button class="btn"><i class="fa fa-edit"></i></button>
                 </td>
