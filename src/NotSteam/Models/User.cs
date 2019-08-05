@@ -38,9 +38,9 @@ namespace NotSteam.Models
         [Url(ErrorMessage = "\"{0}\" neispravno formatiran URL!")]
         public string ProfileImageUri { get; set; }
 
-        public ICollection<Library> Libraries { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
-        public ICollection<Review> Reviews { get; set; }
+        virtual public ICollection<Library> Libraries { get; set; }
+        virtual public ICollection<Purchase> Purchases { get; set; }
+        virtual public ICollection<Review> Reviews { get; set; }
     }
 }
 

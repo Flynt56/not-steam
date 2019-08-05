@@ -9,13 +9,7 @@ namespace NotSteam.Models
     {
         public int UserId { get; set; }
 
-        [JsonIgnore]
-        public User User { get; set; }
-
         public int GameId { get; set; }
-
-        [JsonIgnore]
-        public Game Game { get; set; }
 
         [DataType(DataType.Date)]
         [CustomRequired]
@@ -28,6 +22,11 @@ namespace NotSteam.Models
         [DataType(DataType.Date)]
         [CustomDateRange]
         public DateTime? LastPlayedDate { get; set; }
+
+        [JsonIgnore]
+        virtual public User User { get; set; }
+        [JsonIgnore]
+        virtual public Game Game { get; set; }
     }
 }
 

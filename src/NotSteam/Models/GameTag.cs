@@ -6,13 +6,12 @@ namespace NotSteam.Models
     {
         public int GameId { get; set; }
 
-        [JsonIgnore]
-        public Game Game { get; set; }
-
         public int TagId { get; set; }
 
         [JsonIgnore]
-        public Tag Tag { get; set; }
+        virtual public Game Game { get; set; }
+        [JsonIgnore]
+        virtual public Tag Tag { get; set; }
     }
 }
 

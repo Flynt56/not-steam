@@ -22,7 +22,7 @@ namespace NotSteam.Models
         [Url(ErrorMessage = "\"{0}\" mora biti ispravan URL!")]
         public string LogoImageUri { get; set; }
 
-        public ICollection<Game> Games { get; set; }
+        virtual public ICollection<Game> Games { get; set; }
     }
 }
 

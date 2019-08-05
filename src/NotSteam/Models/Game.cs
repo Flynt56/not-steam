@@ -32,12 +32,12 @@ namespace NotSteam.Models
         public int CompanyId { get; set; }
 
         [JsonIgnore]
-        public Company Company { get; set; }
+        virtual public Company Company { get; set; }
 
-        public ICollection<GameTag> GameTags { get; set; }
-        public ICollection<Library> Libraries { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
-        public ICollection<Review> Reviews { get; set; }
+        virtual public ICollection<GameTag> GameTags { get; set; }
+        virtual public ICollection<Library> Libraries { get; set; }
+        virtual public ICollection<Purchase> Purchases { get; set; }
+        virtual public ICollection<Review> Reviews { get; set; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
@@ -9,8 +10,9 @@ namespace NotSteam.Controllers
 {
     public class UsersController : BaseController
     {
-        public UsersController(NotSteamContext context) : base(context)
-        { }
+        public UsersController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()

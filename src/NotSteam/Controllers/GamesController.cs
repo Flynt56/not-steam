@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
@@ -9,8 +10,9 @@ namespace NotSteam.Controllers
 {
     public class GamesController : BaseController
     {
-        public GamesController(NotSteamContext context) : base(context)
-        { }
+        public GamesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGames()

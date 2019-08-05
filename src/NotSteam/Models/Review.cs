@@ -8,13 +8,7 @@ namespace NotSteam.Models
     {
         public int UserId { get; set; }
 
-        [JsonIgnore]
-        public User User { get; set; }
-
         public int GameId { get; set; }
-
-        [JsonIgnore]
-        public Game Game { get; set; }
 
         [CustomRequired]
         [CustomRange(1, 10)]
@@ -23,6 +17,11 @@ namespace NotSteam.Models
         [CustomMaxStringLength(1500)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [JsonIgnore]
+        virtual public User User { get; set; }
+        [JsonIgnore]
+        virtual public Game Game { get; set; }
     }
 }
 
