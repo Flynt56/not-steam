@@ -13,7 +13,6 @@ export class UserListComponent implements OnInit {
   ) { }
 
   private users = [];
-  private name: string;
 
   ngOnInit() {
     this.userService.getAll().subscribe((response: any) => {
@@ -27,6 +26,10 @@ export class UserListComponent implements OnInit {
 
   onClickDelete() {
     console.log('TEST DELETE');
+  }
+
+  onSelect(index: number) {
+    console.log(index);
   }
 
 }
