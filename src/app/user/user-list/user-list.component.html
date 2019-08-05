@@ -7,16 +7,22 @@
                 <th scope="col">Nickname</th>
                 <th scope="col">Email Address</th>
                 <th scope="col">Date of Birth</th>
-                <th scope="col">Actions</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users; let i = index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{user.username}}</td>
-                <td>{{user.nickname}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.nick}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.dateOfBirth | date: 'longDate'}}</td>
+                <td>
+                    <button class="btn"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-trash"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
