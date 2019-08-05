@@ -3,20 +3,18 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">Game</th>
                 <th scope="col">Rating</th>
-                <th scope="col">Description</th>
                 <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let review of reviews; let i = index">
                 <th scope="row">{{i+1}}</th>
+                <td>{{review.user}}</td>
+                <td>{{review.game}}</td>
                 <td>{{review.rating}}/10</td>
-                <td>
-                    <div class="text-wrap text-truncate" style="width: 24em;">
-                        {{review.description}}
-                    </div>
-                </td>
                 <td>
                     <button class="btn"><i class="fa fa-edit"></i></button>
                 </td>
