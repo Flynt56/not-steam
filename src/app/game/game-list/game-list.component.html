@@ -7,7 +7,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Release Date</th>
                 <th scope="col">Base Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +21,12 @@
                 </td>
                 <td>{{ game.releaseDate | date: 'longDate' }}</td>
                 <td>{{game.basePrice | currency}}</td>
+                <td>
+                    <button class="btn"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-trash"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>

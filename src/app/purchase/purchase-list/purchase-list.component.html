@@ -5,7 +5,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Date of Purchase</th>
                 <th scope="col">Total Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -13,6 +13,12 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{purchase.dateOfPurchase | date: 'longDate'}}/10</td>
                 <td>{{purchase.totalPrice | currency}}</td>
+                <td>
+                    <button class="btn"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-trash"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
