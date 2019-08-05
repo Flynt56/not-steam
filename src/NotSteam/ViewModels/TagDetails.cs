@@ -4,30 +4,26 @@ using NotSteam.Models;
 
 namespace NotSteam.ViewModels
 {
-    public class UserDetails
+    public class TagDetails
     {
         public string Name { get; set; }
         public string Nick { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public static Expression<Func<User, UserDetails>> Projection
+        public static Expression<Func<Tag, TagDetails>> Projection
         {
             get
             {
-                return user => new UserDetails
+                return tag => new TagDetails
                 {
-                    Name = user.Username,
-                    Nick = user.Nickname,
-                    Email = user.Email,
-                    DateOfBirth = user.DateOfBirth
                 };
             }
         }
 
-        public static UserDetails Create(User user)
+        public static TagDetails Create(Tag tag)
         {
-            return Projection.Compile().Invoke(user);
+            return Projection.Compile().Invoke(tag);
         }
     }
 }
