@@ -1,8 +1,8 @@
-﻿using NotSteam.Models;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using NotSteam.Models;
 
-namespace NotSteam.DTOs
+namespace NotSteam.ViewModels
 {
     public class GameTagDetails
     {

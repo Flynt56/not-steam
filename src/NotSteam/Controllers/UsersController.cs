@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,13 +17,13 @@ namespace NotSteam.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UsersList>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.ProjectTo<UsersList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserDetails>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -30,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return user;
+            return UserDetails.Create(user);
         }
 
         [HttpPut("{id}")]

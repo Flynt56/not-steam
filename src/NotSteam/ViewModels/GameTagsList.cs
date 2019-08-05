@@ -2,7 +2,7 @@
 using NotSteam.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Models;
 
-namespace NotSteam.DTOs
+namespace NotSteam.ViewModels
 {
     public class GameTagsList : IHaveCustomMapping
     {
