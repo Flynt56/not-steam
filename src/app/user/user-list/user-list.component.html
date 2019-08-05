@@ -18,10 +18,10 @@
                 <td>{{user.email}}</td>
                 <td>{{user.dateOfBirth | date: 'longDate'}}</td>
                 <td>
-                    <button class="btn"><i class="fa fa-edit"></i></button>
+                    <button (click)="onClickEdit()" class="btn"><i class="fa fa-edit"></i></button>
                 </td>
                 <td>
-                    <button class="btn"><i class="fa fa-trash"></i></button>
+                    <button (click)="onClickDelete()" class="btn"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         </tbody>

@@ -13,11 +13,20 @@ export class UserListComponent implements OnInit {
   ) { }
 
   private users = [];
+  private name: string;
 
   ngOnInit() {
     this.userService.getAll().subscribe((response: any) => {
       this.users = response;
     });
+  }
+
+  onClickEdit() {
+
+  }
+
+  onClickDelete() {
+    console.log('TEST DELETE');
   }
 
 }
