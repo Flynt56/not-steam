@@ -13,11 +13,13 @@ import { ReviewModule } from './review/review.module';
 import { TagModule } from './tag/tag.module';
 import { GametagModule } from './gametag/gametag.module';
 import { NavbarComponent } from './template/navbar/navbar.component';
+import { FooterComponent } from './template/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
