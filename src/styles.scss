@@ -6,11 +6,16 @@
     color: white; /* White text */
     padding: auto; /* Some padding */
     margin: auto;
-    font-size: 16px; /* Set a font size */
+    font-size: 12px; /* Set a font size */
+    size: 26px 26px;
     cursor: pointer; /* Mouse pointer on hover */
   }
+
+.btn.delete:hover{
+    background-color: red
+}
   
   /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: RoyalBlue;
-  }
+.btn:hover {
+    background-color: lightblue;
+}
