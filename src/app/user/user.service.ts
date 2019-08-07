@@ -13,23 +13,31 @@ export class UserService {
 
   private readonly USERS_URL = 'users';
 
+  private getRootUrl() {
+    return environment.apiUrl + '/' + this.USERS_URL;
+  }
+
+  private formatUrl(userId){
+    return this.getRootUrl() + '/' + userId;
+  }
+
   public getAll() {
-    return this.http.get(environment.apiUrl + this.USERS_URL);
+    return this.http.get(this.getRootUrl());
   }
 
-  public getOne(id: number) {
-    return this.http.get(environment.apiUrl + this.USERS_URL + '/' + id);
+  public getOne(userId) {
+    return this.http.get(this.formatUrl(userId));
   }
 
-  public post(item: any) {
-    return this.http.post(environment.apiUrl + this.USERS_URL, item);
+  public deleteOne(userId) {
+    return this.http.delete(this.formatUrl(userId));
   }
 
-  public put(id: number, item: any) {
-    return this.http.put(environment.apiUrl + this.USERS_URL + '/' + id, item);
+  public addOne(user) {
+    return this.http.post(this.getRootUrl(), user);
   }
 
-  public delete(id: number) {
-    return this.http.delete(environment.apiUrl + this.USERS_URL + '/' + id);
+  public putOne(userId, user) {
+    return this.http.put(this.formatUrl(userId), user);
   }
 }
