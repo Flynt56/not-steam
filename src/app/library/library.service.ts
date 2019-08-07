@@ -13,23 +13,31 @@ export class LibraryService {
 
   private readonly LIBRARIES_URL = 'libraries';
 
+  private getRootUrl() {
+    return environment.apiUrl + '/' + this.LIBRARIES_URL;
+  }
+
+  private formatUrl(userId, gameId){
+    return this.getRootUrl() + '/' + userId + '/' + gameId;
+  }
+
   public getAll() {
-    return this.http.get(environment.apiUrl + this.LIBRARIES_URL);
+    return this.http.get(this.getRootUrl());
   }
 
-  public getOne(libraryId) {
-    return this.http.get(environment.apiUrl + '/' + this.LIBRARIES_URL + '/' + libraryId);
+  public getOne(userId, gameId) {
+    return this.http.get(this.formatUrl(userId, gameId));
   }
 
-  public deleteOne(libraryId) {
-    return this.http.delete(environment.apiUrl + '/' + this.LIBRARIES_URL + '/' + libraryId);
+  public deleteOne(userId, gameId) {
+    return this.http.delete(this.formatUrl(userId, gameId));
   }
 
   public addOne(library) {
-    return this.http.post(environment.apiUrl + '/' + this.LIBRARIES_URL, library);
+    return this.http.post(this.getRootUrl(), library);
   }
 
-  public putOne(libraryId, library) {
-    return this.http.put(environment.apiUrl + '/' + this.LIBRARIES_URL + '/' + libraryId, library);
+  public putOne(userId, gameId, library) {
+    return this.http.put(this.formatUrl(userId, gameId), library);
   }
 }

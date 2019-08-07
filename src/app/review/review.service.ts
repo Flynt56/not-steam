@@ -22,7 +22,7 @@ export class ReviewService {
   }
 
   public getAll() {
-    return this.http.get(environment.apiUrl + this.REVIEWS_URL);
+    return this.http.get(this.getRootUrl());
   }
 
   public getOne(userId, gameId) {

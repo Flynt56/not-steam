@@ -35,7 +35,7 @@ export class GameListComponent implements OnInit {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
         this.toastr.success('Bravo frajeru.');
-      })
+      });
     }
   }
 

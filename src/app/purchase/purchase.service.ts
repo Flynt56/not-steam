@@ -13,7 +13,31 @@ export class PurchaseService {
 
   private readonly PURCHASES_URL = 'purchases';
 
+  private getRootUrl() {
+    return environment.apiUrl + '/' + this.PURCHASES_URL;
+  }
+
+  private formatUrl(userId, gameId){
+    return this.getRootUrl() + '/' + userId + '/' + gameId;
+  }
+
   public getAll() {
-    return this.http.get(environment.apiUrl + this.PURCHASES_URL);
+    return this.http.get(this.getRootUrl());
+  }
+
+  public getOne(userId, gameId) {
+    return this.http.get(this.formatUrl(userId, gameId));
+  }
+
+  public deleteOne(userId, gameId) {
+    return this.http.delete(this.formatUrl(userId, gameId));
+  }
+
+  public addOne(purchase) {
+    return this.http.post(this.getRootUrl(), purchase);
+  }
+
+  public putOne(userId, gameId, purchase) {
+    return this.http.put(this.formatUrl(userId, gameId), purchase);
   }
 }
