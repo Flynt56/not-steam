@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NotSteam.Core\NotSteam.csproj" />
+    <ProjectReference Include="..\..\src\NotSteam.Core\NotSteam.Core.csproj" />
   </ItemGroup>
 
 </Project>

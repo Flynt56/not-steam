@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Models.Attributes
+namespace NotSteam.Core.Models.Attributes
 {
     public class CustomRange : RangeAttribute
     {

@@ -1,7 +1,7 @@
-﻿using NotSteam.Models;
+﻿using NotSteam.Core.Models;
 using System;
 
-namespace NotSteam.Extensions.ModelBuilder
+namespace NotSteam.Core.Extensions.ModelBuilder
 {
     public static class ModelBuilderSeedExtension
     {

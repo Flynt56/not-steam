@@ -1,11 +1,11 @@
-using Newtonsoft.Json;
-using NotSteam.Models.Attributes;
+﻿using Newtonsoft.Json;
+using NotSteam.Core.Models.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NotSteam.Models
+namespace NotSteam.Core.Models
 {
     public class Game : BaseEntity
     {

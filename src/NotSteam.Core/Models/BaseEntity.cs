@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Models
+﻿namespace NotSteam.Core.Models
 {
     public abstract class BaseEntity : BaseModel
     {

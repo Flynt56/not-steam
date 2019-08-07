@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NotSteam.DB;
+using NotSteam.Core.DB;
 
-namespace NotSteam.Migrations
+namespace NotSteam.Core.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
     [Migration("20190728155833_Initial1")]
@@ -21,7 +21,7 @@ namespace NotSteam.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NotSteam.Models.Company", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Game", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -149,7 +149,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.GameTag", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.GameTag", b =>
                 {
                     b.Property<int>("GameId");
 
@@ -212,7 +212,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Library", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Library", b =>
                 {
                     b.Property<int>("UserId");
 
@@ -269,7 +269,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Purchase", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Purchase", b =>
                 {
                     b.Property<int>("UserId");
 
@@ -322,7 +322,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Review", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Review", b =>
                 {
                     b.Property<int>("UserId");
 
@@ -366,7 +366,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Tag", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -416,7 +416,7 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.User", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -496,61 +496,61 @@ namespace NotSteam.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Game", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Game", b =>
                 {
-                    b.HasOne("NotSteam.Models.Company", "Company")
+                    b.HasOne("NotSteam.Core.Models.Company", "Company")
                         .WithMany("Games")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NotSteam.Models.GameTag", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.GameTag", b =>
                 {
-                    b.HasOne("NotSteam.Models.Game", "Game")
+                    b.HasOne("NotSteam.Core.Models.Game", "Game")
                         .WithMany("GameTags")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Models.Tag", "Tag")
+                    b.HasOne("NotSteam.Core.Models.Tag", "Tag")
                         .WithMany("GameTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Library", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Library", b =>
                 {
-                    b.HasOne("NotSteam.Models.Game", "Game")
+                    b.HasOne("NotSteam.Core.Models.Game", "Game")
                         .WithMany("Libraries")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Models.User", "User")
+                    b.HasOne("NotSteam.Core.Models.User", "User")
                         .WithMany("Libraries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Purchase", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Purchase", b =>
                 {
-                    b.HasOne("NotSteam.Models.Game", "Game")
+                    b.HasOne("NotSteam.Core.Models.Game", "Game")
                         .WithMany("Purchases")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Models.User", "User")
+                    b.HasOne("NotSteam.Core.Models.User", "User")
                         .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("NotSteam.Models.Review", b =>
+            modelBuilder.Entity("NotSteam.Core.Models.Review", b =>
                 {
-                    b.HasOne("NotSteam.Models.Game", "Game")
+                    b.HasOne("NotSteam.Core.Models.Game", "Game")
                         .WithMany("Reviews")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Models.User", "User")
+                    b.HasOne("NotSteam.Core.Models.User", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

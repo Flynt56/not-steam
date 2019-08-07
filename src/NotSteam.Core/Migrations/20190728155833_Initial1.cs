@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace NotSteam.Migrations
+namespace NotSteam.Core.Migrations
 {
     public partial class Initial1 : Migration
     {

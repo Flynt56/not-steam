@@ -1,4 +1,4 @@
-﻿using NotSteam.Infrastructure.AutoMapper.Interfaces;
+﻿using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

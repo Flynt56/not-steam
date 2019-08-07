@@ -1,11 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using NotSteam.Extensions.ModelBuilder;
-using NotSteam.Extensions.NotSteamContext;
-using NotSteam.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.Extensions.ModelBuilder;
+using NotSteam.Core.Extensions.NotSteamContext;
+using NotSteam.Core.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NotSteam.DB
+namespace NotSteam.Core.DB
 {
     public class NotSteamContext : DbContext
     {

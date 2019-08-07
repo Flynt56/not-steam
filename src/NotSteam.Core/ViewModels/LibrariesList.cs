@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using NotSteam.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Models;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
+using NotSteam.Core.Models;
 using System;
 
-namespace NotSteam.ViewModels
+namespace NotSteam.Core.ViewModels
 {
     public class LibrariesList : IHaveCustomMapping
     {

@@ -2,13 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.DB;
-using NotSteam.Models;
-using NotSteam.ViewModels;
+using NotSteam.Core.DB;
+using NotSteam.Core.Models;
+using NotSteam.Core.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NotSteam.Controllers
+namespace NotSteam.Core.Controllers
 {
     public class TagsController : BaseController
     {

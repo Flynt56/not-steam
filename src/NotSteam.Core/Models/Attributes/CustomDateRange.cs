@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace NotSteam.Models.Attributes
+namespace NotSteam.Core.Models.Attributes
 {
     public class CustomDateRange : CustomRange
     {

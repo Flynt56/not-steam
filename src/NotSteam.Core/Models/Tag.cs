@@ -1,8 +1,8 @@
-using NotSteam.Models.Attributes;
+﻿using NotSteam.Core.Models.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Models
+namespace NotSteam.Core.Models
 {
     public class Tag : BaseEntity
     {

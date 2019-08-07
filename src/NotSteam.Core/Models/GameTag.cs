@@ -1,6 +1,6 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace NotSteam.Models
+namespace NotSteam.Core.Models
 {
     public class GameTag : BaseModel
     {

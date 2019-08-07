@@ -1,8 +1,8 @@
-﻿using NotSteam.Models.Attributes;
+﻿using NotSteam.Core.Models.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Models.Interfaces
+namespace NotSteam.Core.Models.Interfaces
 {
     public interface IBaseDateable
     {

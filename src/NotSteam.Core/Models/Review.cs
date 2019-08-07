@@ -1,8 +1,8 @@
-using Newtonsoft.Json;
-using NotSteam.Models.Attributes;
+﻿using Newtonsoft.Json;
+using NotSteam.Core.Models.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Models
+namespace NotSteam.Core.Models
 {
     public class Review : BaseModel
     {

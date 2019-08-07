@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{28F3BD53-D2D2-41DF-A87C-8834D92A3DF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotSteam", "src\NotSteam.Core\NotSteam.csproj", "{B7FA5316-66A3-4BD0-BA28-D816C271FE8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotSteam.Core", "src\NotSteam.Core\NotSteam.Core.csproj", "{B7FA5316-66A3-4BD0-BA28-D816C271FE8D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{EDBFFF13-9EDC-46A0-8D22-AFEF876EA1CC}"
 EndProject

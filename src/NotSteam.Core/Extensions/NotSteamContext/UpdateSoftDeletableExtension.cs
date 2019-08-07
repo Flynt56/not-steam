@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NotSteam.Models.Interfaces;
+using NotSteam.Core.Models.Interfaces;
 using System.Linq;
 
-namespace NotSteam.Extensions.NotSteamContext
+namespace NotSteam.Core.Extensions.NotSteamContext
 {
     public static class UpdateSoftDeletableExtension
     {

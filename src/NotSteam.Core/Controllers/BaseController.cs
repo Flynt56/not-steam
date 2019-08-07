@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.DB;
+using NotSteam.Core.DB;
 
-namespace NotSteam.Controllers
+namespace NotSteam.Core.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

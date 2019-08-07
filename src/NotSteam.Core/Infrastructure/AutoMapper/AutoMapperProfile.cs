@@ -2,7 +2,7 @@
 using Northwind.Application.Infrastructure.AutoMapper;
 using System.Reflection;
 
-namespace NotSteam.Infrastructure.AutoMapper
+namespace NotSteam.Core.Infrastructure.AutoMapper
 {
     public class AutoMapperProfile : Profile
     {

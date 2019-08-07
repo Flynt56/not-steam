@@ -1,6 +1,6 @@
-﻿using NotSteam.Models;
+﻿using NotSteam.Core.Models;
 
-namespace NotSteam.Extensions.ModelBuilder
+namespace NotSteam.Core.Extensions.ModelBuilder
 {
     public static class ManyToManyRelationshipsSetupExtension
     {

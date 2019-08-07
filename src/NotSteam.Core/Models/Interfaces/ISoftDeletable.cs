@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Models.Interfaces
+﻿namespace NotSteam.Core.Models.Interfaces
 {
     public interface ISoftDeletable
     {

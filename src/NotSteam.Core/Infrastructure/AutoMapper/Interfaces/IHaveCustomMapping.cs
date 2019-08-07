@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace NotSteam.Infrastructure.AutoMapper.Interfaces
+namespace NotSteam.Core.Infrastructure.AutoMapper.Interfaces
 {
     public interface IHaveCustomMapping
     {

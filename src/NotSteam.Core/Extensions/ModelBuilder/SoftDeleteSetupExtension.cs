@@ -1,8 +1,8 @@
-﻿using NotSteam.Models;
-using NotSteam.Models.Interfaces;
+﻿using NotSteam.Core.Models;
+using NotSteam.Core.Models.Interfaces;
 using System.Reflection;
 
-namespace NotSteam.Extensions.ModelBuilder
+namespace NotSteam.Core.Extensions.ModelBuilder
 {
     public static class SoftDeleteSetupExtension
     {

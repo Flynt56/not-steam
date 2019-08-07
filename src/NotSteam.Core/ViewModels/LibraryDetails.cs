@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using NotSteam.Models;
+using NotSteam.Core.Models;
 
-namespace NotSteam.ViewModels
+namespace NotSteam.Core.ViewModels
 {
     public class LibraryDetails
     {
