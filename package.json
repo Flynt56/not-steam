@@ -13,8 +13,8 @@
     "start": "npm-run-all --parallel api web",
     "install": "(cd ./src/NotSteam.WebUI/ClientApp/ && npm install) && (cd ./../../../ && dotnet restore)",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api": "(dotnet run --project ./src/NotSteam.Core/)",
-    "web": "(cd ./src/NotSteam.WebUI/ClientApp/ && npm start)"
+    "api": "dotnet run --project ./src/NotSteam.Core/",
+    "web": "cd ./src/NotSteam.WebUI/ClientApp/ && npm start"
   },
   "repository": {
     "type": "git",
