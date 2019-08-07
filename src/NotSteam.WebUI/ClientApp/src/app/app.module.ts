@@ -14,7 +14,6 @@ import { TagModule } from './tag/tag.module';
 import { GametagModule } from './gametag/gametag.module';
 import { NavbarComponent } from './template/navbar/navbar.component';
 import { FooterComponent } from './template/footer/footer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -35,7 +34,6 @@ import { ToastrModule } from 'ngx-toastr';
     TagModule,
     GametagModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [],
