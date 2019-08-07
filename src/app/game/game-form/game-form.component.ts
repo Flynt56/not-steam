@@ -15,6 +15,7 @@ export class GameFormComponent implements OnInit {
   ) { }
 
   public game : any = {};
+  public companies: any = [];
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -33,5 +34,13 @@ export class GameFormComponent implements OnInit {
         }
       );
   }
+
+  // getCompanies() {
+  //     this.companyService.getAll().subscribe(response => 
+  //       {
+  //         this.companies = response;
+  //       }
+  //     );
+  // }
 
 }
