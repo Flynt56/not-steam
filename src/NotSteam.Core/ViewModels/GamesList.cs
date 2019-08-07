@@ -18,11 +18,11 @@ namespace NotSteam.Core.ViewModels
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Game, GamesList>()
+                .ForMember(gDTO => gDTO.Id, opt => opt.MapFrom(g => g.Id))
                 .ForMember(gDTO => gDTO.Title, opt => opt.MapFrom(g => g.Title))
                 .ForMember(gDTO => gDTO.ReleaseDate, opt => opt.MapFrom(g => g.ReleaseDate))
                 .ForMember(gDTO => gDTO.BasePrice, opt => opt.MapFrom(g => g.BasePrice))
-                .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToHashSet()))
-                .ForMember(gDTO => gDTO.Id, opt => opt.MapFrom(g => g.Id));
+                .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToHashSet()));
         }
     }
 }
