@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
-using System;
 
 namespace NotSteam.Core.ViewModels
 {
     public class ReviewsList : IHaveCustomMapping
     {
+        public int Id { get; set; }
         public string User { get; set; }
         public string Game { get; set; }
         public int Rating { get; set; }

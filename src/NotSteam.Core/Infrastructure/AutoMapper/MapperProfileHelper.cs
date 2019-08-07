@@ -1,8 +1,8 @@
-﻿using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 
 namespace Northwind.Application.Infrastructure.AutoMapper
 {

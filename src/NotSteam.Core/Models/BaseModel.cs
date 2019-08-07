@@ -1,5 +1,5 @@
-﻿using NotSteam.Core.Models.Interfaces;
-using System;
+﻿using System;
+using NotSteam.Core.Models.Interfaces;
 
 namespace NotSteam.Core.Models
 {

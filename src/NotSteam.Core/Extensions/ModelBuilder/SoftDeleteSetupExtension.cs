@@ -1,6 +1,6 @@
-﻿using NotSteam.Core.Models;
+﻿using System.Reflection;
+using NotSteam.Core.Models;
 using NotSteam.Core.Models.Interfaces;
-using System.Reflection;
 
 namespace NotSteam.Core.Extensions.ModelBuilder
 {

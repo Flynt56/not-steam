@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Models.Interfaces;
-using System.Linq;
 
 namespace NotSteam.Core.Extensions.NotSteamContext
 {

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NotSteam.Core.DB;
 using NotSteam.Core.Infrastructure.AutoMapper;
-using System.Reflection;
 
 namespace NotSteam
 {
@@ -49,4 +49,3 @@ namespace NotSteam
         }
     }
 }
-

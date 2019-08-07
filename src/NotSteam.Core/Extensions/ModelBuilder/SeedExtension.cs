@@ -1,5 +1,5 @@
-﻿using NotSteam.Core.Models;
-using System;
+﻿using System;
+using NotSteam.Core.Models;
 
 namespace NotSteam.Core.Extensions.ModelBuilder
 {

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.ModelBuilder;
 using NotSteam.Core.Extensions.NotSteamContext;
 using NotSteam.Core.Models;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NotSteam.Core.DB
 {

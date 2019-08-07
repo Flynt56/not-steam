@@ -1,6 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using Northwind.Application.Infrastructure.AutoMapper;
-using System.Reflection;
 
 namespace NotSteam.Core.Infrastructure.AutoMapper
 {

@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using NotSteam.Core.Models.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using NotSteam.Core.Models.Attributes;
 
 namespace NotSteam.Core.Models
 {

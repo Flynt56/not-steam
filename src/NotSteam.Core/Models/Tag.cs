@@ -1,6 +1,6 @@
-﻿using NotSteam.Core.Models.Attributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using NotSteam.Core.Models.Attributes;
 
 namespace NotSteam.Core.Models
 {
