@@ -15,9 +15,23 @@ export class GameListComponent implements OnInit {
   private games = [];
 
   ngOnInit() {
+    this.getAllGames();
+  }
+
+
+  getAllGames() {
     this.gameService.getAll().subscribe((response: any) => {
       this.games = response;
     });
+  }
+
+
+  onDelete(gameId) {
+    if(confirm('Da li ste sigurni?')) {
+      this.gameService.deleteOne(gameId).subscribe(result => {
+        this.getAllGames();
+      })
+    }
   }
 
 }

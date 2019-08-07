@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let game of games; let i = index">
-                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{game.id}}</th>
                 <td>{{ game.title }}</td>
                 <td>
                     <div class="text-wrap text-truncate" style="width: 24em;">
@@ -25,7 +25,7 @@
                     <button class="btn"><i class="fa fa-edit"></i></button>
                 </td>
                 <td>
-                    <button class="btn delete"><i class="fa fa-trash"></i></button>
+                    <button class="btn delete" (click)="onDelete(game.id)"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         </tbody>
