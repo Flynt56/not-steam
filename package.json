@@ -11,10 +11,10 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel api web",
-    "install": "npm install --prefix ./src/NotSteam.WebUI/ClientApp/ && dotnet restore",
+    "install": "(cd ./src/NotSteam.WebUI/ClientApp/ && npm install) && (cd ./../../../ && dotnet restore)",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api": "dotnet run --project ./src/NotSteam.Core/",
-    "web": "npm start --prefix ./src/NotSteam.WebUI/ClientApp/"
+    "api": "(dotnet run --project ./src/NotSteam.Core/)",
+    "web": "(cd ./src/NotSteam.WebUI/ClientApp/ && npm start)"
   },
   "repository": {
     "type": "git",
