@@ -11,7 +11,13 @@ export class CompanyService {
     private http: HttpClient
   ) { }
 
+  private readonly COMPANIES_URL = 'companies';
+
   public getAll() {
-    return this.http.get(environment.apiUrl + 'companies');
+    return this.http.get(environment.apiUrl + this.COMPANIES_URL);
+  }
+
+  public getOne(gameId){
+    return this.http.get(environment.apiUrl + this.COMPANIES_URL + '/' + gameId);
   }
 }

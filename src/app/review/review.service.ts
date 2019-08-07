@@ -16,4 +16,20 @@ export class ReviewService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.REVIEWS_URL);
   }
+
+  public getOne(reviewId) {
+    return this.http.get(environment.apiUrl + '/' + this.REVIEWS_URL + '/' + reviewId);
+  }
+
+  public deleteOne(reviewId) {
+    return this.http.delete(environment.apiUrl + '/' + this.REVIEWS_URL + '/' + reviewId);
+  }
+
+  public addOne(review) {
+    return this.http.post(environment.apiUrl + '/' + this.REVIEWS_URL, review);
+  }
+
+  public putOne(reviewId, review) {
+    return this.http.put(environment.apiUrl + '/' + this.REVIEWS_URL + '/' + reviewId, review);
+  }
 }

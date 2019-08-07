@@ -21,7 +21,6 @@ export class GameService {
     return this.http.delete(environment.apiUrl + this.GAMES_URL + '/' + gameId);
   }
 
-
   public getOne(gameId) {
     return this.http.get(environment.apiUrl + this.GAMES_URL + '/' + gameId);
   }
