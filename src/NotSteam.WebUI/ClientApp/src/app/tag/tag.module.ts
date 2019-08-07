@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { TagRoutingModule } from './tag-routing.module';
 import { TagListComponent } from './tag-list/tag-list.component';
+import { TagFormComponent } from './tag-form/tag-form.component';
 
 
 @NgModule({
-  declarations: [TagListComponent],
+  declarations: [TagListComponent, TagFormComponent],
   imports: [
     CommonModule,
     TagRoutingModule

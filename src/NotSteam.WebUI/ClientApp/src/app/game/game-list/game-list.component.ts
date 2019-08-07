@@ -29,7 +29,7 @@ export class GameListComponent implements OnInit {
   }
 
   onDelete(gameId) {
-    if (confirm('Da li ste sigurni?')) {
+    if (confirm('Jeste li ste sigurni?')) {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
         this.toastr.success('Bravo frajeru.');
