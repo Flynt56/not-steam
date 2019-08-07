@@ -13,23 +13,31 @@ export class GameService {
 
   private readonly GAMES_URL = 'games';
 
+  private getRootUrl() {
+    return environment.apiUrl + '/' + this.GAMES_URL;
+  }
+
+  private formatUrl(gameId){
+    return this.getRootUrl() + '/' + gameId;
+  }
+
   public getAll() {
-    return this.http.get(environment.apiUrl + this.GAMES_URL);
+    return this.http.get(this.getRootUrl());
   }
 
   public getOne(gameId) {
-    return this.http.get(environment.apiUrl + '/' + this.GAMES_URL + '/' + gameId);
+    return this.http.get(this.formatUrl(gameId));
   }
 
   public deleteOne(gameId) {
-    return this.http.delete(environment.apiUrl + '/' + this.GAMES_URL + '/' + gameId);
+    return this.http.delete(this.formatUrl(gameId));
   }
 
   public addOne(game) {
-    return this.http.post(environment.apiUrl + '/' + this.GAMES_URL, game);
+    return this.http.post(this.getRootUrl(), game);
   }
 
   public putOne(gameId, game) {
-    return this.http.put(environment.apiUrl + '/' + this.GAMES_URL + '/' + gameId, game);
+    return this.http.put(this.formatUrl(gameId), game);
   }
 }
