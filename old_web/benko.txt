@@ -1,0 +1,13 @@
+ng generate module game --routing // nakon generiranja dodati u app.module.ts, tj. registrirati novi modul
+ng generate component -m game game/game-list // -m oznacava modul
+dodati rutu u novu komponentu // { path: 'games', component: GameListComponent }
+
+instalacija bootstrapa:
+npm install --save bootstrap jquery popper
+
+includati HttpClient globalno u app.module.ts
+
+1.) napraviti github projekt
+2.) pushati projekt na github
+3.) podijeliti projekt s ostatkom razreda
+4.) #nemrem
