@@ -1,4 +1,10 @@
 <div>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+
+    <button class="btn btn-primary" (click)="onAdd()">Add</button>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,7 +28,7 @@
                 <td>{{ game.releaseDate | date: 'longDate' }}</td>
                 <td>{{game.basePrice | currency}}</td>
                 <td>
-                    <button class="btn"><i class="fa fa-edit"></i></button>
+                    <button class="btn"><i class="fa fa-edit" (click)="onEdit(game.id)"></i></button>
                 </td>
                 <td>
                     <button class="btn delete" (click)="onDelete(game.id)"><i class="fa fa-trash"></i></button>

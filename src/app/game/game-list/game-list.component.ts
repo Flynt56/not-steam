@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-list',
@@ -9,7 +11,9 @@ import { GameService } from '../game.service';
 export class GameListComponent implements OnInit {
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   private games = [];
@@ -30,8 +34,17 @@ export class GameListComponent implements OnInit {
     if(confirm('Da li ste sigurni?')) {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
+        this.toastr.success('Bravo frajeru.');
       })
     }
+  }
+
+  onAdd() {
+    this.router.navigate(['games/new']);
+  }
+
+  onEdit(gameId) {
+    this.router.navigate(['games', gameId]);
   }
 
 }
