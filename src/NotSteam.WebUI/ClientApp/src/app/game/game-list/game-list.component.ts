@@ -29,10 +29,10 @@ export class GameListComponent implements OnInit {
   }
 
   onDelete(gameId) {
-    if (confirm('Jeste li ste sigurni?')) {
+    if (confirm('Jeste li sigurni?')) {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
-        this.toastr.success('Bravo frajeru.');
+        this.toastr.success('Uspješno obrisano!');
       });
     }
   }
