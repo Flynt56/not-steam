@@ -16,4 +16,20 @@ export class GametagService {
   public getAll() {
     return this.http.get(environment.apiUrl + this.GAMETAGS_URL);
   }
+
+  public getOne(gameId, tagId) {
+    return this.http.get(environment.apiUrl + '/' + this.GAMETAGS_URL + '/' + gameId + '/' + tagId);
+  }
+
+  public deleteOne(gameId, tagId) {
+    return this.http.delete(environment.apiUrl + '/' + this.GAMETAGS_URL + '/' + gameId + '/' + tagId);
+  }
+
+  public addOne(gameTag) {
+    return this.http.post(environment.apiUrl + '/' + this.GAMETAGS_URL, gameTag);
+  }
+
+  public putOne(gameId, tagId, gameTag) {
+    return this.http.put(environment.apiUrl + '/' + this.GAMETAGS_URL + '/' + gameId + '/' + tagId, gameTag);
+  }
 }

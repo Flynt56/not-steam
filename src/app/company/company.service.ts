@@ -17,7 +17,19 @@ export class CompanyService {
     return this.http.get(environment.apiUrl + this.COMPANIES_URL);
   }
 
-  public getOne(gameId){
-    return this.http.get(environment.apiUrl + this.COMPANIES_URL + '/' + gameId);
+  public getOne(companyId) {
+    return this.http.get(environment.apiUrl + '/' + this.COMPANIES_URL + '/' + companyId);
+  }
+
+  public deleteOne(companyId) {
+    return this.http.delete(environment.apiUrl + '/' + this.COMPANIES_URL + '/' + companyId);
+  }
+
+  public addOne(company) {
+    return this.http.post(environment.apiUrl + '/' + this.COMPANIES_URL, company);
+  }
+
+  public putOne(companyId, company) {
+    return this.http.put(environment.apiUrl + '/' + this.COMPANIES_URL + '/' + companyId, company);
   }
 }
