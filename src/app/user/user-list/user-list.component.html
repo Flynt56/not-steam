@@ -6,7 +6,7 @@
                 <th scope="col">Nickname</th>
                 <th scope="col">Email Address</th>
                 <th scope="col">Date of Birth</th>
-                <th scope="col" rowspan="2">Actions</th>
+                <th scope="col" colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +17,8 @@
                 <td>{{user.dateOfBirth | date: 'dd.MM.yyyy.'}}</td>
                 <td>
                     <button (click)="onClickEdit()" class="btn btn-sm"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
                     <button (click)="onClickDelete()" class="btn btn-sm"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
