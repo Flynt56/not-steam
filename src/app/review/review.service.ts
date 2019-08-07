@@ -14,7 +14,7 @@ export class ReviewService {
   private readonly REVIEWS_URL = 'reviews';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.REVIEWS_URL;
+    return environment.apiUrl + this.REVIEWS_URL;
   }
 
   private formatUrl(userId, gameId){

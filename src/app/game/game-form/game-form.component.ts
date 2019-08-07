@@ -14,25 +14,24 @@ export class GameFormComponent implements OnInit {
     private gameService: GameService
   ) { }
 
-  public game : any = {};
+  public game: any = {};
   public companies: any = [];
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const gameId = params['id'];
-      if(gameId != null) {
+      if (gameId != null) {
         this.getGame(gameId);
       }
     });
   }
 
   getGame(gameId) {
-      this.gameService.getOne(gameId).subscribe(response => 
-        {
-          this.game = response;
-          this.game.id = gameId;
-        }
-      );
+    this.gameService.getOne(gameId).subscribe(response => {
+      this.game = response;
+      this.game.id = gameId;
+    }
+    );
   }
 
   // getCompanies() {

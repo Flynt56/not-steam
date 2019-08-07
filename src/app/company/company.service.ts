@@ -14,7 +14,7 @@ export class CompanyService {
   private readonly COMPANIES_URL = 'companies';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.COMPANIES_URL;
+    return environment.apiUrl + this.COMPANIES_URL;
   }
 
   private formatUrl(companyId){

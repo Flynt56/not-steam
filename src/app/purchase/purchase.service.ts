@@ -14,7 +14,7 @@ export class PurchaseService {
   private readonly PURCHASES_URL = 'purchases';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.PURCHASES_URL;
+    return environment.apiUrl + this.PURCHASES_URL;
   }
 
   private formatUrl(userId, gameId){

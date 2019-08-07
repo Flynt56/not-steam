@@ -14,7 +14,7 @@ export class UserService {
   private readonly USERS_URL = 'users';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.USERS_URL;
+    return environment.apiUrl + this.USERS_URL;
   }
 
   private formatUrl(userId){

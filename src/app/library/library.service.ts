@@ -14,7 +14,7 @@ export class LibraryService {
   private readonly LIBRARIES_URL = 'libraries';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.LIBRARIES_URL;
+    return environment.apiUrl + this.LIBRARIES_URL;
   }
 
   private formatUrl(userId, gameId){

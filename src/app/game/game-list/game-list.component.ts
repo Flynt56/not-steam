@@ -22,16 +22,14 @@ export class GameListComponent implements OnInit {
     this.getAllGames();
   }
 
-
   getAllGames() {
     this.gameService.getAll().subscribe((response: any) => {
       this.games = response;
     });
   }
 
-
   onDelete(gameId) {
-    if(confirm('Da li ste sigurni?')) {
+    if (confirm('Da li ste sigurni?')) {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
         this.toastr.success('Bravo frajeru.');
@@ -46,5 +44,4 @@ export class GameListComponent implements OnInit {
   onEdit(gameId) {
     this.router.navigate(['games', gameId]);
   }
-
 }

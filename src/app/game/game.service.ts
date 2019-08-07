@@ -14,7 +14,7 @@ export class GameService {
   private readonly GAMES_URL = 'games';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.GAMES_URL;
+    return environment.apiUrl + this.GAMES_URL;
   }
 
   private formatUrl(gameId){

@@ -14,7 +14,7 @@ export class TagService {
   private readonly TAGS_URL = 'tags';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.TAGS_URL;
+    return environment.apiUrl + this.TAGS_URL;
   }
 
   private formatUrl(tagId){

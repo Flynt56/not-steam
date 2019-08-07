@@ -14,7 +14,7 @@ export class GametagService {
   private readonly GAMETAGS_URL = 'gametags';
 
   private getRootUrl() {
-    return environment.apiUrl + '/' + this.GAMETAGS_URL;
+    return environment.apiUrl + this.GAMETAGS_URL;
   }
 
   private formatUrl(gameId, tagId){
