@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,17 +12,17 @@ namespace NotSteam.Controllers
 {
     public class GameTagsController : BaseController
     {
-        public GameTagsController(NotSteamContext context) : base(context)
+        public GameTagsController(NotSteamContext context, IMapper mapper) : base(context, mapper)
         { }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameTag>>> GetGameTags()
+        public async Task<ActionResult<IEnumerable<GameTagsList>>> GetGameTags()
         {
-            return await _context.GameTags.ToListAsync();
+            return await _context.GameTags.ProjectTo<GameTagsList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{idGame}/{idTag}")]
-        public async Task<ActionResult<GameTag>> GetGameTag(int idGame, int idTag)
+        public async Task<ActionResult<GameTagDetails>> GetGameTag(int idGame, int idTag)
         {
             var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
 
@@ -28,7 +31,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return gameTag;
+            return GameTagDetails.Create(gameTag);
         }
 
         [HttpPut("{idGame}/{idTag}")]

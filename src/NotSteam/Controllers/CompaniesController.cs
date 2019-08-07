@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,17 +12,18 @@ namespace NotSteam.Controllers
 {
     public class CompaniesController : BaseController
     {
-        public CompaniesController(NotSteamContext context) : base(context)
-        { }
+        public CompaniesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
+        public async Task<ActionResult<IEnumerable<CompaniesList>>> GetCompanies()
         {
-            return await _context.Companies.ToListAsync();
+            return await _context.Companies.ProjectTo<CompaniesList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompany(int id)
+        public async Task<ActionResult<CompanyDetails>> GetCompany(int id)
         {
             var company = await _context.Companies.FindAsync(id);
 
@@ -28,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return company;
+            return CompanyDetails.Create(company);
         }
 
         [HttpPut("{id}")]

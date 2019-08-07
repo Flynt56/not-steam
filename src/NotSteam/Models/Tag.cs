@@ -15,7 +15,7 @@ namespace NotSteam.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public ICollection<GameTag> GameTags { get; set; }
+        virtual public ICollection<GameTag> GameTags { get; set; }
     }
 }
 

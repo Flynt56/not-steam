@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,17 +12,18 @@ namespace NotSteam.Controllers
 {
     public class PurchasesController : BaseController
     {
-        public PurchasesController(NotSteamContext context) : base(context)
-        { }
+        public PurchasesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Purchase>>> GetPurchases()
+        public async Task<ActionResult<IEnumerable<PurchasesList>>> GetPurchases()
         {
-            return await _context.Purchases.ToListAsync();
+            return await _context.Purchases.ProjectTo<PurchasesList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<Purchase>> GetPurchase(int idUser, int idGame)
+        public async Task<ActionResult<PurchaseDetails>> GetPurchase(int idUser, int idGame)
         {
             var purchase = await _context.Purchases.FindAsync(idUser, idGame);
 
@@ -28,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return purchase;
+            return PurchaseDetails.Create(purchase);
         }
 
         [HttpPut("{idUser}/{idGame}")]

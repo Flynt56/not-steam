@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.DB;
 using NotSteam.Models;
+using NotSteam.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,17 +12,18 @@ namespace NotSteam.Controllers
 {
     public class LibrariesController : BaseController
     {
-        public LibrariesController(NotSteamContext context) : base(context)
-        { }
+        public LibrariesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Library>>> GetLibraries()
+        public async Task<ActionResult<IEnumerable<LibrariesList>>> GetLibraries()
         {
-            return await _context.Libraries.ToListAsync();
+            return await _context.Libraries.ProjectTo<LibrariesList>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<Library>> GetLibrary(int idUser, int idGame)
+        public async Task<ActionResult<LibraryDetails>> GetLibrary(int idUser, int idGame)
         {
             var library = await _context.Libraries.FindAsync(idUser, idGame);
 
@@ -28,7 +32,7 @@ namespace NotSteam.Controllers
                 return NotFound();
             }
 
-            return library;
+            return LibraryDetails.Create(library);
         }
 
         [HttpPut("{idUser}/{idGame}")]
