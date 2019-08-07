@@ -1,0 +1,29 @@
+{
+  "name": "not-steam",
+  "version": "1.0.0",
+  "description": "Practice project featuring a useless Steam clone.",
+  "main": "index.js",
+  "directories": {
+    "src": "src/",
+    "test": "test/",
+    "api": "src/NotSteam.Core/",
+    "web": "src/NotSteam.WebUI/ClientApp/"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel api web",
+    "install": "npm install --prefix ./src/NotSteam.WebUI/ClientApp/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "dotnet run --project ./src/NotSteam.Core/",
+    "web": "npm start --prefix ./src/NotSteam.WebUI/ClientApp/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flynt56/not-steam.git"
+  },
+  "author": "Flynt56",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Flynt56/not-steam/issues"
+  },
+  "homepage": "https://github.com/Flynt56/not-steam#readme"
+}
