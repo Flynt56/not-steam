@@ -1,26 +1,38 @@
 <div>
-    <table class="table">
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+
+    <button class="btn btn-primary" (click)="onAdd()">Add</button>
+        </div>
+    </div>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Description</th>
+                <th scope="col">Tags</th>
                 <th scope="col">Release Date</th>
                 <th scope="col">Base Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let game of games; let i = index">
-                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{game.id}}</th>
                 <td>{{ game.title }}</td>
                 <td>
                     <div class="text-wrap text-truncate" style="width: 24em;">
-                        {{game.description}}
+                        {{game.tags}}
                     </div>
                 </td>
                 <td>{{ game.releaseDate | date: 'longDate' }}</td>
                 <td>{{game.basePrice | currency}}</td>
+                <td>
+                    <button class="btn"><i class="fa fa-edit" (click)="onEdit(game.id)"></i></button>
+                </td>
+                <td>
+                    <button class="btn delete" (click)="onDelete(game.id)"><i class="fa fa-trash"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>

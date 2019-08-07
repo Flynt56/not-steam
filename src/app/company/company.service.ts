@@ -11,7 +11,33 @@ export class CompanyService {
     private http: HttpClient
   ) { }
 
+  private readonly COMPANIES_URL = 'companies';
+
+  private getRootUrl() {
+    return environment.apiUrl + this.COMPANIES_URL;
+  }
+
+  private formatUrl(companyId){
+    return this.getRootUrl() + '/' + companyId;
+  }
+
   public getAll() {
-    return this.http.get(environment.apiUrl + 'companies');
+    return this.http.get(this.getRootUrl());
+  }
+
+  public getOne(companyId) {
+    return this.http.get(this.formatUrl(companyId));
+  }
+
+  public deleteOne(companyId) {
+    return this.http.delete(this.formatUrl(companyId));
+  }
+
+  public addOne(company) {
+    return this.http.post(this.getRootUrl(), company);
+  }
+
+  public putOne(companyId, company) {
+    return this.http.put(this.formatUrl(companyId), company);
   }
 }

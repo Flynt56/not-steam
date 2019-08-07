@@ -20,4 +20,16 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  onClickEdit() {
+
+  }
+
+  onClickDelete() {
+    console.log('TEST DELETE');
+  }
+
+  onSelect(index: number) {
+    console.log(index);
+  }
+
 }

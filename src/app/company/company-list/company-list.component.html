@@ -1,11 +1,11 @@
 <div>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Actions</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +16,12 @@
                     <div class="text-wrap text-truncate" style="width: 24em;">
                         {{company.description}}
                     </div>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         </tbody>

@@ -1,21 +1,23 @@
 <div>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Usage Amount</th>
+                <th scope="col" rowspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let tag of tags; let i = index">
                 <th scope="row">{{i+1}}</th>
                 <td>{{tag.name}}</td>
+                <td>{{tag.usageAmount}}</td>
                 <td>
-                    <div class="text-wrap text-truncate" style="width: 24em;">
-                        {{tag.description}}
-                    </div>
+                    <button class="btn"><i class="fa fa-edit"></i></button>
+                </td>
+                <td>
+                    <button class="btn"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         </tbody>
