@@ -17,7 +17,7 @@ export class TagService {
     return environment.apiUrl + this.TAGS_URL;
   }
 
-  private formatUrl(tagId){
+  private formatUrl(tagId) {
     return this.getRootUrl() + '/' + tagId;
   }
 
@@ -39,5 +39,13 @@ export class TagService {
 
   public putOne(tagId, tag) {
     return this.http.put(this.formatUrl(tagId), tag);
+  }
+
+  public submit(tag) {
+    if (!tag.id) {
+      return this.addOne(tag);
+    }
+
+    return this.putOne(tag.id, tag);
   }
 }

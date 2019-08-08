@@ -17,7 +17,7 @@ export class GametagService {
     return environment.apiUrl + this.GAMETAGS_URL;
   }
 
-  private formatUrl(gameId, tagId){
+  private formatUrl(gameId, tagId) {
     return this.getRootUrl() + '/' + gameId + '/' + tagId;
   }
 
@@ -39,5 +39,13 @@ export class GametagService {
 
   public putOne(gameId, tagId, gameTag) {
     return this.http.put(this.formatUrl(gameId, tagId), gameTag);
+  }
+
+  public submit(gametag) {
+    if (gametag.gameId == null || gametag.tagId == null) {
+      return this.addOne(gametag);
+    }
+
+    return this.putOne(gametag.gameId, gametag.tagId, gametag);
   }
 }

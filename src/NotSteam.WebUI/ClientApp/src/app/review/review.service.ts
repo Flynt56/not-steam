@@ -17,7 +17,7 @@ export class ReviewService {
     return environment.apiUrl + this.REVIEWS_URL;
   }
 
-  private formatUrl(userId, gameId){
+  private formatUrl(userId, gameId) {
     return this.getRootUrl() + '/' + userId + '/' + gameId;
   }
 
@@ -39,5 +39,13 @@ export class ReviewService {
 
   public putOne(userId, gameId, review) {
     return this.http.put(this.formatUrl(userId, gameId), review);
+  }
+
+  public submit(review) {
+    if (review.userId == null || review.gameId == null) {
+      return this.addOne(review);
+    }
+
+    return this.putOne(review.userId, review.gameId, review);
   }
 }
