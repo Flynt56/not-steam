@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../game.service';
 import { SpinnerService } from 'src/app/shared/spinner.service';
+import { ToastrService } from 'ngx-toastr';
+import { CompanyService } from 'src/app/company/company.service';
 
 @Component({
   selector: 'app-game-form',
@@ -13,17 +15,23 @@ export class GameFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private router: Router,
+    private toastr: ToastrService,
+    private companyService: CompanyService
   ) { }
 
   public game: any = {};
   public companies: any = [];
+  public selectedCompany
+  public errorMessage = "";
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const gameId = params['id'];
       if (gameId != null) {
         this.getGame(gameId);
+        this.getCompanies();
       }
     });
   }
@@ -37,12 +45,31 @@ export class GameFormComponent implements OnInit {
     );
   }
 
-  // getCompanies() {
-  //     this.companyService.getAll().subscribe(response => 
-  //       {
-  //         this.companies = response;
-  //       }
-  //     );
-  // }
+  onSubmit() {
+    this.spinner.show();
+    delete this.game.tags;
+    this.game.companyId = 1;
+
+    this.gameService.submit(this.game).subscribe(
+      (response: any) => {
+        this.toastr.success('dosta gey');
+        this.router.navigate(['games']);
+        this.spinner.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.spinner.hide();
+      });
+  }
+
+  getCompanies() {
+      this.companyService.getAll().subscribe(response => 
+        {
+          this.companies = response;
+        }
+      );
+  }
 
 }

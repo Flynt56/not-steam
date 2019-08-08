@@ -40,4 +40,12 @@ export class GameService {
   public putOne(gameId, game) {
     return this.http.put(this.formatUrl(gameId), game);
   }
+
+  public submit(game) {
+    if(!game.id) {
+      return this.addOne(game);
+    }
+
+    return this.putOne(game.id, game);
+  }
 }
