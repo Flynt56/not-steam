@@ -40,4 +40,12 @@ export class LibraryService {
   public putOne(userId, gameId, library) {
     return this.http.put(this.formatUrl(userId, gameId), library);
   }
+
+  public submit(library) {
+    if (library.userId == null || library.gameId == null) {
+      return this.addOne(library);
+    }
+
+    return this.putOne(library.userId, library.gameId, library);
+  }
 }

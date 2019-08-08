@@ -17,7 +17,7 @@ export class UserService {
     return environment.apiUrl + this.USERS_URL;
   }
 
-  private formatUrl(userId){
+  private formatUrl(userId) {
     return this.getRootUrl() + '/' + userId;
   }
 
@@ -39,5 +39,13 @@ export class UserService {
 
   public putOne(userId, user) {
     return this.http.put(this.formatUrl(userId), user);
+  }
+
+  public submit(user) {
+    if (!user.id) {
+      return this.addOne(user);
+    }
+
+    return this.putOne(user.id, user);
   }
 }

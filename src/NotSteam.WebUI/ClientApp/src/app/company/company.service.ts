@@ -17,7 +17,7 @@ export class CompanyService {
     return environment.apiUrl + this.COMPANIES_URL;
   }
 
-  private formatUrl(companyId){
+  private formatUrl(companyId) {
     return this.getRootUrl() + '/' + companyId;
   }
 
@@ -39,5 +39,13 @@ export class CompanyService {
 
   public putOne(companyId, company) {
     return this.http.put(this.formatUrl(companyId), company);
+  }
+
+  public submit(company) {
+    if (!company.id) {
+      return this.addOne(company);
+    }
+
+    return this.putOne(company.id, company);
   }
 }

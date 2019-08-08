@@ -40,4 +40,12 @@ export class PurchaseService {
   public putOne(userId, gameId, purchase) {
     return this.http.put(this.formatUrl(userId, gameId), purchase);
   }
+
+  public submit(purchase) {
+    if (purchase.userId == null || purchase.gameId == null) {
+      return this.addOne(purchase);
+    }
+
+    return this.putOne(purchase.userId, purchase.gameId, purchase);
+  }
 }
