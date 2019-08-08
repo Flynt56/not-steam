@@ -11,3 +11,4 @@
 - [ ] Implement form components functionality
 - [ ] Modify form components HTML
 - [ ] Create API routes for dropdown view models (game, user, company, tag) - 'api/games/dropdown'
+- [ ] Find instructions for Monday
