@@ -10,6 +10,8 @@ namespace NotSteam.Core.ViewModels
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string HomepageUri { get; set; }
+        public string LogoImageUri { get; set; }
         public ICollection<string> GameNames { get; set; } = new HashSet<string>();
 
         public static Expression<Func<Company, CompanyDetails>> Projection
@@ -20,6 +22,8 @@ namespace NotSteam.Core.ViewModels
                 {
                     Name = company.Name,
                     Description = company.Description,
+                    HomepageUri = company.HomepageUri,
+                    LogoImageUri = company.LogoImageUri,
                     GameNames = company.Games.Select(g => g.Title).ToHashSet()
                 };
             }
