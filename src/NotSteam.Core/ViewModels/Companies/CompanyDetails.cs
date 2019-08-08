@@ -1,37 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class CompanyDetails
+    public class CompanyDetails : IHaveCustomMapping
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public string HomepageUri { get; set; }
         public string LogoImageUri { get; set; }
-        public ICollection<string> GameNames { get; set; } = new HashSet<string>();
 
-        public static Expression<Func<Company, CompanyDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return company => new CompanyDetails
-                {
-                    Name = company.Name,
-                    Description = company.Description,
-                    HomepageUri = company.HomepageUri,
-                    LogoImageUri = company.LogoImageUri,
-                    GameNames = company.Games.Select(g => g.Title).ToHashSet()
-                };
-            }
-        }
-
-        public static CompanyDetails Create(Company company)
-        {
-            return Projection.Compile().Invoke(company);
+            configuration.CreateMap<Company, CompanyDetails>();
         }
     }
 }

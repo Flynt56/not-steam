@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CompaniesList>>> GetCompanies()
         {
-            return await _context.Companies.ProjectTo<CompaniesList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Companies.ProjectTo<CompaniesList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{id}")]
@@ -32,7 +32,7 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return CompanyDetails.Create(company);
+            return Ok(_mapper.Map<CompanyDetails>(company));
         }
 
         [HttpPut("{id}")]

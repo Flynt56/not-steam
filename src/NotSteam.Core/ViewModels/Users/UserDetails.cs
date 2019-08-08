@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
@@ -11,11 +10,10 @@ namespace NotSteam.Core.ViewModels
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public string Password { get; set; }
         public string Nick { get; set; }
         public string Email { get; set; }
         public DateTime DOB { get; set; }
-
-        public IEnumerable<UserRequestedReviewDetails> Reviews { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
