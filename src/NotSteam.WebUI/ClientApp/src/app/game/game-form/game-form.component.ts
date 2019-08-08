@@ -23,7 +23,7 @@ export class GameFormComponent implements OnInit {
 
   public game: any = {};
   public companies: any = [];
-  public selectedCompany: any = {};
+  public selectedCompanyId: any = {};
   public errorMessage = "";
 
   ngOnInit() {
@@ -40,6 +40,7 @@ export class GameFormComponent implements OnInit {
     this.gameService.getOne(gameId).subscribe(response => {
       this.game = response;
       this.game.id = gameId;
+      this.selectedCompanyId = this.game.companyId;
       this.spinner.hide();
     }
     );
@@ -47,7 +48,7 @@ export class GameFormComponent implements OnInit {
 
   onSubmit() {
     this.spinner.show();
-    this.game.companyId = this.selectedCompany.id;
+    this.game.companyId = this.selectedCompanyId;
 
     this.gameService.submit(this.game).subscribe(
       (response: any) => {
@@ -64,11 +65,10 @@ export class GameFormComponent implements OnInit {
   }
 
   getCompanies() {
-      this.companyService.getAll().subscribe(response => 
-        {
-          this.companies = response;
-        }
-      );
+    this.companyService.getAll().subscribe(response => {
+      this.companies = response;
+    }
+    );
   }
 
 }

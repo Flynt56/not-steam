@@ -1,7 +1,9 @@
 <div>
     <div class="row">
         <div class="col-sm-12 mb-3">
-            <button class="btn add btn-primary" (click)="onAdd()"><i class="fa fa-plus"></i></button>
+            <button class="btn add btn-primary" (click)="onAdd()">
+                <i class="fa fa-plus"></i>
+            </button>
         </div>
     </div>
     <div>
@@ -28,10 +30,14 @@
                     </td>
                     <td>{{game.basePrice | currency}}</td>
                     <td>
-                        <button class="btn edit"><i class="fa fa-edit" (click)="onEdit(game.id)"></i></button>
+                        <button class="btn btn-sm edit" (click)="onEdit(game.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
                     </td>
                     <td>
-                        <button class="btn delete" (click)="onDelete(game.id)"><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-sm delete" (click)="onDelete(game.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>

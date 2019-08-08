@@ -44,8 +44,7 @@ export class GameListComponent implements OnInit {
   }
 
   onEdit(gameId) {
-
-    this.router.navigate(['games', gameId]);
     this.spinner.show();
+    this.router.navigate(['games', gameId]);
   }
 }

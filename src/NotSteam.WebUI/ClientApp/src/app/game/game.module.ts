@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GameRoutingModule } from './game-routing.module';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameFormComponent } from './game-form/game-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     GameRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ]
 })
 export class GameModule { }
