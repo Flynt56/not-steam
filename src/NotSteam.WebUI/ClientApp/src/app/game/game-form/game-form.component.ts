@@ -23,7 +23,7 @@ export class GameFormComponent implements OnInit {
 
   public game: any = {};
   public companies: any = [];
-  public selectedCompany
+  public selectedCompany: any = {};
   public errorMessage = "";
 
   ngOnInit() {
@@ -47,8 +47,7 @@ export class GameFormComponent implements OnInit {
 
   onSubmit() {
     this.spinner.show();
-    delete this.game.tags;
-    this.game.companyId = 1;
+    this.game.companyId = this.selectedCompany.id;
 
     this.gameService.submit(this.game).subscribe(
       (response: any) => {

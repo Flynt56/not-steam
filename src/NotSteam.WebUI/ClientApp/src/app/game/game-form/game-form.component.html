@@ -1,6 +1,6 @@
 <div>
   <div [hidden]="errorMessage.length == 0">{{ errorMessage }}</div>
-    <form (submit)="onSubmit()" #gejForm="ngForm">
+    <form (submit)="onSubmit()" #gameForm="ngForm">
         <input title="id" name="id" type="hidden" [(ngModel)]="game.id" />
   <div class="form-group">
     <label for="title">Title</label>
@@ -12,9 +12,9 @@
   </div>
   <select class="form-control" name="companyId" [(ngModel)]="selectedCompany">  
     <option *ngFor="let company of companies" [value]="company.id">  
-      {{company.name}}  
+      {{company.name}}
     </option>  
   </select>  
-  <button [disabled]="!gejForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+  <button [disabled]="!gameForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>

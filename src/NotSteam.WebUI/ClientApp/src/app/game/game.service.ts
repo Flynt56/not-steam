@@ -17,7 +17,7 @@ export class GameService {
     return environment.apiUrl + this.GAMES_URL;
   }
 
-  private formatUrl(gameId){
+  private formatUrl(gameId) {
     return this.getRootUrl() + '/' + gameId;
   }
 
@@ -42,7 +42,7 @@ export class GameService {
   }
 
   public submit(game) {
-    if(!game.id) {
+    if (!game.id) {
       return this.addOne(game);
     }
 
