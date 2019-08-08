@@ -1,40 +1,30 @@
 ﻿using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
+using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class UserDetails
+    public class UserDetails : IHaveCustomMapping
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
         public string Nick { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DOB { get; set; }
 
-        public int ReviewsCreated { get; set; }
-        public int PurchasesMade { get; set; }
-        public int GamesOwned { get; set; }
+        public IEnumerable<ReviewDetails> Reviews { get; set; }
+        public IEnumerable<PurchaseDetails> Purchases { get; set; }
+        public IEnumerable<LibraryDetails> Libraries { get; set; }
 
-        public static Expression<Func<User, UserDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return user => new UserDetails
-                {
-                    Name = user.Username,
-                    Nick = user.Nickname,
-                    Email = user.Email,
-                    DateOfBirth = user.DateOfBirth,
-                    ReviewsCreated = user.Reviews.Count,
-                    PurchasesMade = user.Purchases.Count,
-                    GamesOwned = user.Libraries.Count
-                };
-            }
-        }
-
-        public static UserDetails Create(User user)
-        {
-            return Projection.Compile().Invoke(user);
+            configuration.CreateMap<User, UserDetails>()
+                .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Username))
+                .ForMember(uDTO => uDTO.Nick, opt => opt.MapFrom(u => u.Nickname))
+                .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth));
         }
     }
 }

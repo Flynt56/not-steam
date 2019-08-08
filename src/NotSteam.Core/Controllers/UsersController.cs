@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsersList>>> GetUsers()
         {
-            return await _context.Users.ProjectTo<UsersList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Users.ProjectTo<UsersList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{id}")]
@@ -32,7 +32,7 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return UserDetails.Create(user);
+            return Ok(_mapper.Map<UserDetails>(user));
         }
 
         [HttpPut("{id}")]
