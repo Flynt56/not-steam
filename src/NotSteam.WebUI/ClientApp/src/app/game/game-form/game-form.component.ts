@@ -29,10 +29,12 @@ export class GameFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const gameId = params['id'];
+
       if (gameId != null) {
         this.getGame(gameId);
-        this.getCompanies();
       }
+
+      this.getCompanies();
     });
   }
 
