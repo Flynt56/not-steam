@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel api web",
-    "install": "(cd ./src/NotSteam.WebUI/ClientApp/ && npm install) && (cd ./../../../ && dotnet restore)",
+    "install": "(dotnet restore) && (cd ./src/NotSteam.WebUI/ClientApp/ && npm install)",
     "test": "echo \"Error: no test specified\" && exit 1",
     "api": "dotnet run --project ./src/NotSteam.Core/",
     "web": "cd ./src/NotSteam.WebUI/ClientApp/ && npm start"
