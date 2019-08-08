@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../game.service';
+import { SpinnerService } from 'src/app/shared/spinner.service';
 
 @Component({
   selector: 'app-game-form',
@@ -11,7 +12,8 @@ export class GameFormComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private gameService: GameService
+    private gameService: GameService,
+    private spinner: SpinnerService
   ) { }
 
   public game: any = {};
@@ -30,6 +32,7 @@ export class GameFormComponent implements OnInit {
     this.gameService.getOne(gameId).subscribe(response => {
       this.game = response;
       this.game.id = gameId;
+      this.spinner.hide();
     }
     );
   }

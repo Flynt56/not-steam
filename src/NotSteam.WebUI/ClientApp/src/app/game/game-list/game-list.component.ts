@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'src/app/shared/spinner.service';
 
 @Component({
   selector: 'app-game-list',
@@ -13,7 +14,8 @@ export class GameListComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private spinner: SpinnerService
   ) { }
 
   private games = [];
@@ -42,6 +44,8 @@ export class GameListComponent implements OnInit {
   }
 
   onEdit(gameId) {
+
     this.router.navigate(['games', gameId]);
+    this.spinner.show();
   }
 }
