@@ -15,9 +15,7 @@ namespace NotSteam.Core.ViewModels
         public string Email { get; set; }
         public DateTime DOB { get; set; }
 
-        public IEnumerable<ReviewDetails> Reviews { get; set; }
-        public IEnumerable<PurchaseDetails> Purchases { get; set; }
-        public IEnumerable<LibraryDetails> Libraries { get; set; }
+        public IEnumerable<UserRequestedReviewDetails> Reviews { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
