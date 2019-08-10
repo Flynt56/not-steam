@@ -1,19 +1,26 @@
 <div>
-  <div [hidden]="errorMessage.length == 0">{{ errorMessage }}</div>
+  <div [hidden]="errorMessage.length == 0">
+    {{errorMessage}}
+  </div>
   <form (submit)="onSubmit()" #gameForm="ngForm">
     <input title="id" name="id" type="hidden" [(ngModel)]="game.id" />
     <div class="form-group">
-      <label for="title">Title</label>
+      <label for="title">
+        Title
+      </label>
       <input required type="text" name="title" [(ngModel)]="game.title" class="form-control" id="title">
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="description">
+        Description
+      </label>
       <textarea type="text" id="description" title="description" class="form-control" rows="3" cols="50"
-        name="description" placeholder="Let us know!" [(ngModel)]="game.description">
-      </textarea>
+        name="description" placeholder="Let us know!" [(ngModel)]="game.description"></textarea>
     </div>
     <div class="form-group">
-      <label for="companyId">Developer Company</label>
+      <label for="companyId">
+        Developer Company
+      </label>
       <select class="form-control" name="companyId" [(ngModel)]="selectedCompanyId">
         <option *ngFor="let company of companies" [value]="company.id">
           {{company.name}}
@@ -21,14 +28,20 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="releaseDate">Release Date</label>
+      <label for="releaseDate">
+        Release Date
+      </label>
       <input required type="datetime-local" name="releaseDate" [(ngModel)]="game.releaseDate" class="form-control"
         id="releaseDate">
     </div>
     <div class="form-group">
-      <label for="basePrice">Base Price ($)</label>
+      <label for="basePrice">
+        Base Price ($)
+      </label>
       <input required type="number" name="basePrice" [(ngModel)]="game.basePrice" class="form-control" id="basePrice" />
     </div>
-    <button [disabled]="!gameForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="!gameForm.form.valid" type="submit" class="btn btn-primary">
+      Submit
+    </button>
   </form>
 </div>
