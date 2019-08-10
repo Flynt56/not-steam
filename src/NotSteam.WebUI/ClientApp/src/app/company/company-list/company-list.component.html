@@ -1,31 +1,43 @@
 <div>
     <div class="row">
         <div class="col-sm-12 mb-3">
-            <button class="btn add btn-primary" (click)="onAdd()"><i class="fa fa-plus"></i></button>
+            <button class="btn add btn-primary" (click)="onAdd()">
+                <i class="fa fa-plus"></i>
+            </button>
         </div>
     </div>
     <div>
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th colspan="2">Actions</th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th colspan="2">
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let company of companies">
-                    <td>{{company.name}}</td>
                     <td>
-                        <div class="text-wrap text-truncate" style="width: 24em;">
-                            {{company.description}}
-                        </div>
+                        {{company.name}}
+                    </td>
+                    <td class="text-wrap text-truncate" style="width: 24em">
+                        {{company.description}}
                     </td>
                     <td>
-                        <button class="btn edit"><i class="fa fa-edit" (click)="onEdit(company.id)"></i></button>
+                        <button class="btn btn-sm edit" (click)="onEdit(company.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
                     </td>
                     <td>
-                        <button class="btn delete" (click)="onDelete(company.id)"><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-sm delete" (click)="onDelete(company.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
