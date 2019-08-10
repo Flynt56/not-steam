@@ -44,8 +44,7 @@ export class GameFormComponent implements OnInit {
       this.game.id = gameId;
       this.selectedCompanyId = this.game.companyId;
       this.spinner.hide();
-    }
-    );
+    });
   }
 
   onSubmit() {
