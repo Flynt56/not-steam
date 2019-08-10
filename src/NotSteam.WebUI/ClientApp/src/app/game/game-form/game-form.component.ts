@@ -53,7 +53,7 @@ export class GameFormComponent implements OnInit {
 
     this.gameService.submit(this.game).subscribe(
       (response: any) => {
-        this.toastr.success('dosta gey');
+        this.toastr.success('Uspješno izvršeno!');
         this.router.navigate(['games']);
         this.spinner.hide();
       },
