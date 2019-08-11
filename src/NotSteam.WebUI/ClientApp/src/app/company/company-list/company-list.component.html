@@ -26,8 +26,10 @@
                     <td>
                         {{company.name}}
                     </td>
-                    <td class="text-wrap text-truncate">
-                        {{company.description}}
+                    <td>
+                        <div class="text-truncate" style="max-width: 500px">
+                            {{company.description}}
+                        </div>
                     </td>
                     <td>
                         <button class="btn btn-sm edit" (click)="onEdit(company.id)">
