@@ -18,7 +18,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameTagsList>>> GetGameTags()
         {
-            return await _context.GameTags.ProjectTo<GameTagsList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.GameTags.ProjectTo<GameTagsList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{idGame}/{idTag}")]
@@ -31,15 +31,15 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return GameTagDetails.Create(gameTag);
+            return Ok(_mapper.Map<GameTagDetails>(gameTag));
         }
 
         [HttpPut("{idGame}/{idTag}")]
-        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTag gameTag)
+        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTagDetails gameTag)
         {
             if (idGame == gameTag.TagId && idTag == gameTag.GameId)
             {
-                _context.Entry(gameTag).State = EntityState.Modified;
+                _context.Entry(_mapper.Map<GameTag>(gameTag)).State = EntityState.Modified;
 
                 try
                 {
@@ -64,9 +64,9 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<GameTag>> PostGameTag([FromBody]GameTag gameTag)
+        public async Task<ActionResult<GameTag>> PostGameTag([FromBody]GameTagDetails gameTag)
         {
-            await _context.GameTags.AddAsync(gameTag);
+            await _context.GameTags.AddAsync(_mapper.Map<GameTag>(gameTag));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.TagId, idTag = gameTag.GameId }, gameTag);

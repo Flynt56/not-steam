@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Linq.Expressions;
+using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class GameTagDetails
+    public class GameTagDetails : IHaveCustomMapping
     {
+        public int GameId { get; set; }
+        public int TagId { get; set; }
+
         public string TagName { get; set; }
         public string GameTitle { get; set; }
         public DateTime DateAdded { get; set; }
 
-        public static Expression<Func<GameTag, GameTagDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return gameTag => new GameTagDetails
-                {
-                    TagName = gameTag.Tag.Name,
-                    GameTitle = gameTag.Game.Title,
-                    DateAdded = gameTag.CreatedAt
-                };
-            }
-        }
+            configuration.CreateMap<GameTag, GameTagDetails>()
+                .ForMember(gtDTO => gtDTO.TagName, opt => opt.MapFrom(gt => gt.Tag.Name))
+                .ForMember(gtDTO => gtDTO.GameTitle, opt => opt.MapFrom(gt => gt.Game.Title))
+                .ForMember(gtDTO => gtDTO.DateAdded, opt => opt.MapFrom(gt => gt.CreatedAt));
 
-        public static GameTagDetails Create(GameTag gameTag)
-        {
-            return Projection.Compile().Invoke(gameTag);
+            configuration.CreateMap<GameTagDetails, GameTag>();
         }
     }
 }
