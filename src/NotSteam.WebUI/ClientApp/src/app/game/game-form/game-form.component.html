@@ -21,7 +21,7 @@
       <label for="companyId">
         Developer Company
       </label>
-      <select class="form-control" name="companyId" [(ngModel)]="selectedCompanyId">
+      <select required class="form-control" name="companyId" [(ngModel)]="selectedCompanyId">
         <option *ngFor="let company of companies" [value]="company.id">
           {{company.name}}
         </option>

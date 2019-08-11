@@ -41,8 +41,8 @@ export class GametagService {
     return this.http.put(this.formatUrl(gameId, tagId), gameTag);
   }
 
-  public submit(gametag) {
-    if (gametag.gameId == null || gametag.tagId == null) {
+  public submit(gametag, bIsNew: boolean) {
+    if (bIsNew) {
       return this.addOne(gametag);
     }
 

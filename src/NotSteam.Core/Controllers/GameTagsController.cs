@@ -37,9 +37,11 @@ namespace NotSteam.Core.Controllers
         [HttpPut("{idGame}/{idTag}")]
         public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTagDetails gameTag)
         {
-            if (idGame == gameTag.TagId && idTag == gameTag.GameId)
+            if (idTag == gameTag.TagId && idGame == gameTag.GameId)
             {
-                _context.Entry(_mapper.Map<GameTag>(gameTag)).State = EntityState.Modified;
+                var gt = _mapper.Map<GameTag>(gameTag);
+
+                _context.Entry(gt).State = EntityState.Modified;
 
                 try
                 {
@@ -57,7 +59,7 @@ namespace NotSteam.Core.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetGameTag), new { idGame = gameTag.TagId, idTag = gameTag.GameId }, gameTag);
+                return AcceptedAtAction(nameof(GetGameTag), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
             }
 
             return BadRequest();
@@ -66,10 +68,12 @@ namespace NotSteam.Core.Controllers
         [HttpPost]
         public async Task<ActionResult<GameTag>> PostGameTag([FromBody]GameTagDetails gameTag)
         {
-            await _context.GameTags.AddAsync(_mapper.Map<GameTag>(gameTag));
+            var gt = _mapper.Map<GameTag>(gameTag);
+
+            await _context.GameTags.AddAsync(gt);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.TagId, idTag = gameTag.GameId }, gameTag);
+            return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
         }
 
         [HttpDelete("{idGame}/{idTag}")]
@@ -90,7 +94,7 @@ namespace NotSteam.Core.Controllers
 
         private async Task<bool> GameTagExists(int idGame, int idTag)
         {
-            return await _context.GameTags.AnyAsync(e => e.TagId == idGame && e.GameId == idTag);
+            return await _context.GameTags.AnyAsync(e => e.TagId == idTag && e.GameId == idGame);
         }
     }
 }
