@@ -37,9 +37,10 @@ namespace NotSteam.Core.Controllers
         [HttpPut("{idGame}/{idTag}")]
         public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTagDetails gameTag)
         {
-            if (idTag == gameTag.TagId && idGame == gameTag.GameId)
+            var gt = _mapper.Map<GameTag>(gameTag);
+
+            if (idTag == gt.TagId && idGame == gt.GameId)
             {
-                var gt = _mapper.Map<GameTag>(gameTag);
 
                 _context.Entry(gt).State = EntityState.Modified;
 
@@ -68,9 +69,7 @@ namespace NotSteam.Core.Controllers
         [HttpPost]
         public async Task<ActionResult<GameTag>> PostGameTag([FromBody]GameTagDetails gameTag)
         {
-            var gt = _mapper.Map<GameTag>(gameTag);
-
-            await _context.GameTags.AddAsync(gt);
+            await _context.GameTags.AddAsync(_mapper.Map<GameTag>(gameTag));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);

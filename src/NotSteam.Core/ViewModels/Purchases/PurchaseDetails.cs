@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class PurchaseDetails
+    public class PurchaseDetails : IHaveCustomMapping
     {
+        public int UserId { get; set; }
+        public int GameId { get; set; }
+
         public string User { get; set; }
         public string Game { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime Date { get; set; }
 
-        public static Expression<Func<Purchase, PurchaseDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return purchase => new PurchaseDetails
-                {
-                    User = purchase.User.Username,
-                    Game = purchase.Game.Title,
-                    TotalPrice = purchase.TotalPrice,
-                    Date = purchase.DateOfPurchase
-                };
-            }
-        }
+            configuration.CreateMap<Purchase, PurchaseDetails>()
+                .ForMember(pDTO => pDTO.Date, opt => opt.MapFrom(p => p.DateOfPurchase));
 
-        public static PurchaseDetails Create(Purchase purchase)
-        {
-            return Projection.Compile().Invoke(purchase);
+            configuration.CreateMap<PurchaseDetails, Purchase>()
+                .ForMember(p => p.DateOfPurchase, opt => opt.MapFrom(pDTO => pDTO.Date));
         }
     }
 }

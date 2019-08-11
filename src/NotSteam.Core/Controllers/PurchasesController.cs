@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PurchasesList>>> GetPurchases()
         {
-            return await _context.Purchases.ProjectTo<PurchasesList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Purchases.ProjectTo<PurchasesList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{idUser}/{idGame}")]
@@ -32,15 +32,17 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return PurchaseDetails.Create(purchase);
+            return Ok(_mapper.Map<PurchaseDetails>(purchase));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutPurchase(int idUser, int idGame, [FromBody]Purchase purchase)
+        public async Task<IActionResult> PutPurchase(int idUser, int idGame, [FromBody]PurchaseDetails purchase)
         {
-            if (idUser == purchase.UserId && idGame == purchase.GameId)
+            var purchaseOriginal = _mapper.Map<Purchase>(purchase);
+
+            if (idUser == purchaseOriginal.UserId && idGame == purchaseOriginal.GameId)
             {
-                _context.Entry(purchase).State = EntityState.Modified;
+                _context.Entry(purchaseOriginal).State = EntityState.Modified;
 
                 try
                 {
@@ -65,9 +67,9 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Purchase>> PostPurchase([FromBody]Purchase purchase)
+        public async Task<ActionResult<Purchase>> PostPurchase([FromBody]PurchaseDetails purchase)
         {
-            await _context.Purchases.AddAsync(purchase);
+            await _context.Purchases.AddAsync(_mapper.Map<Purchase>(purchase));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
