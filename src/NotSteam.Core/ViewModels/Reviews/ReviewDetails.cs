@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class ReviewDetails
+    public class ReviewDetails : IHaveCustomMapping
     {
+        public int UserId { get; set; }
+        public int GameId { get; set; }
+
         public string User { get; set; }
         public string Game { get; set; }
         public int Rating { get; set; }
         public string Description { get; set; }
 
-        public static Expression<Func<Review, ReviewDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return review => new ReviewDetails
-                {
-                    User = review.User.Username,
-                    Game = review.Game.Title,
-                    Rating = review.Rating,
-                    Description = review.Description
-                };
-            }
-        }
+            configuration.CreateMap<Review, ReviewDetails>();
 
-        public static ReviewDetails Create(Review review)
-        {
-            return Projection.Compile().Invoke(review);
+            configuration.CreateMap<ReviewDetails, Review>()
+                .ForMember(r => r.User, opt => opt.Ignore())
+                .ForMember(r => r.Game, opt => opt.Ignore());
         }
     }
 }

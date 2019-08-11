@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReviewsList>>> GetReviews()
         {
-            return await _context.Reviews.ProjectTo<ReviewsList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Reviews.ProjectTo<ReviewsList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{idUser}/{idGame}")]
@@ -32,15 +32,17 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return ReviewDetails.Create(review);
+            return Ok(_mapper.Map<ReviewDetails>(review));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutReview(int idUser, int idGame, [FromBody]Review review)
+        public async Task<IActionResult> PutReview(int idUser, int idGame, [FromBody]ReviewDetails review)
         {
-            if (idUser == review.UserId && idGame == review.GameId)
+            var r = _mapper.Map<Review>(review);
+
+            if (idUser == r.UserId && idGame == r.GameId)
             {
-                _context.Entry(review).State = EntityState.Modified;
+                _context.Entry(r).State = EntityState.Modified;
 
                 try
                 {
@@ -65,9 +67,9 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview([FromBody]Review review)
+        public async Task<ActionResult<Review>> PostReview([FromBody]ReviewDetails review)
         {
-            await _context.Reviews.AddAsync(review);
+            await _context.Reviews.AddAsync(_mapper.Map<Review>(review));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetReview), new { idUser = review.UserId, idGame = review.GameId }, review);
