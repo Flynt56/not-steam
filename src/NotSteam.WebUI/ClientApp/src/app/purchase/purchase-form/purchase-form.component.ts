@@ -101,6 +101,6 @@ export class PurchaseFormComponent implements OnInit {
   getUsers() {
     this.userService.getAll().subscribe(response => {
       this.users = response;
-    })
+    });
   }
 }

@@ -17,7 +17,7 @@ export class LibraryService {
     return environment.apiUrl + this.LIBRARIES_URL;
   }
 
-  private formatUrl(userId, gameId){
+  private formatUrl(userId, gameId) {
     return this.getRootUrl() + '/' + userId + '/' + gameId;
   }
 
@@ -42,10 +42,10 @@ export class LibraryService {
   }
 
   public submit(library) {
-    if (library.userId == null || library.gameId == null) {
-      return this.addOne(library);
-    }
-
     return this.putOne(library.userId, library.gameId, library);
+  }
+
+  public submitNew(library) {
+    return this.addOne(library);
   }
 }
