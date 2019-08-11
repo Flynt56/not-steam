@@ -1,27 +1,58 @@
-<div style="margin-top: 24px">
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th scope="col">Username</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">Email Address</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col" colspan="2">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users; let i = index" (click)="onSelect(i)" style="cursor: pointer">
-                <td>{{user.name}}</td>
-                <td>{{user.nick}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.dob | date: 'dd.MM.yyyy.'}}</td>
-                <td>
-                    <button (click)="onClickEdit()" class="btn btn-sm"><i class="fa fa-edit"></i></button>
-                </td>
-                <td>
-                    <button (click)="onClickDelete()" class="btn btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <button class="btn add btn-primary" (click)="onAdd()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Nickname
+                    </th>
+                    <th>
+                        Email Address
+                    </th>
+                    <th>
+                        Date of Birth
+                    </th>
+                    <th colspan="2">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>
+                        {{user.name}}
+                    </td>
+                    <td>
+                        {{user.nick}}
+                    </td>
+                    <td>
+                        {{user.email}}
+                    </td>
+                    <td>
+                        {{user.dob | date: 'dd.MM.yyyy.'}}
+                    </td>
+                    <td>
+                        <button class="btn btn-sm edit" (click)="onEdit(user.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm delete" (click)="onDelete(user.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
