@@ -9,7 +9,7 @@
             <label for="userId">
                 User
             </label>
-            <select [readonly]="bIsNew" required class="form-control" name="userId" [(ngModel)]="selectedUserId">
+            <select [disabled]="!bIsNew" required class="form-control" name="userId" [(ngModel)]="selectedUserId">
                 <option *ngFor="let user of users" [value]="user.id">
                     {{user.name}}
                 </option>
@@ -19,7 +19,7 @@
             <label for="gameId">
                 Game
             </label>
-            <select [readonly]="bIsNew" required class="form-control" name="gameId" [(ngModel)]="selectedGameId">
+            <select [disabled]="!bIsNew" required class="form-control" name="gameId" [(ngModel)]="selectedGameId">
                 <option *ngFor="let game of games" [value]="game.id">
                     {{game.title}}
                 </option>

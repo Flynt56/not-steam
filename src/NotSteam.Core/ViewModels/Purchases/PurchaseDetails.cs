@@ -22,7 +22,9 @@ namespace NotSteam.Core.ViewModels
                 .ForMember(pDTO => pDTO.Date, opt => opt.MapFrom(p => p.DateOfPurchase));
 
             configuration.CreateMap<PurchaseDetails, Purchase>()
-                .ForMember(p => p.DateOfPurchase, opt => opt.MapFrom(pDTO => pDTO.Date));
+                .ForMember(p => p.DateOfPurchase, opt => opt.MapFrom(pDTO => pDTO.Date))
+                .ForMember(p => p.User, opt => opt.Ignore())
+                .ForMember(p => p.Game, opt => opt.Ignore());
         }
     }
 }
