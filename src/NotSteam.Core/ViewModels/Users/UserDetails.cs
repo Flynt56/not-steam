@@ -14,6 +14,7 @@ namespace NotSteam.Core.ViewModels
         public string Nick { get; set; }
         public string Email { get; set; }
         public DateTime DOB { get; set; }
+        public string ProfileImageUri { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
