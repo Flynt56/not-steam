@@ -24,11 +24,11 @@ export class GameFormComponent implements OnInit {
   public game: any = {};
   public companies: any = [];
   public selectedCompanyId: any = {};
-  public errorMessage = "";
+  public errorMessage = '';
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const gameId = params['id'];
+    this.route.paramMap.subscribe(params => {
+      const gameId = params.get('id');
 
       if (gameId != null) {
         this.getGame(gameId);
