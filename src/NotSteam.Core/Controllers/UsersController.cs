@@ -43,18 +43,7 @@ namespace NotSteam.Core.Controllers
                 return BadRequest();
             }
 
-            var rawUser = new User
-            {
-                Id = user.Id,
-                Username = user.Name,
-                Password = user.Password,
-                Email = user.Email,
-                Nickname = user.Nick,
-                DateOfBirth = user.DOB,
-                ProfileImageUri = user.ProfileImageUri
-            };
-
-            _context.Entry(rawUser).State = EntityState.Modified;
+            _context.Entry(_mapper.Map<User>(user)).State = EntityState.Modified;
 
             try
             {
@@ -78,18 +67,7 @@ namespace NotSteam.Core.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDetails>> PostUser(UserDetails user)
         {
-            var rawUser = new User
-            {
-                Id = user.Id,
-                Username = user.Name,
-                Password = user.Password,
-                Email = user.Email,
-                Nickname = user.Nick,
-                DateOfBirth = user.DOB,
-                ProfileImageUri = user.ProfileImageUri
-            };
-
-            await _context.Users.AddAsync(rawUser);
+            await _context.Users.AddAsync(_mapper.Map<User>(user));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);

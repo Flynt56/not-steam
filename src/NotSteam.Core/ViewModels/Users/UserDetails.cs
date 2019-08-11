@@ -22,6 +22,11 @@ namespace NotSteam.Core.ViewModels
                 .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Username))
                 .ForMember(uDTO => uDTO.Nick, opt => opt.MapFrom(u => u.Nickname))
                 .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth));
+
+            configuration.CreateMap<UserDetails, User>()
+                .ForMember(u => u.Username, opt => opt.MapFrom(uDTO => uDTO.Name))
+                .ForMember(u => u.Nickname, opt => opt.MapFrom(uDTO => uDTO.Nick))
+                .ForMember(u => u.DateOfBirth, opt => opt.MapFrom(uDTO => uDTO.DOB));
         }
     }
 }
