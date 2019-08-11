@@ -34,15 +34,18 @@ export class GametagFormComponent implements OnInit {
   public selectedTagId: any = {};
   public selectedGameId: any = {};
 
+  private gameId = {};
+  private tagId = {};
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const gameId = params.get('id');
-      const tagId = params.get('id2');
+      this.gameId = params.get('id');
+      this.tagId = params.get('id2');
 
-      this.bIsNew = gameId == null || tagId == null;
+      this.bIsNew = this.gameId == null || this.tagId == null;
 
       if (!this.bIsNew) {
-        this.getGameTag(gameId, tagId);
+        this.getGameTag(this.gameId, this.tagId);
       }
 
       this.getGames();
@@ -64,7 +67,7 @@ export class GametagFormComponent implements OnInit {
     this.gameTag.gameId = this.selectedGameId;
     this.gameTag.tagId = this.selectedTagId;
 
-    this.gameTagService.submit(this.gameTag, this.bIsNew).subscribe(
+    this.gameTagService.submit(this.gameId, this.tagId, this.gameTag, this.bIsNew).subscribe(
       (response: any) => {
         this.toastr.success('Uspješno izvršeno!');
         this.router.navigate(['gametags']);

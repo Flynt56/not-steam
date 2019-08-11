@@ -40,12 +40,8 @@ export class GametagListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['gametags/new']);
-  }
-
-  onEdit(gameId, tagId) {
     this.spinner.show();
-    this.router.navigate(['gametags', gameId, tagId]);
+    this.router.navigate(['gametags/new']);
   }
 
 }

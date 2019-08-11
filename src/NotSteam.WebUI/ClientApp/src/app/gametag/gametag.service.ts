@@ -37,15 +37,7 @@ export class GametagService {
     return this.http.post(this.getRootUrl(), gameTag);
   }
 
-  public putOne(gameId, tagId, gameTag) {
-    return this.http.put(this.formatUrl(gameId, tagId), gameTag);
-  }
-
-  public submit(gametag, bIsNew: boolean) {
-    if (bIsNew) {
-      return this.addOne(gametag);
-    }
-
-    return this.putOne(gametag.gameId, gametag.tagId, gametag);
+  public submit(gametag) {
+    return this.addOne(gametag);
   }
 }

@@ -16,7 +16,7 @@
                     <th>
                         Game
                     </th>
-                    <th colspan="2">
+                    <th>
                         Actions
                     </th>
                 </tr>
@@ -28,11 +28,6 @@
                     </td>
                     <td>
                         {{gametag.gameTitle}}
-                    </td>
-                    <td>
-                        <button class="btn btn-sm edit" (click)="onEdit(gametag.gameId, gametag.tagId)">
-                            <i class="fa fa-edit"></i>
-                        </button>
                     </td>
                     <td>
                         <button class="btn btn-sm delete" (click)="onDelete(gametag.gameId, gametag.tagId)">

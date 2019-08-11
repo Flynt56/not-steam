@@ -6,8 +6,7 @@ import { GametagFormComponent } from './gametag-form/gametag-form.component';
 
 const routes: Routes = [
   { path: 'gametags', component: GametagListComponent },
-  { path: 'gametags/new', component: GametagFormComponent },
-  { path: 'gametags/:id/:id2', component: GametagFormComponent }
+  { path: 'gametags/new', component: GametagFormComponent }
 ];
 
 @NgModule({
