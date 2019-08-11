@@ -5,6 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user-form/user-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { UserFormComponent } from './user-form/user-form.component';
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ]
 })
 export class UserModule { }
