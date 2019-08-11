@@ -20,16 +20,16 @@ export class CompanyFormComponent implements OnInit {
   ) { }
 
   private company: any = {};
-  private errorMessage = "";
+  private errorMessage = '';
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const companyId = params['id'];
+    this.route.paramMap.subscribe(params => {
+      const companyId = params.get('id');
 
       if (companyId != null) {
         this.getCompany(companyId);
       }
-    })
+    });
   }
 
   getCompany(companyId) {
