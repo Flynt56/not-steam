@@ -42,10 +42,10 @@ export class ReviewService {
   }
 
   public submit(review) {
-    if (review.userId == null || review.gameId == null) {
-      return this.addOne(review);
-    }
-
     return this.putOne(review.userId, review.gameId, review);
+  }
+
+  public submitNew(review) {
+    return this.addOne(review);
   }
 }

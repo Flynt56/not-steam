@@ -7,7 +7,7 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 const routes: Routes = [
   { path: 'reviews', component: ReviewListComponent },
   { path: 'reviews/new', component: ReviewFormComponent },
-  { path: 'reviews/:userId/:gameId', component: ReviewFormComponent }
+  { path: 'reviews/:id/:id2', component: ReviewFormComponent }
 ];
 
 @NgModule({
