@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SpinnerService } from 'src/app/shared/spinner.service';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -7,9 +11,49 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private spinner: SpinnerService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
+
+  public user: any = {};
+  public errorMessage = '';
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const userId = params.get('id');
+
+      if (userId != null) {
+        this.getUser(userId);
+      }
+    });
+  }
+
+  getUser(userId) {
+    this.userService.getOne(userId).subscribe(response => {
+      this.user = response;
+      this.spinner.hide();
+    });
+  }
+
+  onSubmit() {
+    this.spinner.show();
+
+    this.userService.submit(this.user).subscribe(
+      () => {
+        this.toastr.success('Uspješno izvršeno!');
+        this.router.navigate(['users']);
+        this.spinner.hide();
+      },
+      (response: any) => {
+        const firstError = response.error.errors;
+        const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
+        this.spinner.hide();
+      });
   }
 
 }

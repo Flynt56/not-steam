@@ -1,1 +1,50 @@
-<p>user-form works!</p>
+<div>
+    <div [hidden]="errorMessage.length == 0">
+        {{errorMessage}}
+    </div>
+    <form (submit)="onSubmit()" #userForm="ngForm">
+        <input title="id" name="id" type="hidden" [(ngModel)]="user.id" />
+        <div class="form-group">
+            <label for="username">
+                Username
+            </label>
+            <input required type="text" name="username" [(ngModel)]="user.name" class="form-control" id="username">
+        </div>
+        <div class="form-group">
+            <label for="password">
+                Password (8 characters minimum)
+            </label>
+            <input required type="password" name="password" [(ngModel)]="user.password" class="form-control"
+                id="password">
+        </div>
+        <div class="form-group">
+            <label for="nickname">
+                Nickname
+            </label>
+            <input required type="text" name="nickname" [(ngModel)]="user.nick" class="form-control" id="nickname">
+        </div>
+        <div class="form-group">
+            <label for="email">
+                Email Address
+            </label>
+            <input required type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">
+                Date of Birth
+            </label>
+            <input required type="datetime-local" name="dateOfBirth" [(ngModel)]="user.dob" class="form-control"
+                id="dateOfBirth">
+        </div>
+        <div class="form-group">
+            <label for="profileImageUri">
+                Logo Image URL
+            </label>
+            <input type="url" name="profileImageUri" [(ngModel)]="user.profileImageUri" class="form-control"
+                id="profileImageUri">
+        </div>
+        <button [disabled]="!userForm.form.valid" type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>
