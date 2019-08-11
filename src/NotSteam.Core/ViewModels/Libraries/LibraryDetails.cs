@@ -1,35 +1,29 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AutoMapper;
+using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {
-    public class LibraryDetails
+    public class LibraryDetails : IHaveCustomMapping
     {
+        public int UserId { get; set; }
+        public int GameId { get; set; }
+
         public string OwnerUsername { get; set; }
         public string GameTitle { get; set; }
         public DateTime DateAcquired { get; set; }
         public int TotalPlayTimeHours { get; set; }
         public DateTime? LastPlayed { get; set; }
 
-        public static Expression<Func<Library, LibraryDetails>> Projection
+        public void CreateMappings(Profile configuration)
         {
-            get
-            {
-                return library => new LibraryDetails
-                {
-                    OwnerUsername = library.User.Username,
-                    GameTitle = library.Game.Title,
-                    DateAcquired = library.DateAcquired,
-                    TotalPlayTimeHours = library.TotalPlayTimeHours,
-                    LastPlayed = library.LastPlayedDate
-                };
-            }
-        }
+            configuration.CreateMap<Library, LibraryDetails>();
 
-        public static LibraryDetails Create(Library library)
-        {
-            return Projection.Compile().Invoke(library);
+            configuration.CreateMap<LibraryDetails, Library>()
+                .ForMember(l => l.Game, opt => opt.Ignore())
+                .ForMember(l => l.User, opt => opt.Ignore());
         }
     }
 }

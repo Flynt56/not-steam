@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LibrariesList>>> GetLibraries()
         {
-            return await _context.Libraries.ProjectTo<LibrariesList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Libraries.ProjectTo<LibrariesList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{idUser}/{idGame}")]
@@ -32,15 +32,17 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return LibraryDetails.Create(library);
+            return Ok(_mapper.Map<LibraryDetails>(library));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutLibrary(int idUser, int idGame, [FromBody]Library library)
+        public async Task<IActionResult> PutLibrary(int idUser, int idGame, [FromBody]LibraryDetails library)
         {
-            if (idUser == library.UserId && idGame == library.GameId)
+            var l = _mapper.Map<Library>(library);
+
+            if (idUser == l.UserId && idGame == l.GameId)
             {
-                _context.Entry(library).State = EntityState.Modified;
+                _context.Entry(l).State = EntityState.Modified;
 
                 try
                 {
@@ -65,9 +67,9 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Library>> PostLibrary([FromBody]Library library)
+        public async Task<ActionResult<Library>> PostLibrary([FromBody]LibraryDetails library)
         {
-            await _context.Libraries.AddAsync(library);
+            await _context.Libraries.AddAsync(_mapper.Map<Library>(library));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
@@ -95,4 +97,3 @@ namespace NotSteam.Core.Controllers
         }
     }
 }
-
