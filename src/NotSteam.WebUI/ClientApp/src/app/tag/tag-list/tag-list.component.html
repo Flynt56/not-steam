@@ -1,25 +1,46 @@
 <div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Usage Amount</th>
-                <th scope="col" colspan="2">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let tag of tags; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td>{{tag.name}}</td>
-                <td>{{tag.usageAmount}}</td>
-                <td>
-                    <button class="btn"><i class="fa fa-edit"></i></button>
-                </td>
-                <td>
-                    <button class="btn"><i class="fa fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <button class="btn add btn-primary" (click)="onAdd()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Usage Amount
+                    </th>
+                    <th colspan="2">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tag of tags">
+                    <td>
+                        {{tag.name}}
+                    </td>
+                    <td>
+                        {{tag.usageAmount}}
+                    </td>
+                    <td>
+                        <button class="btn btn-sm edit" (click)="onEdit(tag.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm delete" (click)="onDelete(tag.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
