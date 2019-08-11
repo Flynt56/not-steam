@@ -7,7 +7,7 @@ import { PurchaseFormComponent } from './purchase-form/purchase-form.component';
 const routes: Routes = [
   { path: 'purchases', component: PurchaseListComponent },
   { path: 'purchases/new', component: PurchaseFormComponent },
-  { path: 'purchases/:userId/:gameId', component: PurchaseFormComponent }
+  { path: 'purchases/:id/:id2', component: PurchaseFormComponent }
 ];
 
 @NgModule({

@@ -1,1 +1,46 @@
-<p>purchase-form works!</p>
+<div>
+    <div [hidden]="errorMessage.length == 0">
+        {{errorMessage}}
+    </div>
+    <form (submit)="onSubmit()" #purchaseForm="ngForm">
+        <input title="userId" name="userId" type="hidden" [(ngModel)]="purchase.userId" />
+        <input title="gameId" name="gameId" type="hidden" [(ngModel)]="purchase.gameId" />
+        <div class="form-group">
+            <label for="userId">
+                User
+            </label>
+            <select [readonly]="bIsNew" required class="form-control" name="userId" [(ngModel)]="selectedUserId">
+                <option *ngFor="let user of users" [value]="user.id">
+                    {{user.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gameId">
+                Game
+            </label>
+            <select [readonly]="bIsNew" required class="form-control" name="gameId" [(ngModel)]="selectedGameId">
+                <option *ngFor="let game of games" [value]="game.id">
+                    {{game.title}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dateOfPurchase">
+                Date of Purchase
+            </label>
+            <input required type="datetime-local" name="dateOfPurchase" [(ngModel)]="purchase.date" class="form-control"
+                id="dateOfPurchase">
+        </div>
+        <div class="form-group">
+            <label for="totalPrice">
+                Total Price
+            </label>
+            <input required type="number" name="totalPrice" [(ngModel)]="purchase.totalPrice" class="form-control"
+                id="totalPrice">
+        </div>
+        <button [disabled]="!purchaseForm.form.valid" type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>

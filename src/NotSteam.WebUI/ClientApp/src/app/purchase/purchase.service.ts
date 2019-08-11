@@ -17,7 +17,7 @@ export class PurchaseService {
     return environment.apiUrl + this.PURCHASES_URL;
   }
 
-  private formatUrl(userId, gameId){
+  private formatUrl(userId, gameId) {
     return this.getRootUrl() + '/' + userId + '/' + gameId;
   }
 
@@ -42,10 +42,10 @@ export class PurchaseService {
   }
 
   public submit(purchase) {
-    if (purchase.userId == null || purchase.gameId == null) {
-      return this.addOne(purchase);
-    }
-
     return this.putOne(purchase.userId, purchase.gameId, purchase);
+  }
+
+  public submitNew(purchase) {
+    return this.addOne(purchase);
   }
 }
