@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'src/app/shared/spinner.service';
 
 @Component({
   selector: 'app-company-list',
@@ -13,7 +14,8 @@ export class CompanyListComponent implements OnInit {
   constructor(
     private companyService: CompanyService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private spinner: SpinnerService
   ) { }
 
   private companies = [];
@@ -33,6 +35,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   onEdit(companyId) {
+    this.spinner.show();
     this.router.navigate(['companies', companyId]);
   }
 

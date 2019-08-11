@@ -3,11 +3,13 @@
         {{errorMessage}}
     </div>
     <form (submit)="onSubmit()" #gameTagForm="ngForm">
+        <input title="gameId" name="gameId" type="hidden" [(ngModel)]="gametag.gameId" />
+        <input title="tagId" name="tagId" type="hidden" [(ngModel)]="gametag.tagId" />
         <div class="form-group">
             <label for="gameId">
                 Game
             </label>
-            <select required class="form-control" name="gameId" [(ngModel)]="selectedGameId">
+            <select class="form-control" name="gameId" [(ngModel)]="selectedGameId">
                 <option *ngFor="let game of games" [value]="game.id">
                     {{game.title}}
                 </option>
@@ -17,7 +19,7 @@
             <label for="tagId">
                 Tag
             </label>
-            <select required class="form-control" name="tagId" [(ngModel)]="selectedTagId">
+            <select class="form-control" name="tagId" [(ngModel)]="selectedTagId">
                 <option *ngFor="let tag of tags" [value]="tag.id">
                     {{tag.name}}
                 </option>

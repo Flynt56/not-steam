@@ -14,7 +14,6 @@ import { GametagService } from '../gametag.service';
 export class GametagFormComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
     private spinner: SpinnerService,
     private router: Router,
     private toastr: ToastrService,
@@ -24,7 +23,6 @@ export class GametagFormComponent implements OnInit {
   ) { }
 
   public gameTag: any = {};
-  private bIsNew = true;
 
   public errorMessage = '';
 
@@ -34,32 +32,10 @@ export class GametagFormComponent implements OnInit {
   public selectedTagId: any = {};
   public selectedGameId: any = {};
 
-  private gameId = {};
-  private tagId = {};
-
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.gameId = params.get('id');
-      this.tagId = params.get('id2');
-
-      this.bIsNew = this.gameId == null || this.tagId == null;
-
-      if (!this.bIsNew) {
-        this.getGameTag(this.gameId, this.tagId);
-      }
-
-      this.getGames();
-      this.getTags();
-    });
-  }
-
-  getGameTag(gameId, tagId) {
-    this.gameTagService.getOne(gameId, tagId).subscribe(response => {
-      this.gameTag = response;
-      this.selectedGameId = this.gameTag.gameId;
-      this.selectedTagId = this.gameTag.tagId;
-      this.spinner.hide();
-    });
+    this.getGames();
+    this.getTags();
+    this.spinner.hide();
   }
 
   onSubmit() {
@@ -67,7 +43,7 @@ export class GametagFormComponent implements OnInit {
     this.gameTag.gameId = this.selectedGameId;
     this.gameTag.tagId = this.selectedTagId;
 
-    this.gameTagService.submit(this.gameId, this.tagId, this.gameTag, this.bIsNew).subscribe(
+    this.gameTagService.submit(this.gameTag).subscribe(
       (response: any) => {
         this.toastr.success('Uspješno izvršeno!');
         this.router.navigate(['gametags']);
