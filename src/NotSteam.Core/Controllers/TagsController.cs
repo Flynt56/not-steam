@@ -19,7 +19,7 @@ namespace NotSteam.Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TagsList>>> GetTags()
         {
-            return await _context.Tags.ProjectTo<TagsList>(_mapper.ConfigurationProvider).ToListAsync();
+            return Ok(await _context.Tags.ProjectTo<TagsList>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         [HttpGet("{id}")]
@@ -32,18 +32,18 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return TagDetails.Create(tag);
+            return Ok(_mapper.Map<TagDetails>(tag));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, [FromBody]Tag tag)
+        public async Task<IActionResult> PutTag(int id, [FromBody]TagDetails tag)
         {
             if (id != tag.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(_mapper.Map<Tag>(tag)).State = EntityState.Modified;
 
             try
             {
@@ -65,9 +65,9 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag([FromBody]Tag tag)
+        public async Task<ActionResult<Tag>> PostTag([FromBody]TagDetails tag)
         {
-            await _context.Tags.AddAsync(tag);
+            await _context.Tags.AddAsync(_mapper.Map<Tag>(tag));
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
