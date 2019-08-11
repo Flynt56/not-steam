@@ -7,7 +7,7 @@ import { LibraryFormComponent } from './library-form/library-form.component';
 const routes: Routes = [
   { path: 'libraries', component: LibraryListComponent },
   { path: 'libraries/new', component: LibraryFormComponent },
-  { path: 'libraries/:userId/:gameId', component: LibraryFormComponent }
+  { path: 'libraries/:id/:id2', component: LibraryFormComponent }
 ];
 
 @NgModule({
