@@ -1,1 +1,24 @@
-<p>tag-form works!</p>
+<div>
+    <div [hidden]="errorMessage.length == 0">
+        {{errorMessage}}
+    </div>
+    <form (submit)="onSubmit()" #tagForm="ngForm">
+        <input title="id" name="id" type="hidden" [(ngModel)]="tag.id" />
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input required type="text" name="name" [(ngModel)]="tag.name" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="description">
+                Description
+            </label>
+            <textarea type="text" id="description" name="description" class="form-control" rows="3" cols="50"
+                name="description" placeholder="Let us know!" [(ngModel)]="tag.description"></textarea>
+        </div>
+        <button [disabled]="!tagForm.form.valid" type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>
