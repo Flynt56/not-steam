@@ -1,1 +1,45 @@
-<p>review-form works!</p>
+<div>
+    <div [hidden]="errorMessage.length == 0">
+        {{errorMessage}}
+    </div>
+    <form (submit)="onSubmit()" #reviewForm="ngForm">
+        <input title="userId" name="userId" type="hidden" [(ngModel)]="review.userId" />
+        <input title="gameId" name="gameId" type="hidden" [(ngModel)]="review.gameId" />
+        <div class="form-group">
+            <label for="userId">
+                User
+            </label>
+            <select [disabled]="!bIsNew" required class="form-control" name="userId" [(ngModel)]="selectedUserId">
+                <option *ngFor="let user of users" [value]="user.id">
+                    {{user.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gameId">
+                Game
+            </label>
+            <select [disabled]="!bIsNew" required class="form-control" name="gameId" [(ngModel)]="selectedGameId">
+                <option *ngFor="let game of games" [value]="game.id">
+                    {{game.title}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rating">
+                Rating
+            </label>
+            <input required type="number" name="rating" [(ngModel)]="review.rating" class="form-control" id="rating">
+        </div>
+        <div class="form-group">
+            <label for="description">
+                Description
+            </label>
+            <textarea type="text" id="description" title="description" class="form-control" rows="3" cols="50"
+                name="description" placeholder="Let us know!" [(ngModel)]="review.description"></textarea>
+        </div>
+        <button [disabled]="!reviewForm.form.valid" type="submit" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
+</div>
