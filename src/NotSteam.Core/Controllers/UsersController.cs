@@ -6,7 +6,6 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.DB;
-using NotSteam.Core.Extensions.ViewModels;
 using NotSteam.Core.Models;
 using NotSteam.Core.ViewModels;
 
@@ -45,25 +44,34 @@ namespace NotSteam.Core.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(user.ToUser()).State = EntityState.Modified;
+            var userEntity = _mapper.Map<User>(user);
 
-            try
+            this.ValidateViewModel(userEntity);
+
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (await UserExists(id))
+                _context.Entry(userEntity).State = EntityState.Modified;
+
+                try
                 {
-                    throw;
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    return NotFound();
+                    if (await UserExists(id))
+                    {
+                        throw;
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
+
+                return AcceptedAtAction(nameof(GetUser), new { id = user.Id }, user);
             }
 
-            return AcceptedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return BadRequest(new ValidationProblemDetails(ModelState));
         }
 
         [HttpPost]
@@ -88,6 +96,7 @@ namespace NotSteam.Core.Controllers
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
+
             if (user == null)
             {
                 return NotFound();
@@ -105,4 +114,3 @@ namespace NotSteam.Core.Controllers
         }
     }
 }
-
