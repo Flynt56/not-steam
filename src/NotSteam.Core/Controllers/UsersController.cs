@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using NotSteam.Core.Extensions.BaseController;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,6 @@ using NotSteam.Core.DB;
 using NotSteam.Core.Extensions.ViewModels;
 using NotSteam.Core.Models;
 using NotSteam.Core.ViewModels;
-using System.Linq;
 
 namespace NotSteam.Core.Controllers
 {
@@ -72,15 +71,7 @@ namespace NotSteam.Core.Controllers
         {
             var userEntity = _mapper.Map<User>(user);
 
-            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(userEntity);
-            var validationResults = new List<ValidationResult>();
-
-            Validator.TryValidateObject(userEntity, validationContext, validationResults, true);
-
-            foreach (var validationResult in validationResults)
-            {
-                ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? string.Empty, validationResult.ErrorMessage);
-            }
+            this.ValidateViewModel(userEntity);
 
             if (ModelState.IsValid)
             {
