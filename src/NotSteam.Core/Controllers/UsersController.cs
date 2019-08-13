@@ -68,12 +68,8 @@ namespace NotSteam.Core.Controllers
         public async Task<ActionResult<UserDetails>> PostUser(UserDetails user)
         {
             var userEntity = _mapper.Map<User>(user);
-            _context.Attach(userEntity);
-            if(ModelState.IsValid)
-            {
-                
-            }
-            await _context.Users.AddAsync(_mapper.Map<User>(user));
+
+            await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);

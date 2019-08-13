@@ -1,14 +1,34 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace NotSteam.Core.Models.Attributes
 {
-    public class CustomDateRange : CustomRange
+    public class CustomDateRange : ValidationAttribute
     {
+        private DateTime Min { get; set; }
+        private DateTime Max { get; set; }
+
         public CustomDateRange()
-          : base(typeof(DateTime),
-                  DateTime.SpecifyKind(new DateTime(1900, 1, 1), DateTimeKind.Utc).ToShortDateString(),
-                  DateTime.UtcNow.ToShortDateString())
-        { }
+        {
+            Min = DateTime.SpecifyKind(new DateTime(1900, 1, 1), DateTimeKind.Utc);
+            Max = DateTime.UtcNow;
+        }
+
+        public override string FormatErrorMessage(string name)
+        {
+            return $"{name} je ograničen od {Min} do {Max}.";
+        }
+
+        public override bool IsValid(object value)
+        {
+            if (value is DateTime)
+            {
+                var currDate = (DateTime)value;
+
+                return (currDate >= Min) && (currDate <= Max);
+            }
+
+            return false;
+        }
     }
 }
-
