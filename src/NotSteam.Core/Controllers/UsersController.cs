@@ -67,6 +67,12 @@ namespace NotSteam.Core.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDetails>> PostUser(UserDetails user)
         {
+            var userEntity = _mapper.Map<User>(user);
+            _context.Attach(userEntity);
+            if(ModelState.IsValid)
+            {
+                
+            }
             await _context.Users.AddAsync(_mapper.Map<User>(user));
             await _context.SaveChangesAsync();
 
