@@ -16,6 +16,7 @@ namespace NotSteam.Core.ViewModels
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Company, CompanyDetails>();
+            configuration.CreateMap<CompanyDetails, Company>();
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.DB;
+using NotSteam.Core.Extensions.ViewModels;
 using NotSteam.Core.Models;
 using NotSteam.Core.ViewModels;
+using System.Linq;
 
 namespace NotSteam.Core.Controllers
 {
@@ -43,7 +46,7 @@ namespace NotSteam.Core.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(_mapper.Map<User>(user)).State = EntityState.Modified;
+            _context.Entry(user.ToUser()).State = EntityState.Modified;
 
             try
             {
@@ -69,10 +72,25 @@ namespace NotSteam.Core.Controllers
         {
             var userEntity = _mapper.Map<User>(user);
 
-            await _context.Users.AddAsync(userEntity);
-            await _context.SaveChangesAsync();
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(userEntity);
+            var validationResults = new List<ValidationResult>();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            Validator.TryValidateObject(userEntity, validationContext, validationResults, true);
+
+            foreach (var validationResult in validationResults)
+            {
+                ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? string.Empty, validationResult.ErrorMessage);
+            }
+
+            if (ModelState.IsValid)
+            {
+                await _context.Users.AddAsync(userEntity);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            }
+
+            return BadRequest(new ValidationProblemDetails(ModelState));
         }
 
         [HttpDelete("{id}")]

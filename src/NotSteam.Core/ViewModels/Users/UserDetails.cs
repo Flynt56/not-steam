@@ -18,7 +18,7 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<User, UserDetails>()
+            configuration.CreateMap<User, UserDetails>(MemberList.Source)
                 .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Username))
                 .ForMember(uDTO => uDTO.Nick, opt => opt.MapFrom(u => u.Nickname))
                 .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth));
