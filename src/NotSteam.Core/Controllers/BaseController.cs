@@ -31,7 +31,6 @@ namespace NotSteam.Core.Controllers
         protected IActionResult ApiOk(HttpStatusCode code, object data)
         {
             return Ok(NotSteam.Api.ApiResponse.ApiResponse.Ok(code, data));
-
         }
     }
 }

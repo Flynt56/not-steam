@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Core.Models;
 
 namespace NotSteam.Core.ViewModels
 {

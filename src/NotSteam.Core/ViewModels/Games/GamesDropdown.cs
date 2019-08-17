@@ -1,19 +1,18 @@
 ﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Core.Models;
+using NotSteam.Model.Models;
 
-namespace NotSteam.Core.ViewModels
+namespace NotSteam.Api.ViewModels.Games
 {
     public class GamesDropdown : IHaveCustomMapping
     {
         public int Id { get; set; }
+
         public string Title { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GamesDropdown>()
-                .ForMember(gDTO => gDTO.Id, opt => opt.MapFrom(g => g.Id))
-                .ForMember(gDTO => gDTO.Title, opt => opt.MapFrom(g => g.Title));
+            configuration.CreateMap<Game, GamesDropdown>().ReverseMap();
         }
     }
 }

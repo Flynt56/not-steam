@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using System.Linq;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Api.Requests;
 using NotSteam.Api.Responses;
+using NotSteam.Api.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Shared.Pagination;
-using NotSteam.Api.Services.Contracts;
 
 namespace NotSteam.Api.Services
 {

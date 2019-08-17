@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Catherine.Model.Cities;
-using Catherine.Model.Citizenships;
 
 namespace NotSteam.Api.Responses
 {

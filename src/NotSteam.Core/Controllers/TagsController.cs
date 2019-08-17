@@ -4,8 +4,6 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.DB;
-using NotSteam.Core.Models;
 using NotSteam.Core.ViewModels;
 
 namespace NotSteam.Core.Controllers

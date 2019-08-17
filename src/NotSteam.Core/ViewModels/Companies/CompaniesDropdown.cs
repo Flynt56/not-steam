@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Core.Models;
+using NotSteam.Model.Models;
 
 namespace NotSteam.Core.ViewModels
 {
@@ -11,9 +11,7 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Company, CompaniesDropdown>()
-                .ForMember(cDTO => cDTO.Id, opt => opt.MapFrom(c => c.Id))
-                .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Name));
+            configuration.CreateMap<Company, CompaniesDropdown>().ReverseMap();
         }
     }
 }
