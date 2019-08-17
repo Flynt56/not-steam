@@ -1,7 +1,7 @@
 ﻿using System;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Extensions.ModelBuilder
+namespace NotSteam.Infrastructure.Extensions.ModelBuilder
 {
     public static class ModelBuilderSeedExtension
     {
@@ -104,7 +104,7 @@ namespace NotSteam.Core.Extensions.ModelBuilder
                     UserId = 2,
                     GameId = 1,
                     DateAcquired = DateTime.SpecifyKind(new DateTime(2019, 7, 18), DateTimeKind.Utc),
-                    TotalPlayTimeHours = (int)((DateTime.UtcNow - DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc)).TotalHours),
+                    TotalPlayTimeHours = (int)(DateTime.UtcNow - DateTime.SpecifyKind(new DateTime(2019, 7, 19), DateTimeKind.Utc)).TotalHours,
                     LastPlayedDate = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
                     IsDeleted = false
@@ -308,4 +308,3 @@ namespace NotSteam.Core.Extensions.ModelBuilder
         }
     }
 }
-

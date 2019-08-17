@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.ModelBuilder;
 using NotSteam.Core.Extensions.NotSteamContext;
+using NotSteam.Infrastructure.Extensions.ModelBuilder;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.DB
+namespace NotSteam.Infrastructure.DB
 {
     public class NotSteamContext : DbContext
     {
@@ -24,7 +25,11 @@ namespace NotSteam.Core.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            OnBeforeOnModelCreating(modelBuilder);
+            modelBuilder.ManyToManyRelationshipsSetup();
+            modelBuilder.Seed();
+            modelBuilder.SoftDeleteSetup();
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotSteamContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -41,14 +46,6 @@ namespace NotSteam.Core.DB
             OnBeforeSaving();
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        }
-
-        private void OnBeforeOnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ValidationSetup();
-            modelBuilder.ManyToManyRelationshipsSetup();
-            modelBuilder.Seed();
-            modelBuilder.SoftDeleteSetup();
         }
 
         private void OnBeforeSaving()

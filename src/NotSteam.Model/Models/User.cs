@@ -11,7 +11,6 @@ namespace NotSteam.Model.Models
         [CustomRequired]
         [StringLength(32, MinimumLength = 1, ErrorMessage = "\"{0}\" je ograničen između {1} i {2} znakova!")]
         [RegularExpression("^[a-zA-Z0-9_]{1,32}$", ErrorMessage = "{0} smije sadržavati ASCII alfanumeričke znakove i '_'!")]
-        [Required]
         public string Username { get; set; }
 
         [DataType(DataType.Password)]

@@ -6,7 +6,7 @@ namespace NotSteam.Core.Extensions.NotSteamContext
 {
     public static class UpdateSoftDeletableExtension
     {
-        public static void UpdateSoftDeletable(this DB.NotSteamContext context)
+        public static void UpdateSoftDeletable(this Infrastructure.DB.NotSteamContext context)
         {
             var entries = context.ChangeTracker.Entries();
             foreach (var entry in entries.Where(entry => entry.Entity is ISoftDeletable).Select(entry => entry))
