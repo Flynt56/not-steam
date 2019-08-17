@@ -5,10 +5,10 @@ using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Api.Services.Contracts
 {
-    public interface ICountryService
+    public interface IUserService
     {
-        Task<PagedResult<CountryResponse>> GetPageAsync(CountryPaginationRequest request);
-        Task<CountryResponse> GetByIdAsync(long id);
+        Task<PagedResult<UserPaginationResponse>> GetPageAsync(UserPaginationRequest request);
+        Task<UserPaginationResponse> GetByIdAsync(long id);
 
         Task<int> DeleteByIdAsync(long id);
     }
