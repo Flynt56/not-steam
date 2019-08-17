@@ -1,25 +1,25 @@
-using System.Threading.Tasks;
-using Catherine.Api.Requests;
-using Catherine.Api.Responses;
-using Catherine.Model.DbContext;
-using Catherine.Shared.Pagination;
+﻿using System.Threading.Tasks;
 using System.Linq;
-using Catherine.Shared.Extensions;
-using Catherine.Api.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Api.Requests;
+using NotSteam.Api.Responses;
+using NotSteam.Infrastructure.DB;
+using NotSteam.Shared.Pagination;
+using NotSteam.Api.Services.Contracts;
 
-namespace Catherine.Api.Services
+namespace NotSteam.Api.Services
 {
     public class CountryService : BaseService, ICountryService
     {
-        private readonly AppDbContext _context;
+        private readonly NotSteamContext _context;
 
         public CountryService(
-            AppDbContext context
-        ) {
+            NotSteamContext context
+        )
+        {
             _context = context;
         }
-        
+
         public async Task<PagedResult<CountryResponse>> GetPageAsync(CountryPaginationRequest request)
         {
             PagedResult<CountryResponse> pagedResult = await _context
@@ -55,10 +55,10 @@ namespace Catherine.Api.Services
             var country = await _context
                 .Countries
                 .FindAsync(id);
-            
+
             _context.Countries.Remove(country);
             return await _context.SaveChangesAsync();
-        }        
+        }
 
     }
 }

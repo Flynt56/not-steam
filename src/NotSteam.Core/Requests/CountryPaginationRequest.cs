@@ -1,13 +1,12 @@
-using System.Linq;
-using Catherine.Api.Responses;
-using Catherine.Shared.Pagination;
+﻿using System.Linq;
+using NotSteam.Api.Responses;
+using NotSteam.Shared.Pagination;
 
-namespace Catherine.Api.Requests
+namespace NotSteam.Api.Requests
 {
     public class CountryPaginationRequest : AbstractPagingRequest<CountryResponse>
     {
         private const string ValidOrderByValues = "name";
-        // private const string ValidOrderByValues = "number,someName,etc";
         public string Name { get; set; }
 
         public string OrderBy { get; set; }

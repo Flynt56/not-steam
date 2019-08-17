@@ -1,10 +1,9 @@
-using System.Threading.Tasks;
-using Catherine.Api.Requests;
-using Catherine.Api.Responses;
-using Catherine.Model.Countries;
-using Catherine.Shared.Pagination;
+﻿using System.Threading.Tasks;
+using NotSteam.Api.Requests;
+using NotSteam.Api.Responses;
+using NotSteam.Shared.Pagination;
 
-namespace Catherine.Api.Services.Contracts
+namespace NotSteam.Api.Services.Contracts
 {
     public interface ICountryService
     {

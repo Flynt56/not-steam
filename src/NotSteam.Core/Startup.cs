@@ -32,7 +32,8 @@ namespace NotSteam
 
             services.AddDbContext<NotSteamContext>(options =>
                 options
-                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    opt => opt.MigrationsAssembly("NotSteam.Infrastructure"))
                );
         }
 

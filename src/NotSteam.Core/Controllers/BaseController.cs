@@ -1,6 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.DB;
+using NotSteam.Infrastructure.DB;
 
 namespace NotSteam.Core.Controllers
 {
@@ -16,6 +17,21 @@ namespace NotSteam.Core.Controllers
             _context = context;
             _mapper = mapper;
         }
+
+        protected IActionResult ApiOk()
+        {
+            return ApiOk(HttpStatusCode.OK, null);
+        }
+
+        protected IActionResult ApiOk(object data)
+        {
+            return ApiOk(HttpStatusCode.OK, data);
+        }
+
+        protected IActionResult ApiOk(HttpStatusCode code, object data)
+        {
+            return Ok(NotSteam.Api.ApiResponse.ApiResponse.Ok(code, data));
+
+        }
     }
 }
-

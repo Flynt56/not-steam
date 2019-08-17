@@ -1,7 +1,7 @@
-namespace Catherine.Api.Services
+﻿namespace NotSteam.Api.Services
 {
-    public class BaseService
+    public abstract class BaseService
     {
-        
+
     }
 }
