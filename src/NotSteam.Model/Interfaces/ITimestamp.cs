@@ -4,7 +4,7 @@ using NotSteam.Core.Models.Attributes;
 
 namespace NotSteam.Core.Models.Interfaces
 {
-    public interface IBaseDateable
+    public interface ITimestamp
     {
         [DataType(DataType.DateTime)]
         [CustomRequired]
@@ -13,7 +13,6 @@ namespace NotSteam.Core.Models.Interfaces
 
         [DataType(DataType.DateTime)]
         [CustomDateRange]
-        DateTime? LastModifiedAt { get; set; }
+        DateTime? UpdatedAt { get; set; }
     }
 }
-

@@ -3,14 +3,13 @@ using NotSteam.Core.Models.Interfaces;
 
 namespace NotSteam.Core.Models
 {
-    public abstract class BaseModel : IBaseDateable, ISoftDeletable
+    public abstract class BaseModel : ITimestamp, ISoftDeletable
     {
         // Inherited from IBaseDateable
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? LastModifiedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         // Inherited from ISoftDeletable
         public bool IsDeleted { get; set; } = false;
     }
 }
-
