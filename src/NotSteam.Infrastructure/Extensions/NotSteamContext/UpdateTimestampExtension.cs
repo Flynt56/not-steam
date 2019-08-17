@@ -5,9 +5,9 @@ using NotSteam.Model.Interfaces;
 
 namespace NotSteam.Core.Extensions.NotSteamContext
 {
-    public static class UpdateBaseDateableExtension
+    public static class UpdateTimestampExtension
     {
-        public static void UpdateBaseDateable(this Infrastructure.DB.NotSteamContext context)
+        public static void UpdateTimestamp(this Infrastructure.DB.NotSteamContext context)
         {
             var entries = context.ChangeTracker.Entries();
             foreach (var entry in entries.Where(entry => entry.Entity is ITimestamp).Select(entry => entry))
