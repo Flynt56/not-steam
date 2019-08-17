@@ -23,5 +23,10 @@
     <Folder Include="Infrastructure\AutoMapper\Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NotSteam.Infrastructure\NotSteam.Infrastructure.csproj" />
+    <ProjectReference Include="..\NotSteam.Shared\NotSteam.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
 

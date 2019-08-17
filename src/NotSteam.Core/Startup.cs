@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NotSteam.Core.DB;
+using NotSteam.Api.Extensions;
 using NotSteam.Core.Infrastructure.AutoMapper;
+using NotSteam.Infrastructure.DB;
 
 namespace NotSteam
 {
@@ -23,14 +24,16 @@ namespace NotSteam
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            services.AddCors();
 
             services.AddMvc()
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<NotSteamContext>(options => options
-                .UseLazyLoadingProxies()
-                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<NotSteamContext>(options =>
+                options
+                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+               );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -44,8 +47,9 @@ namespace NotSteam
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseApiCors();
         }
     }
 }
