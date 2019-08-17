@@ -24,9 +24,8 @@ namespace NotSteam.Infrastructure.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Seed();
-
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotSteamContext).Assembly);
+            modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
         }
