@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Extensions.ModelBuilder;
 using NotSteam.Core.Extensions.NotSteamContext;
 using NotSteam.Infrastructure.Extensions.ModelBuilder;
 using NotSteam.Model.Models;
@@ -25,9 +24,7 @@ namespace NotSteam.Infrastructure.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ManyToManyRelationshipsSetup();
             modelBuilder.Seed();
-            modelBuilder.SoftDeleteSetup();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotSteamContext).Assembly);
 

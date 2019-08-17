@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NotSteam.Infrastructure.Extensions;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations
@@ -21,6 +21,8 @@ namespace NotSteam.Infrastructure.Configurations
 
             builder.Property(l => l.DateAcquired)
                 .IsRequired();
+
+            builder.SetupSoftDelete();
         }
     }
 }
