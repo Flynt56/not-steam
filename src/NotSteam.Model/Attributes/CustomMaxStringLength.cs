@@ -1,7 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Core.Models.Attributes
+namespace NotSteam.Model.Attributes
 {
     public class CustomMaxStringLength : StringLengthAttribute
     {
@@ -14,4 +13,3 @@ namespace NotSteam.Core.Models.Attributes
         }
     }
 }
-

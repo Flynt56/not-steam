@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using NotSteam.Core.Models.Attributes;
+using NotSteam.Model.Attributes;
 
-namespace NotSteam.Core.Models
+namespace NotSteam.Model.Models
 {
     public class Company : BaseEntity
     {
@@ -22,7 +22,6 @@ namespace NotSteam.Core.Models
         [Url(ErrorMessage = "\"{0}\" mora biti ispravan URL!")]
         public string LogoImageUri { get; set; }
 
-        virtual public ICollection<Game> Games { get; set; }
+        public ICollection<Game> Games { get; set; }
     }
 }
-

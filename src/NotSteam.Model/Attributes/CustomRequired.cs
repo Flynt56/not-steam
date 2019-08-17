@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Core.Models.Attributes
+namespace NotSteam.Model.Attributes
 {
     public class CustomRequired : RequiredAttribute
     {
@@ -13,4 +13,3 @@ namespace NotSteam.Core.Models.Attributes
         }
     }
 }
-

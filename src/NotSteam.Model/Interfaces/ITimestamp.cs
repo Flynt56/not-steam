@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using NotSteam.Core.Models.Attributes;
+using NotSteam.Model.Attributes;
 
-namespace NotSteam.Core.Models.Interfaces
+namespace NotSteam.Model.Interfaces
 {
     public interface ITimestamp
     {

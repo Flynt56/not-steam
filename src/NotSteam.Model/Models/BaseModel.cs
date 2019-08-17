@@ -1,7 +1,7 @@
 ﻿using System;
-using NotSteam.Core.Models.Interfaces;
+using NotSteam.Model.Interfaces;
 
-namespace NotSteam.Core.Models
+namespace NotSteam.Model.Models
 {
     public abstract class BaseModel : ITimestamp, ISoftDeletable
     {

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
-using NotSteam.Core.Models.Attributes;
+using NotSteam.Model.Attributes;
 
-namespace NotSteam.Core.Models
+namespace NotSteam.Model.Models
 {
     public class Game : BaseEntity
     {
@@ -31,13 +30,11 @@ namespace NotSteam.Core.Models
 
         public int CompanyId { get; set; }
 
-        [JsonIgnore]
-        virtual public Company Company { get; set; }
+        public Company Company { get; set; }
 
-        virtual public ICollection<GameTag> GameTags { get; set; }
-        virtual public ICollection<Library> Libraries { get; set; }
-        virtual public ICollection<Purchase> Purchases { get; set; }
-        virtual public ICollection<Review> Reviews { get; set; }
+        public ICollection<GameTag> GameTags { get; set; }
+        public ICollection<Library> Libraries { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }
-

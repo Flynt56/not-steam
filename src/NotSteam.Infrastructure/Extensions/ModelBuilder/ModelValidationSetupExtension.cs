@@ -1,4 +1,4 @@
-﻿using NotSteam.Core.Models;
+﻿using NotSteam.Model.Models;
 
 namespace NotSteam.Core.Extensions.ModelBuilder
 {

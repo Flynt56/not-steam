@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using NotSteam.Core.Models.Attributes;
+using NotSteam.Model.Attributes;
 
-namespace NotSteam.Core.Models
+namespace NotSteam.Model.Models
 {
     public class Review : BaseModel
     {
         public int UserId { get; set; }
-
         public int GameId { get; set; }
 
         [CustomRequired]
@@ -18,10 +16,7 @@ namespace NotSteam.Core.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [JsonIgnore]
-        virtual public User User { get; set; }
-        [JsonIgnore]
-        virtual public Game Game { get; set; }
+        public User User { get; set; }
+        public Game Game { get; set; }
     }
 }
-

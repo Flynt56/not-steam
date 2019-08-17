@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.ModelBuilder;
 using NotSteam.Core.Extensions.NotSteamContext;
-using NotSteam.Core.Models;
+using NotSteam.Model.Models;
 
 namespace NotSteam.Core.DB
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace NotSteam.Core.Models.Attributes
+namespace NotSteam.Model.Attributes
 {
     public class CustomDateRange : ValidationAttribute
     {
@@ -25,7 +25,7 @@ namespace NotSteam.Core.Models.Attributes
             {
                 var currDate = (DateTime)value;
 
-                return (currDate >= Min) && (currDate <= Max);
+                return currDate >= Min && currDate <= Max;
             }
 
             return false;

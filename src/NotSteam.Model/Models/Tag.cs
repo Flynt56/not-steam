@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using NotSteam.Core.Models.Attributes;
+using NotSteam.Model.Attributes;
 
-namespace NotSteam.Core.Models
+namespace NotSteam.Model.Models
 {
     public class Tag : BaseEntity
     {
@@ -15,7 +15,6 @@ namespace NotSteam.Core.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        virtual public ICollection<GameTag> GameTags { get; set; }
+        public ICollection<GameTag> GameTags { get; set; }
     }
 }
-
