@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NotSteam.Infrastructure.Extensions;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Infrastructure.Configurations
+namespace NotSteam.Infrastructure.Configurations.Entity
 {
-    public class PurchaseConfiguration : IEntityTypeConfiguration<Purchase>
+    public class PurchaseEntityConfiguration : IEntityTypeConfiguration<Purchase>
     {
         public void Configure(EntityTypeBuilder<Purchase> builder)
         {
@@ -25,8 +24,6 @@ namespace NotSteam.Infrastructure.Configurations
             builder.Property(p => p.TotalPrice)
                 .HasColumnType("decimal(19,4)")
                 .IsRequired();
-
-            builder.SetupSoftDelete();
         }
     }
 }

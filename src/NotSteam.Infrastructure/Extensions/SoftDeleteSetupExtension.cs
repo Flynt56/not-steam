@@ -7,7 +7,7 @@ namespace NotSteam.Infrastructure.Extensions
 {
     public static class SoftDeleteSetupExtension
     {
-        public static void SetupSoftDelete<TEntity>(this EntityTypeBuilder<TEntity> builder)
+        public static void SetupSoftDelete<TEntity>(this QueryTypeBuilder<TEntity> builder)
             where TEntity : BaseModel
         {
             if (typeof(ISoftDeletable).GetTypeInfo().IsAssignableFrom(typeof(TEntity).Ge‌​tTypeInfo()))
