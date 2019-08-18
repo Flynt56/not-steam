@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NotSteam.Infrastructure.Extensions;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
@@ -14,6 +15,8 @@ namespace NotSteam.Infrastructure.Configurations.Entity
 
             builder.Property(c => c.Description)
                 .HasMaxLength(1500);
+
+            builder.SetupSoftDelete();
         }
     }
 }

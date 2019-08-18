@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NotSteam.Infrastructure.Extensions;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
@@ -21,6 +22,8 @@ namespace NotSteam.Infrastructure.Configurations.Entity
             builder.Property(g => g.BasePrice)
                 .IsRequired()
                 .HasColumnType("decimal(19,4)");
+
+            builder.SetupSoftDelete();
         }
     }
 }
