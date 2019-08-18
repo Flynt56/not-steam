@@ -14,8 +14,8 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Tag, TagDetails>();
-            configuration.CreateMap<TagDetails, Tag>();
+            configuration.CreateMap<Tag, TagDetails>()
+                .ReverseMap();
         }
     }
 }

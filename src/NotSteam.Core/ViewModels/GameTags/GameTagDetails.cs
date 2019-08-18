@@ -19,9 +19,8 @@ namespace NotSteam.Core.ViewModels
             configuration.CreateMap<GameTag, GameTagDetails>()
                 .ForMember(gtDTO => gtDTO.TagName, opt => opt.MapFrom(gt => gt.Tag.Name))
                 .ForMember(gtDTO => gtDTO.GameTitle, opt => opt.MapFrom(gt => gt.Game.Title))
-                .ForMember(gtDTO => gtDTO.DateAdded, opt => opt.MapFrom(gt => gt.CreatedAt));
-
-            configuration.CreateMap<GameTagDetails, GameTag>();
+                .ForMember(gtDTO => gtDTO.DateAdded, opt => opt.MapFrom(gt => gt.CreatedAt))
+                .ReverseMap();
         }
     }
 }

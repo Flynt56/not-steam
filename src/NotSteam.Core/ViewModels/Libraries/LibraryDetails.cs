@@ -18,11 +18,14 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Library, LibraryDetails>();
+            configuration.CreateMap<Library, LibraryDetails>()
+                .ReverseMap();
 
+            /*
             configuration.CreateMap<LibraryDetails, Library>()
                 .ForMember(l => l.Game, opt => opt.Ignore())
                 .ForMember(l => l.User, opt => opt.Ignore());
+            */
         }
     }
 }

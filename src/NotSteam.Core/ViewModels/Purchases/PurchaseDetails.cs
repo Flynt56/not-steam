@@ -18,12 +18,15 @@ namespace NotSteam.Core.ViewModels
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Purchase, PurchaseDetails>()
-                .ForMember(pDTO => pDTO.Date, opt => opt.MapFrom(p => p.DateOfPurchase));
+                .ForMember(pDTO => pDTO.Date, opt => opt.MapFrom(p => p.DateOfPurchase))
+                .ReverseMap();
 
+            /*
             configuration.CreateMap<PurchaseDetails, Purchase>()
                 .ForMember(p => p.DateOfPurchase, opt => opt.MapFrom(pDTO => pDTO.Date))
                 .ForMember(p => p.User, opt => opt.Ignore())
                 .ForMember(p => p.Game, opt => opt.Ignore());
+            */
         }
     }
 }

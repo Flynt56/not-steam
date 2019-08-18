@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using NotSteam.Api.Responses;
+using NotSteam.Core.ViewModels;
 using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Api.Requests
 {
-    public class UserPaginationRequest : AbstractPagingRequest<UserPaginationResponse>
+    public class UserPaginationRequest : AbstractPagingRequest<UsersList>
     {
         private const string ValidOrderByValues = "username,nickname";
 
@@ -13,7 +13,7 @@ namespace NotSteam.Api.Requests
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<UserPaginationResponse> GetFilteredQuery(IQueryable<UserPaginationResponse> query)
+        public override IQueryable<UsersList> GetFilteredQuery(IQueryable<UsersList> query)
         {
             if (!string.IsNullOrWhiteSpace(Username))
             {
@@ -23,7 +23,7 @@ namespace NotSteam.Api.Requests
             return query;
         }
 
-        public override IQueryable<UserPaginationResponse> SetUpSorting(IQueryable<UserPaginationResponse> query)
+        public override IQueryable<UsersList> SetUpSorting(IQueryable<UsersList> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 

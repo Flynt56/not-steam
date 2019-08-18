@@ -4,13 +4,12 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Api.Requests;
-using NotSteam.Api.Responses;
 using NotSteam.Api.Services.Contracts;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Shared.Pagination;
-using NotSteam.Shared.Extensions;
 using NotSteam.Core.ViewModels;
+using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
+using NotSteam.Shared.Extensions;
+using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Api.Services
 {
@@ -25,11 +24,11 @@ namespace NotSteam.Api.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<UserPaginationResponse>> GetPageAsync(UserPaginationRequest request)
+        public async Task<PagedResult<UsersList>> GetPageAsync(UserPaginationRequest request)
         {
             var pagedResult = await _context
                 .Users
-                .ProjectTo<UserPaginationResponse>(_mapper.ConfigurationProvider)
+                .ProjectTo<UsersList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;

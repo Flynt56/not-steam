@@ -19,7 +19,8 @@ namespace NotSteam.Core.ViewModels
             configuration.CreateMap<User, UsersList>()
                 .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Username))
                 .ForMember(uDTO => uDTO.Nick, opt => opt.MapFrom(u => u.Nickname))
-                .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth));
+                .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth))
+                .ReverseMap();
         }
     }
 }

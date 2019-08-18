@@ -42,7 +42,17 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
 
-    this.userService.submit(this.user).subscribe(
+    const postUser: any = {};
+
+    postUser.id = this.user.id;
+    postUser.username = this.user.name;
+    postUser.nickname = this.user.nick;
+    postUser.password = this.user.password;
+    postUser.email = this.user.email;
+    postUser.dateOfBirth = this.user.dob;
+    postUser.profileImageUri = this.user.profileImageUri;
+
+    this.userService.submit(postUser).subscribe(
       () => {
         this.toastr.success('Uspješno izvršeno!');
         this.router.navigate(['users']);

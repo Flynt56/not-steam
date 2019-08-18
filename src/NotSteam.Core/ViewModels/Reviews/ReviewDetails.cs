@@ -16,11 +16,14 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Review, ReviewDetails>();
+            configuration.CreateMap<Review, ReviewDetails>()
+                .ReverseMap();
 
+            /*
             configuration.CreateMap<ReviewDetails, Review>()
                 .ForMember(r => r.User, opt => opt.Ignore())
                 .ForMember(r => r.Game, opt => opt.Ignore());
+            */
         }
     }
 }

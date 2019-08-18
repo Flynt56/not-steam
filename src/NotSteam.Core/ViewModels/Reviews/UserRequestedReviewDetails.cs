@@ -13,7 +13,8 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Review, UserRequestedReviewDetails>();
+            configuration.CreateMap<Review, UserRequestedReviewDetails>()
+                .ReverseMap();
         }
     }
 }

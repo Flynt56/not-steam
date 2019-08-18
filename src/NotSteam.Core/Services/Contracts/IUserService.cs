@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using NotSteam.Api.Requests;
-using NotSteam.Api.Responses;
 using NotSteam.Core.ViewModels;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;
@@ -9,7 +8,7 @@ namespace NotSteam.Api.Services.Contracts
 {
     public interface IUserService
     {
-        Task<PagedResult<UserPaginationResponse>> GetPageAsync(UserPaginationRequest request);
+        Task<PagedResult<UsersList>> GetPageAsync(UserPaginationRequest request);
         Task<UserDetails> GetByIdAsync(int id);
 
         Task<int> DeleteByIdAsync(int id);
