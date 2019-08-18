@@ -2,10 +2,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Extensions.BaseController;
 using NotSteam.Core.Requests;
 using NotSteam.Core.Services.Contracts;
-using NotSteam.Core.ViewModels.Users;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -32,42 +30,40 @@ namespace NotSteam.Api.Controllers
             return ApiOk(await UserService.GetByIdAsync(id));
         }
 
+        [HttpHead("dropdown")]
+        public async Task<IActionResult> GetDropdown()
+        {
+            return ApiOk(await UserService.GetDropdown());
+        }
+
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, [FromBody]UserDetails user)
+        public async Task<IActionResult> PutUser(int id, [FromBody]User user)
         {
             if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            var userEntity = _mapper.Map<User>(user);
+            _context.Entry(user).State = EntityState.Modified;
 
-            this.ValidateViewModel(userEntity);
-
-            if (ModelState.IsValid)
+            try
             {
-                _context.Entry(userEntity).State = EntityState.Modified;
-
-                try
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await UserService.DoesExist(id))
                 {
-                    await _context.SaveChangesAsync();
+                    throw;
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (await UserService.DoesExist(id))
-                    {
-                        throw;
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
+                    return NotFound();
                 }
-
-                return AcceptedAtAction(nameof(GetOne), new { id = user.Id }, user);
             }
 
-            return BadRequest(new ValidationProblemDetails(ModelState));
+            return AcceptedAtAction(nameof(GetOne), new { id = user.Id }, user);
         }
 
         [HttpPost]
