@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NotSteam.Api.Extensions;
+using NotSteam.Core.Extensions;
 using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Services;
 using NotSteam.Core.Services.Contracts;
@@ -29,7 +30,7 @@ namespace NotSteam
             services.AddCors();
 
             // Services
-            services.AddTransient<IUserService, UserService>();
+            services.AddNotSteamServices();
 
             services.AddMvc()
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
