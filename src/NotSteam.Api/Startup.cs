@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NotSteam.Api.Extensions;
-using NotSteam.Api.Services;
-using NotSteam.Api.Services.Contracts;
 using NotSteam.Core.Infrastructure.AutoMapper;
+using NotSteam.Core.Services;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 
 namespace NotSteam

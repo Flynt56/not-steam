@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Api.Requests;
-using NotSteam.Api.Services.Contracts;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Core.ViewModels;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Api.Services
+namespace NotSteam.Core.Services
 {
     public class UserService : BaseService, IUserService
     {

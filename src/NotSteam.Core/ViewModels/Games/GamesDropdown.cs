@@ -2,7 +2,7 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.ViewModels.Games
+namespace NotSteam.Core.ViewModels.Games
 {
     public class GamesDropdown : IHaveCustomMapping
     {

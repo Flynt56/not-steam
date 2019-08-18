@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Api.Requests;
+using NotSteam.Core.Requests;
 using NotSteam.Core.ViewModels;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Api.Services.Contracts
+namespace NotSteam.Core.Services.Contracts
 {
     public interface IUserService
     {

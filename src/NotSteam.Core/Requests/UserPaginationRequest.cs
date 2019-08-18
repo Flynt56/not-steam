@@ -2,7 +2,7 @@
 using NotSteam.Core.ViewModels;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Api.Requests
+namespace NotSteam.Core.Requests
 {
     public class UserPaginationRequest : AbstractPagingRequest<UsersList>
     {

@@ -4,7 +4,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Api.ViewModels.Games;
+using NotSteam.Core.ViewModels.Games;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 

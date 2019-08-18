@@ -2,9 +2,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Api.Requests;
-using NotSteam.Api.Services.Contracts;
 using NotSteam.Core.Extensions.BaseController;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Core.ViewModels;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;

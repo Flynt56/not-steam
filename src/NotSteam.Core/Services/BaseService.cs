@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Api.Services
+﻿namespace NotSteam.Core.Services
 {
     public abstract class BaseService
     {
