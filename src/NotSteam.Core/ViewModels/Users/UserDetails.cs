@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
+using NotSteam.Model.Models;
 
 namespace NotSteam.Core.ViewModels
 {
@@ -17,15 +18,11 @@ namespace NotSteam.Core.ViewModels
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<User, UserDetails>(MemberList.Source)
+            configuration.CreateMap<User, UserDetails>()
                 .ForMember(uDTO => uDTO.Name, opt => opt.MapFrom(u => u.Username))
                 .ForMember(uDTO => uDTO.Nick, opt => opt.MapFrom(u => u.Nickname))
-                .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth));
-
-            configuration.CreateMap<UserDetails, User>()
-                .ForMember(u => u.Username, opt => opt.MapFrom(uDTO => uDTO.Name))
-                .ForMember(u => u.Nickname, opt => opt.MapFrom(uDTO => uDTO.Nick))
-                .ForMember(u => u.DateOfBirth, opt => opt.MapFrom(uDTO => uDTO.DOB));
+                .ForMember(uDTO => uDTO.DOB, opt => opt.MapFrom(u => u.DateOfBirth))
+                .ReverseMap();
         }
     }
 }

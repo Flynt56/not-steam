@@ -3,7 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Infrastructure.DB;
 
-namespace NotSteam.Core.Controllers
+namespace NotSteam.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -30,7 +30,7 @@ namespace NotSteam.Core.Controllers
 
         protected IActionResult ApiOk(HttpStatusCode code, object data)
         {
-            return Ok(NotSteam.Api.ApiResponse.ApiResponse.Ok(code, data));
+            return Ok(ApiResponse.ApiResponse.Ok(code, data));
         }
     }
 }

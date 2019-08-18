@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using NotSteam.Model.Models;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 
 namespace NotSteam.Core.ViewModels

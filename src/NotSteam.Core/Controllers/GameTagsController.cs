@@ -5,8 +5,10 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.ViewModels;
+using NotSteam.Infrastructure.DB;
+using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Controllers
+namespace NotSteam.Api.Controllers
 {
     public class GameTagsController : BaseController
     {

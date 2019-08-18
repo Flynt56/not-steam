@@ -6,7 +6,7 @@ namespace NotSteam.Core.Extensions.BaseController
 {
     public static class ViewModelValidation
     {
-        public static void ValidateViewModel(this NotSteam.Core.Controllers.BaseController controller, object viewModelToValidate)
+        public static void ValidateViewModel(this Api.Controllers.BaseController controller, object viewModelToValidate)
         {
             var validationContext = new ValidationContext(viewModelToValidate, null, null);
             var validationResults = new List<ValidationResult>();

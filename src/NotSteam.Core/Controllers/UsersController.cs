@@ -1,37 +1,35 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Api.Requests;
+using NotSteam.Api.Services.Contracts;
 using NotSteam.Core.Extensions.BaseController;
 using NotSteam.Core.ViewModels;
+using NotSteam.Infrastructure.DB;
+using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Controllers
+namespace NotSteam.Api.Controllers
 {
     public class UsersController : BaseController
     {
-        public UsersController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly IUserService UserService;
+
+        public UsersController(IUserService userService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            UserService = userService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsersList>>> GetUsers()
+        public async Task<IActionResult> GetPage([FromQuery] UserPaginationRequest request = null)
         {
-            return Ok(await _context.Users.ProjectTo<UsersList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await UserService.GetPageAsync(request));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDetails>> GetUser(int id)
+        public async Task<IActionResult> GetOne(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<UserDetails>(user));
+            return ApiOk(await UserService.GetByIdAsync(id));
         }
 
         [HttpPut("{id}")]
@@ -56,7 +54,7 @@ namespace NotSteam.Core.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await UserExists(id))
+                    if (await UserService.DoesExist(id))
                     {
                         throw;
                     }
@@ -66,49 +64,22 @@ namespace NotSteam.Core.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetUser), new { id = user.Id }, user);
+                return AcceptedAtAction(nameof(GetOne), new { id = user.Id }, user);
             }
 
             return BadRequest(new ValidationProblemDetails(ModelState));
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDetails>> PostUser(UserDetails user)
+        public async Task<IActionResult> PostUser(User user)
         {
-            var userEntity = _mapper.Map<User>(user);
-
-            this.ValidateViewModel(userEntity);
-
-            if (ModelState.IsValid)
-            {
-                await _context.Users.AddAsync(userEntity);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
-            }
-
-            return BadRequest(new ValidationProblemDetails(ModelState));
+            return ApiOk(await UserService.AddAsync(user));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
-        }
-
-        private async Task<bool> UserExists(int id)
-        {
-            return await _context.Users.AnyAsync(e => e.Id == id);
+            return ApiOk(await UserService.DeleteByIdAsync(id));
         }
     }
 }

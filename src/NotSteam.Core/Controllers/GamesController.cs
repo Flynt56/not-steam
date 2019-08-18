@@ -5,8 +5,10 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Api.ViewModels.Games;
+using NotSteam.Infrastructure.DB;
+using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Controllers
+namespace NotSteam.Api.Controllers
 {
     public class GamesController : BaseController
     {
@@ -30,7 +32,7 @@ namespace NotSteam.Core.Controllers
                 return NotFound();
             }
 
-            return GameDetails.Create(game);
+            return _mapper.Map<GameDetails>(game);
         }
 
         [HttpPut("{id}")]

@@ -17,7 +17,7 @@ namespace NotSteam.Api.Requests
         {
             if (!string.IsNullOrWhiteSpace(Username))
             {
-                query = query.Where(i => i.Username.Contains(Username));
+                query = query.Where(i => i.Name.Contains(Username));
             }
 
             return query;
@@ -31,8 +31,12 @@ namespace NotSteam.Api.Requests
             {
                 switch (sortInformation.PropertyName)
                 {
-                    case "name":
-                        query = ApplyOrdering(query, dtc => dtc.Username, sortInformation.SortDirection);
+                    case "username":
+                        query = ApplyOrdering(query, dtc => dtc.Name, sortInformation.SortDirection);
+                        break;
+
+                    case "nickname":
+                        query = ApplyOrdering(query, dtc => dtc.Nick, sortInformation.SortDirection);
                         break;
                 }
             }
