@@ -12,7 +12,8 @@ namespace NotSteam.Core.ViewModels.Games
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GamesDropdown>().ReverseMap();
+            configuration.CreateMap<Game, GamesDropdown>()
+                .ReverseMap();
         }
     }
 }
