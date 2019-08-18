@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NotSteam.Api.Extensions;
 using NotSteam.Core.Extensions;
 using NotSteam.Core.Infrastructure.AutoMapper;
-using NotSteam.Core.Services;
-using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 
 namespace NotSteam
