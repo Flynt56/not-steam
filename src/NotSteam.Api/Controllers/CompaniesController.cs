@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels.Companies;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -12,27 +11,29 @@ namespace NotSteam.Api.Controllers
 {
     public class CompaniesController : BaseController
     {
-        public CompaniesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly ICompanyService CompanyService;
+
+        public CompaniesController(ICompanyService companyService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            CompanyService = companyService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CompaniesList>>> GetCompanies()
+        public async Task<IActionResult> GetPage([FromQuery]CompanyPaginationRequest request = null)
         {
-            return Ok(await _context.Companies.ProjectTo<CompaniesList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await CompanyService.GetPageAsync(request));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyDetails>> GetCompany(int id)
+        public async Task<IActionResult> GetOne(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            return ApiOk(await CompanyService.GetByIdAsync(id));
+        }
 
-            if (company == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<CompanyDetails>(company));
+        [HttpGet("dropdown")]
+        public async Task<IActionResult> GetDropdown()
+        {
+            return ApiOk(await CompanyService.GetDropdown());
         }
 
         [HttpPut("{id}")]
@@ -51,7 +52,7 @@ namespace NotSteam.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await CompanyExists(id))
+                if (await CompanyService.DoesExist(id))
                 {
                     throw;
                 }
@@ -61,37 +62,19 @@ namespace NotSteam.Api.Controllers
                 }
             }
 
-            return AcceptedAtAction(nameof(GetCompany), new { id = company.Id }, company);
+            return AcceptedAtAction(nameof(GetOne), new { id = company.Id }, company);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany([FromBody]Company company)
+        public async Task<IActionResult> PostCompany([FromBody]Company company)
         {
-            await _context.Companies.AddAsync(company);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCompany), new { id = company.Id }, company);
+            return ApiOk(await CompanyService.AddAsync(company));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Company>> DeleteCompany(int id)
+        public async Task<IActionResult> DeleteCompany(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
-            if (company == null)
-            {
-                return NotFound();
-            }
-
-            _context.Companies.Remove(company);
-            await _context.SaveChangesAsync();
-
-            return company;
-        }
-
-        private async Task<bool> CompanyExists(int id)
-        {
-            return await _context.Companies.AnyAsync(e => e.Id == id);
+            return ApiOk(await CompanyService.DeleteByIdAsync(id));
         }
     }
 }
-

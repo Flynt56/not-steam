@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels.Purchases;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -12,37 +11,31 @@ namespace NotSteam.Api.Controllers
 {
     public class PurchasesController : BaseController
     {
-        public PurchasesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly IPurchaseService PurchaseService;
+
+        public PurchasesController(IPurchaseService purchaseService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            PurchaseService = purchaseService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PurchasesList>>> GetPurchases()
+        public async Task<IActionResult> GetPage([FromQuery]PurchasePaginationRequest request = null)
         {
-            return Ok(await _context.Purchases.ProjectTo<PurchasesList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await PurchaseService.GetPageAsync(request));
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<PurchaseDetails>> GetPurchase(int idUser, int idGame)
+        public async Task<IActionResult> GetOne(int idUser, int idGame)
         {
-            var purchase = await _context.Purchases.FindAsync(idUser, idGame);
-
-            if (purchase == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<PurchaseDetails>(purchase));
+            return ApiOk(await PurchaseService.GetByIdAsync(idUser, idGame));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutPurchase(int idUser, int idGame, [FromBody]PurchaseDetails purchase)
+        public async Task<IActionResult> PutPurchase(int idUser, int idGame, [FromBody]Purchase purchase)
         {
-            var purchaseOriginal = _mapper.Map<Purchase>(purchase);
-
-            if (idUser == purchaseOriginal.UserId && idGame == purchaseOriginal.GameId)
+            if (idUser == purchase.UserId && idGame == purchase.GameId)
             {
-                _context.Entry(purchaseOriginal).State = EntityState.Modified;
+                _context.Entry(purchase).State = EntityState.Modified;
 
                 try
                 {
@@ -50,7 +43,7 @@ namespace NotSteam.Api.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await PurchaseExists(idUser, idGame))
+                    if (await PurchaseService.DoesExist(idUser, idGame))
                     {
                         throw;
                     }
@@ -60,41 +53,22 @@ namespace NotSteam.Api.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
+                return AcceptedAtAction(nameof(GetOne), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Purchase>> PostPurchase([FromBody]PurchaseDetails purchase)
+        public async Task<IActionResult> PostPurchase([FromBody]Purchase purchase)
         {
-            await _context.Purchases.AddAsync(_mapper.Map<Purchase>(purchase));
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPurchase), new { idUser = purchase.UserId, idGame = purchase.GameId }, purchase);
+            return ApiOk(await PurchaseService.AddAsync(purchase));
         }
 
         [HttpDelete("{idUser}/{idGame}")]
-        public async Task<ActionResult<Purchase>> DeletePurchase(int idUser, int idGame)
+        public async Task<IActionResult> DeletePurchase(int idUser, int idGame)
         {
-            var purchase = await _context.Purchases.FindAsync(idUser, idGame);
-
-            if (purchase == null)
-            {
-                return NotFound();
-            }
-
-            _context.Purchases.Remove(purchase);
-            await _context.SaveChangesAsync();
-
-            return purchase;
-        }
-
-        private async Task<bool> PurchaseExists(int idUser, int idGame)
-        {
-            return await _context.Purchases.AnyAsync(e => e.UserId == idUser && e.GameId == idGame);
+            return ApiOk(await PurchaseService.DeleteByIdAsync(idUser, idGame));
         }
     }
 }
-

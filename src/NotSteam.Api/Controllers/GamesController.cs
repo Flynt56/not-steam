@@ -4,6 +4,8 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Core.ViewModels.Games;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
@@ -12,27 +14,29 @@ namespace NotSteam.Api.Controllers
 {
     public class GamesController : BaseController
     {
-        public GamesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly IGameService GameService;
+
+        public GamesController(IGameService gameService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            GameService = gameService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GamesList>>> GetGames()
+        public async Task<IActionResult> GetPage([FromQuery]GamePaginationRequest request = null)
         {
-            return await _context.Games.ProjectTo<GamesList>(_mapper.ConfigurationProvider).ToListAsync();
+            return ApiOk(await GameService.GetPageAsync(request));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GameDetails>> GetGame(int id)
+        public async Task<IActionResult> GetOne(int id)
         {
-            var game = await _context.Games.FindAsync(id);
+            return ApiOk(await GameService.GetByIdAsync(id));
+        }
 
-            if (game == null)
-            {
-                return NotFound();
-            }
-
-            return _mapper.Map<GameDetails>(game);
+        [HttpGet("dropdown")]
+        public async Task<IActionResult> GetDropdown()
+        {
+            return ApiOk(await GameService.GetDropdown());
         }
 
         [HttpPut("{id}")]
@@ -51,7 +55,7 @@ namespace NotSteam.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await GameExists(id))
+                if (await GameService.DoesExist(id))
                 {
                     throw;
                 }
@@ -61,37 +65,19 @@ namespace NotSteam.Api.Controllers
                 }
             }
 
-            return AcceptedAtAction(nameof(GetGame), new { id = game.Id }, game);
+            return AcceptedAtAction(nameof(GetOne), new { id = game.Id }, game);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame([FromBody]Game game)
+        public async Task<IActionResult> PostGame([FromBody]Game game)
         {
-            await _context.Games.AddAsync(game);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
+            return ApiOk(await GameService.AddAsync(game));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Game>> DeleteGame(int id)
+        public async Task<IActionResult> DeleteGame(int id)
         {
-            var game = await _context.Games.FindAsync(id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-
-            _context.Games.Remove(game);
-            await _context.SaveChangesAsync();
-
-            return game;
-        }
-
-        private async Task<bool> GameExists(int id)
-        {
-            return await _context.Games.AnyAsync(e => e.Id == id);
+            return ApiOk(await GameService.DeleteByIdAsync(id));
         }
     }
 }
-

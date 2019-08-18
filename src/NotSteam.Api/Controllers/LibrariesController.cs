@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels.Libraries;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -12,37 +11,31 @@ namespace NotSteam.Api.Controllers
 {
     public class LibrariesController : BaseController
     {
-        public LibrariesController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly ILibraryService LibraryService;
+
+        public LibrariesController(ILibraryService libraryService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            LibraryService = libraryService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LibrariesList>>> GetLibraries()
+        public async Task<IActionResult> GetPage([FromQuery]LibraryPaginationRequest request = null)
         {
-            return Ok(await _context.Libraries.ProjectTo<LibrariesList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await LibraryService.GetPageAsync(request));
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<LibraryDetails>> GetLibrary(int idUser, int idGame)
+        public async Task<IActionResult> GetOne(int idUser, int idGame)
         {
-            var library = await _context.Libraries.FindAsync(idUser, idGame);
-
-            if (library == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<LibraryDetails>(library));
+            return ApiOk(await LibraryService.GetByIdAsync(idUser, idGame));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutLibrary(int idUser, int idGame, [FromBody]LibraryDetails library)
+        public async Task<IActionResult> PutLibrary(int idUser, int idGame, [FromBody]Library library)
         {
-            var l = _mapper.Map<Library>(library);
-
-            if (idUser == l.UserId && idGame == l.GameId)
+            if (idUser == library.UserId && idGame == library.GameId)
             {
-                _context.Entry(l).State = EntityState.Modified;
+                _context.Entry(library).State = EntityState.Modified;
 
                 try
                 {
@@ -50,7 +43,7 @@ namespace NotSteam.Api.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await LibraryExists(idUser, idGame))
+                    if (await LibraryService.DoesExist(idUser, idGame))
                     {
                         throw;
                     }
@@ -60,40 +53,22 @@ namespace NotSteam.Api.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
+                return AcceptedAtAction(nameof(GetOne), new { idUser = library.UserId, idGame = library.GameId }, library);
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Library>> PostLibrary([FromBody]LibraryDetails library)
+        public async Task<IActionResult> PostLibrary([FromBody]Library library)
         {
-            await _context.Libraries.AddAsync(_mapper.Map<Library>(library));
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetLibrary), new { idUser = library.UserId, idGame = library.GameId }, library);
+            return ApiOk(await LibraryService.AddAsync(library));
         }
 
         [HttpDelete("{idUser}/{idGame}")]
-        public async Task<ActionResult<Library>> DeleteLibrary(int idUser, int idGame)
+        public async Task<IActionResult> DeleteLibrary(int idUser, int idGame)
         {
-            var library = await _context.Libraries.FindAsync(idUser, idGame);
-
-            if (library == null)
-            {
-                return NotFound();
-            }
-
-            _context.Libraries.Remove(library);
-            await _context.SaveChangesAsync();
-
-            return library;
-        }
-
-        private async Task<bool> LibraryExists(int idUser, int idGame)
-        {
-            return await _context.Libraries.AnyAsync(e => e.UserId == idUser && e.GameId == idGame);
+            return ApiOk(await LibraryService.DeleteByIdAsync(idUser, idGame));
         }
     }
 }

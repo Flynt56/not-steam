@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels.GameTags;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -12,37 +11,31 @@ namespace NotSteam.Api.Controllers
 {
     public class GameTagsController : BaseController
     {
-        public GameTagsController(NotSteamContext context, IMapper mapper) : base(context, mapper)
-        { }
+        private readonly IGameTagService GameTagService;
+
+        public GameTagsController(IGameTagService gameTagService, NotSteamContext context, IMapper mapper) : base(context, mapper)
+        {
+            GameTagService = gameTagService;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameTagsList>>> GetGameTags()
+        public async Task<IActionResult> GetPage([FromQuery]GameTagPaginationRequest request = null)
         {
-            return Ok(await _context.GameTags.ProjectTo<GameTagsList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await GameTagService.GetPageAsync(request));
         }
 
         [HttpGet("{idGame}/{idTag}")]
-        public async Task<ActionResult<GameTagDetails>> GetGameTag(int idGame, int idTag)
+        public async Task<IActionResult> GetOne(int idGame, int idTag)
         {
-            var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
-
-            if (gameTag == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<GameTagDetails>(gameTag));
+            return ApiOk(await GameTagService.GetByIdAsync(idGame, idTag));
         }
 
         [HttpPut("{idGame}/{idTag}")]
-        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTagDetails gameTag)
+        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTag gameTag)
         {
-            var gt = _mapper.Map<GameTag>(gameTag);
-
-            if (idTag == gt.TagId && idGame == gt.GameId)
+            if (idTag == gameTag.TagId && idGame == gameTag.GameId)
             {
-
-                _context.Entry(gt).State = EntityState.Modified;
+                _context.Entry(gameTag).State = EntityState.Modified;
 
                 try
                 {
@@ -50,7 +43,7 @@ namespace NotSteam.Api.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await GameTagExists(idGame, idTag))
+                    if (await GameTagService.DoesExist(idGame, idTag))
                     {
                         throw;
                     }
@@ -60,41 +53,22 @@ namespace NotSteam.Api.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetGameTag), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
+                return AcceptedAtAction(nameof(GetOne), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<ActionResult<GameTag>> PostGameTag([FromBody]GameTagDetails gameTag)
+        public async Task<IActionResult> PostGameTag([FromBody]GameTag gameTag)
         {
-            await _context.GameTags.AddAsync(_mapper.Map<GameTag>(gameTag));
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetGameTag), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
+            return ApiOk(await GameTagService.AddAsync(gameTag));
         }
 
         [HttpDelete("{idGame}/{idTag}")]
-        public async Task<ActionResult<GameTag>> DeleteGameTag(int idGame, int idTag)
+        public async Task<IActionResult> DeleteGameTag(int idGame, int idTag)
         {
-            var gameTag = await _context.GameTags.FindAsync(idGame, idTag);
-
-            if (gameTag == null)
-            {
-                return NotFound();
-            }
-
-            _context.GameTags.Remove(gameTag);
-            await _context.SaveChangesAsync();
-
-            return gameTag;
-        }
-
-        private async Task<bool> GameTagExists(int idGame, int idTag)
-        {
-            return await _context.GameTags.AnyAsync(e => e.TagId == idTag && e.GameId == idGame);
+            return ApiOk(await GameTagService.DeleteByIdAsync(idGame, idTag));
         }
     }
 }
-
