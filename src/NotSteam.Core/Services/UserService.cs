@@ -5,7 +5,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Requests;
 using NotSteam.Core.Services.Contracts;
-using NotSteam.Core.ViewModels;
+using NotSteam.Core.ViewModels.Users;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;

@@ -4,7 +4,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels;
+using NotSteam.Core.ViewModels.Reviews;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 

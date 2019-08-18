@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels;
+using NotSteam.Core.ViewModels.Users;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;
 

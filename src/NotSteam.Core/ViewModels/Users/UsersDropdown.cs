@@ -2,7 +2,7 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.ViewModels
+namespace NotSteam.Core.ViewModels.Users
 {
     public class UsersDropdown : IHaveCustomMapping
     {

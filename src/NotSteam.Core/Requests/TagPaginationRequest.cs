@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using NotSteam.Core.ViewModels.Companies;
+using NotSteam.Core.ViewModels.Tags;
 using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.Requests
 {
-    public class CompanyPaginationRequest : AbstractPagingRequest<CompaniesList>
+    public class TagPaginationRequest : AbstractPagingRequest<TagsList>
     {
         private const string ValidOrderByValues = "name";
 
@@ -12,7 +12,7 @@ namespace NotSteam.Core.Requests
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<CompaniesList> GetFilteredQuery(IQueryable<CompaniesList> query)
+        public override IQueryable<TagsList> GetFilteredQuery(IQueryable<TagsList> query)
         {
             if (!string.IsNullOrWhiteSpace(Name))
             {
@@ -22,7 +22,7 @@ namespace NotSteam.Core.Requests
             return query;
         }
 
-        public override IQueryable<CompaniesList> SetUpSorting(IQueryable<CompaniesList> query)
+        public override IQueryable<TagsList> SetUpSorting(IQueryable<TagsList> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 
