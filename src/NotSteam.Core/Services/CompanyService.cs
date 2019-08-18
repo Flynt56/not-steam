@@ -45,25 +45,25 @@ namespace NotSteam.Core.Services
 
         public async Task<int> DeleteByIdAsync(int id)
         {
-            var user = await _context
+            var company = await _context
                 .Companies
                 .FindAsync(id);
 
-            _context.Companies.Remove(user);
+            _context.Companies.Remove(company);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(Company user)
+        public async Task<int> AddAsync(Company company)
         {
-            await _context.Companies.AddAsync(user);
+            await _context.Companies.AddAsync(company);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Company user)
+        public async Task<int> EditAsync(int id, Company company)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(company).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync();
         }

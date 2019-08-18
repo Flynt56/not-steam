@@ -28,49 +28,53 @@ namespace NotSteam.Core.Services
         {
             var pagedResult = await _context
                 .GameTags
+                .Include(e => e.Tag)
+                .Include(e => e.Game)
                 .ProjectTo<GameTagsList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<GameTagDetails> GetByIdAsync(int id)
+        public async Task<GameTagDetails> GetByIdAsync(int gameId, int tagId)
         {
             return await _context
                 .GameTags
-                .Where(c => c.Id == id)
+                .Where(e => e.GameId == gameId && e.TagId == tagId)
+                .Include(e => e.Tag)
+                .Include(e => e.Game)
                 .ProjectTo<GameTagDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
-        public async Task<int> DeleteByIdAsync(int id)
+        public async Task<int> DeleteByIdAsync(int gameId, int tagId)
         {
-            var user = await _context
+            var gameTag = await _context
                 .GameTags
-                .FindAsync(id);
+                .FindAsync(gameId, tagId);
 
-            _context.GameTags.Remove(user);
-
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<int> AddAsync(GameTag user)
-        {
-            await _context.GameTags.AddAsync(user);
+            _context.GameTags.Remove(gameTag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, GameTag user)
+        public async Task<int> AddAsync(GameTag gameTag)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            await _context.GameTags.AddAsync(gameTag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> DoesExist(int id)
+        public async Task<int> EditAsync(int gameId, int tagId, GameTag gameTag)
         {
-            return await _context.GameTags.AnyAsync(e => e.Id == id);
+            _context.Entry(gameTag).State = EntityState.Modified;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DoesExist(int gameId, int tagId)
+        {
+            return await _context.GameTags.AnyAsync(e => e.GameId == gameId && e.TagId == tagId);
         }
     }
 }

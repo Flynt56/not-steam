@@ -15,6 +15,7 @@ namespace NotSteam.Core.ViewModels.Tags
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Tag, TagDetails>()
+                .ForMember(tDTO => tDTO.UsageAmount, opt => opt.MapFrom(t => t.GameTags.Count))
                 .ReverseMap();
         }
     }

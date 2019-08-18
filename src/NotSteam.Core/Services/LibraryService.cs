@@ -28,49 +28,53 @@ namespace NotSteam.Core.Services
         {
             var pagedResult = await _context
                 .Libraries
+                .Include(c => c.Game)
+                .Include(c => c.User)
                 .ProjectTo<LibrariesList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<LibraryDetails> GetByIdAsync(int id)
+        public async Task<LibraryDetails> GetByIdAsync(int userId, int gameId)
         {
             return await _context
                 .Libraries
-                .Where(c => c.Id == id)
+                .Where(c => c.UserId == userId && c.GameId == gameId)
+                .Include(c => c.Game)
+                .Include(c => c.User)
                 .ProjectTo<LibraryDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
-        public async Task<int> DeleteByIdAsync(int id)
+        public async Task<int> DeleteByIdAsync(int userId, int gameId)
         {
-            var user = await _context
+            var library = await _context
                 .Libraries
-                .FindAsync(id);
+                .FindAsync(userId, gameId);
 
-            _context.Libraries.Remove(user);
-
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<int> AddAsync(Library user)
-        {
-            await _context.Libraries.AddAsync(user);
+            _context.Libraries.Remove(library);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Library user)
+        public async Task<int> AddAsync(Library library)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            await _context.Libraries.AddAsync(library);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> DoesExist(int id)
+        public async Task<int> EditAsync(int userId, int gameId, Library library)
         {
-            return await _context.Libraries.AnyAsync(e => e.Id == id);
+            _context.Entry(library).State = EntityState.Modified;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DoesExist(int userId, int gameId)
+        {
+            return await _context.Libraries.AnyAsync(e => e.UserId == userId && e.GameId == gameId);
         }
     }
 }

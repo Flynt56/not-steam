@@ -28,49 +28,53 @@ namespace NotSteam.Core.Services
         {
             var pagedResult = await _context
                 .Purchases
+                .Include(c => c.Game)
+                .Include(c => c.User)
                 .ProjectTo<PurchasesList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<PurchaseDetails> GetByIdAsync(int id)
+        public async Task<PurchaseDetails> GetByIdAsync(int userId, int gameId)
         {
             return await _context
                 .Purchases
-                .Where(c => c.Id == id)
+                .Where(c => c.UserId == userId && c.GameId == gameId)
+                .Include(c => c.Game)
+                .Include(c => c.User)
                 .ProjectTo<PurchaseDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
-        public async Task<int> DeleteByIdAsync(int id)
+        public async Task<int> DeleteByIdAsync(int userId, int gameId)
         {
-            var user = await _context
+            var purchase = await _context
                 .Purchases
-                .FindAsync(id);
+                .FindAsync(userId, gameId);
 
-            _context.Purchases.Remove(user);
-
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<int> AddAsync(Purchase user)
-        {
-            await _context.Purchases.AddAsync(user);
+            _context.Purchases.Remove(purchase);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Purchase user)
+        public async Task<int> AddAsync(Purchase purchase)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            await _context.Purchases.AddAsync(purchase);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> DoesExist(int id)
+        public async Task<int> EditAsync(int userId, int gameId, Purchase purchase)
         {
-            return await _context.Purchases.AnyAsync(e => e.Id == id);
+            _context.Entry(purchase).State = EntityState.Modified;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DoesExist(int userId, int gameId)
+        {
+            return await _context.Purchases.AnyAsync(e => e.UserId == userId && e.GameId == gameId);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace NotSteam.Core.Services
         {
             var pagedResult = await _context
                 .Games
+                .Include(c => c.GameTags)
                 .ProjectTo<GamesList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 

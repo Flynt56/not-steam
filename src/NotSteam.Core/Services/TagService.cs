@@ -28,6 +28,7 @@ namespace NotSteam.Core.Services
         {
             var pagedResult = await _context
                 .Tags
+                .Include(c => c.GameTags)
                 .ProjectTo<TagsList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
@@ -39,31 +40,32 @@ namespace NotSteam.Core.Services
             return await _context
                 .Tags
                 .Where(c => c.Id == id)
+                .Include(c => c.GameTags)
                 .ProjectTo<TagDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
         public async Task<int> DeleteByIdAsync(int id)
         {
-            var user = await _context
+            var tag = await _context
                 .Tags
                 .FindAsync(id);
 
-            _context.Tags.Remove(user);
+            _context.Tags.Remove(tag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(Tag user)
+        public async Task<int> AddAsync(Tag tag)
         {
-            await _context.Tags.AddAsync(user);
+            await _context.Tags.AddAsync(tag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Tag user)
+        public async Task<int> EditAsync(int id, Tag tag)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(tag).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync();
         }

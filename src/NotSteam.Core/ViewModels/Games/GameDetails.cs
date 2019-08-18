@@ -17,7 +17,8 @@ namespace NotSteam.Core.ViewModels.Games
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GameDetails>().ReverseMap();
+            configuration.CreateMap<Game, GameDetails>()
+                .ReverseMap();
         }
     }
 }
