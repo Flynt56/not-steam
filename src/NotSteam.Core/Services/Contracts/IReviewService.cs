@@ -9,13 +9,13 @@ namespace NotSteam.Core.Services.Contracts
     public interface IReviewService
     {
         Task<PagedResult<ReviewsList>> GetPageAsync(ReviewPaginationRequest request);
-        Task<ReviewDetails> GetByIdAsync(int id);
+        Task<ReviewDetails> GetByIdAsync(int userId, int gameId);
 
-        Task<int> DeleteByIdAsync(int id);
+        Task<int> DeleteByIdAsync(int userId, int gameId);
 
-        Task<int> AddAsync(Review user);
-        Task<int> EditAsync(int id, Review user);
+        Task<int> AddAsync(Review review);
+        Task<int> EditAsync(int userId, int gameId, Review review);
 
-        Task<bool> DoesExist(int id);
+        Task<bool> DoesExist(int userId, int gameId);
     }
 }

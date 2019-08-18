@@ -9,13 +9,13 @@ namespace NotSteam.Core.Services.Contracts
     public interface ILibraryService
     {
         Task<PagedResult<LibrariesList>> GetPageAsync(LibraryPaginationRequest request);
-        Task<LibraryDetails> GetByIdAsync(int id);
+        Task<LibraryDetails> GetByIdAsync(int userId, int gameId);
 
-        Task<int> DeleteByIdAsync(int id);
+        Task<int> DeleteByIdAsync(int userId, int gameId);
 
-        Task<int> AddAsync(Library user);
-        Task<int> EditAsync(int id, Library user);
+        Task<int> AddAsync(Library library);
+        Task<int> EditAsync(int userId, int gameId, Library library);
 
-        Task<bool> DoesExist(int id);
+        Task<bool> DoesExist(int userId, int gameId);
     }
 }

@@ -9,13 +9,13 @@ namespace NotSteam.Core.Services.Contracts
     public interface IPurchaseService
     {
         Task<PagedResult<PurchasesList>> GetPageAsync(PurchasePaginationRequest request);
-        Task<PurchaseDetails> GetByIdAsync(int id);
+        Task<PurchaseDetails> GetByIdAsync(int userId, int gameId);
 
-        Task<int> DeleteByIdAsync(int id);
+        Task<int> DeleteByIdAsync(int userId, int gameId);
 
-        Task<int> AddAsync(Purchase user);
-        Task<int> EditAsync(int id, Purchase user);
+        Task<int> AddAsync(Purchase purchase);
+        Task<int> EditAsync(int userId, int gameId, Purchase purchase);
 
-        Task<bool> DoesExist(int id);
+        Task<bool> DoesExist(int userId, int gameId);
     }
 }

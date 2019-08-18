@@ -9,13 +9,13 @@ namespace NotSteam.Core.Services.Contracts
     public interface IGameTagService
     {
         Task<PagedResult<GameTagsList>> GetPageAsync(GameTagPaginationRequest request);
-        Task<GameTagDetails> GetByIdAsync(int id);
+        Task<GameTagDetails> GetByIdAsync(int gameId, int tagId);
 
-        Task<int> DeleteByIdAsync(int id);
+        Task<int> DeleteByIdAsync(int gameId, int tagId);
 
-        Task<int> AddAsync(GameTag user);
-        Task<int> EditAsync(int id, GameTag user);
+        Task<int> AddAsync(GameTag gameTag);
+        Task<int> EditAsync(int gameId, int tagId, GameTag gameTag);
 
-        Task<bool> DoesExist(int id);
+        Task<bool> DoesExist(int gameId, int tagId);
     }
 }
