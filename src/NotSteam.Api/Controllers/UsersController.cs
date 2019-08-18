@@ -30,12 +30,11 @@ namespace NotSteam.Api.Controllers
             return ApiOk(await UserService.GetByIdAsync(id));
         }
 
-        [HttpHead("dropdown")]
+        [HttpGet("dropdown")]
         public async Task<IActionResult> GetDropdown()
         {
             return ApiOk(await UserService.GetDropdown());
         }
-
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, [FromBody]User user)
@@ -67,13 +66,13 @@ namespace NotSteam.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUser(User user)
+        public async Task<IActionResult> AddOneAsync([FromBody]User user)
         {
             return ApiOk(await UserService.AddAsync(user));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteOneAsync(int id)
         {
             return ApiOk(await UserService.DeleteByIdAsync(id));
         }

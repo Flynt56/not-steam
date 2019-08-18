@@ -4,6 +4,8 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Core.ViewModels.Tags;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
@@ -12,38 +14,40 @@ namespace NotSteam.Api.Controllers
 {
     public class TagsController : BaseController
     {
-        public TagsController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly ITagService TagService;
+
+        public TagsController(ITagService tagService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            TagService = tagService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TagsList>>> GetTags()
+        public async Task<IActionResult> GetPage([FromQuery]TagPaginationRequest request = null)
         {
-            return Ok(await _context.Tags.ProjectTo<TagsList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await TagService.GetPageAsync(request));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TagDetails>> GetTag(int id)
+        public async Task<IActionResult> GetOne(int id)
         {
-            var tag = await _context.Tags.FindAsync(id);
+            return ApiOk(await TagService.GetByIdAsync(id));
+        }
 
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<TagDetails>(tag));
+        [HttpGet("dropdown")]
+        public async Task<IActionResult> GetDropdown()
+        {
+            return ApiOk(await TagService.GetDropdown());
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, [FromBody]TagDetails tag)
+        public async Task<IActionResult> PutTag(int id, [FromBody]Tag tag)
         {
             if (id != tag.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(_mapper.Map<Tag>(tag)).State = EntityState.Modified;
+            _context.Entry(tag).State = EntityState.Modified;
 
             try
             {
@@ -51,7 +55,7 @@ namespace NotSteam.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await TagExists(id))
+                if (await TagService.DoesExist(id))
                 {
                     throw;
                 }
@@ -61,37 +65,19 @@ namespace NotSteam.Api.Controllers
                 }
             }
 
-            return AcceptedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
+            return AcceptedAtAction(nameof(GetOne), new { id = tag.Id }, tag);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag([FromBody]TagDetails tag)
+        public async Task<IActionResult> AddAsync([FromBody]Tag tag)
         {
-            await _context.Tags.AddAsync(_mapper.Map<Tag>(tag));
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, tag);
+            return ApiOk(await TagService.AddAsync(tag));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tag>> DeleteTag(int id)
+        public async Task<IActionResult> DeleteTag(int id)
         {
-            var tag = await _context.Tags.FindAsync(id);
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            _context.Tags.Remove(tag);
-            await _context.SaveChangesAsync();
-
-            return tag;
-        }
-
-        private async Task<bool> TagExists(int id)
-        {
-            return await _context.Tags.AnyAsync(e => e.Id == id);
+            return ApiOk(await TagService.DeleteByIdAsync(id));
         }
     }
 }
-

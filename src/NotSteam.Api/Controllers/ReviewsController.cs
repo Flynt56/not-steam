@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.ViewModels.Reviews;
+using NotSteam.Core.Requests;
+using NotSteam.Core.Services.Contracts;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
@@ -12,37 +11,31 @@ namespace NotSteam.Api.Controllers
 {
     public class ReviewsController : BaseController
     {
-        public ReviewsController(NotSteamContext context, IMapper mapper) : base(context, mapper)
+        private readonly IReviewService ReviewService;
+
+        public ReviewsController(IReviewService reviewService, NotSteamContext context, IMapper mapper) : base(context, mapper)
         {
+            ReviewService = reviewService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewsList>>> GetReviews()
+        public async Task<IActionResult> GetPage([FromQuery]ReviewPaginationRequest request = null)
         {
-            return Ok(await _context.Reviews.ProjectTo<ReviewsList>(_mapper.ConfigurationProvider).ToListAsync());
+            return ApiOk(await ReviewService.GetPageAsync(request));
         }
 
         [HttpGet("{idUser}/{idGame}")]
-        public async Task<ActionResult<ReviewDetails>> GetReview(int idUser, int idGame)
+        public async Task<IActionResult> GetOne(int idUser, int idGame)
         {
-            var review = await _context.Reviews.FindAsync(idUser, idGame);
-
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<ReviewDetails>(review));
+            return ApiOk(await ReviewService.GetByIdAsync(idUser, idGame));
         }
 
         [HttpPut("{idUser}/{idGame}")]
-        public async Task<IActionResult> PutReview(int idUser, int idGame, [FromBody]ReviewDetails review)
+        public async Task<IActionResult> PutReview(int idUser, int idGame, [FromBody]Review review)
         {
-            var r = _mapper.Map<Review>(review);
-
-            if (idUser == r.UserId && idGame == r.GameId)
+            if (idUser == review.UserId && idGame == review.GameId)
             {
-                _context.Entry(r).State = EntityState.Modified;
+                _context.Entry(review).State = EntityState.Modified;
 
                 try
                 {
@@ -50,7 +43,7 @@ namespace NotSteam.Api.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await ReviewExists(idUser, idGame))
+                    if (await ReviewService.DoesExist(idUser, idGame))
                     {
                         throw;
                     }
@@ -60,41 +53,22 @@ namespace NotSteam.Api.Controllers
                     }
                 }
 
-                return AcceptedAtAction(nameof(GetReview), new { idUser = review.UserId, idGame = review.GameId }, review);
+                return AcceptedAtAction(nameof(GetOne), new { idUser = review.UserId, idGame = review.GameId }, review);
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview([FromBody]ReviewDetails review)
+        public async Task<IActionResult> AddOneAsync([FromBody]Review review)
         {
-            await _context.Reviews.AddAsync(_mapper.Map<Review>(review));
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetReview), new { idUser = review.UserId, idGame = review.GameId }, review);
+            return ApiOk(await ReviewService.AddAsync(review));
         }
 
         [HttpDelete("{idUser}/{idGame}")]
-        public async Task<ActionResult<Review>> DeleteReview(int idUser, int idGame)
+        public async Task<IActionResult> DeleteReview(int idUser, int idGame)
         {
-            var review = await _context.Reviews.FindAsync(idUser, idGame);
-
-            if (review == null)
-            {
-                return NotFound();
-            }
-
-            _context.Reviews.Remove(review);
-            await _context.SaveChangesAsync();
-
-            return review;
-        }
-
-        private async Task<bool> ReviewExists(int idUser, int idGame)
-        {
-            return await _context.Reviews.AnyAsync(e => e.UserId == idUser && e.GameId == idGame);
+            return ApiOk(await ReviewService.DeleteByIdAsync(idUser, idGame));
         }
     }
 }
-
