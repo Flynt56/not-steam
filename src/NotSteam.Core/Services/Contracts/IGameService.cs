@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using NotSteam.Core.Requests;
 using NotSteam.Core.ViewModels.Games;
 using NotSteam.Model.Models;
@@ -10,6 +11,8 @@ namespace NotSteam.Core.Services.Contracts
     {
         Task<PagedResult<GamesList>> GetPageAsync(GamePaginationRequest request);
         Task<GameDetails> GetByIdAsync(int id);
+
+        Task<IEnumerable<GamesDropdown>> GetDropdown();
 
         Task<int> DeleteByIdAsync(int id);
 

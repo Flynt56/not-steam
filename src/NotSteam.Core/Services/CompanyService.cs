@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -71,6 +72,14 @@ namespace NotSteam.Core.Services
         public async Task<bool> DoesExist(int id)
         {
             return await _context.Companies.AnyAsync(e => e.Id == id);
+        }
+
+        public async Task<IEnumerable<CompaniesDropdown>> GetDropdown()
+        {
+            return await _context
+                .Companies
+                .ProjectTo<CompaniesDropdown>(_mapper.ConfigurationProvider)
+                .ToListAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using NotSteam.Core.Requests;
 using NotSteam.Core.ViewModels.Tags;
 using NotSteam.Model.Models;
@@ -10,6 +11,8 @@ namespace NotSteam.Core.Services.Contracts
     {
         Task<PagedResult<TagsList>> GetPageAsync(TagPaginationRequest request);
         Task<TagDetails> GetByIdAsync(int id);
+
+        Task<IEnumerable<TagsDropdown>> GetDropdown();
 
         Task<int> DeleteByIdAsync(int id);
 
