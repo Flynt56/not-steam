@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SpinnerService } from 'src/app/shared/spinner.service';
-import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../user.service';
+import { CommonService } from 'src/app/shared/common.service';
+import { UserDetails } from '../model/user-details';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-user-form',
@@ -14,12 +15,11 @@ export class UserFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private spinner: SpinnerService,
     private router: Router,
-    private toastr: ToastrService
+    private common: CommonService
   ) { }
 
-  public user: any = {};
+  public user: UserDetails;
   public errorMessage = '';
 
   ngOnInit() {
@@ -35,14 +35,14 @@ export class UserFormComponent implements OnInit {
   getUser(userId) {
     this.userService.getOne(userId).subscribe(response => {
       this.user = response;
-      this.spinner.hide();
+      this.common.hide();
     });
   }
 
   onSubmit() {
-    this.spinner.show();
+    this.common.show();
 
-    const postUser: any = {};
+    const postUser: User = {};
 
     postUser.id = this.user.id;
     postUser.username = this.user.name;
@@ -54,15 +54,15 @@ export class UserFormComponent implements OnInit {
 
     this.userService.submit(postUser).subscribe(
       () => {
-        this.toastr.success('Uspješno izvršeno!');
+        this.common.success('Uspješno izvršeno!');
         this.router.navigate(['users']);
-        this.spinner.hide();
+        this.common.hide();
       },
       (response: any) => {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
-        this.spinner.hide();
+        this.common.hide();
       });
   }
 
