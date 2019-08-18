@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { SpinnerService } from 'src/app/shared/spinner.service';
+import { UserList } from '../model/user-list';
+import { Pagination } from 'src/app/shared/Response/Pagination';
+import { CommonService } from 'src/app/shared/common.service';
 
 @Component({
   selector: 'app-user-list',
@@ -13,28 +14,32 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private toastr: ToastrService,
+    private common: CommonService,
     private router: Router,
-    private spinner: SpinnerService
   ) { }
 
-  private users = [];
+  private users = Array<UserList>();
+  private pagination: Pagination;
 
   ngOnInit() {
-    this.getAllUsers();
+    this.getUsers();
   }
 
-  getAllUsers() {
-    this.userService.getAll().subscribe((response: any) => {
-      this.users = response.response.data;
-    });
+  getUsers() {
+    this.userService
+      .getPage(1)
+      .subscribe(({ data, pagination }) => {
+        this.pagination = pagination;
+        this.users = data;
+        this.common.hide();
+      });
   }
 
   onDelete(userId) {
     if (confirm('Jeste li sigurni?')) {
       this.userService.deleteOne(userId).subscribe(result => {
-        this.getAllUsers();
-        this.toastr.success('Uspješno obrisano!');
+        this.getUsers();
+        this.common.success('Uspješno obrisano!');
       });
     }
   }
@@ -44,7 +49,7 @@ export class UserListComponent implements OnInit {
   }
 
   onEdit(userId) {
-    this.spinner.show();
+    this.common.show();
     this.router.navigate(['users', userId]);
   }
 

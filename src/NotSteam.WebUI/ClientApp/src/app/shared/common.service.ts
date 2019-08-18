@@ -19,4 +19,12 @@ export class CommonService {
   public error(msg = '') {
     return this.toastr.error(msg);
   }
+
+  public show() {
+    this.spinner.show();
+  }
+
+  public hide() {
+    this.spinner.hide();
+  }
 }

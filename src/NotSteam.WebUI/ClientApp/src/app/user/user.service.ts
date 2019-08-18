@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { DetailResponse } from '../shared/Response/DetailResponse';
+import { map } from 'rxjs/operators';
+import { PaginationResponse } from '../shared/Response/PaginationResponse';
+import { UserDetails } from './model/user-details';
+import { UserList } from './model/user-list';
 
 @Injectable({
   providedIn: 'root'
@@ -17,28 +22,56 @@ export class UserService {
     return environment.apiUrl + this.USERS_URL;
   }
 
-  private formatUrl(userId) {
-    return this.getRootUrl() + '/' + userId;
+  private formatUrl(id) {
+    return this.getRootUrl() + '/' + id;
+  }
+
+  private formatPageUrl(page) {
+    return this.getRootUrl() + '?page=' + page;
   }
 
   public getAll() {
     return this.http.get(this.getRootUrl());
   }
 
-  public getOne(userId) {
-    return this.http.get(this.formatUrl(userId));
+  public getPage(page = 1) {
+    return this
+      .http
+      .get(this.formatPageUrl(page))
+      .pipe(
+        map((raw: PaginationResponse<UserList>) => {
+          return raw.response;
+        })
+      );
   }
 
-  public deleteOne(userId) {
-    return this.http.delete(this.formatUrl(userId));
+  public getDropdown() {
+    return this
+      .http
+      .get(this.getRootUrl() + '/dropdown');
+  }
+
+  public getOne(id) {
+    return this
+      .http
+      .get(this.formatUrl(id))
+      .pipe(
+        map((raw: DetailResponse<UserDetails>) => {
+          return raw.response;
+        })
+      );
+  }
+
+  public deleteOne(id) {
+    return this.http.delete(this.formatUrl(id));
   }
 
   public addOne(user) {
     return this.http.post(this.getRootUrl(), user);
   }
 
-  public putOne(userId, user) {
-    return this.http.put(this.formatUrl(userId), user);
+  public putOne(id, user) {
+    return this.http.put(this.formatUrl(id), user);
   }
 
   public submit(user) {
