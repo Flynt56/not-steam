@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { UserList } from '../model/user-list';
+import { UserList } from '../model/UserList';
 import { Pagination } from 'src/app/shared/Response/Pagination';
 import { CommonService } from 'src/app/shared/common.service';
 

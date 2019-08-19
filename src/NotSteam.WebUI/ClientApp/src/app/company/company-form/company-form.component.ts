@@ -3,6 +3,8 @@ import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpinnerService } from 'src/app/shared/spinner.service';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/shared/common.service';
+import { CompanyDetails } from '../model/company-details';
 
 @Component({
   selector: 'app-company-form',
@@ -14,12 +16,11 @@ export class CompanyFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private spinner: SpinnerService,
-    private router: Router,
-    private toastr: ToastrService,
+    private common: CommonService,
+    private router: Router
   ) { }
 
-  private company: any = {};
+  private company: CompanyDetails = new CompanyDetails();
   private errorMessage = '';
 
   ngOnInit() {
@@ -35,24 +36,24 @@ export class CompanyFormComponent implements OnInit {
   getCompany(companyId) {
     this.companyService.getOne(companyId).subscribe(response => {
       this.company = response;
-      this.spinner.hide();
+      this.common.hide();
     });
   }
 
   onSubmit() {
-    this.spinner.show();
+    this.common.show();
 
-    this.companyService.submit(this.company).subscribe(
+    this.companyService.submit([this.company.id], this.company).subscribe(
       (response: any) => {
-        this.toastr.success('Uspješno izvršeno!');
+        this.common.success('Uspješno izvršeno!');
         this.router.navigate(['companies']);
-        this.spinner.hide();
+        this.common.hide();
       },
       (response: any) => {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
-        this.spinner.hide();
+        this.common.hide();
       });
   }
 }

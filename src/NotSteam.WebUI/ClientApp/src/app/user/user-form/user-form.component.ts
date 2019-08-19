@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { CommonService } from 'src/app/shared/common.service';
-import { UserDetails } from '../model/user-details';
-import { User } from '../model/user';
+import { UserDetails } from '../model/UserDetails';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-user-form',
@@ -19,24 +19,30 @@ export class UserFormComponent implements OnInit {
     private common: CommonService
   ) { }
 
-  public user: UserDetails;
+  public user: UserDetails = new UserDetails();
   public errorMessage = '';
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const userId = params.get('id');
+    this
+      .route
+      .paramMap
+      .subscribe(params => {
+        const userId = params.get('id');
 
-      if (userId != null) {
-        this.getUser(userId);
-      }
-    });
+        if (userId != null) {
+          this.getUser(userId);
+        }
+      });
   }
 
   getUser(userId) {
-    this.userService.getOne(userId).subscribe(response => {
-      this.user = response;
-      this.common.hide();
-    });
+    this
+      .userService
+      .getOne(userId)
+      .subscribe(response => {
+        this.user = response;
+        this.common.hide();
+      });
   }
 
   onSubmit() {
@@ -52,18 +58,19 @@ export class UserFormComponent implements OnInit {
       profileImageUri: this.user.profileImageUri
     };
 
-    this.userService.submit(postUser).subscribe(
-      () => {
-        this.common.success('Uspješno izvršeno!');
-        this.router.navigate(['users']);
-        this.common.hide();
-      },
-      (response: any) => {
-        const firstError = response.error.errors;
-        const firstKey = Object.keys(firstError)[0];
-        this.errorMessage = firstError[firstKey][0];
-        this.common.hide();
-      });
+    this.userService.submit([postUser.id], postUser)
+      .subscribe(
+        () => {
+          this.common.success('Uspješno izvršeno!');
+          this.router.navigate(['users']);
+          this.common.hide();
+        },
+        (response: any) => {
+          const firstError = response.error.errors;
+          const firstKey = Object.keys(firstError)[0];
+          this.errorMessage = firstError[firstKey][0];
+          this.common.hide();
+        });
   }
 
 }

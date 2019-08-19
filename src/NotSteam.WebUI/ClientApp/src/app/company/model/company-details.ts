@@ -1,6 +1,7 @@
 import { BaseEntity } from 'src/app/shared/Model/base-entity';
 
-export interface CompanyDetails extends BaseEntity {
+export class CompanyDetails implements BaseEntity {
+    id: number;
     name: string;
     description?: string;
     homepageUri?: string;
