@@ -57,7 +57,7 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       .http
       .get(this.getDropdownUrl())
       .pipe(
-        map((raw: DetailResponse<TDropdown>) => {
+        map((raw: DetailResponse<Array<TDropdown>>) => {
           return raw.response;
         }));
   }

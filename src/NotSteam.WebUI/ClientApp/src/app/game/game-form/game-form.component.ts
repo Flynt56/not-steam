@@ -5,8 +5,6 @@ import { CompanyService } from 'src/app/company/company.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { CompanyDropdown } from 'src/app/company/model/CompanyDropdown';
 import { GameDetails } from '../model/GameDetails';
-import { map } from 'rxjs/operators';
-import { DetailResponse } from 'src/app/shared/Response/DetailResponse';
 
 @Component({
   selector: 'app-game-form',
@@ -24,7 +22,7 @@ export class GameFormComponent implements OnInit {
   ) { }
 
   public game: GameDetails = new GameDetails();
-  public companies: any = [];
+  public companies: Array<CompanyDropdown> = new Array<CompanyDropdown>();
   public errorMessage = '';
 
   ngOnInit() {
