@@ -1,33 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { DetailResponse } from '../shared/Response/DetailResponse';
 import { map } from 'rxjs/operators';
 import { PaginationResponse } from '../shared/Response/PaginationResponse';
 import { UserDetails } from './model/user-details';
 import { UserList } from './model/user-list';
+import { BaseService } from '../shared/base-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService {
 
   constructor(
     private http: HttpClient
-  ) { }
-
-  private readonly USERS_URL = 'users';
-
-  private getRootUrl() {
-    return environment.apiUrl + this.USERS_URL;
-  }
-
-  private formatUrl(id) {
-    return this.getRootUrl() + '/' + id;
-  }
-
-  private formatPageUrl(page) {
-    return this.getRootUrl() + '?page=' + page;
+  ) {
+    super('users');
   }
 
   public getAll() {
@@ -37,7 +25,7 @@ export class UserService {
   public getPage(page = 1) {
     return this
       .http
-      .get(this.formatPageUrl(page))
+      .get(this.getPageUrl(page))
       .pipe(
         map((raw: PaginationResponse<UserList>) => {
           return raw.response;
@@ -48,13 +36,13 @@ export class UserService {
   public getDropdown() {
     return this
       .http
-      .get(this.getRootUrl() + '/dropdown');
+      .get(this.getDropdownUrl());
   }
 
   public getOne(id) {
     return this
       .http
-      .get(this.formatUrl(id))
+      .get(this.getOneUrl(id))
       .pipe(
         map((raw: DetailResponse<UserDetails>) => {
           return raw.response;
@@ -63,7 +51,7 @@ export class UserService {
   }
 
   public deleteOne(id) {
-    return this.http.delete(this.formatUrl(id));
+    return this.http.delete(this.getOneUrl(id));
   }
 
   public addOne(user) {
@@ -71,7 +59,7 @@ export class UserService {
   }
 
   public putOne(id, user) {
-    return this.http.put(this.formatUrl(id), user);
+    return this.http.put(this.getOneUrl(id), user);
   }
 
   public submit(user) {
