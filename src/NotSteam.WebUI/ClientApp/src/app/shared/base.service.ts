@@ -23,7 +23,11 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
     return this.getRootUrl() + '?page=' + page;
   }
 
-  private getOneUrl(id: Array<any>): string {
+  private getOneUrl(id: number): string {
+    return this.getRootUrl() + '/' + id;
+  }
+
+  private getOneArrayUrl(id: Array<number>): string {
     return this.getRootUrl() + Array.from(id).map((item: any) => '/' + item);
   }
 
@@ -54,7 +58,7 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       .get(this.getDropdownUrl());
   }
 
-  public getOne(id: Array<any>) {
+  public getOneById(id: number) {
     return this
       .http
       .get(this.getOneUrl(id))
@@ -65,10 +69,27 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       );
   }
 
-  public deleteOne(id: Array<any>) {
+  public getOneByIds(id: Array<any>) {
+    return this
+      .http
+      .get(this.getOneArrayUrl(id))
+      .pipe(
+        map((raw: DetailResponse<TDetailResponse>) => {
+          return raw.response;
+        })
+      );
+  }
+
+  public deleteOneById(id: number) {
     return this
       .http
       .delete(this.getOneUrl(id));
+  }
+
+  public deleteOneByIds(id: Array<number>) {
+    return this
+      .http
+      .delete(this.getOneArrayUrl(id));
   }
 
   public addOne(item: any) {
@@ -77,15 +98,29 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       .post(this.getRootUrl(), item);
   }
 
-  public putOne(id: Array<any>, item: any) {
+  public putOneById(id: number, item: any) {
     return this
       .http
       .put(this.getOneUrl(id), item);
   }
 
-  public submit(id: Array<any>, item: any) {
+  public putOneByIds(id: Array<number>, item: any) {
+    return this
+      .http
+      .put(this.getOneArrayUrl(id), item);
+  }
+
+  public submit(item: any) {
+    if (item.id) {
+      return this.putOneById(item.id, item);
+    }
+
+    return this.addOne(item);
+  }
+
+  public submitComposite(id: Array<number>, item: any) {
     if (id && id.length && id.every((element: any) => element !== undefined)) {
-      return this.putOne(id, item);
+      return this.putOneByIds(id, item);
     }
 
     return this.addOne(item);

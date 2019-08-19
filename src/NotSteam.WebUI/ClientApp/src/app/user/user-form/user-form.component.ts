@@ -38,7 +38,7 @@ export class UserFormComponent implements OnInit {
   getUser(userId) {
     this
       .userService
-      .getOne(userId)
+      .getOneById(userId)
       .subscribe(response => {
         this.user = response;
         this.common.hide();
@@ -58,7 +58,7 @@ export class UserFormComponent implements OnInit {
       profileImageUri: this.user.profileImageUri
     };
 
-    this.userService.submit([postUser.id], postUser)
+    this.userService.submit(postUser)
       .subscribe(
         () => {
           this.common.success('Uspješno izvršeno!');

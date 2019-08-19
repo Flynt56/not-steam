@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
 
   onDelete(userId) {
     if (confirm('Jeste li sigurni?')) {
-      this.userService.deleteOne(userId).subscribe(result => {
+      this.userService.deleteOneById(userId).subscribe(result => {
         this.getUsers();
         this.common.success('Uspješno obrisano!');
       });

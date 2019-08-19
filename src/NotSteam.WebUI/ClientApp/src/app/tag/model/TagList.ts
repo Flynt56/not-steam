@@ -1,7 +1,7 @@
 import { BaseEntity } from 'src/app/shared/Model/base-entity';
 
-export interface TagDetails extends BaseEntity {
+export class TagList implements BaseEntity {
+    id: number;
     name: string;
     usageAmount: number;
-    description?: string;
 }

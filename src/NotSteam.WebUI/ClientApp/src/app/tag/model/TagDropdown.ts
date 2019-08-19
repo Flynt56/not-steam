@@ -1,6 +1,6 @@
 import { BaseEntity } from 'src/app/shared/Model/base-entity';
 
-export interface TagList extends BaseEntity {
+export class TagDropdown implements BaseEntity {
+    id: number;
     name: string;
-    usageAmount: number;
 }

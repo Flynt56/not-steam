@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TagService } from '../tag.service';
 import { Router } from '@angular/router';
-import { TagList } from '../model/tag-list';
+import { TagList } from '../model/TagList';
 import { CommonService } from 'src/app/shared/common.service';
 import { Pagination } from 'src/app/shared/Response/Pagination';
 
@@ -27,17 +27,17 @@ export class TagListComponent implements OnInit {
 
   getAllTags() {
     this.tagService
-    .getPage(1)
-    .subscribe(({ data, pagination }) => {
-      this.pagination = pagination;
-      this.tags = data;
-      this.common.hide();
-    });
+      .getPage(1)
+      .subscribe(({ data, pagination }) => {
+        this.pagination = pagination;
+        this.tags = data;
+        this.common.hide();
+      });
   }
 
   onDelete(tagId) {
     if (confirm('Jeste li sigurni?')) {
-      this.tagService.deleteOne(tagId).subscribe(result => {
+      this.tagService.deleteOneById(tagId).subscribe(result => {
         this.getAllTags();
         this.common.success('Uspješno obrisano!');
       });

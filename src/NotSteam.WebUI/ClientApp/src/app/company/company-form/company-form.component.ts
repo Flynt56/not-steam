@@ -31,7 +31,7 @@ export class CompanyFormComponent implements OnInit {
   }
 
   getCompany(companyId) {
-    this.companyService.getOne(companyId).subscribe(response => {
+    this.companyService.getOneById(companyId).subscribe(response => {
       this.company = response;
       this.common.hide();
     });
@@ -40,7 +40,7 @@ export class CompanyFormComponent implements OnInit {
   onSubmit() {
     this.common.show();
 
-    this.companyService.submit([this.company.id], this.company).subscribe(
+    this.companyService.submit(this.company).subscribe(
       () => {
         this.common.success('Uspješno izvršeno!');
         this.router.navigate(['companies']);

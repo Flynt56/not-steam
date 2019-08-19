@@ -37,7 +37,7 @@ export class CompanyListComponent implements OnInit {
 
   onDelete(companyId) {
     if (confirm('Jeste li sigurni?')) {
-      this.companyService.deleteOne(companyId).subscribe(result => {
+      this.companyService.deleteOneById(companyId).subscribe(result => {
         this.getAllCompanies();
         this.common.success('Uspješno obrisano!');
       });

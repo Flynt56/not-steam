@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TagService } from '../tag.service';
-import { SpinnerService } from 'src/app/shared/spinner.service';
-import { ToastrService } from 'ngx-toastr';
+import { CommonService } from 'src/app/shared/common.service';
+import { TagDetails } from '../model/TagDetails';
 
 @Component({
   selector: 'app-tag-form',
@@ -14,12 +14,11 @@ export class TagFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tagService: TagService,
-    private spinner: SpinnerService,
     private router: Router,
-    private toastr: ToastrService
+    private common: CommonService
   ) { }
 
-  public tag: any = {};
+  public tag: TagDetails = new TagDetails();
   public errorMessage = '';
 
   ngOnInit() {
@@ -33,26 +32,26 @@ export class TagFormComponent implements OnInit {
   }
 
   getTag(tagId) {
-    this.tagService.getOne(tagId).subscribe(response => {
+    this.tagService.getOneById(tagId).subscribe(response => {
       this.tag = response;
-      this.spinner.hide();
+      this.common.hide();
     });
   }
 
   onSubmit() {
-    this.spinner.show();
+    this.common.show();
 
     this.tagService.submit(this.tag).subscribe(
       () => {
-        this.toastr.success('Uspješno izvršeno!');
+        this.common.success('Uspješno izvršeno!');
         this.router.navigate(['tags']);
-        this.spinner.hide();
+        this.common.hide();
       },
       (response: any) => {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
-        this.spinner.hide();
+        this.common.hide();
       });
   }
 
