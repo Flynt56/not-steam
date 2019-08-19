@@ -19,6 +19,7 @@ export class CompanyFormComponent implements OnInit {
   ) { }
 
   private company: CompanyDetails = new CompanyDetails();
+  private errorMessage = '';
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -49,6 +50,7 @@ export class CompanyFormComponent implements OnInit {
       (response: any) => {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
+        this.errorMessage = firstError[firstKey][0];
         this.common.hide();
       });
   }

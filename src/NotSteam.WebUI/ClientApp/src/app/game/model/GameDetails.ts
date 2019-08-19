@@ -1,6 +1,7 @@
 import { BaseEntity } from 'src/app/shared/Model/base-entity';
 
-export interface GameDetails extends BaseEntity {
+export class GameDetails implements BaseEntity {
+    id: number;
     title: string;
     releaseDate: string;
     basePrice: number;

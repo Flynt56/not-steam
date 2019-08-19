@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../game.service';
-import { SpinnerService } from 'src/app/shared/spinner.service';
-import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from 'src/app/company/company.service';
+import { CommonService } from 'src/app/shared/common.service';
+import { CompanyDropdown } from 'src/app/company/model/CompanyDropdown';
+import { GameDetails } from '../model/GameDetails';
+import { map } from 'rxjs/operators';
+import { DetailResponse } from 'src/app/shared/Response/DetailResponse';
 
 @Component({
   selector: 'app-game-form',
@@ -15,15 +18,13 @@ export class GameFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private spinner: SpinnerService,
     private router: Router,
-    private toastr: ToastrService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private common: CommonService
   ) { }
 
-  public game: any = {};
+  public game: GameDetails = new GameDetails();
   public companies: any = [];
-  public selectedCompanyId: any = {};
   public errorMessage = '';
 
   ngOnInit() {
@@ -39,37 +40,35 @@ export class GameFormComponent implements OnInit {
   }
 
   getGame(gameId) {
-    this.gameService.getOne(gameId).subscribe(response => {
+    this.gameService.getOneById(gameId).subscribe(response => {
       this.game = response;
-      this.game.id = gameId;
-      this.selectedCompanyId = this.game.companyId;
-      this.spinner.hide();
+      this.common.hide();
     });
   }
 
   onSubmit() {
-    this.spinner.show();
-    this.game.companyId = this.selectedCompanyId;
+    this.common.show();
 
     this.gameService.submit(this.game).subscribe(
-      (response: any) => {
-        this.toastr.success('Uspješno izvršeno!');
+      () => {
+        this.common.success('Uspješno izvršeno!');
         this.router.navigate(['games']);
-        this.spinner.hide();
+        this.common.hide();
       },
       (response: any) => {
         const firstError = response.error.errors;
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
-        this.spinner.hide();
+        this.common.hide();
       });
   }
 
   getCompanies() {
-    this.companyService.getAll().subscribe(response => {
-      this.companies = response;
-    }
-    );
+    this.companyService.getDropdown()
+      .pipe(
+        map((raw: DetailResponse<CompanyDropdown>) => {
+          return raw.response;
+        }));
   }
 
 }

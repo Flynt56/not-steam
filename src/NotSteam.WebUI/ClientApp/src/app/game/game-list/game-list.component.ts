@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
-import { GameList } from '../model/game-list';
+import { GameList } from '../model/GameList';
 import { Pagination } from 'src/app/shared/Response/Pagination';
 
 @Component({
@@ -27,17 +27,17 @@ export class GameListComponent implements OnInit {
 
   getAllGames() {
     this.gameService
-    .getPage(1)
-    .subscribe(({ data, pagination }) => {
-      this.pagination = pagination;
-      this.games = data;
-      this.common.hide();
-    });;
+      .getPage(1)
+      .subscribe(({ data, pagination }) => {
+        this.pagination = pagination;
+        this.games = data;
+        this.common.hide();
+      });;
   }
 
   onDelete(gameId) {
     if (confirm('Jeste li sigurni?')) {
-      this.gameService.deleteOne(gameId).subscribe(result => {
+      this.gameService.deleteOneById(gameId).subscribe(result => {
         this.getAllGames();
         this.common.success('Uspješno obrisano!');
       });
