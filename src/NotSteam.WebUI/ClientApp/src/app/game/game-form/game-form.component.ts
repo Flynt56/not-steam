@@ -68,7 +68,10 @@ export class GameFormComponent implements OnInit {
       .pipe(
         map((raw: DetailResponse<CompanyDropdown>) => {
           return raw.response;
-        }));
+        }))
+      .subscribe(response => {
+        this.companies = response;
+      });
   }
 
 }
