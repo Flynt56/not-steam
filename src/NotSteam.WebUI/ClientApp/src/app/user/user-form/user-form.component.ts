@@ -42,15 +42,15 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     this.common.show();
 
-    const postUser: User = {};
-
-    postUser.id = this.user.id;
-    postUser.username = this.user.name;
-    postUser.nickname = this.user.nick;
-    postUser.password = this.user.password;
-    postUser.email = this.user.email;
-    postUser.dateOfBirth = this.user.dob;
-    postUser.profileImageUri = this.user.profileImageUri;
+    const postUser: User = {
+      id: this.user.id,
+      username: this.user.name,
+      nickname: this.user.nick,
+      password: this.user.password,
+      email: this.user.email,
+      dateOfBirth: this.user.dob,
+      profileImageUri: this.user.profileImageUri
+    };
 
     this.userService.submit(postUser).subscribe(
       () => {
