@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { BaseService } from '../shared/base-service';
 import { DetailResponse } from '../shared/Response/DetailResponse';
 import { map } from 'rxjs/operators';
 import { PaginationResponse } from '../shared/Response/PaginationResponse';
+import { CompanyList } from './model/company-list';
+import { CompanyDetails } from './model/company-details';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class CompanyService extends BaseService {
       .http
       .get(this.getPageUrl(page))
       .pipe(
-        map((raw: PaginationResponse<UserList>) => {
+        map((raw: PaginationResponse<CompanyList>) => {
           return raw.response;
         })
       );
@@ -43,7 +44,7 @@ export class CompanyService extends BaseService {
       .http
       .get(this.getOneUrl(id))
       .pipe(
-        map((raw: DetailResponse<UserDetails>) => {
+        map((raw: DetailResponse<CompanyDetails>) => {
           return raw.response;
         })
       );

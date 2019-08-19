@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { SpinnerService } from 'src/app/shared/spinner.service';
+import { CommonService } from 'src/app/shared/common.service';
+import { CompanyList } from '../model/company-list';
+import { Pagination } from 'src/app/shared/Response/Pagination';
 
 @Component({
   selector: 'app-company-list',
@@ -13,21 +14,34 @@ export class CompanyListComponent implements OnInit {
 
   constructor(
     private companyService: CompanyService,
-    private toastr: ToastrService,
     private router: Router,
-    private spinner: SpinnerService
+    private common: CommonService
   ) { }
 
-  private companies = [];
+  private companies = Array<CompanyList>();
+  private pagination: Pagination;
 
   ngOnInit() {
     this.getAllCompanies();
   }
 
   getAllCompanies() {
-    this.companyService.getAll().subscribe((response: any) => {
-      this.companies = response;
-    });
+    this.companyService
+      .getPage(1)
+      .subscribe(({ data, pagination }) => {
+        this.pagination = pagination;
+        this.companies = data;
+        this.common.hide();
+      });
+  }
+
+  onDelete(companyId) {
+    if (confirm('Jeste li sigurni?')) {
+      this.companyService.deleteOne(companyId).subscribe(result => {
+        this.getAllCompanies();
+        this.common.success('Uspješno obrisano!');
+      });
+    }
   }
 
   onAdd() {
@@ -35,16 +49,8 @@ export class CompanyListComponent implements OnInit {
   }
 
   onEdit(companyId) {
-    this.spinner.show();
+    this.common.show();
     this.router.navigate(['companies', companyId]);
   }
 
-  onDelete(companyId) {
-    if (confirm('Jeste li sigurni?')) {
-      this.companyService.deleteOne(companyId).subscribe(result => {
-        this.getAllCompanies();
-        this.toastr.success('Uspješno obrisano!');
-      });
-    }
-  }
 }
