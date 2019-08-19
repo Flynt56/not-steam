@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { SpinnerService } from 'src/app/shared/spinner.service';
+import { CommonService } from 'src/app/shared/common.service';
+import { GameList } from '../model/game-list';
+import { Pagination } from 'src/app/shared/Response/Pagination';
 
 @Component({
   selector: 'app-game-list',
@@ -13,28 +14,32 @@ export class GameListComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
-    private toastr: ToastrService,
     private router: Router,
-    private spinner: SpinnerService
+    private common: CommonService
   ) { }
 
-  private games = [];
+  private games = Array<GameList>();
+  private pagination: Pagination;
 
   ngOnInit() {
     this.getAllGames();
   }
 
   getAllGames() {
-    this.gameService.getAll().subscribe((response: any) => {
-      this.games = response;
-    });
+    this.gameService
+    .getPage(1)
+    .subscribe(({ data, pagination }) => {
+      this.pagination = pagination;
+      this.games = data;
+      this.common.hide();
+    });;
   }
 
   onDelete(gameId) {
     if (confirm('Jeste li sigurni?')) {
       this.gameService.deleteOne(gameId).subscribe(result => {
         this.getAllGames();
-        this.toastr.success('Uspješno obrisano!');
+        this.common.success('Uspješno obrisano!');
       });
     }
   }
@@ -44,7 +49,7 @@ export class GameListComponent implements OnInit {
   }
 
   onEdit(gameId) {
-    this.spinner.show();
+    this.common.show();
     this.router.navigate(['games', gameId]);
   }
 }
