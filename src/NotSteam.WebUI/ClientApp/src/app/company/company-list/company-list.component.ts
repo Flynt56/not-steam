@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
-import { CompanyList } from '../model/company-list';
+import { CompanyList } from '../model/CompanyList';
 import { Pagination } from 'src/app/shared/Response/Pagination';
 
 @Component({
