@@ -1,14 +1,37 @@
-<div>
+<div class="pb-5 col-sm-6 mx-auto">
     <div [hidden]="errorMessage.length == 0">
         {{errorMessage}}
     </div>
     <form (submit)="onSubmit()" #userForm="ngForm">
         <input title="id" name="id" type="hidden" [(ngModel)]="user.id" />
         <div class="form-group">
-            <label for="username">
-                Username
+            <label for="email">
+                Email Address
             </label>
-            <input required type="text" name="username" [(ngModel)]="user.name" class="form-control" id="username">
+            <input placeholder="von@neumann.com" required type="email" name="email" [(ngModel)]="user.email"
+                class="form-control" id="email">
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="username">
+                        Username
+                    </label>
+                    <input required type="text" name="username" [(ngModel)]="user.name" class="form-control"
+                        id="username">
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="nickname">
+                        Nickname
+                    </label>
+                    <input required type="text" name="nickname" [(ngModel)]="user.nick" class="form-control"
+                        id="nickname">
+                </div>
+
+            </div>
         </div>
         <div class="form-group">
             <label for="password">
@@ -16,18 +39,6 @@
             </label>
             <input required type="password" name="password" [(ngModel)]="user.password" class="form-control"
                 id="password">
-        </div>
-        <div class="form-group">
-            <label for="nickname">
-                Nickname
-            </label>
-            <input required type="text" name="nickname" [(ngModel)]="user.nick" class="form-control" id="nickname">
-        </div>
-        <div class="form-group">
-            <label for="email">
-                Email Address
-            </label>
-            <input required type="email" name="email" [(ngModel)]="user.email" class="form-control" id="email">
         </div>
         <div class="form-group">
             <label for="dateOfBirth">
@@ -40,8 +51,8 @@
             <label for="profileImageUri">
                 Logo Image URL
             </label>
-            <input type="url" name="profileImageUri" [(ngModel)]="user.profileImageUri" class="form-control"
-                id="profileImageUri">
+            <input placeholder="http..." type="url" name="profileImageUri" [(ngModel)]="user.profileImageUri"
+                class="form-control" id="profileImageUri">
         </div>
         <button [disabled]="!userForm.form.valid" type="submit" class="btn btn-primary">
             Submit

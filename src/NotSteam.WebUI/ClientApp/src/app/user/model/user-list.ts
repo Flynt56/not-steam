@@ -1,8 +1,8 @@
 import { BaseEntity } from 'src/app/shared/Model/base-entity';
 
-export class UserList extends BaseEntity {
+export interface UserList extends BaseEntity {
     name: string;
-    nick: string;
     email: string;
     dob: string;
+    nick?: string;
 }
