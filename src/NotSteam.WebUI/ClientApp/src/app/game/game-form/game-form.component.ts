@@ -64,11 +64,7 @@ export class GameFormComponent implements OnInit {
   }
 
   getCompanies() {
-    this.companyService.getDropdown()
-      .pipe(
-        map((raw: DetailResponse<CompanyDropdown>) => {
-          return raw.response;
-        }))
+    this.companyService.getDropdown<CompanyDropdown>()
       .subscribe(response => {
         this.companies = response;
       });

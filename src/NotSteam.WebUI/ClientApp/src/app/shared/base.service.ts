@@ -52,10 +52,14 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       );
   }
 
-  public getDropdown() {
+  public getDropdown<TDropdown>() {
     return this
       .http
-      .get(this.getDropdownUrl());
+      .get(this.getDropdownUrl())
+      .pipe(
+        map((raw: DetailResponse<TDropdown>) => {
+          return raw.response;
+        }));
   }
 
   public getOneById(id: number) {
