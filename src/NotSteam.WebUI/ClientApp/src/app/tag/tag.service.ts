@@ -1,33 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { TagList } from './model/tag-list';
 import { map } from 'rxjs/operators';
 import { PaginationResponse } from '../shared/Response/PaginationResponse';
 import { DetailResponse } from '../shared/Response/DetailResponse';
 import { TagDetails } from './model/tag-details';
+import { BaseService } from '../shared/base-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TagService {
+export class TagService extends BaseService {
 
   constructor(
     private http: HttpClient
-  ) { }
-
-  private readonly TAGS_URL = 'tags';
-
-  private getRootUrl() {
-    return environment.apiUrl + this.TAGS_URL;
-  }
-
-  private formatUrl(tagId) {
-    return this.getRootUrl() + '/' + tagId;
-  }
-
-  private formatPageUrl(page) {
-    return this.getRootUrl() + '?page=' + page;
+  ) {
+    super('tags');
   }
 
   public getAll() {
@@ -37,7 +25,7 @@ export class TagService {
   public getPage(page = 1) {
     return this
       .http
-      .get(this.formatPageUrl(page))
+      .get(this.getPageUrl(page))
       .pipe(
         map((raw: PaginationResponse<TagList>) => {
           return raw.response;
@@ -48,13 +36,13 @@ export class TagService {
   public getDropdown() {
     return this
       .http
-      .get(this.getRootUrl() + '/dropdown');
+      .get(this.getDropdownUrl());
   }
 
   public getOne(id) {
     return this
       .http
-      .get(this.formatUrl(id))
+      .get(this.getOneUrl(id))
       .pipe(
         map((raw: DetailResponse<TagDetails>) => {
           return raw.response;
@@ -63,7 +51,7 @@ export class TagService {
   }
 
   public deleteOne(tagId) {
-    return this.http.delete(this.formatUrl(tagId));
+    return this.http.delete(this.getOneUrl(tagId));
   }
 
   public addOne(tag) {
@@ -71,7 +59,7 @@ export class TagService {
   }
 
   public putOne(tagId, tag) {
-    return this.http.put(this.formatUrl(tagId), tag);
+    return this.http.put(this.getOneUrl(tagId), tag);
   }
 
   public submit(tag) {

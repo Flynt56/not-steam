@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 export class BaseService {
 
     constructor(
-        private routeUrl: string
+        private routeUrl: string,
     ) { }
 
     protected getRootUrl(): string {
@@ -21,4 +21,5 @@ export class BaseService {
     protected getDropdownUrl(): string {
         return this.getRootUrl() + '/dropdown';
     }
+
 }
