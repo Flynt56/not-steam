@@ -15,12 +15,16 @@ import { GametagModule } from './gametag/gametag.module';
 import { NavbarComponent } from './template/navbar/navbar.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RegisterFormComponent } from './register/register-form/register-form.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
