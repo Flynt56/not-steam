@@ -8,14 +8,14 @@ namespace NotSteam.Core.Extensions
     {
         public static void AddNotSteamServices(this IServiceCollection services)
         {
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IGameService, GameService>();
-            services.AddTransient<ICompanyService, CompanyService>();
-            services.AddTransient<IReviewService, ReviewService>();
-            services.AddTransient<ILibraryService, LibraryService>();
-            services.AddTransient<ITagService, TagService>();
-            services.AddTransient<IGameTagService, GameTagService>();
-            services.AddTransient<IPurchaseService, PurchaseService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ILibraryService, LibraryService>();
+            services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IGameTagService, GameTagService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
         }
     }
 }
