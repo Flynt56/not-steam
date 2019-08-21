@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
 using NotSteam.Infrastructure.Extensions.ModelBuilder;
@@ -7,7 +8,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NotSteamContext : DbContext
+    public class NotSteamContext : IdentityDbContext
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)
@@ -19,7 +20,6 @@ namespace NotSteam.Infrastructure.DB
         public DbSet<Library> Libraries { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,4 +51,3 @@ namespace NotSteam.Infrastructure.DB
         }
     }
 }
-
