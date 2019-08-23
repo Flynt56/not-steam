@@ -7,9 +7,10 @@ namespace NotSteam.Core.Extensions.NotSteamContext
 {
     public static class UpdateTimestampExtension
     {
-        public static void UpdateTimestamp(this Infrastructure.DB.NotSteamContext context)
+        public static void UpdateTimestamp(this NotSteam.Infrastructure.DB.NotSteamContext context)
         {
             var entries = context.ChangeTracker.Entries();
+
             foreach (var entry in entries.Where(entry => entry.Entity is IEntityTimestamp).Select(entry => entry))
             {
                 var entity = (IEntityTimestamp)entry.Entity;

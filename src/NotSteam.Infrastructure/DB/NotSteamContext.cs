@@ -47,7 +47,7 @@ namespace NotSteam.Infrastructure.DB
         private void OnBeforeSaving()
         {
             this.UpdateTimestamp();
-            this.UpdateSoftDeletable();
+            this.UpdateSoftDelete();
         }
     }
 }
