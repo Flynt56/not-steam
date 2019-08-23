@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.ApiResponse;
 using NotSteam.Infrastructure.DB;
 
 namespace NotSteam.Api.Controllers
@@ -31,7 +30,7 @@ namespace NotSteam.Api.Controllers
 
         protected IActionResult ApiOk(HttpStatusCode code, object data)
         {
-            return Ok(ApiResponse.Ok(code, data));
+            return Ok(ApiResponse.ApiResponse.Ok(code, data));
         }
     }
 }
