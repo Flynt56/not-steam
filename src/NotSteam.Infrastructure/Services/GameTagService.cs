@@ -11,7 +11,7 @@ using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Infrastructure.Services
 {
     public class GameTagService : BaseService, IGameTagService
     {

@@ -6,79 +6,81 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Users;
+using NotSteam.Core.ViewModels.Tags;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Infrastructure.Services
 {
-    public class UserService : BaseService, IUserService
+    public class TagService : BaseService, ITagService
     {
         private readonly NotSteamContext _context;
         private readonly IMapper _mapper;
 
-        public UserService(NotSteamContext context, IMapper mapper)
+        public TagService(NotSteamContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<UsersList>> GetPageAsync(UserPaginationRequest request)
+        public async Task<PagedResult<TagsList>> GetPageAsync(TagPaginationRequest request)
         {
             var pagedResult = await _context
-                .Users
-                .ProjectTo<UsersList>(_mapper.ConfigurationProvider)
+                .Tags
+                .Include(c => c.GameTags)
+                .ProjectTo<TagsList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<UserDetails> GetByIdAsync(int id)
+        public async Task<TagDetails> GetByIdAsync(int id)
         {
             return await _context
-                .Users
+                .Tags
                 .Where(c => c.Id == id)
-                .ProjectTo<UserDetails>(_mapper.ConfigurationProvider)
+                .Include(c => c.GameTags)
+                .ProjectTo<TagDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
         public async Task<int> DeleteByIdAsync(int id)
         {
-            var user = await _context
-                .Users
+            var tag = await _context
+                .Tags
                 .FindAsync(id);
 
-            _context.Users.Remove(user);
+            _context.Tags.Remove(tag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(User user)
+        public async Task<int> AddAsync(Tag tag)
         {
-            await _context.Users.AddAsync(user);
+            await _context.Tags.AddAsync(tag);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, User user)
+        public async Task<int> EditAsync(int id, Tag tag)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(tag).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> DoesExist(int id)
         {
-            return await _context.Users.AnyAsync(e => e.Id == id);
+            return await _context.Tags.AnyAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<UsersDropdown>> GetDropdown()
+        public async Task<IEnumerable<TagsDropdown>> GetDropdown()
         {
             return await _context
-                .Users
-                .ProjectTo<UsersDropdown>(_mapper.ConfigurationProvider)
+                .Tags
+                .ProjectTo<TagsDropdown>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
     }

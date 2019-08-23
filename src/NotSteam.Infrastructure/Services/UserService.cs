@@ -6,64 +6,63 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Games;
+using NotSteam.Core.ViewModels.Users;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Infrastructure.Services
 {
-    public class GameService : BaseService, IGameService
+    public class UserService : BaseService, IUserService
     {
         private readonly NotSteamContext _context;
         private readonly IMapper _mapper;
 
-        public GameService(NotSteamContext context, IMapper mapper)
+        public UserService(NotSteamContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<GamesList>> GetPageAsync(GamePaginationRequest request)
+        public async Task<PagedResult<UsersList>> GetPageAsync(UserPaginationRequest request)
         {
             var pagedResult = await _context
-                .Games
-                .Include(c => c.GameTags)
-                .ProjectTo<GamesList>(_mapper.ConfigurationProvider)
+                .Users
+                .ProjectTo<UsersList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<GameDetails> GetByIdAsync(int id)
+        public async Task<UserDetails> GetByIdAsync(int id)
         {
             return await _context
-                .Games
+                .Users
                 .Where(c => c.Id == id)
-                .ProjectTo<GameDetails>(_mapper.ConfigurationProvider)
+                .ProjectTo<UserDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
         public async Task<int> DeleteByIdAsync(int id)
         {
             var user = await _context
-                .Games
+                .Users
                 .FindAsync(id);
 
-            _context.Games.Remove(user);
+            _context.Users.Remove(user);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(Game user)
+        public async Task<int> AddAsync(User user)
         {
-            await _context.Games.AddAsync(user);
+            await _context.Users.AddAsync(user);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Game user)
+        public async Task<int> EditAsync(int id, User user)
         {
             _context.Entry(user).State = EntityState.Modified;
 
@@ -72,14 +71,14 @@ namespace NotSteam.Core.Services
 
         public async Task<bool> DoesExist(int id)
         {
-            return await _context.Games.AnyAsync(e => e.Id == id);
+            return await _context.Users.AnyAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<GamesDropdown>> GetDropdown()
+        public async Task<IEnumerable<UsersDropdown>> GetDropdown()
         {
             return await _context
-                .Games
-                .ProjectTo<GamesDropdown>(_mapper.ConfigurationProvider)
+                .Users
+                .ProjectTo<UsersDropdown>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
     }

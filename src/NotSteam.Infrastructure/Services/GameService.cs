@@ -6,79 +6,80 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Companies;
+using NotSteam.Core.ViewModels.Games;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Infrastructure.Services
 {
-    public class CompanyService : BaseService, ICompanyService
+    public class GameService : BaseService, IGameService
     {
         private readonly NotSteamContext _context;
         private readonly IMapper _mapper;
 
-        public CompanyService(NotSteamContext context, IMapper mapper)
+        public GameService(NotSteamContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<CompaniesList>> GetPageAsync(CompanyPaginationRequest request)
+        public async Task<PagedResult<GamesList>> GetPageAsync(GamePaginationRequest request)
         {
             var pagedResult = await _context
-                .Companies
-                .ProjectTo<CompaniesList>(_mapper.ConfigurationProvider)
+                .Games
+                .Include(c => c.GameTags)
+                .ProjectTo<GamesList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<CompanyDetails> GetByIdAsync(int id)
+        public async Task<GameDetails> GetByIdAsync(int id)
         {
             return await _context
-                .Companies
+                .Games
                 .Where(c => c.Id == id)
-                .ProjectTo<CompanyDetails>(_mapper.ConfigurationProvider)
+                .ProjectTo<GameDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
         public async Task<int> DeleteByIdAsync(int id)
         {
-            var company = await _context
-                .Companies
+            var user = await _context
+                .Games
                 .FindAsync(id);
 
-            _context.Companies.Remove(company);
+            _context.Games.Remove(user);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(Company company)
+        public async Task<int> AddAsync(Game user)
         {
-            await _context.Companies.AddAsync(company);
+            await _context.Games.AddAsync(user);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Company company)
+        public async Task<int> EditAsync(int id, Game user)
         {
-            _context.Entry(company).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> DoesExist(int id)
         {
-            return await _context.Companies.AnyAsync(e => e.Id == id);
+            return await _context.Games.AnyAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<CompaniesDropdown>> GetDropdown()
+        public async Task<IEnumerable<GamesDropdown>> GetDropdown()
         {
             return await _context
-                .Companies
-                .ProjectTo<CompaniesDropdown>(_mapper.ConfigurationProvider)
+                .Games
+                .ProjectTo<GamesDropdown>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
     }

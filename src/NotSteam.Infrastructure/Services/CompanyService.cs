@@ -6,81 +6,79 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Tags;
+using NotSteam.Core.ViewModels.Companies;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Infrastructure.Services
 {
-    public class TagService : BaseService, ITagService
+    public class CompanyService : BaseService, ICompanyService
     {
         private readonly NotSteamContext _context;
         private readonly IMapper _mapper;
 
-        public TagService(NotSteamContext context, IMapper mapper)
+        public CompanyService(NotSteamContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<TagsList>> GetPageAsync(TagPaginationRequest request)
+        public async Task<PagedResult<CompaniesList>> GetPageAsync(CompanyPaginationRequest request)
         {
             var pagedResult = await _context
-                .Tags
-                .Include(c => c.GameTags)
-                .ProjectTo<TagsList>(_mapper.ConfigurationProvider)
+                .Companies
+                .ProjectTo<CompaniesList>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
 
             return pagedResult;
         }
 
-        public async Task<TagDetails> GetByIdAsync(int id)
+        public async Task<CompanyDetails> GetByIdAsync(int id)
         {
             return await _context
-                .Tags
+                .Companies
                 .Where(c => c.Id == id)
-                .Include(c => c.GameTags)
-                .ProjectTo<TagDetails>(_mapper.ConfigurationProvider)
+                .ProjectTo<CompanyDetails>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }
 
         public async Task<int> DeleteByIdAsync(int id)
         {
-            var tag = await _context
-                .Tags
+            var company = await _context
+                .Companies
                 .FindAsync(id);
 
-            _context.Tags.Remove(tag);
+            _context.Companies.Remove(company);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> AddAsync(Tag tag)
+        public async Task<int> AddAsync(Company company)
         {
-            await _context.Tags.AddAsync(tag);
+            await _context.Companies.AddAsync(company);
 
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(int id, Tag tag)
+        public async Task<int> EditAsync(int id, Company company)
         {
-            _context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(company).State = EntityState.Modified;
 
             return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> DoesExist(int id)
         {
-            return await _context.Tags.AnyAsync(e => e.Id == id);
+            return await _context.Companies.AnyAsync(e => e.Id == id);
         }
 
-        public async Task<IEnumerable<TagsDropdown>> GetDropdown()
+        public async Task<IEnumerable<CompaniesDropdown>> GetDropdown()
         {
             return await _context
-                .Tags
-                .ProjectTo<TagsDropdown>(_mapper.ConfigurationProvider)
+                .Companies
+                .ProjectTo<CompaniesDropdown>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
     }
