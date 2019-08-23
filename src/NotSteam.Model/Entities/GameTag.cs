@@ -1,6 +1,6 @@
 ﻿namespace NotSteam.Model.Models
 {
-    public class GameTag : BaseModel
+    public class GameTag : ModelBase
     {
         public int GameId { get; set; }
         public int TagId { get; set; }

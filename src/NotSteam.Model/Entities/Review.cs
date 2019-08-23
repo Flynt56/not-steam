@@ -3,7 +3,7 @@ using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class Review : BaseModel
+    public class Review : ModelBase
     {
         public int UserId { get; set; }
         public int GameId { get; set; }

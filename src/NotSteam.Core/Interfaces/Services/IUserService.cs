@@ -5,7 +5,7 @@ using NotSteam.Core.ViewModels.Users;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services.Contracts
+namespace NotSteam.Core.Interfaces.Services
 {
     public interface IUserService
     {

@@ -6,7 +6,7 @@ using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class Game : BaseEntity
+    public class Game : EntityBase
     {
         [DataType(DataType.Text)]
         [CustomMaxStringLength(250)]

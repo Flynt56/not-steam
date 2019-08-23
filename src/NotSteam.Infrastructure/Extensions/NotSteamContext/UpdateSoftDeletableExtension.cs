@@ -9,9 +9,9 @@ namespace NotSteam.Core.Extensions.NotSteamContext
         public static void UpdateSoftDeletable(this Infrastructure.DB.NotSteamContext context)
         {
             var entries = context.ChangeTracker.Entries();
-            foreach (var entry in entries.Where(entry => entry.Entity is ISoftDeletable).Select(entry => entry))
+            foreach (var entry in entries.Where(entry => entry.Entity is IEntitySoftDelete).Select(entry => entry))
             {
-                var entity = (ISoftDeletable)entry.Entity;
+                var entity = (IEntitySoftDelete)entry.Entity;
                 switch (entry.State)
                 {
                     case EntityState.Added:

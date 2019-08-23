@@ -5,7 +5,7 @@ using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class User : BaseEntity
+    public class User : EntityBase
     {
         [DataType(DataType.Text)]
         [CustomRequired]

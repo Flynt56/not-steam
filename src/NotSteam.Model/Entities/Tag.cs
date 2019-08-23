@@ -4,7 +4,7 @@ using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class Tag : BaseEntity
+    public class Tag : EntityBase
     {
         [CustomRequired]
         [CustomMaxStringLength(48)]

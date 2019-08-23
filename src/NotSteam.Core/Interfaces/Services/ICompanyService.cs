@@ -5,7 +5,7 @@ using NotSteam.Core.ViewModels.Companies;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Services.Contracts
+namespace NotSteam.Core.Interfaces.Services
 {
     public interface ICompanyService
     {

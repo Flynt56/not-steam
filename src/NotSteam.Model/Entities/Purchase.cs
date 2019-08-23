@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class Library : BaseModel
+    public class Purchase : ModelBase
     {
         public int UserId { get; set; }
         public int GameId { get; set; }
@@ -12,14 +13,13 @@ namespace NotSteam.Model.Models
         [DataType(DataType.Date)]
         [CustomRequired]
         [CustomDateRange]
-        public DateTime DateAcquired { get; set; } = DateTime.UtcNow;
+        public DateTime DateOfPurchase { get; set; } = DateTime.UtcNow;
 
-        [Range(0, int.MaxValue, ErrorMessage = "\"{0}\" mora biti veći od {1}!")]
-        public int TotalPlayTimeHours { get; set; }
-
-        [DataType(DataType.Date)]
-        [CustomDateRange]
-        public DateTime? LastPlayedDate { get; set; }
+        [DataType(DataType.Currency)]
+        [CustomRequired]
+        [CustomRange(0.0, 99.99)]
+        [Column(TypeName = "decimal(19,4)")]
+        public decimal TotalPrice { get; set; }
 
         public User User { get; set; }
         public Game Game { get; set; }
