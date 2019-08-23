@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="App\Games\Commands\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
 
