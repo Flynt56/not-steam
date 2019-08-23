@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NotSteam.Model\NotSteam.Model.csproj" />
+    <ProjectReference Include="..\NotSteam.Shared\NotSteam.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
