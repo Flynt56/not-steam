@@ -5,7 +5,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
 {
-    public class PurchaseEntityConfiguration : IEntityTypeConfiguration<Purchase>
+    public class PurchaseConfiguration : IEntityTypeConfiguration<Purchase>
     {
         public void Configure(EntityTypeBuilder<Purchase> builder)
         {

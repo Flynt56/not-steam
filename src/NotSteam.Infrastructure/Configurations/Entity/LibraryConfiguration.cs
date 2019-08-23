@@ -5,7 +5,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
 {
-    public class LibraryEntityConfiguration : IEntityTypeConfiguration<Library>
+    public class LibraryConfiguration : IEntityTypeConfiguration<Library>
     {
         public void Configure(EntityTypeBuilder<Library> builder)
         {

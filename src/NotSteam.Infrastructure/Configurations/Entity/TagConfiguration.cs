@@ -5,7 +5,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
 {
-    public class TagEntityConfiguration : IEntityTypeConfiguration<Tag>
+    public class TagConfiguration : IEntityTypeConfiguration<Tag>
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {

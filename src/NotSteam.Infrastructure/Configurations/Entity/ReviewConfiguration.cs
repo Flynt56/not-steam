@@ -5,7 +5,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
 {
-    public class ReviewEntityConfiguration : IEntityTypeConfiguration<Review>
+    public class ReviewConfiguration : IEntityTypeConfiguration<Review>
     {
         public void Configure(EntityTypeBuilder<Review> builder)
         {
