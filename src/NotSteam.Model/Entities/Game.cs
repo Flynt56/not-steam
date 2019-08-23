@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Interfaces;
 
 namespace NotSteam.Model.Models
 {
-    public class Game : EntityBase
+    public class Game : EntityBase, IAggregateRoot
     {
         [DataType(DataType.Text)]
         [CustomMaxStringLength(250)]

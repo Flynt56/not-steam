@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Interfaces;
 
 namespace NotSteam.Model.Models
 {
-    public class Company : EntityBase
+    public class Company : EntityBase, IAggregateRoot
     {
         [DataType(DataType.Text)]
         [CustomRequired]
