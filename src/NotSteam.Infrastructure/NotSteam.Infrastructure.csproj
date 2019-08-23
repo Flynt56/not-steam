@@ -6,6 +6,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NotSteam.Core\NotSteam.Core.csproj" />
     <ProjectReference Include="..\NotSteam.Model\NotSteam.Model.csproj" />
     <ProjectReference Include="..\NotSteam.Shared\NotSteam.Shared.csproj" />
   </ItemGroup>
