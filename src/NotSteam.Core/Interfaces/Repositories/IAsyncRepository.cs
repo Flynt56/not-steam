@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using NotSteam.Core.Interfaces.Specifications;
+using NotSteam.Model.Interfaces;
+using NotSteam.Model.Models;
 
 namespace NotSteam.Core.Interfaces.Repositories
 {
