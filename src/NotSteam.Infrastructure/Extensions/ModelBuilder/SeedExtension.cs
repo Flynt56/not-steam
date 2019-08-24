@@ -7,7 +7,8 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
     {
         public static void Seed(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            User(modelBuilder);
+            // User(modelBuilder);
+
             Company(modelBuilder);
             Tag(modelBuilder);
             Game(modelBuilder);
