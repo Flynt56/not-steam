@@ -2,19 +2,21 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList
+namespace NotSteam.Core.App.GameTags.Queries.GetPaginatedGameTagsList
 {
-    public class TagsListEntryDto : IHaveCustomMapping
+    public class GameTagsListEntryDto : IHaveCustomMapping
     {
-        public int Id { get; set; }
+        public int GameId { get; set; }
+        public int TagId { get; set; }
 
-        public string Name { get; set; }
-        public int UsageAmount { get; set; }
+        public string TagName { get; set; }
+        public string GameTitle { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Tag, TagsListEntryDto>()
-                .ForMember(tDTO => tDTO.UsageAmount, opt => opt.MapFrom(t => t.GameTags.Count))
+            configuration.CreateMap<GameTag, GameTagsListEntryDto>()
+                .ForMember(gtDTO => gtDTO.TagName, opt => opt.MapFrom(gt => gt.Tag.Name))
+                .ForMember(gtDTO => gtDTO.GameTitle, opt => opt.MapFrom(gt => gt.Game.Title))
                 .ReverseMap();
         }
     }

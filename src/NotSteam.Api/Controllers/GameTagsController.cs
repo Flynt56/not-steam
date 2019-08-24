@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.GameTags.Queries.GetGameTagDetail;
+using NotSteam.Core.App.GameTags.Queries.GetPaginatedGameTagsList;
 
 namespace NotSteam.Api.Controllers
 {

@@ -2,27 +2,33 @@
 using MediatR;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList
+namespace NotSteam.Core.App.GameTags.Queries.GetPaginatedGameTagsList
 {
-    public class GetPaginatedTagsListQuery : AbstractPagingRequest<TagsListEntryDto>, IRequest<PagedResult<TagsListEntryDto>>
+    public class GetPaginatedGameTagsListQuery : AbstractPagingRequest<GameTagsListEntryDto>, IRequest<PagedResult<GameTagsListEntryDto>>
     {
-        private const string ValidOrderByValues = "name";
+        private const string ValidOrderByValues = "game,tag";
 
-        public string Name { get; set; }
+        public string Game { get; set; }
+        public string Tag { get; set; }
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<TagsListEntryDto> GetFilteredQuery(IQueryable<TagsListEntryDto> query)
+        public override IQueryable<GameTagsListEntryDto> GetFilteredQuery(IQueryable<GameTagsListEntryDto> query)
         {
-            if (!string.IsNullOrWhiteSpace(Name))
+            if (!string.IsNullOrWhiteSpace(Game))
             {
-                query = query.Where(i => i.Name.Contains(Name));
+                query = query.Where(i => i.GameTitle.Contains(Game));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Tag))
+            {
+                query = query.Where(i => i.TagName.Contains(Tag));
             }
 
             return query;
         }
 
-        public override IQueryable<TagsListEntryDto> SetUpSorting(IQueryable<TagsListEntryDto> query)
+        public override IQueryable<GameTagsListEntryDto> SetUpSorting(IQueryable<GameTagsListEntryDto> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 
@@ -30,8 +36,12 @@ namespace NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList
             {
                 switch (sortInformation.PropertyName)
                 {
-                    case "name":
-                        query = ApplyOrdering(query, dtc => dtc.Name, sortInformation.SortDirection);
+                    case "game":
+                        query = ApplyOrdering(query, dtc => dtc.GameTitle, sortInformation.SortDirection);
+                        break;
+
+                    case "tag":
+                        query = ApplyOrdering(query, dtc => dtc.TagName, sortInformation.SortDirection);
                         break;
                 }
             }
