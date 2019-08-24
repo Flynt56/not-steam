@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
@@ -35,9 +36,9 @@ namespace NotSteam.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostGame([FromBody]Game game)
+        public async Task<IActionResult> PostGame([FromBody] AddGameCommand command)
         {
-            return ApiOk(await GameService.AddAsync(game));
+            return ApiOk(await Mediator.Send(command));
         }
 
         [HttpDelete("{id}")]
