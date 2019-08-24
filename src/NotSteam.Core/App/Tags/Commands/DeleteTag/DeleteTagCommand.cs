@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Games.Commands.DeleteGame
+namespace NotSteam.Core.App.Tags.Commands.DeleteTag
 {
-    public class DeleteGameCommand : IRequest
+    public class DeleteTagCommand : IRequest
     {
         public int Id { get; set; }
     }
