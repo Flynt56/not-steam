@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NotSteam.Core.App.Companies.Commands.AddCompany;
 using NotSteam.Core.App.Companies.Queries.GetCompaniesMap;
 using NotSteam.Core.App.Companies.Queries.GetCompanyDetail;
 using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;

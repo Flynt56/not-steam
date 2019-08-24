@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Games.Commands.AddGame
 {
-    class AddGameCommandValidator : AbstractValidator<AddGameDto>
+    class AddGameCommandValidator : AbstractValidator<AddGameCommand>
     {
         public AddGameCommandValidator()
         {

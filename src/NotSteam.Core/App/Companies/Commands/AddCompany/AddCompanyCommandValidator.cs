@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace NotSteam.Core.App.Games.Commands.AddGame
+namespace NotSteam.Core.App.Companies.Commands.AddCompany
 {
-    class AddGameCommandValidator : AbstractValidator<AddGameDto>
+    class AddCompanyCommandValidator : AbstractValidator<AddCompanyCommand>
     {
-        public AddGameCommandValidator()
+        public AddCompanyCommandValidator()
         {
         }
     }
