@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.Tags.Commands.AddTag;
 using NotSteam.Core.App.Tags.Commands.DeleteTag;
+using NotSteam.Core.App.Tags.Commands.UpdateTag;
 using NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList;
 using NotSteam.Core.App.Tags.Queries.GetTagDetail;
 using NotSteam.Core.App.Tags.Queries.GetTagsMap;

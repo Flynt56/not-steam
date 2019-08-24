@@ -5,25 +5,25 @@ using MediatR;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Commands.UpdateGame
+namespace NotSteam.Core.App.Tags.Commands.UpdateTag
 {
-    public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand, UpdateGameDto>
+    public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, UpdateTagDto>
     {
-        private readonly IAsyncRepository<Game> _gameRepository;
+        private readonly IAsyncRepository<Tag> _tagRepository;
         private readonly IMapper _mapper;
 
-        public UpdateGameCommandHandler(IAsyncRepository<Game> gameRepository, IMapper mapper)
+        public UpdateTagCommandHandler(IAsyncRepository<Tag> tagRepository, IMapper mapper)
         {
-            _gameRepository = gameRepository;
+            _tagRepository = tagRepository;
             _mapper = mapper;
         }
 
-        public async Task<UpdateGameDto> Handle(UpdateGameCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateTagDto> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
         {
-            await _gameRepository
-                .UpdateAsync(_mapper.Map<Game>(request.UpdateGameDto));
+            await _tagRepository
+                .UpdateAsync(_mapper.Map<Tag>(request.UpdateTagDto));
 
-            return request.UpdateGameDto;
+            return request.UpdateTagDto;
         }
     }
 }

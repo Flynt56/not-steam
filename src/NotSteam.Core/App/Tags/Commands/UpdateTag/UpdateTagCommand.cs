@@ -1,11 +1,11 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Games.Commands.UpdateGame
+namespace NotSteam.Core.App.Tags.Commands.UpdateTag
 {
-    public class UpdateGameCommand : IRequest<UpdateGameDto>
+    public class UpdateTagCommand : IRequest<UpdateTagDto>
     {
         public int Id { get; set; }
 
-        public UpdateGameDto UpdateGameDto { get; set; }
+        public UpdateTagDto UpdateTagDto { get; set; }
     }
 }
