@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
+using NotSteam.Core.Interfaces.DB;
 using NotSteam.Infrastructure.Extensions.ModelBuilder;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NotSteamContext : IdentityDbContext<AuthUser>
+    public class NotSteamContext : IdentityDbContext<AuthUser>, INotSteamContext
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)
