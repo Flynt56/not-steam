@@ -7,7 +7,7 @@ namespace NotSteam.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class BaseController : ControllerBase
+    public abstract class AppController : ControllerBase
     {
         private IMediator _mediator;
 

@@ -1,6 +1,6 @@
 ﻿namespace NotSteam.Api.Controllers
 {
-    public class ReviewsController : BaseController
+    public class ReviewsController : AppController
     {
     }
 }

@@ -9,7 +9,7 @@ using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 
 namespace NotSteam.Api.Controllers
 {
-    public class GamesController : BaseController
+    public class GamesController : AppController
     {
         [HttpGet]
         public async Task<IActionResult> GetPage([FromQuery] GetPaginatedGamesListQuery query = null)

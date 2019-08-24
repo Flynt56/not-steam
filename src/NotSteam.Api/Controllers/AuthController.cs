@@ -3,7 +3,7 @@
 namespace NotSteam.Api.Controllers
 {
     [Authorize]
-    public abstract class AuthController : BaseController
+    public abstract class AuthController : AppController
     {
     }
 }

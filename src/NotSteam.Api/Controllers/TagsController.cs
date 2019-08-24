@@ -9,7 +9,7 @@ using NotSteam.Core.App.Tags.Queries.GetTagsMap;
 
 namespace NotSteam.Api.Controllers
 {
-    public class TagsController : BaseController
+    public class TagsController : AppController
     {
         [HttpGet]
         public async Task<IActionResult> GetPage([FromQuery] GetPaginatedTagsListQuery query = null)

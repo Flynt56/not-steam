@@ -9,7 +9,7 @@ using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;
 
 namespace NotSteam.Api.Controllers
 {
-    public class CompaniesController : BaseController
+    public class CompaniesController : AppController
     {
         [HttpGet]
         public async Task<IActionResult> GetPage([FromQuery] GetPaginatedCompaniesListQuery query = null)
