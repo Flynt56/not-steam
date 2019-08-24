@@ -19,11 +19,11 @@ using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Interfaces.DB;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
-
 using NotSteam.Core.App.Games.Commands.AddGame;
 using MediatR;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.Infrastructure;
+using NotSteam.Api.Filters;
 
 namespace NotSteam
 {
@@ -80,10 +80,12 @@ namespace NotSteam
                     };
                 });
 
-            services.AddMvc()
+            services.AddMvc(opt => opt.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(a=>a.RegisterValidatorsFromAssemblyContaining<AddGameCommandValidator>());
+
+            FluentValidation.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("hr");
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
