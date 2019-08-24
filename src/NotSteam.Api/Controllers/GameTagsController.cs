@@ -1,74 +1,44 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Requests;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Model.Models;
 
 namespace NotSteam.Api.Controllers
 {
-    public class GameTagsController : BaseController
+    public class GameTagTagsController : BaseController
     {
-        private readonly IGameTagService GameTagService;
-
-        public GameTagsController(IGameTagService gameTagService, NotSteamContext context, IMapper mapper) : base(context, mapper)
-        {
-            GameTagService = gameTagService;
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]GameTagPaginationRequest request = null)
+        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedGameTagsListQuery query = null)
         {
-            return ApiOk(await GameTagService.GetPageAsync(request));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("{idGame}/{idTag}")]
-        public async Task<IActionResult> GetOne(int idGame, int idTag)
+        public async Task<IActionResult> GetOne([FromQuery] GetGameTagDetailQuery query)
         {
-            return ApiOk(await GameTagService.GetByIdAsync(idGame, idTag));
+            return ApiOk(await Mediator.Send(query));
         }
 
-        [HttpPut("{idGame}/{idTag}")]
-        public async Task<IActionResult> PutGameTag(int idGame, int idTag, [FromBody]GameTag gameTag)
+        [HttpGet("dropdown")]
+        public async Task<IActionResult> GetDropdown()
         {
-            if (idTag == gameTag.TagId && idGame == gameTag.GameId)
-            {
-                _context.Entry(gameTag).State = EntityState.Modified;
+            return ApiOk(await Mediator.Send(new GetGameTagsMapQuery()));
+        }
 
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (await GameTagService.DoesExist(idGame, idTag))
-                    {
-                        throw;
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
-                }
-
-                return AcceptedAtAction(nameof(GetOne), new { idGame = gameTag.GameId, idTag = gameTag.TagId }, gameTag);
-            }
-
-            return BadRequest();
+        [HttpGet("{idGame}/{idTag}")]
+        public async Task<IActionResult> PutOne(int idGame, int idTag, [FromBody] UpdateGameTagDto game)
+        {
+            return ApiOk(await Mediator.Send(new UpdateGameTagCommand { Id = id, UpdateGameTagDto = game }));
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostGameTag([FromBody]GameTag gameTag)
+        public async Task<IActionResult> PostOne([FromBody] AddGameTagDto game)
         {
-            return ApiOk(await GameTagService.AddAsync(gameTag));
+            return ApiOk(await Mediator.Send(new AddGameTagCommand { AddGameTagDto = game }));
         }
 
-        [HttpDelete("{idGame}/{idTag}")]
-        public async Task<IActionResult> DeleteGameTag(int idGame, int idTag)
+        [HttpGet("{idGame}/{idTag}")]
+        public async Task<IActionResult> DeleteOne([FromQuery] DeleteGameTagCommand command)
         {
-            return ApiOk(await GameTagService.DeleteByIdAsync(idGame, idTag));
+            return ApiOk(await Mediator.Send(command));
         }
     }
 }
