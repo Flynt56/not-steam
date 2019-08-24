@@ -2,28 +2,32 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.Interfaces.DB;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Tags.Commands.UpdateTag
+namespace NotSteam.Core.App.GameTags.Commands.UpdateGameTag
 {
-    public class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, UpdateTagDto>
+    public class UpdateGameTagCommandHandler : IRequestHandler<UpdateGameTagCommand, UpdateGameTagDto>
     {
-        private readonly IAsyncRepository<Tag> _tagRepository;
+        private readonly INotSteamContext _context;
         private readonly IMapper _mapper;
 
-        public UpdateTagCommandHandler(IAsyncRepository<Tag> tagRepository, IMapper mapper)
+        public UpdateGameTagCommandHandler(INotSteamContext context, IMapper mapper)
         {
-            _tagRepository = tagRepository;
+            _context = context;
             _mapper = mapper;
         }
 
-        public async Task<UpdateTagDto> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateGameTagDto> Handle(UpdateGameTagCommand request, CancellationToken cancellationToken)
         {
-            await _tagRepository
-                .UpdateAsync(_mapper.Map<Tag>(request.UpdateTagDto));
+            _context.GameTags.Entry(_mapper.Map<GameTag>(request.UpdateGameTagDto)).State = EntityState.Modified;
 
-            return request.UpdateTagDto;
+            await _dbContext.SaveChangesAsync();
+
+
+            return request.UpdateGameTagDto;
         }
     }
 }
