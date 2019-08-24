@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using NotSteam.Infrastructure.DB;
+﻿using Microsoft.AspNetCore.Authorization;
 
 namespace NotSteam.Api.Controllers
 {
