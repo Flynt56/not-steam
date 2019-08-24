@@ -2,7 +2,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;

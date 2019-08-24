@@ -24,7 +24,7 @@ namespace NotSteam.Core.App.Tags.Commands.DeleteTag
             var entity = await _tagRepository
                 .GetByIdAsync(request.Id);
 
-            if(entity == null)
+            if (entity == null)
             {
                 throw new NotFoundException(nameof(Tag), request.Id);
             }

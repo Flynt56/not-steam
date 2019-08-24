@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Services;
 
 namespace NotSteam.Core.Extensions
 {

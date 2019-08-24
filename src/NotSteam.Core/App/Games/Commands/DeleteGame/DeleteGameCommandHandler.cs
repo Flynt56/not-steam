@@ -24,7 +24,7 @@ namespace NotSteam.Core.App.Games.Commands.DeleteGame
             var entity = await _gameRepository
                 .GetByIdAsync(request.Id);
 
-            if(entity == null)
+            if (entity == null)
             {
                 throw new NotFoundException(nameof(Game), request.Id);
             }

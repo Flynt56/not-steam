@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using NotSteam.Core.ViewModels.Reviews;
 using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.Requests

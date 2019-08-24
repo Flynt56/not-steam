@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using NotSteam.Core.ViewModels.Users;
 using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.Requests
@@ -20,7 +19,7 @@ namespace NotSteam.Core.Requests
                 query = query.Where(i => i.Name.Contains(Username));
             }
 
-            if(!string.IsNullOrWhiteSpace(Nickname))
+            if (!string.IsNullOrWhiteSpace(Nickname))
             {
                 query = query.Where(i => i.Nick.Contains(Nickname));
             }
