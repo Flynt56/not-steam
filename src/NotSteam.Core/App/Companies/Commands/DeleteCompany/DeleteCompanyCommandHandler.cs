@@ -6,30 +6,30 @@ using NotSteam.Core.Exceptions;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Commands.DeleteGame
+namespace NotSteam.Core.App.Companies.Commands.DeleteCompany
 {
-    public class DeleteGameCommandHandler : IRequestHandler<DeleteGameCommand>
+    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     {
-        private readonly IAsyncRepository<Game> _gameRepository;
+        private readonly IAsyncRepository<Company> _companyRepository;
         private readonly IMapper _mapper;
 
-        public DeleteGameCommandHandler(IAsyncRepository<Game> gameRepository, IMapper mapper)
+        public DeleteCompanyCommandHandler(IAsyncRepository<Company> companyRepository, IMapper mapper)
         {
-            _gameRepository = gameRepository;
+            _companyRepository = companyRepository;
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteGameCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _gameRepository
+            var entity = await _companyRepository
                 .GetByIdAsync(request.Id);
 
-            if(entity == null)
+            if (entity == null)
             {
-                throw new NotFoundException(nameof(Game), request.Id);
+                throw new NotFoundException(nameof(Company), request.Id);
             }
 
-            await _gameRepository
+            await _companyRepository
                 .DeleteAsync(entity);
 
             return Unit.Value;

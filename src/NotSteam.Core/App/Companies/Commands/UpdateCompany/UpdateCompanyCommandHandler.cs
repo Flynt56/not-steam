@@ -5,25 +5,25 @@ using MediatR;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Commands.UpdateGame
+namespace NotSteam.Core.App.Companies.Commands.UpdateCompany
 {
-    public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand, UpdateGameDto>
+    public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand, UpdateCompanyDto>
     {
-        private readonly IAsyncRepository<Game> _gameRepository;
+        private readonly IAsyncRepository<Company> _companyRepository;
         private readonly IMapper _mapper;
 
-        public UpdateGameCommandHandler(IAsyncRepository<Game> gameRepository, IMapper mapper)
+        public UpdateCompanyCommandHandler(IAsyncRepository<Company> companyRepository, IMapper mapper)
         {
-            _gameRepository = gameRepository;
+            _companyRepository = companyRepository;
             _mapper = mapper;
         }
 
-        public async Task<UpdateGameDto> Handle(UpdateGameCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateCompanyDto> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
-            await _gameRepository
-                .UpdateAsync(_mapper.Map<Game>(request.UpdateGameDto));
+            await _companyRepository
+                .UpdateAsync(_mapper.Map<Company>(request.UpdateCompanyDto));
 
-            return request.UpdateGameDto;
+            return request.UpdateCompanyDto;
         }
     }
 }

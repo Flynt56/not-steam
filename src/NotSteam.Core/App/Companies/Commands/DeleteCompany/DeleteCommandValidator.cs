@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace NotSteam.Core.App.Games.Commands.DeleteGame
+namespace NotSteam.Core.App.Companies.Commands.DeleteCompany
 {
-    class DeleteGameCommandValidator : AbstractValidator<DeleteGameCommand>
+    class DeleteCompanyCommandValidator : AbstractValidator<DeleteCompanyCommand>
     {
-        public DeleteGameCommandValidator()
+        public DeleteCompanyCommandValidator()
         {
             RuleFor(e => e.Id).NotEmpty();
         }

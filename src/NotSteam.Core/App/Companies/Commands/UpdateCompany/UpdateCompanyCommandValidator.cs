@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace NotSteam.Core.App.Games.Commands.UpdateGame
+namespace NotSteam.Core.App.Companies.Commands.UpdateCompany
 {
-    class UpdateGameCommandValidator : AbstractValidator<UpdateGameCommand>
+    class UpdateCompanyCommandValidator : AbstractValidator<UpdateCompanyCommand>
     {
-        public UpdateGameCommandValidator()
+        public UpdateCompanyCommandValidator()
         {
         }
     }

@@ -1,11 +1,11 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Games.Commands.UpdateGame
+namespace NotSteam.Core.App.Companies.Commands.UpdateCompany
 {
-    public class UpdateGameCommand : IRequest<UpdateGameDto>
+    public class UpdateCompanyCommand : IRequest<UpdateCompanyDto>
     {
         public int Id { get; set; }
 
-        public UpdateGameDto UpdateGameDto { get; set; }
+        public UpdateCompanyDto UpdateCompanyDto { get; set; }
     }
 }

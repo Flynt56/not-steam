@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Games.Commands.DeleteGame
+namespace NotSteam.Core.App.Companies.Commands.DeleteCompany
 {
-    public class DeleteGameCommand : IRequest
+    public class DeleteCompanyCommand : IRequest
     {
         public int Id { get; set; }
     }
