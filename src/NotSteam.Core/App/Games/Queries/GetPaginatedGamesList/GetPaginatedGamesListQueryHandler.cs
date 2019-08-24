@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Core.Specifications;
 using NotSteam.Model.Models;
+using NotSteam.Shared.Extensions;
+using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
-    public class GetPaginatedGamesListQueryHandler : IRequestHandler<GetPaginatedGamesListQuery, PaginatedGameListModel>
+    public class GetPaginatedGamesListQueryHandler : IRequestHandler<GamePaginationRequest, PagedResult<GamesListEntryDto>>
     {
         private readonly IAsyncRepository<Game> _gameRepository;
         private readonly IMapper _mapper;
@@ -22,9 +22,12 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
             _mapper = mapper;
         }
 
-        public async Task<PaginatedGameListModel> Handle(GetPaginatedGamesListQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<GamesListEntryDto>> Handle(GamePaginationRequest request, CancellationToken cancellationToken)
         {
-            return await _gameRepository.ListAsync(new PaginatedGamesListSpecification(request.Skip, request.Take, null));
+            return await _gameRepository.GetAll()
+                .Include(a => a.GameTags)
+                .ProjectTo<GamesListEntryDto>(_mapper.ConfigurationProvider)
+                .ToPagedResultAsync(request);
         }
     }
 }

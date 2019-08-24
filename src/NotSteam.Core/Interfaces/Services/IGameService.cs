@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using NotSteam.Core.Requests;
+using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 using NotSteam.Core.ViewModels.Games;
 using NotSteam.Model.Models;
 using NotSteam.Shared.Pagination;

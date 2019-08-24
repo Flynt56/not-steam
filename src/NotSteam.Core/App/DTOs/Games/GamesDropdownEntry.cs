@@ -2,9 +2,9 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.ViewModels.Games
+namespace NotSteam.Core.App.DTOs.Games
 {
-    public class GamesDropdown : IHaveCustomMapping
+    public class GamesDropdownEntry : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -12,7 +12,7 @@ namespace NotSteam.Api.ViewModels.Games
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GamesDropdown>()
+            configuration.CreateMap<Game, GamesDropdownEntry>()
                 .ReverseMap();
         }
     }

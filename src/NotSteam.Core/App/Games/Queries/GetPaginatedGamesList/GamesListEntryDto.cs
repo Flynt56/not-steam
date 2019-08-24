@@ -5,9 +5,9 @@ using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.ViewModels.Games
+namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
-    public class GamesList : IHaveCustomMapping
+    public class GamesListEntryDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace NotSteam.Api.ViewModels.Games
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GamesList>()
+            configuration.CreateMap<Game, GamesListEntryDto>()
                 .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToHashSet()))
                 .ReverseMap();
         }
