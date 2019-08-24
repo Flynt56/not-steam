@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 using NotSteam.Core.ViewModels.Games;
 using NotSteam.Model.Models;
@@ -9,7 +10,7 @@ namespace NotSteam.Core.Interfaces.Services
 {
     public interface IGameService
     {
-        Task<PagedResult<GamesList>> GetPageAsync(GamePaginationRequest request);
+        Task<PagedResult<GamesList>> GetPageAsync(GetPaginatedGamesListQuery request);
         Task<GameDetails> GetByIdAsync(int id);
 
         Task<IEnumerable<GamesDropdown>> GetDropdown();

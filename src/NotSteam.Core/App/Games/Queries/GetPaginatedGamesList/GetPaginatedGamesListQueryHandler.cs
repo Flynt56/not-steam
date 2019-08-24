@@ -11,7 +11,7 @@ using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
-    public class GetPaginatedGamesListQueryHandler : IRequestHandler<GamePaginationRequest, PagedResult<GamesListEntryDto>>
+    public class GetPaginatedGamesListQueryHandler : IRequestHandler<GetPaginatedGamesListQuery, PagedResult<GamesListEntryDto>>
     {
         private readonly IAsyncRepository<Game> _gameRepository;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<GamesListEntryDto>> Handle(GamePaginationRequest request, CancellationToken cancellationToken)
+        public async Task<PagedResult<GamesListEntryDto>> Handle(GetPaginatedGamesListQuery request, CancellationToken cancellationToken)
         {
             return await _gameRepository.GetAll()
                 .Include(a => a.GameTags)

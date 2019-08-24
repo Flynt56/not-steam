@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.ViewModels.Games;
@@ -25,7 +26,7 @@ namespace NotSteam.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<GamesList>> GetPageAsync(GamePaginationRequest request)
+        public async Task<PagedResult<GamesList>> GetPageAsync(GetPaginatedGamesListQuery request)
         {
             var pagedResult = await _context
                 .Games

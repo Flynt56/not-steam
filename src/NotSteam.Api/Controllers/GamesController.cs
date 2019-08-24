@@ -4,6 +4,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
@@ -17,9 +18,9 @@ namespace NotSteam.Api.Controllers
     public class GamesController : BaseController
     {
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]PagingRequest request = null)
+        public async Task<IActionResult> GetPage([FromQuery]GetPaginatedGamesListQuery request = null)
         {
-            return ApiOk(Mapper.Map<IReadOnlyList<GamesListEntryDto>>(await Mediator.Send(new GetPaginatedGamesListQuery(request.Page, request.PageSize))));
+            return ApiOk(await Mediator.Send(request));
         }
 
         [HttpGet("{id}")]

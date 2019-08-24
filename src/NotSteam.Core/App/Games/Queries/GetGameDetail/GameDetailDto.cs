@@ -3,9 +3,9 @@ using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.DTOs.Games
+namespace NotSteam.Core.App.Games.Queries.GetGameDetail
 {
-    public class GameDetails : IHaveCustomMapping
+    public class GameDetailDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace NotSteam.Core.App.DTOs.Games
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GameDetails>()
+            configuration.CreateMap<Game, GameDetailDto>()
                 .ReverseMap();
         }
     }
