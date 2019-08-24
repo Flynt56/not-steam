@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{15BA82CF-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{532F663D-2695-4BE5-A9E0-87A3D759D006}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3AD3A67C-829F-450B-BE1C-8572CF492D28}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{3AD3A67C-829F-450B-BE1C-8572CF492D28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
