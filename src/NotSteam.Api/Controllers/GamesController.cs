@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.App.Games.Commands.AddGame;
+using NotSteam.Core.App.Games.Commands.DeleteGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
-using NotSteam.Model.Models;
 
 namespace NotSteam.Api.Controllers
 {
@@ -42,9 +41,9 @@ namespace NotSteam.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGame(int id)
+        public async Task<IActionResult> DeleteGame([FromQuery] DeleteGameCommand command)
         {
-            return ApiOk(await GameService.DeleteByIdAsync(id));
+            return ApiOk(await Mediator.Send(command));
         }
     }
 }
