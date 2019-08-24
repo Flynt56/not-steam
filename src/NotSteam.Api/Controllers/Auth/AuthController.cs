@@ -50,7 +50,7 @@ namespace NotSteam.Api.Controllers.Auth
             {
                 User = new AuthUserResponse
                 {
-                    Id = 1,
+                    Id = user.Id,
                     Email = user.Email
                 },
                 Token = token

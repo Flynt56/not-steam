@@ -2,7 +2,7 @@
 {
     public class AuthUserResponse
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
     }
 }

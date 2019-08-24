@@ -1,11 +1,8 @@
-﻿using NotSteam.Model.Models;
-
-namespace NotSteam.Api.Responses
+﻿namespace NotSteam.Api.Responses
 {
     public class LoginResponse : AppResponse
     {
         public string Token { get; set; }
-
-        public AuthUser User { get; set; }
+        public AuthUserResponse User { get; set; }
     }
 }
