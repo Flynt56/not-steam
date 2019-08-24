@@ -1,80 +1,47 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Requests;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Model.Models;
+using NotSteam.Core.App.Companies.Queries.GetCompaniesMap;
+using NotSteam.Core.App.Companies.Queries.GetCompanyDetail;
+using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;
 
 namespace NotSteam.Api.Controllers
 {
     public class CompaniesController : BaseController
     {
-        private readonly ICompanyService CompanyService;
-
-        public CompaniesController(ICompanyService companyService, NotSteamContext context, IMapper mapper) : base(context, mapper)
-        {
-            CompanyService = companyService;
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]CompanyPaginationRequest request = null)
+        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedCompaniesListQuery query = null)
         {
-            return ApiOk(await CompanyService.GetPageAsync(request));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        public async Task<IActionResult> GetOne([FromQuery] GetCompanyDetailQuery query)
         {
-            return ApiOk(await CompanyService.GetByIdAsync(id));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("dropdown")]
         public async Task<IActionResult> GetDropdown()
         {
-            return ApiOk(await CompanyService.GetDropdown());
+            return ApiOk(await Mediator.Send(new GetCompaniesMapQuery()));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(int id, [FromBody]Company company)
+        public async Task<IActionResult> PutOne(int id, [FromBody] UpdateCompanyDto game)
         {
-            if (id != company.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(company).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (await CompanyService.DoesExist(id))
-                {
-                    throw;
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-
-            return AcceptedAtAction(nameof(GetOne), new { id = company.Id }, company);
+            return ApiOk(await Mediator.Send(new UpdateCompanyCommand { Id = id, UpdateCompanyDto = game }));
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCompany([FromBody]Company company)
+        public async Task<IActionResult> PostOne([FromBody] AddCompanyDto game)
         {
-            return ApiOk(await CompanyService.AddAsync(company));
+            return ApiOk(await Mediator.Send(new AddCompanyCommand { AddCompanyDto = game }));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompany(int id)
+        public async Task<IActionResult> DeleteOne([FromQuery] DeleteCompanyCommand command)
         {
-            return ApiOk(await CompanyService.DeleteByIdAsync(id));
+            return ApiOk(await Mediator.Send(command));
         }
     }
 }
