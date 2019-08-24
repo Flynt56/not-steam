@@ -1,38 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
-using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Games;
-using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
-using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Api.Controllers
 {
     public class GamesController : BaseController
     {
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]GetPaginatedGamesListQuery request = null)
+        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedGamesListQuery query = null)
         {
-            return ApiOk(await Mediator.Send(request));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        public async Task<IActionResult> GetOne([FromQuery] GetGameDetailQuery query)
         {
-            return ApiOk(await GameService.GetByIdAsync(id));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("dropdown")]
         public async Task<IActionResult> GetDropdown()
         {
-            return ApiOk(await GameService.GetDropdown());
+            return ApiOk(await Mediator.Send(new GetGamesMapQuery()));
         }
 
         [HttpPut("{id}")]
