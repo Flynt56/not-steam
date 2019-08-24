@@ -35,13 +35,13 @@ namespace NotSteam.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostGame([FromBody] AddGameCommand command)
+        public async Task<IActionResult> PostOne([FromBody] AddGameDto game)
         {
-            return ApiOk(await Mediator.Send(command));
+            return ApiOk(await Mediator.Send(new AddGameCommand { AddGameDto = game }));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGame([FromQuery] DeleteGameCommand command)
+        public async Task<IActionResult> DeleteOne([FromQuery] DeleteGameCommand command)
         {
             return ApiOk(await Mediator.Send(command));
         }
