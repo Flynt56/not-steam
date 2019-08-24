@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NotSteam.Core.App.GameTags.Queries.GetGameTagDetail;
 
 namespace NotSteam.Api.Controllers
 {
@@ -15,12 +16,6 @@ namespace NotSteam.Api.Controllers
         public async Task<IActionResult> GetOne([FromQuery] GetGameTagDetailQuery query)
         {
             return ApiOk(await Mediator.Send(query));
-        }
-
-        [HttpGet("dropdown")]
-        public async Task<IActionResult> GetDropdown()
-        {
-            return ApiOk(await Mediator.Send(new GetGameTagsMapQuery()));
         }
 
         [HttpGet("{idGame}/{idTag}")]
