@@ -15,6 +15,7 @@ namespace NotSteam.Api.Filters
             {
                 context.HttpContext.Response.ContentType = "application/json";
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
                 context.Result = new JsonResult(
                     ((ValidationException)context.Exception).Failures);
 
