@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Auth.Register.Command
 {
-    class RegisterRequestValidator : AbstractValidator<RegisterRequest>
+    public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {
         public RegisterRequestValidator()
         {

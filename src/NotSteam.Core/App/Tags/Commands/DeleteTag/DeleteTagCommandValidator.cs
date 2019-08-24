@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Tags.Commands.DeleteTag
 {
-    class DeleteTagCommandValidator : AbstractValidator<DeleteTagCommand>
+    public class DeleteTagCommandValidator : AbstractValidator<DeleteTagCommand>
     {
         public DeleteTagCommandValidator()
         {

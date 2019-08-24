@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Tags.Commands.UpdateTag
 {
-    class UpdateTagCommandValidator : AbstractValidator<UpdateTagCommand>
+    public class UpdateTagCommandValidator : AbstractValidator<UpdateTagCommand>
     {
         public UpdateTagCommandValidator()
         {

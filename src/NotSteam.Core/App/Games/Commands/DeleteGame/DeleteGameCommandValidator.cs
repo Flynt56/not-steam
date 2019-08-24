@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Games.Commands.DeleteGame
 {
-    class DeleteGameCommandValidator : AbstractValidator<DeleteGameCommand>
+    public class DeleteGameCommandValidator : AbstractValidator<DeleteGameCommand>
     {
         public DeleteGameCommandValidator()
         {

@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Auth.Login.Command
 {
-    class LoginRequestValidator : AbstractValidator<LoginRequest>
+    public class LoginRequestValidator : AbstractValidator<LoginRequest>
     {
         public LoginRequestValidator()
         {

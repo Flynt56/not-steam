@@ -2,7 +2,7 @@
 
 namespace NotSteam.Core.App.Companies.Commands.AddCompany
 {
-    class AddCompanyCommandValidator : AbstractValidator<AddCompanyCommand>
+    public class AddCompanyCommandValidator : AbstractValidator<AddCompanyCommand>
     {
         public AddCompanyCommandValidator()
         {
