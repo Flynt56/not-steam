@@ -28,7 +28,9 @@ namespace NotSteam.Api.Controllers.Auth
             string token = await AuthService.SignInAsync(request.Email, request.Password);
 
             if (string.IsNullOrEmpty(token))
+            {
                 throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            }
 
             return token;
         }
@@ -40,7 +42,9 @@ namespace NotSteam.Api.Controllers.Auth
             var user = await UserService.GetByEmailAsync(request.Email);
 
             if (string.IsNullOrEmpty(token))
+            {
                 throw new ApplicationException("UNKNOWN_ERROR");
+            }
 
             return new RegisterResponse
             {
