@@ -25,6 +25,11 @@ namespace NotSteam.Infrastructure.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
+        public virtual async Task<T> GetByCompositeIdAsync(int[] ids)
+        {
+            return await _dbContext.Set<T>().FindAsync(ids);
+        }
+
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             return await _dbContext.Set<T>().ToListAsync();

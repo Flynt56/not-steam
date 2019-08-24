@@ -10,6 +10,7 @@ namespace NotSteam.Core.Interfaces.Repositories
     public interface IAsyncRepository<T> where T : EntityBase, IAggregateRoot
     {
         Task<T> GetByIdAsync(int id);
+        Task<T> GetByCompositeIdAsync(int[] ids);
 
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
