@@ -21,7 +21,7 @@ namespace NotSteam.Model.Models
         [CustomDateRange]
         public DateTime? LastPlayedDate { get; set; }
 
-        public User User { get; set; }
+        public AuthUser User { get; set; }
         public Game Game { get; set; }
     }
 }

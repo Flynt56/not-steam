@@ -15,12 +15,12 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
         public DateTime ReleaseDate { get; set; }
         public decimal BasePrice { get; set; }
 
-        public ICollection<string> Tags { get; set; } = new HashSet<string>();
+        public IReadOnlyList<string> Tags { get; set; } = new List<string>();
 
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Game, GamesListEntryDto>()
-                .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToHashSet()))
+                .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToList()))
                 .ReverseMap();
         }
     }

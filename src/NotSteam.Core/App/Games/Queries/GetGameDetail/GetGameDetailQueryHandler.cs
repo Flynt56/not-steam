@@ -26,6 +26,7 @@ namespace NotSteam.Core.App.Games.Queries.GetGameDetail
             return await _gameRepository.GetAll()
                 .Where(a => a.Id == request.Id)
                 .Include(a => a.Company)
+                .Include(a => a.Reviews)
                 .ProjectTo<GameDetailDto>(_mapper.ConfigurationProvider)
                 .FirstAsync();
         }

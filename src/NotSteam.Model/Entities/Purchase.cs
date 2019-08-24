@@ -21,7 +21,7 @@ namespace NotSteam.Model.Models
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
 
-        public User User { get; set; }
+        public AuthUser User { get; set; }
         public Game Game { get; set; }
     }
 }

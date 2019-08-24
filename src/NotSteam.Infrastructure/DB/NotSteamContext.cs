@@ -8,7 +8,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NotSteamContext : IdentityDbContext
+    public class NotSteamContext : IdentityDbContext<AuthUser>
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)

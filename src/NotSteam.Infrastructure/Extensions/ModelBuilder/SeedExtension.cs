@@ -267,7 +267,7 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
 
         private static void User(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
+            modelBuilder.Entity<AuthUser>().HasData(
                 new
                 {
                     Id = 1,
