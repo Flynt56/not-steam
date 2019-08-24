@@ -35,6 +35,11 @@ namespace NotSteam.Infrastructure.Repositories
             return await ApplySpecification(spec).ToListAsync();
         }
 
+        public IQueryable<T> GetAll()
+        {
+            return _dbContext.Set<T>().AsQueryable();
+        }
+
         public async Task<int> CountAsync(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).CountAsync();

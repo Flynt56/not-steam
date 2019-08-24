@@ -4,27 +4,23 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NotSteam.Api.ViewModels.Games;
+using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Requests;
 using NotSteam.Core.ViewModels.Games;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
+using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Api.Controllers
 {
     public class GamesController : BaseController
     {
-        private readonly IGameService GameService;
-
-        public GamesController(IGameService gameService, NotSteamContext context, IMapper mapper) : base(context, mapper)
-        {
-            GameService = gameService;
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]GamePaginationRequest request = null)
+        public async Task<IActionResult> GetPage([FromQuery]PagingRequest request = null)
         {
-            return ApiOk(await GameService.GetPageAsync(request));
+            return ApiOk(Mapper.Map<IReadOnlyList<GamesList>>(await Mediator.Send(new GetPaginatedGamesListQuery(request.Page, request.PageSize))));
         }
 
         [HttpGet("{id}")]

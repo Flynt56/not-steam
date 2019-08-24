@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using System;
+using NotSteam.Model.Models;
+using System.Collections.Generic;
 
 namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
@@ -11,16 +12,6 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 
         public GetPaginatedGamesListQuery(int page, int pageSize)
         {
-            if (page < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(page), page, "Page number must be greater than 0!");
-            }
-
-            if(pageSize < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(pageSize), pageSize, "Page size must be greater than 0!");
-            }
-
             Skip = (page - 1) * pageSize;
             Take = pageSize;
         }

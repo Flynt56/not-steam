@@ -24,7 +24,7 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 
         public async Task<PaginatedGameListModel> Handle(GetPaginatedGamesListQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<PaginatedGameListModel>(await _gameRepository.ListAsync(new PaginatedGamesListSpecification(request.Skip, request.Take, null)));
+            return await _gameRepository.ListAsync(new PaginatedGamesListSpecification(request.Skip, request.Take, null));
         }
     }
 }

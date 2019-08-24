@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NotSteam.Core.Interfaces.Specifications;
 using NotSteam.Model.Interfaces;
@@ -12,6 +13,8 @@ namespace NotSteam.Core.Interfaces.Repositories
 
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+
+        IQueryable<T> GetAll();
 
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);

@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using NotSteam.Infrastructure.DB;
 
 namespace NotSteam.Api.Controllers
@@ -9,14 +11,13 @@ namespace NotSteam.Api.Controllers
     [ApiController]
     public abstract class BaseController : ControllerBase
     {
-        protected readonly NotSteamContext _context;
-        protected readonly IMapper _mapper;
+        private NotSteamContext _context;
+        private IMapper _mapper;
+        private IMediator _mediator;
 
-        public BaseController(NotSteamContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        protected NotSteamContext Context => _context ?? (_context = HttpContext.RequestServices.GetRequiredService<NotSteamContext>());
+        protected IMapper Mapper => _mapper ?? (_mapper = HttpContext.RequestServices.GetRequiredService<IMapper>());
+        protected IMediator Mediator => _mediator ?? (_mediator = HttpContext.RequestServices.GetRequiredService<IMediator>());
 
         protected IActionResult ApiOk()
         {
