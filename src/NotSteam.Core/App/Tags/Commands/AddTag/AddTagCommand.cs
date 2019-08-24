@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Games.Commands.AddGame
+namespace NotSteam.Core.App.Tags.Commands.AddTag
 {
-    public class AddGameCommand : IRequest<AddGameDto>
+    public class AddTagCommand : IRequest<AddTagDto>
     {
-        public AddGameDto AddGameDto { get; set; }
+        public AddTagDto AddTagDto { get; set; }
     }
 }
