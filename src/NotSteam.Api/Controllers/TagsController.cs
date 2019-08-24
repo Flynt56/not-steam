@@ -1,83 +1,47 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Requests;
-using NotSteam.Core.ViewModels.Tags;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Model.Models;
+using NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList;
+using NotSteam.Core.App.Tags.Queries.GetTagDetail;
+using NotSteam.Core.App.Tags.Queries.GetTagsMap;
 
 namespace NotSteam.Api.Controllers
 {
     public class TagsController : BaseController
     {
-        private readonly ITagService TagService;
-
-        public TagsController(ITagService tagService, NotSteamContext context, IMapper mapper) : base(context, mapper)
-        {
-            TagService = tagService;
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]TagPaginationRequest request = null)
+        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedTagsListQuery query = null)
         {
-            return ApiOk(await TagService.GetPageAsync(request));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        public async Task<IActionResult> GetOne([FromQuery] GetTagDetailQuery query)
         {
-            return ApiOk(await TagService.GetByIdAsync(id));
+            return ApiOk(await Mediator.Send(query));
         }
 
         [HttpGet("dropdown")]
         public async Task<IActionResult> GetDropdown()
         {
-            return ApiOk(await TagService.GetDropdown());
+            return ApiOk(await Mediator.Send(new GetTagsMapQuery()));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, [FromBody]Tag tag)
+        public async Task<IActionResult> PutOne(int id, [FromBody] UpdateTagDto game)
         {
-            if (id != tag.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tag).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (await TagService.DoesExist(id))
-                {
-                    throw;
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-
-            return AcceptedAtAction(nameof(GetOne), new { id = tag.Id }, tag);
+            return ApiOk(await Mediator.Send(new UpdateTagCommand { Id = id, UpdateTagDto = game }));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody]Tag tag)
+        public async Task<IActionResult> PostOne([FromBody] AddTagDto game)
         {
-            return ApiOk(await TagService.AddAsync(tag));
+            return ApiOk(await Mediator.Send(new AddTagCommand { AddTagDto = game }));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTag(int id)
+        public async Task<IActionResult> DeleteOne([FromQuery] DeleteTagCommand command)
         {
-            return ApiOk(await TagService.DeleteByIdAsync(id));
+            return ApiOk(await Mediator.Send(command));
         }
     }
 }

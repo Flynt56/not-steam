@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Interfaces;
 
 namespace NotSteam.Model.Models
 {
-    public class Tag : EntityBase
+    public class Tag : EntityBase, IAggregateRoot
     {
         [CustomRequired]
         [CustomMaxStringLength(48)]

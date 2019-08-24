@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.App.Companies.Commands.DeleteCompany;
-using NotSteam.Core.App.Companies.Commands.UpdateCompany;
 using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Commands.DeleteGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
+using NotSteam.Core.App.Games.Queries.GetGamesMap;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
+using NotSteam.Core.App.Tags.Queries.GetTagsMap;
 
 namespace NotSteam.Api.Controllers
 {

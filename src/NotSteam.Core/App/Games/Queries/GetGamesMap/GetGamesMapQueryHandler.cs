@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Queries.GetGameDetail
+namespace NotSteam.Core.App.Games.Queries.GetGamesMap
 {
     public class GetGamesMapQueryHandler : IRequestHandler<GetGamesMapQuery, IEnumerable<GamesMapEntryDto>>
     {

@@ -2,7 +2,7 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Queries.GetGameDetail
+namespace NotSteam.Core.App.Games.Queries.GetGamesMap
 {
     public class GamesMapEntryDto : IHaveCustomMapping
     {

@@ -2,9 +2,9 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.ViewModels.Tags
+namespace NotSteam.Core.App.Tags.Queries.GetTagsMap
 {
-    public class TagsDropdown : IHaveCustomMapping
+    public class TagsMapEntryDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -12,7 +12,7 @@ namespace NotSteam.Api.ViewModels.Tags
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Tag, TagsDropdown>()
+            configuration.CreateMap<Tag, TagsMapEntryDto>()
                 .ReverseMap();
         }
     }

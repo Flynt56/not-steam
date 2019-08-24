@@ -2,19 +2,19 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.ViewModels.Tags
+namespace NotSteam.Core.App.Tags.Queries.GetTagDetail
 {
-    public class TagDetails : IHaveCustomMapping
+    public class TagDetailDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public int UsageAmount { get; set; }
         public string Description { get; set; }
+        public int UsageAmount { get; set; }
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Tag, TagDetails>()
+            configuration.CreateMap<Tag, TagDetailDto>()
                 .ForMember(tDTO => tDTO.UsageAmount, opt => opt.MapFrom(t => t.GameTags.Count))
                 .ReverseMap();
         }

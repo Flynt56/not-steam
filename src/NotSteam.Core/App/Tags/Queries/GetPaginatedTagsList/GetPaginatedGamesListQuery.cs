@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using NotSteam.Core.ViewModels.Tags;
+using MediatR;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.Requests
+namespace NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList
 {
-    public class TagPaginationRequest : AbstractPagingRequest<TagsList>
+    public class GetPaginatedTagsListQuery : AbstractPagingRequest<TagsListEntryDto>, IRequest<PagedResult<TagsListEntryDto>>
     {
         private const string ValidOrderByValues = "name";
 
@@ -12,7 +12,7 @@ namespace NotSteam.Core.Requests
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<TagsList> GetFilteredQuery(IQueryable<TagsList> query)
+        public override IQueryable<TagsListEntryDto> GetFilteredQuery(IQueryable<TagsListEntryDto> query)
         {
             if (!string.IsNullOrWhiteSpace(Name))
             {
@@ -22,7 +22,7 @@ namespace NotSteam.Core.Requests
             return query;
         }
 
-        public override IQueryable<TagsList> SetUpSorting(IQueryable<TagsList> query)
+        public override IQueryable<TagsListEntryDto> SetUpSorting(IQueryable<TagsListEntryDto> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 
