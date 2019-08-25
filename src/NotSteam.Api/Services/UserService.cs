@@ -5,7 +5,7 @@ using NotSteam.Core.Interfaces.DB;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Api.Services
 {
     public class UserService : IUserService
     {

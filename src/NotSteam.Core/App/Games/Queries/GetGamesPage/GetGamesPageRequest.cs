@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using MediatR;
 using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
-    public class GetPaginatedGamesListQuery : AbstractPagingRequest<GamesListEntryDto>, IRequest<PagedResult<GamesListEntryDto>>
+    public class GetGamesPageRequest : AbstractPagingRequest<GamesPageEntryDto>
     {
         private const string ValidOrderByValues = "title";
 
@@ -12,7 +11,7 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<GamesListEntryDto> GetFilteredQuery(IQueryable<GamesListEntryDto> query)
+        public override IQueryable<GamesPageEntryDto> GetFilteredQuery(IQueryable<GamesPageEntryDto> query)
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
@@ -22,7 +21,7 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
             return query;
         }
 
-        public override IQueryable<GamesListEntryDto> SetUpSorting(IQueryable<GamesListEntryDto> query)
+        public override IQueryable<GamesPageEntryDto> SetUpSorting(IQueryable<GamesPageEntryDto> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 

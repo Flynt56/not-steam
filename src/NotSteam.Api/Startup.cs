@@ -14,26 +14,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Api.Extensions;
-using NotSteam.Core.Extensions;
 using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Interfaces.DB;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Core.App.Games.Commands.AddGame;
-using MediatR;
-using NotSteam.Core.App.Games.Queries.GetGameDetail;
-using NotSteam.Core.Infrastructure;
 using NotSteam.Api.Filters;
 using NotSteam.Core.Interfaces;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Infrastructure.Repositories;
+using NotSteam.Core.Interfaces.Services;
+using NotSteam.Api.Services;
 
 namespace NotSteam
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public readonly IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
         {
@@ -42,14 +40,14 @@ namespace NotSteam
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddAutoMapper(new Assembly[]
             {
                 typeof(AutoMapperProfile).GetTypeInfo().Assembly
             });
 
-            services.AddCors();
-
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
             services.AddDbContext<INotSteamContext, NotSteamContext>(options =>
                 options
@@ -59,11 +57,6 @@ namespace NotSteam
             services.AddIdentity<AuthUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
-
-            services.AddNotSteamServices();
-
-            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
-            services.AddScoped<IGameRepository, GameRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Remove default claims
             services
@@ -87,19 +80,17 @@ namespace NotSteam
                     };
                 });
 
-            // Add MediatR
-            services.AddMediatR(new Assembly[]
-            {
-                typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly
-            });
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGameService, GameService>();
 
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IGameRepository, GameRepository>();
 
             services.AddMvc(opt => opt.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(a=>a.RegisterValidatorsFromAssemblyContaining<AddGameCommandValidator>());
+                .AddFluentValidation(a => a.RegisterValidatorsFromAssemblyContaining<AddGameCommandValidator>());
 
             FluentValidation.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("hr");
         }

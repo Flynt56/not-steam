@@ -1,20 +1,37 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Commands.DeleteGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetGamesMap;
 using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
+using NotSteam.Core.Interfaces.Repositories;
+using NotSteam.Core.Interfaces.Services;
+using NotSteam.Shared.Extensions;
 
 namespace NotSteam.Api.Controllers
 {
     public class GamesController : AppController
     {
-        [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedGamesListQuery query = null)
+        private readonly IGameRepository GameRepository;
+        private readonly IMapper Mapper;
+        private readonly IGameService GameService;
+
+        public GamesController(IGameService gameService, IGameRepository gameRepository, IMapper mapper)
         {
-            return ApiOk(await Mediator.Send(query));
+            GameService = gameService;
+            GameRepository = gameRepository;
+            Mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPage([FromQuery] GetGamesPageRequest request = null)
+        {
+            return ApiOk(await GameService.GetPageAsync(request));
         }
 
         [HttpGet("{id}")]

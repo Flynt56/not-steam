@@ -1,6 +1,6 @@
 ﻿using NotSteam.Core.Interfaces.Services;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Api.Services
 {
     public class AppService : IAppService
     {
