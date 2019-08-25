@@ -15,8 +15,8 @@ import { GametagModule } from './gametag/gametag.module';
 import { NavbarComponent } from './template/navbar/navbar.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
-import { RegisterFormComponent } from './register/register-form/register-form.component';
-import { LoginFormComponent } from './login/login-form/login-form.component';
+import { RegisterFormComponent } from './auth/register/register-form/register-form.component';
+import { LoginFormComponent } from './auth/login/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
