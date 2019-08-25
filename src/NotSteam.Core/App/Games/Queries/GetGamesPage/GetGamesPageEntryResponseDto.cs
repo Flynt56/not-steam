@@ -5,9 +5,9 @@ using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
+namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 {
-    public class GamesListEntryDto : IHaveCustomMapping
+    public class GetGamesPageEntryResponseDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GamesListEntryDto>()
+            configuration.CreateMap<Game, GetGamesPageEntryResponseDto>()
                 .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToList()))
                 .ReverseMap();
         }

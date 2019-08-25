@@ -91,7 +91,7 @@ namespace NotSteam
             // Add MediatR
             services.AddMediatR(new Assembly[]
             {
-                typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly
+                typeof(GetGameDetailRequestHandler).GetTypeInfo().Assembly
             });
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));

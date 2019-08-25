@@ -5,28 +5,28 @@ using NotSteam.Core.App.Games.Commands.DeleteGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetGamesMap;
-using NotSteam.Core.App.Games.Queries.GetPaginatedGamesList;
+using NotSteam.Core.App.Games.Queries.GetGamesPage;
 
 namespace NotSteam.Api.Controllers
 {
     public class GamesController : AppController
     {
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery] GetPaginatedGamesListQuery query = null)
+        public async Task<IActionResult> GetPage([FromQuery] GetGamesPageRequest request = null)
         {
-            return ApiOk(await Mediator.Send(query));
+            return ApiOk(await Mediator.Send(request));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne([FromQuery] GetGameDetailQuery query)
+        public async Task<IActionResult> GetOne([FromQuery] GetGameDetailRequest request)
         {
-            return ApiOk(await Mediator.Send(query));
+            return ApiOk(await Mediator.Send(request));
         }
 
         [HttpGet("dropdown")]
         public async Task<IActionResult> GetDropdown()
         {
-            return ApiOk(await Mediator.Send(new GetGamesMapQuery()));
+            return ApiOk(await Mediator.Send(new GetGamesMapRequest()));
         }
 
         [HttpPut("{id}")]

@@ -6,7 +6,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Core.App.Games.Queries.GetGameDetail
 {
-    public class GameDetailDto : IHaveCustomMapping
+    public class GetGameDetailResponseDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Games.Queries.GetGameDetail
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GameDetailDto>()
+            configuration.CreateMap<Game, GetGameDetailResponseDto>()
                 .ForMember(DTO => DTO.CompanyName, opt => opt.MapFrom(g => g.Company.Name))
                 .ForMember(DTO => DTO.ReviewAmount, opt => opt.MapFrom(g => g.Reviews.Count))
                 .ForMember(DTO => DTO.AverageReview, opt => opt.MapFrom(g => g.Reviews.Average(r => r.Rating)))

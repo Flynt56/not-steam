@@ -8,24 +8,24 @@ using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
-namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
+namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 {
-    public class GetPaginatedGamesListQueryHandler : IRequestHandler<GetPaginatedGamesListQuery, PagedResult<GamesListEntryDto>>
+    public class GetGamesPageRequestHandler : IRequestHandler<GetGamesPageRequest, PagedResult<GetGamesPageEntryResponseDto>>
     {
         private readonly IGameRepository _gameRepository;
         private readonly IMapper _mapper;
 
-        public GetPaginatedGamesListQueryHandler(IGameRepository gameRepository, IMapper mapper)
+        public GetGamesPageRequestHandler(IGameRepository gameRepository, IMapper mapper)
         {
             _gameRepository = gameRepository;
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<GamesListEntryDto>> Handle(GetPaginatedGamesListQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<GetGamesPageEntryResponseDto>> Handle(GetGamesPageRequest request, CancellationToken cancellationToken)
         {
             return await _gameRepository.GetAll()
                 .Include(a => a.GameTags)
-                .ProjectTo<GamesListEntryDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<GetGamesPageEntryResponseDto>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
         }
     }
