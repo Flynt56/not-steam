@@ -24,6 +24,10 @@ using MediatR;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.Infrastructure;
 using NotSteam.Api.Filters;
+using NotSteam.Core.Interfaces;
+using NotSteam.Infrastructure.Logging;
+using NotSteam.Core.Interfaces.Repositories;
+using NotSteam.Infrastructure.Repositories;
 
 namespace NotSteam
 {
@@ -41,13 +45,7 @@ namespace NotSteam
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
             services.AddCors();
 
-            // Services
-            services.AddNotSteamServices();
-
-            // Add MediatR
-            services.AddMediatR(typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly);
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddDbContext<INotSteamContext, NotSteamContext>(options =>
                 options
@@ -57,6 +55,11 @@ namespace NotSteam
             services.AddIdentity<AuthUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddNotSteamServices();
+
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+            services.AddScoped<IGameRepository, GameRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Remove default claims
             services
@@ -79,6 +82,11 @@ namespace NotSteam
                         ClockSkew = TimeSpan.Zero // Remove token expiration delay
                     };
                 });
+
+            // Add MediatR
+            services.AddMediatR(typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddMvc(opt => opt.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)

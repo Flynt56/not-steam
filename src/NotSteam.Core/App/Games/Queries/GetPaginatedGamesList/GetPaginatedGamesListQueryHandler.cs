@@ -5,7 +5,6 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Model.Models;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 
@@ -13,10 +12,10 @@ namespace NotSteam.Core.App.Games.Queries.GetPaginatedGamesList
 {
     public class GetPaginatedGamesListQueryHandler : IRequestHandler<GetPaginatedGamesListQuery, PagedResult<GamesListEntryDto>>
     {
-        private readonly IAsyncRepository<Game> _gameRepository;
+        private readonly IGameRepository _gameRepository;
         private readonly IMapper _mapper;
 
-        public GetPaginatedGamesListQueryHandler(IAsyncRepository<Game> gameRepository, IMapper mapper)
+        public GetPaginatedGamesListQueryHandler(IGameRepository gameRepository, IMapper mapper)
         {
             _gameRepository = gameRepository;
             _mapper = mapper;
