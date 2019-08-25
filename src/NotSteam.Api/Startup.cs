@@ -14,9 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Api.Extensions;
-using NotSteam.Core.Extensions;
 using NotSteam.Core.Infrastructure.AutoMapper;
-using NotSteam.Core.Interfaces.DB;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 using NotSteam.Core.App.Games.Commands.AddGame;
@@ -28,12 +26,14 @@ using NotSteam.Core.Interfaces;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Infrastructure.Repositories;
+using NotSteam.Core.Interfaces.Services;
+using NotSteam.Core.Services;
 
 namespace NotSteam
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public readonly IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
         {
@@ -42,16 +42,16 @@ namespace NotSteam
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddAutoMapper(new Assembly[]
             {
                 typeof(AutoMapperProfile).GetTypeInfo().Assembly
             });
 
-            services.AddCors();
-
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
-            services.AddDbContext<INotSteamContext, NotSteamContext>(options =>
+            services.AddDbContext<NotSteamContext>(options =>
                 options
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     opt => opt.MigrationsAssembly("NotSteam.Infrastructure")));
@@ -60,7 +60,8 @@ namespace NotSteam
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddNotSteamServices();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IGameRepository, GameRepository>();
