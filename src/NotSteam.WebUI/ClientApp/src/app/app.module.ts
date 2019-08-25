@@ -17,6 +17,7 @@ import { FooterComponent } from './template/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RegisterFormComponent } from './register/register-form/register-form.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
     NavbarComponent,
     FooterComponent,
     RegisterFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +39,7 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
     TagModule,
     GametagModule,
     HttpClientModule,
+    FormsModule,
     ToastrModule.forRoot()
   ],
   providers: [],

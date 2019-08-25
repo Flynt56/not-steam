@@ -5,20 +5,20 @@
     <form (submit)="onSubmit()" #registerForm="ngForm">
         <div class="form-group">
             <label for="email">
-                Email Address&ast;
+                Email Address
             </label>
             <input placeholder="example@domain.com" required type="email" name="email" [(ngModel)]="user.email"
                 class="form-control" id="email">
         </div>
         <div class="form-group">
             <label for="username">
-                Username&ast;
+                Username
             </label>
             <input required type="text" name="username" [(ngModel)]="user.username" class="form-control" id="username">
         </div>
         <div class="form-group">
             <label for="password">
-                Password (8 characters minimum)&ast;
+                Password
             </label>
             <input required type="password" name="password" [(ngModel)]="user.password" class="form-control"
                 id="password">

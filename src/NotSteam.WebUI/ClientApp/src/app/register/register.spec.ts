@@ -1,4 +1,4 @@
-import { Register } from './Register';
+import { Register } from './register';
 
 describe('Register', () => {
   it('should create an instance', () => {

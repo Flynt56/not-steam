@@ -12,9 +12,9 @@ export class RegisterFormComponent implements OnInit {
   ) { }
 
   public user: Register = new Register();
+  public errorMessage = '';
 
   ngOnInit() {
-
   }
 
   onSubmit() {

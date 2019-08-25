@@ -11,9 +11,9 @@ export class LoginFormComponent implements OnInit {
   constructor() { }
 
   public user: Login = new Login();
+  public errorMessage = '';
 
   ngOnInit() {
-
   }
 
   onSubmit() {
