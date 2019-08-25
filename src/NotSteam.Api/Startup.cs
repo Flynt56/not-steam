@@ -42,7 +42,11 @@ namespace NotSteam
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            services.AddAutoMapper(new Assembly[]
+            {
+                typeof(AutoMapperProfile).GetTypeInfo().Assembly
+            });
+
             services.AddCors();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
@@ -84,7 +88,11 @@ namespace NotSteam
                 });
 
             // Add MediatR
-            services.AddMediatR(typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(new Assembly[]
+            {
+                typeof(GetGameDetailQueryHandler).GetTypeInfo().Assembly
+            });
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
