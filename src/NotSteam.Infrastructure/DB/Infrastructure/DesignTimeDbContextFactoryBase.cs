@@ -9,7 +9,7 @@ namespace NotSteam.Infrastructure.DB.Infrastructure
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
         IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "NotSteam";
+        private const string ConnectionStringName = "DefaultConnection";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
 
         public TContext CreateDbContext(string[] args)

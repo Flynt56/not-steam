@@ -6,7 +6,7 @@ using NotSteam.Model.Attributes;
 
 namespace NotSteam.Model.Models
 {
-    public class AuthUser : IdentityUser
+    public class AuthUser : IdentityUser<int>
     {
         [DataType(DataType.Date)]
         [CustomRequired]

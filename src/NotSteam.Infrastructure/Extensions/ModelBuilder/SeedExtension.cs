@@ -7,7 +7,7 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
     {
         public static void Seed(this Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            // User(modelBuilder);
+            User(modelBuilder);
 
             Company(modelBuilder);
             Tag(modelBuilder);
@@ -279,7 +279,12 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
                     Nickname = "xXSlayerXx",
                     ProfileImageUri = "https://cdn.notsteam.com/images/1",
                     CreatedAt = DateTime.UtcNow,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    TwoFactorEnabled = false,
+                    PhoneNumberConfirmed = false,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
                 },
                 new
                 {
@@ -291,7 +296,12 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
                     Nickname = "Sgt. Harry",
                     ProfileImageUri = "https://cdn.notsteam.com/images/2",
                     CreatedAt = DateTime.UtcNow,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    TwoFactorEnabled = false,
+                    PhoneNumberConfirmed = false,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
                 },
                 new
                 {
@@ -303,7 +313,12 @@ namespace NotSteam.Infrastructure.Extensions.ModelBuilder
                     Nickname = "Mr.Boom",
                     ProfileImageUri = "https://cdn.notsteam.com/images/3",
                     CreatedAt = DateTime.UtcNow,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    TwoFactorEnabled = false,
+                    PhoneNumberConfirmed = false,
+                    EmailConfirmed = true,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0
                 }
             );
         }

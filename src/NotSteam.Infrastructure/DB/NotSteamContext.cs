@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
@@ -9,7 +10,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NotSteamContext : IdentityDbContext<AuthUser>, INotSteamContext
+    public class NotSteamContext : IdentityDbContext<AuthUser, IdentityRole<int>, int>, INotSteamContext
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)
