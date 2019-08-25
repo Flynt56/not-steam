@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.App.Auth.Login.Command;
 using NotSteam.Core.App.Companies.Commands.AddCompany;
 using NotSteam.Core.App.Companies.Commands.DeleteCompany;
 using NotSteam.Core.App.Companies.Commands.UpdateCompany;

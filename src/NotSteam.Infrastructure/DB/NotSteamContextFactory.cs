@@ -3,7 +3,7 @@ using NotSteam.Infrastructure.DB.Infrastructure;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NorthwindDbContextFactory : DesignTimeDbContextFactoryBase<NotSteamContext>
+    public class NotSteamContextFactory : DesignTimeDbContextFactoryBase<NotSteamContext>
     {
         protected override NotSteamContext CreateNewInstance(DbContextOptions<NotSteamContext> options)
         {

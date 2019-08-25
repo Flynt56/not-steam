@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
-using NotSteam.Core.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using NotSteam.Core.Exceptions;
 
 namespace NotSteam.Api.Filters
 {

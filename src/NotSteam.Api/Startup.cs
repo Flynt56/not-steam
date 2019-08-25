@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,20 +15,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Api.Extensions;
-using NotSteam.Core.Infrastructure.AutoMapper;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Model.Models;
+using NotSteam.Api.Filters;
 using NotSteam.Core.App.Games.Commands.AddGame;
-using MediatR;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.Infrastructure;
-using NotSteam.Api.Filters;
+using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Interfaces;
-using NotSteam.Infrastructure.Logging;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Infrastructure.Repositories;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Services;
+using NotSteam.Infrastructure.DB;
+using NotSteam.Infrastructure.Logging;
+using NotSteam.Infrastructure.Repositories;
+using NotSteam.Model.Models;
 
 namespace NotSteam
 {
@@ -100,7 +100,7 @@ namespace NotSteam
             services.AddMvc(opt => opt.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(a=>a.RegisterValidatorsFromAssemblyContaining<AddGameCommandValidator>());
+                .AddFluentValidation(a => a.RegisterValidatorsFromAssemblyContaining<AddGameCommandValidator>());
 
             FluentValidation.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("hr");
         }
