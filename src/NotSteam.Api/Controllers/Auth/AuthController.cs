@@ -8,13 +8,13 @@ namespace NotSteam.Api.Controllers.Auth
 {
     public class AuthController : AppController
     {
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             return ApiOk(await Mediator.Send(request));
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             return ApiOk(await Mediator.Send(request));
