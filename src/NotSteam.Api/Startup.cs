@@ -54,7 +54,7 @@ namespace NotSteam
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     opt => opt.MigrationsAssembly("NotSteam.Infrastructure")));
 
-            services.AddIdentity<AuthUser, IdentityRole>()
+            services.AddIdentity<AuthUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
 
