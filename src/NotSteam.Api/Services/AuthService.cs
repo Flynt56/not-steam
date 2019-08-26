@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Api.Services
 {
     public class AuthService : AppService, IAuthService
     {
