@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Model.Models;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Core.Interfaces.Repositories
 {

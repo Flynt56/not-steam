@@ -21,14 +21,14 @@ using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.Infrastructure;
 using NotSteam.Core.Infrastructure.AutoMapper;
-using NotSteam.Core.Interfaces;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Infrastructure.DB;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Infrastructure.Repositories;
-using NotSteam.Model.Models;
 using NotSteam.Api.Auth;
+using NotSteam.Model.Identity;
+using NotSteam.Core.Interfaces.Logging;
 
 namespace NotSteam
 {
@@ -57,7 +57,7 @@ namespace NotSteam
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     opt => opt.MigrationsAssembly("NotSteam.Infrastructure")));
 
-            services.AddIdentity<AuthUser, IdentityRole<int>>()
+            services.AddIdentity<AuthUser, AuthRole>()
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
 

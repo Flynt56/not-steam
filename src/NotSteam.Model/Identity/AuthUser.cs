@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Models;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Identity
 {
     public class AuthUser : IdentityUser<int>
     {

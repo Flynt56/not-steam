@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Core.Interfaces
+﻿namespace NotSteam.Core.Interfaces.Logging
 {
     public interface IAppLogger<T>
     {

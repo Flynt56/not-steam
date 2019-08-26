@@ -1,4 +1,5 @@
 ﻿using System;
+using NotSteam.Model.Identity;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Extensions.ModelBuilder

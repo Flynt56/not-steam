@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Model.Models;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Core.Services
 {

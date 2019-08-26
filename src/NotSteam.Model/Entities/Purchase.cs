@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Model.Models
 {

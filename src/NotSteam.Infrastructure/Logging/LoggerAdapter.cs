@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using NotSteam.Core.Interfaces;
+using NotSteam.Core.Interfaces.Logging;
 
 namespace NotSteam.Infrastructure.Logging
 {

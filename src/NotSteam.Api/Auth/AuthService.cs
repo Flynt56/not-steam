@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Services;
-using NotSteam.Model.Models;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Api.Auth
 {
