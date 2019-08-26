@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Infrastructure.Identity;
+using NotSteam.Model.Identity;
 
-namespace NotSteam.Infrastructure.Interfaces.Services
+namespace NotSteam.Core.Interfaces.Services
 {
     public interface IAuthUserService
     {

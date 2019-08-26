@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using NotSteam.Infrastructure.Interfaces.Services;
+using NotSteam.Core.Interfaces.Services;
 
 namespace NotSteam.Api.Identity.Auth.Login.Command
 {

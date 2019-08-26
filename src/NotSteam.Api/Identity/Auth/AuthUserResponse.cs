@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Infrastructure.Identity;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Api.Identity.Auth
 {

@@ -26,12 +26,9 @@ using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Services;
 using NotSteam.Infrastructure.DB;
-using NotSteam.Infrastructure.Identity;
-using NotSteam.Infrastructure.Interfaces.Repositories;
-using NotSteam.Infrastructure.Interfaces.Services;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Infrastructure.Repositories;
-using NotSteam.Infrastructure.Services;
+using NotSteam.Model.Identity;
 
 namespace NotSteam
 {
@@ -67,12 +64,10 @@ namespace NotSteam
             // Repositories
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped<IGameRepository, GameRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthUserRepository, AuthUserRepository>();
 
             // Services
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthUserService, AuthUserService>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Remove default claims

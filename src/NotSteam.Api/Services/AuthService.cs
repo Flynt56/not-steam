@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Services;
-using NotSteam.Infrastructure.Identity;
-using NotSteam.Infrastructure.Interfaces.Services;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Api.Services
 {

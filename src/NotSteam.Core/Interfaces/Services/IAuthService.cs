@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Core.Interfaces.Services;
 
-namespace NotSteam.Infrastructure.Interfaces.Services
+namespace NotSteam.Core.Interfaces.Services
 {
     public interface IAuthService : IAppService
     {

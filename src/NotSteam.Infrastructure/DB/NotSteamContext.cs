@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
 using NotSteam.Infrastructure.Extensions.ModelBuilder;
-using NotSteam.Infrastructure.Identity;
+using NotSteam.Model.Identity;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB

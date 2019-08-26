@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NotSteam.Infrastructure.Identity;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Infrastructure.Configurations.Entity
 {

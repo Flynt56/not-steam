@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Infrastructure.Identity;
-using NotSteam.Infrastructure.Interfaces.Repositories;
-using NotSteam.Infrastructure.Interfaces.Services;
+using NotSteam.Core.Interfaces.Repositories;
+using NotSteam.Core.Interfaces.Services;
+using NotSteam.Model.Identity;
 
-namespace NotSteam.Infrastructure.Services
+namespace NotSteam.Core.Services
 {
     public class AuthUserService : IAuthUserService
     {
