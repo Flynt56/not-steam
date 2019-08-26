@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../login';
-<<<<<<< HEAD
-=======
 import { AuthService } from '../../auth.service';
->>>>>>> 5bf6fdb8f380604825559e39cb82991caee13c85
 
 @Component({
   selector: 'app-login-form',
@@ -12,13 +9,9 @@ import { AuthService } from '../../auth.service';
 })
 export class LoginFormComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-=======
   constructor(
     private auth: AuthService
   ) { }
->>>>>>> 5bf6fdb8f380604825559e39cb82991caee13c85
 
   public user: Login = new Login();
   public errorMessage = '';
@@ -27,10 +20,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-<<<<<<< HEAD
-    console.log(this.user);
-=======
     this.auth.login(this.user);
->>>>>>> 5bf6fdb8f380604825559e39cb82991caee13c85
   }
 }
