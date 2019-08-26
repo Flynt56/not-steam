@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Register } from '../register';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -9,6 +10,7 @@ import { Register } from '../register';
 export class RegisterFormComponent implements OnInit {
 
   constructor(
+    private auth: AuthService
   ) { }
 
   public user: Register = new Register();
@@ -18,6 +20,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.user);
+    this.auth.register(this.user);
   }
 }
