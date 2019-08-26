@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
 using NotSteam.Infrastructure.Extensions.ModelBuilder;
+using NotSteam.Infrastructure.Identity;
 using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.DB
 {
-    public class NotSteamContext : IdentityDbContext<AuthUser, IdentityRole<int>, int>
+    public class NotSteamContext : IdentityDbContext<AuthUser, AuthRole, int>
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)

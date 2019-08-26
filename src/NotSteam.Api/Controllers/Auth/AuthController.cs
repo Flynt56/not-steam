@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.App.Auth.Login.Command;
-using NotSteam.Core.App.Auth.Register.Command;
+using NotSteam.Api.Identity.Auth.Login.Command;
+using NotSteam.Api.Identity.Auth.Register.Command;
 
 namespace NotSteam.Core.Controllers.Auth
 {

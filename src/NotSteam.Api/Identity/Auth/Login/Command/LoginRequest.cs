@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace NotSteam.Core.App.Auth.Register.Command
+namespace NotSteam.Api.Identity.Auth.Login.Command
 {
-    public class RegisterRequest : IRequest<RegisterResponse>
+    public class LoginRequest : IRequest<LoginResponse>
     {
         public string Email { get; set; }
         public string Password { get; set; }

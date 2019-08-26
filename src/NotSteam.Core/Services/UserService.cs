@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Model.Models;
+using NotSteam.Model.Interfaces.Entities;
 
 namespace NotSteam.Core.Services
 {
@@ -14,7 +14,7 @@ namespace NotSteam.Core.Services
             _userRepository = userRepository;
         }
 
-        public async Task<AuthUser> GetByEmailAsync(string email)
+        public async Task<IUser> GetByEmailAsync(string email)
         {
             return await _userRepository.GetByEmailAsync(email);
         }

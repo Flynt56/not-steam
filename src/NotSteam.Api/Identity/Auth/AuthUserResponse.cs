@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Model.Models;
+using NotSteam.Infrastructure.Identity;
 
-namespace NotSteam.Core.App.Auth
+namespace NotSteam.Api.Identity.Auth
 {
     public class AuthUserResponse : IHaveCustomMapping
     {

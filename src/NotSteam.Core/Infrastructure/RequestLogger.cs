@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Pipeline;
-using NotSteam.Core.Interfaces;
+using NotSteam.Core.Interfaces.Logging;
 
 namespace NotSteam.Core.Infrastructure
 {

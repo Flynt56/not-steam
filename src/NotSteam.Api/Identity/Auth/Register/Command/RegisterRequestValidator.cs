@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace NotSteam.Core.App.Auth.Register.Command
+namespace NotSteam.Api.Identity.Auth.Register.Command
 {
     public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
     {

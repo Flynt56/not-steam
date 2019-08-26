@@ -1,6 +1,6 @@
-﻿namespace NotSteam.Core.App.Auth.Register.Command
+﻿namespace NotSteam.Api.Identity.Auth.Login.Command
 {
-    public class RegisterResponse
+    public class LoginResponse
     {
         public string Token { get; set; }
         public AuthUserResponse User { get; set; }

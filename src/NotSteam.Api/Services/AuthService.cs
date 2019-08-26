@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using NotSteam.Core.Interfaces.Services;
 using NotSteam.Core.Services;
-using NotSteam.Model.Models;
+using NotSteam.Infrastructure.Identity;
+using NotSteam.Infrastructure.Interfaces.Services;
 
-namespace NotSteam.Api.Auth
+namespace NotSteam.Api.Services
 {
     public class AuthService : AppService, IAuthService
     {

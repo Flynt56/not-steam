@@ -4,12 +4,12 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Model.Interfaces.Entities
 {
-    public interface IUser
+    public interface IUser : IAggregateRoot
     {
         int Id { get; set; }
 
         string UserName { get; set; }
-        string Password { get; set; }
+        string PasswordHash { get; set; }
         string Email { get; set; }
 
         string Nickname { get; set; }

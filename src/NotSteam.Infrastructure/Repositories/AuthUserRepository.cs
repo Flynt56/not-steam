@@ -1,22 +1,22 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Infrastructure.DB;
-using NotSteam.Model.Interfaces.Entities;
+using NotSteam.Infrastructure.Identity;
+using NotSteam.Infrastructure.Interfaces.Repositories;
 
 namespace NotSteam.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class AuthUserRepository : IAuthUserRepository
     {
         private readonly NotSteamContext Context;
 
-        public UserRepository(NotSteamContext context)
+        public AuthUserRepository(NotSteamContext context)
         {
             Context = context;
         }
 
-        public async Task<IUser> GetByEmailAsync(string email)
+        public async Task<AuthUser> GetByEmailAsync(string email)
         {
             return await Context.Users
                 .Where(u => u.Email == email)

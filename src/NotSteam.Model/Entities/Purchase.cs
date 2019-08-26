@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using NotSteam.Model.Attributes;
+using NotSteam.Model.Interfaces.Entities;
 
 namespace NotSteam.Model.Models
 {
@@ -21,7 +22,7 @@ namespace NotSteam.Model.Models
         [Column(TypeName = "decimal(19,4)")]
         public decimal TotalPrice { get; set; }
 
-        public AuthUser User { get; set; }
+        public IUser User { get; set; }
         public Game Game { get; set; }
     }
 }
