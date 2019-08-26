@@ -42,7 +42,7 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOne([FromQuery] DeleteGameCommand command)
+        public async Task<IActionResult> DeleteOne([FromRoute] DeleteGameCommand command)
         {
             return ApiOk(await Mediator.Send(command));
         }
