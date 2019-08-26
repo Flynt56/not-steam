@@ -14,9 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using NotSteam.Api.Extensions;
-using NotSteam.Api.Filters;
-using NotSteam.Api.Services;
+using NotSteam.Core.Extensions;
+using NotSteam.Core.Filters;
+using NotSteam.Core.Services;
 using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.Infrastructure;
@@ -28,6 +28,7 @@ using NotSteam.Infrastructure.DB;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Infrastructure.Repositories;
 using NotSteam.Model.Models;
+using NotSteam.Api.Auth;
 
 namespace NotSteam
 {
@@ -65,6 +66,7 @@ namespace NotSteam
 
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Remove default claims
             services

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NotSteam.Api.Controllers
+namespace NotSteam.Core.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

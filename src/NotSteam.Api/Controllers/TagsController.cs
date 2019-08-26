@@ -7,7 +7,7 @@ using NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList;
 using NotSteam.Core.App.Tags.Queries.GetTagDetail;
 using NotSteam.Core.App.Tags.Queries.GetTagsMap;
 
-namespace NotSteam.Api.Controllers
+namespace NotSteam.Core.Controllers
 {
     public class TagsController : AppController
     {

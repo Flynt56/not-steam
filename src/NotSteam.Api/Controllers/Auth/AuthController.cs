@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.Auth.Login.Command;
 using NotSteam.Core.App.Auth.Register.Command;
 
-namespace NotSteam.Api.Controllers.Auth
+namespace NotSteam.Core.Controllers.Auth
 {
     public class AuthController : AppController
     {

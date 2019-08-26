@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Interfaces.Services;
+using NotSteam.Core.Services;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Api.Services
+namespace NotSteam.Api.Auth
 {
     public class AuthService : AppService, IAuthService
     {

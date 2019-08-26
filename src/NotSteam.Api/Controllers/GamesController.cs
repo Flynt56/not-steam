@@ -7,7 +7,7 @@ using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetGamesMap;
 using NotSteam.Core.App.Games.Queries.GetGamesPage;
 
-namespace NotSteam.Api.Controllers
+namespace NotSteam.Core.Controllers
 {
     public class GamesController : AppController
     {

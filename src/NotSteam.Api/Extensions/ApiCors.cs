@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace NotSteam.Api.Extensions
+namespace NotSteam.Core.Extensions
 {
     public static class ApiCors
     {

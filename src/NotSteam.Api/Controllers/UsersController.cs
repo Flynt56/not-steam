@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Api.Controllers
+﻿namespace NotSteam.Core.Controllers
 {
     public class UsersController : AppController
     {

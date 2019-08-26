@@ -1,4 +1,4 @@
-﻿namespace NotSteam.Api.ApiResponse
+﻿namespace NotSteam.Core.ApiResponse
 {
     public enum ApiErrorCode
     {

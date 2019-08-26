@@ -7,7 +7,7 @@ using NotSteam.Core.App.Companies.Queries.GetCompaniesMap;
 using NotSteam.Core.App.Companies.Queries.GetCompanyDetail;
 using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;
 
-namespace NotSteam.Api.Controllers
+namespace NotSteam.Core.Controllers
 {
     public class CompaniesController : AppController
     {
