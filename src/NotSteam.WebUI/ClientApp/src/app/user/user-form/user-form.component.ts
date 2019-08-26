@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { UserDetails } from '../model/UserDetails';
-import { User } from '../model/User';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-user-form',

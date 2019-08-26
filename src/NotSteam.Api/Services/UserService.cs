@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NotSteam.Core.Interfaces.DB;
 using NotSteam.Core.Interfaces.Services;
+using NotSteam.Infrastructure.DB;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.Services
+namespace NotSteam.Api.Services
 {
     public class UserService : IUserService
     {
-        private readonly INotSteamContext _context;
+        private readonly NotSteamContext _context;
 
-        public UserService(INotSteamContext context)
+        public UserService(NotSteamContext context)
         {
             _context = context;
         }

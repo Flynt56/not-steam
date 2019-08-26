@@ -1,6 +1,9 @@
-﻿namespace NotSteam.Api.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace NotSteam.Api.Controllers
 {
-    public class AppAuthorizedController : AppController
+    [Authorize]
+    public abstract class AppAuthorizedController : AppController
     {
 
     }

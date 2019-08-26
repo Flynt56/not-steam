@@ -1260,6 +1260,33 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"asdasd@gmail.com\",\n\t\"password\": \"pass123ABC@@\"\n}"
+						},
+						"url": {
+							"raw": "{{rootUrl}}/{{auth}}/{{login}}",
+							"host": [
+								"{{rootUrl}}"
+							],
+							"path": [
+								"{{auth}}",
+								"{{login}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
