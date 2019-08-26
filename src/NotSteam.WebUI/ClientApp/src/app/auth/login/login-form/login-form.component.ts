@@ -20,6 +20,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.login(this.user);
+    this.auth.login(this.user)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
   }
 }

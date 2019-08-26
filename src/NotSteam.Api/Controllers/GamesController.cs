@@ -18,7 +18,7 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne([FromQuery] GetGameDetailRequest request)
+        public async Task<IActionResult> GetOne([FromRoute] GetGameDetailRequest request)
         {
             return ApiOk(await Mediator.Send(request));
         }

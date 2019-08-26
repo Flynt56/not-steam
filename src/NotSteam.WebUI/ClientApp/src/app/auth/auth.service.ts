@@ -13,12 +13,16 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  private rootAuth = 'auth';
+  private loginRoute = 'login';
+  private registerRoute = 'register';
+
   public login(data: Login) {
-    return this.http.post(environment.apiUrl + 'auth/login', data);
+    return this.http.post(`${environment.apiUrl}${this.rootAuth}/${this.loginRoute}`, data);
   }
 
   public register(data: Register) {
-    return this.http.post(environment.apiUrl + 'auth/register', data);
+    return this.http.post(`${environment.apiUrl}${this.rootAuth}/${this.registerRoute}`, data);
   }
 
 }

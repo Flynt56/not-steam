@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RegisterFormComponent } from './auth/register/register-form/register-form.component';
 import { LoginFormComponent } from './auth/login/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './template/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     RegisterFormComponent,
     LoginFormComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
