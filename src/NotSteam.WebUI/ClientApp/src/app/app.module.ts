@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyModule } from './company/company.module';
 import { GameModule } from './game/game.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserModule } from './user/user.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { LibraryModule } from './library/library.module';
@@ -19,6 +19,7 @@ import { RegisterFormComponent } from './auth/register/register-form/register-fo
 import { LoginFormComponent } from './auth/login/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './template/home/home.component';
+import { AuthTokenInterceptor } from './shared/auth-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { HomeComponent } from './template/home/home.component';
     FormsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

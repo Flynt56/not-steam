@@ -13,9 +13,9 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  private rootAuth = 'auth';
-  private loginRoute = 'login';
-  private registerRoute = 'register';
+  private readonly rootAuth = 'auth';
+  private readonly loginRoute = 'login';
+  private readonly registerRoute = 'register';
 
   public login(data: Login) {
     return this.http.post(`${environment.apiUrl}${this.rootAuth}/${this.loginRoute}`, data);
