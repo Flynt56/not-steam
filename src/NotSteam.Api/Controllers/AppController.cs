@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using NotSteam.Api.Core.ApiResponse;
 
 namespace NotSteam.Core.Controllers
 {

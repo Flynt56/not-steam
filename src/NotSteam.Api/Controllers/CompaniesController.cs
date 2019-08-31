@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.App.Companies.Commands.AddCompany;
-using NotSteam.Core.App.Companies.Commands.DeleteCompany;
-using NotSteam.Core.App.Companies.Commands.UpdateCompany;
-using NotSteam.Core.App.Companies.Queries.GetCompaniesMap;
-using NotSteam.Core.App.Companies.Queries.GetCompanyDetail;
-using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;
+using NotSteam.Api.Core.Companies.Commands.AddCompany;
+using NotSteam.Api.Core.Companies.Commands.DeleteCompany;
+using NotSteam.Api.Core.Companies.Commands.UpdateCompany;
+using NotSteam.Api.Core.Companies.Queries.GetCompaniesMap;
+using NotSteam.Api.Core.Companies.Queries.GetCompanyDetail;
+using NotSteam.Api.Core.Companies.Queries.GetPaginatedCompaniesList;
 
 namespace NotSteam.Core.Controllers
 {

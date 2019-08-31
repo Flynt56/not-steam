@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NotSteam.Core.App.Tags.Commands.AddTag;
-using NotSteam.Core.App.Tags.Commands.DeleteTag;
-using NotSteam.Core.App.Tags.Commands.UpdateTag;
-using NotSteam.Core.App.Tags.Queries.GetPaginatedTagsList;
-using NotSteam.Core.App.Tags.Queries.GetTagDetail;
-using NotSteam.Core.App.Tags.Queries.GetTagsMap;
+using NotSteam.Api.Core.Tags.Commands.AddTag;
+using NotSteam.Api.Core.Tags.Commands.DeleteTag;
+using NotSteam.Api.Core.Tags.Commands.UpdateTag;
+using NotSteam.Api.Core.Tags.Queries.GetPaginatedTagsList;
+using NotSteam.Api.Core.Tags.Queries.GetTagDetail;
+using NotSteam.Api.Core.Tags.Queries.GetTagsMap;
 
 namespace NotSteam.Core.Controllers
 {

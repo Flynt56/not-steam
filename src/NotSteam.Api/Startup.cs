@@ -17,18 +17,18 @@ using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Extensions;
 using NotSteam.Core.Filters;
 using NotSteam.Core.Services;
-using NotSteam.Core.App.Games.Commands.AddGame;
-using NotSteam.Core.App.Games.Queries.GetGameDetail;
-using NotSteam.Core.Infrastructure;
 using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Infrastructure.DB;
 using NotSteam.Infrastructure.Logging;
 using NotSteam.Infrastructure.Repositories;
-using NotSteam.Api.Auth;
 using NotSteam.Model.Identity;
 using NotSteam.Core.Interfaces.Logging;
+using NotSteam.Api.Core.Games.Commands.AddGame;
+using NotSteam.Api.Core.Games.Queries.GetGameDetail;
+using NotSteam.Api.Core.Auth;
+using NotSteam.Core.Infrastructure.MediatR;
+using NotSteam.Infrastructure.Data;
 
 namespace NotSteam
 {
