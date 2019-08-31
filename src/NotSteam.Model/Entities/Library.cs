@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
-using NotSteam.Model.Identity;
+using NotSteam.Model.Identity.Models;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public class Library : ModelBase
     {
@@ -22,7 +22,7 @@ namespace NotSteam.Model.Models
         [CustomDateRange]
         public DateTime? LastPlayedDate { get; set; }
 
-        public AuthUser User { get; set; }
+        public ApplicationUser User { get; set; }
         public Game Game { get; set; }
     }
 }

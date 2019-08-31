@@ -4,7 +4,7 @@ using AutoMapper;
 using MediatR;
 using NotSteam.Core.Exceptions;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 
 namespace NotSteam.Api.Core.Tags.Commands.DeleteTag
 {

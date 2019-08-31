@@ -1,7 +1,7 @@
 ﻿using System;
 using NotSteam.Model.Interfaces;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public abstract class ModelBase : IEntityTimestamp, IEntitySoftDelete
     {

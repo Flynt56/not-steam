@@ -2,7 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 
 namespace NotSteam.Api.Core.Games.Queries.GetGameDetail
 {

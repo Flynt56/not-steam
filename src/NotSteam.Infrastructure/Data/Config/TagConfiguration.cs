@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NotSteam.Infrastructure.Extensions;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 
 namespace NotSteam.Infrastructure.Data.Config
 {

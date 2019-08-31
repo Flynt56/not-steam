@@ -1,4 +1,6 @@
-﻿namespace NotSteam.Model.Models
+﻿using NotSteam.Model.Entities;
+
+namespace NotSteam.Model.Entities
 {
     public class GameTag : ModelBase
     {

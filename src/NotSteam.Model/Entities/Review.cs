@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
-using NotSteam.Model.Identity;
+using NotSteam.Model.Entities;
+using NotSteam.Model.Identity.Models;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public class Review : ModelBase
     {
@@ -17,7 +18,7 @@ namespace NotSteam.Model.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public AuthUser User { get; set; }
+        public ApplicationUser User { get; set; }
         public Game Game { get; set; }
     }
 }

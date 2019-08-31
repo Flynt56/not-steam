@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using NotSteam.Model.Attributes;
 using NotSteam.Model.Interfaces;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public class Game : EntityBase, IAggregateRoot
     {
@@ -30,8 +30,10 @@ namespace NotSteam.Model.Models
         public decimal BasePrice { get; set; }
 
         public int CompanyId { get; set; }
+        public int CoverArtId { get; set; }
 
         public Company Company { get; set; }
+        public Image CoverArt { get; set; }
 
         public ICollection<GameTag> GameTags { get; set; }
         public ICollection<Library> Libraries { get; set; }

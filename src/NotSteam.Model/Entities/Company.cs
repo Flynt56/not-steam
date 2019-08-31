@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
 using NotSteam.Model.Interfaces;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public class Company : EntityBase, IAggregateRoot
     {
@@ -19,9 +19,9 @@ namespace NotSteam.Model.Models
         [CustomMaxStringLength(1500)]
         public string Description { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        [Url(ErrorMessage = "\"{0}\" mora biti ispravan URL!")]
-        public string LogoImageUri { get; set; }
+        public int LogoImageId { get; set; }
+
+        public Image LogoImage { get; set; }
 
         public ICollection<Game> Games { get; set; }
     }

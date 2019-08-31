@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using NotSteam.Model.Identity;
+using NotSteam.Model.Identity.Models;
 
 namespace NotSteam.Core.Interfaces.Services
 {
     public interface IUserService : IAppService
     {
-        Task<AuthUser> GetByEmailAsync(string email);
+        Task<ApplicationUser> GetByEmailAsync(string email);
     }
 }

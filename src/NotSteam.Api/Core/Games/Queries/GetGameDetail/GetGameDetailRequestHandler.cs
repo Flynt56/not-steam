@@ -6,7 +6,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 
 namespace NotSteam.Api.Core.Games.Queries.GetGameDetail
 {

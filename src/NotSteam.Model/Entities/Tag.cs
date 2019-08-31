@@ -2,8 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using NotSteam.Model.Attributes;
 using NotSteam.Model.Interfaces;
+using NotSteam.Model.Entities;
 
-namespace NotSteam.Model.Models
+namespace NotSteam.Model.Entities
 {
     public class Tag : EntityBase, IAggregateRoot
     {

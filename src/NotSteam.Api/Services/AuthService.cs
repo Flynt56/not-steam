@@ -9,20 +9,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Core.Services;
-using NotSteam.Model.Identity;
+using NotSteam.Model.Identity.Models;
 
-namespace NotSteam.Api.Core.Auth
+namespace NotSteam.Api.Services
 {
     public class AuthService : AppService, IAuthService
     {
-        private readonly SignInManager<AuthUser> SignInManager;
-        private readonly UserManager<AuthUser> UserManager;
+        private readonly SignInManager<ApplicationUser> SignInManager;
+        private readonly UserManager<ApplicationUser> UserManager;
         private readonly IConfiguration Configuration;
 
         public AuthService(
-            UserManager<AuthUser> userManager,
-            SignInManager<AuthUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration
             )
         {
@@ -46,7 +45,7 @@ namespace NotSteam.Api.Core.Auth
 
         public async Task<string> RegisterAsync(string email, string password)
         {
-            var user = new AuthUser
+            var user = new ApplicationUser
             {
                 UserName = email,
                 Email = email
@@ -63,7 +62,7 @@ namespace NotSteam.Api.Core.Auth
             return null;
         }
 
-        private string GenerateJwtToken(string email, AuthUser user)
+        private string GenerateJwtToken(string email, ApplicationUser user)
         {
             var claims = new List<Claim>
             {

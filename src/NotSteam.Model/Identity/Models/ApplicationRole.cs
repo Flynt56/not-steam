@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace NotSteam.Infrastructure.Identity.Models
+namespace NotSteam.Model.Identity.Models
 {
     public class ApplicationRole : IdentityRole<int>
     {

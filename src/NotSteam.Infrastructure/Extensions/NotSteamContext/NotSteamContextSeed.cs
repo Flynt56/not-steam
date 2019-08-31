@@ -1,8 +1,8 @@
 ﻿using System;
-using NotSteam.Model.Identity;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
+using NotSteam.Model.Identity.Models;
 
-namespace NotSteam.Infrastructure.Data
+namespace NotSteam.Infrastructure.Extensions.NotSteamContext
 {
     public static class NotSteamContextSeed
     {
@@ -269,7 +269,7 @@ namespace NotSteam.Infrastructure.Data
 
         private static void User(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AuthUser>().HasData(
+            modelBuilder.Entity<ApplicationUser>().HasData(
                 new
                 {
                     Id = 1,

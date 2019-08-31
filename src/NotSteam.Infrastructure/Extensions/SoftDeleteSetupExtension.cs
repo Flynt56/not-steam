@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NotSteam.Model.Entities;
 using NotSteam.Model.Interfaces;
-using NotSteam.Model.Models;
 
 namespace NotSteam.Infrastructure.Extensions
 {

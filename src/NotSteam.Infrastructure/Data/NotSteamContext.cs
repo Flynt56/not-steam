@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Extensions.NotSteamContext;
-using NotSteam.Model.Identity;
-using NotSteam.Model.Models;
+using NotSteam.Infrastructure.Extensions.NotSteamContext;
+using NotSteam.Model.Entities;
+using NotSteam.Model.Identity.Models;
 
 namespace NotSteam.Infrastructure.Data
 {
-    public class NotSteamContext : IdentityDbContext<AuthUser, AuthRole, int>
+    public class NotSteamContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
         public NotSteamContext(DbContextOptions<NotSteamContext> options)
             : base(options)
@@ -21,6 +22,7 @@ namespace NotSteam.Infrastructure.Data
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

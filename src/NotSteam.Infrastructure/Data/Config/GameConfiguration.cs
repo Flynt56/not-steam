@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NotSteam.Infrastructure.Extensions;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 
 namespace NotSteam.Infrastructure.Data.Config
 {
@@ -14,6 +14,7 @@ namespace NotSteam.Infrastructure.Data.Config
                 .HasMaxLength(250);
 
             builder.Property(g => g.Description)
+                .IsRequired(false)
                 .HasMaxLength(1500);
 
             builder.Property(g => g.ReleaseDate)
@@ -22,6 +23,12 @@ namespace NotSteam.Infrastructure.Data.Config
             builder.Property(g => g.BasePrice)
                 .IsRequired()
                 .HasColumnType("decimal(19,4)");
+
+            builder.Property(g => g.CompanyId)
+                .IsRequired();
+
+            builder.Property(g => g.CoverArtId)
+                .IsRequired(false);
 
             builder.SetupSoftDelete();
         }

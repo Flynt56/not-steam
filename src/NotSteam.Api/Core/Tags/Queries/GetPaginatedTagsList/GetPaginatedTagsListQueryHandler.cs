@@ -5,7 +5,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Model.Models;
+using NotSteam.Model.Entities;
 using NotSteam.Shared.Extensions;
 using NotSteam.Shared.Pagination;
 

@@ -16,19 +16,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NotSteam.Core.Extensions;
 using NotSteam.Core.Filters;
-using NotSteam.Core.Services;
 using NotSteam.Core.Infrastructure.AutoMapper;
-using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Infrastructure.Logging;
-using NotSteam.Infrastructure.Repositories;
-using NotSteam.Model.Identity;
-using NotSteam.Core.Interfaces.Logging;
 using NotSteam.Api.Core.Games.Commands.AddGame;
 using NotSteam.Api.Core.Games.Queries.GetGameDetail;
-using NotSteam.Api.Core.Auth;
 using NotSteam.Core.Infrastructure.MediatR;
 using NotSteam.Infrastructure.Data;
+using NotSteam.Model.Identity.Models;
+using NotSteam.Api.Services;
 
 namespace NotSteam
 {
@@ -50,23 +45,16 @@ namespace NotSteam
                 typeof(AutoMapperProfile).GetTypeInfo().Assembly
             });
 
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
-
-            services.AddDbContext<NotSteamContext>(options =>
-                options
+            services.AddDbContext<NotSteamContext>(options => options
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     opt => opt.MigrationsAssembly("NotSteam.Infrastructure")));
 
-            services.AddIdentity<AuthUser, AuthRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<NotSteamContext>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
-
-            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
-            services.AddScoped<IGameRepository, GameRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // Remove default claims
             services
@@ -119,6 +107,7 @@ namespace NotSteam
             }
 
             app.UseAuthentication();
+
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseApiCors();
