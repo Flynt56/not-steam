@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Pipeline;
-using NotSteam.Core.Interfaces.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace NotSteam.Core.Infrastructure
 {
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {
-        private readonly IAppLogger<TRequest> _logger;
+        private readonly ILogger<TRequest> _logger;
 
-        public RequestLogger(IAppLogger<TRequest> logger)
+        public RequestLogger(ILogger<TRequest> logger)
         {
             _logger = logger;
         }

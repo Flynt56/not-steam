@@ -23,12 +23,10 @@ using NotSteam.Core.Infrastructure;
 using NotSteam.Core.Infrastructure.AutoMapper;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Services;
-using NotSteam.Infrastructure.DB;
-using NotSteam.Infrastructure.Logging;
-using NotSteam.Infrastructure.Repositories;
 using NotSteam.Api.Auth;
 using NotSteam.Model.Identity;
-using NotSteam.Core.Interfaces.Logging;
+using NotSteam.Infrastructure.Data;
+using NotSteam.Infrastructure.Data.Repositories;
 
 namespace NotSteam
 {
@@ -64,7 +62,6 @@ namespace NotSteam
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

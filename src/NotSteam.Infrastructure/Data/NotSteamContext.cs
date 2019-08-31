@@ -7,7 +7,7 @@ using NotSteam.Infrastructure.Extensions.ModelBuilder;
 using NotSteam.Model.Identity;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Infrastructure.DB
+namespace NotSteam.Infrastructure.Data
 {
     public class NotSteamContext : IdentityDbContext<AuthUser, AuthRole, int>
     {

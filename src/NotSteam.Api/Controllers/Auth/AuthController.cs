@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.Auth.Login.Command;
 using NotSteam.Core.App.Auth.Register.Command;
@@ -18,13 +17,6 @@ namespace NotSteam.Core.Controllers.Auth
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             return ApiOk(await Mediator.Send(request));
-        }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult Protected()
-        {
-            return ApiOk("Protected area");
         }
     }
 }

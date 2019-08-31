@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
 using NotSteam.Core.Interfaces.Specifications;
-using NotSteam.Infrastructure.DB;
+using NotSteam.Infrastructure.Data;
 using NotSteam.Infrastructure.Specifications;
 using NotSteam.Model.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Infrastructure.Repositories
+namespace NotSteam.Infrastructure.Data.Repositories
 {
     public class EfRepository<T> : IAsyncRepository<T> where T : EntityBase, IAggregateRoot
     {

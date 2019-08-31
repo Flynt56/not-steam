@@ -1,8 +1,8 @@
 ﻿using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Infrastructure.DB;
+using NotSteam.Infrastructure.Data;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Infrastructure.Repositories
+namespace NotSteam.Infrastructure.Data.Repositories
 {
     public class GameRepository : EfRepository<Game>, IGameRepository
     {

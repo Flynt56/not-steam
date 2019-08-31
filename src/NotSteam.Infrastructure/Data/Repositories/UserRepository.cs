@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NotSteam.Core.Interfaces.Repositories;
-using NotSteam.Infrastructure.DB;
+using NotSteam.Infrastructure.Data;
 using NotSteam.Model.Identity;
 
-namespace NotSteam.Infrastructure.Repositories
+namespace NotSteam.Infrastructure.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {

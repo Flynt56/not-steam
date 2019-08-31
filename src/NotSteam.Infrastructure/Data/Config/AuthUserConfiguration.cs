@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NotSteam.Model.Identity;
 
-namespace NotSteam.Infrastructure.Configurations.Entity
+namespace NotSteam.Infrastructure.Data.Config
 {
     public class AuthUserConfiguration : IEntityTypeConfiguration<AuthUser>
     {
