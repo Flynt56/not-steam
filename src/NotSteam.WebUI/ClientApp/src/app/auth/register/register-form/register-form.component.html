@@ -17,6 +17,35 @@
             <input required type="password" name="password" [(ngModel)]="user.password" class="form-control"
                 id="password">
         </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="dateOfBirth">
+                        Date of Birth
+                    </label>
+                    <input required type="datetime-local" name="dateOfBirth" [(ngModel)]="user.dateOfBirth"
+                        class="form-control" id="dateOfBirth" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="nickname">
+                        Nickname
+                    </label>
+                    <input type="test" name="nickname" [(ngModel)]="user.nickname" class="form-control" id="nickname">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="profileImageUri">
+                Profile Image URL
+            </label>
+            <input type="url" name="profileImageUri" [(ngModel)]="user.profileImageUri" class="form-control"
+                id="profileImageUri">
+        </div>
+
         <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-primary">
             Submit
         </button>

@@ -20,6 +20,7 @@ import { LoginFormComponent } from './auth/login/login-form/login-form.component
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './template/home/home.component';
 import { AuthTokenInterceptor } from './shared/auth-token.interceptor';
+import { AuthErrorInterceptor } from './shared/auth-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AuthTokenInterceptor } from './shared/auth-token.interceptor';
     ToastrModule.forRoot()
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

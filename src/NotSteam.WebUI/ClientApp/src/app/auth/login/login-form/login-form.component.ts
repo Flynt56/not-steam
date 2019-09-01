@@ -48,10 +48,11 @@ export class LoginFormComponent implements OnInit {
       } else {
         this.router.navigate(['/']);
       }
-
-      setTimeout(() => {
-        location.reload();
-      }, 300);
+      /*
+            setTimeout(() => {
+              location.reload();
+            }, 300);
+            */
     },
 
       (response) => {

@@ -39,9 +39,6 @@ export class RegisterFormComponent implements OnInit {
 
       this.router.navigate(['/']);
 
-      setTimeout(() => {
-        location.reload();
-      }, 300);
     },
 
       (response) => {

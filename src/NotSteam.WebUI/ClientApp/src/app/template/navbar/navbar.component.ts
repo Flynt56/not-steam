@@ -27,5 +27,7 @@ export class NavbarComponent implements OnInit {
 
   onLogout() {
     this.jwt.logout();
+
+    location.reload();
   }
 }
