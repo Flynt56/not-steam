@@ -4,6 +4,6 @@ namespace NotSteam.Core.App.Companies.Commands.AddCompany
 {
     public class AddCompanyCommand : IRequest<AddCompanyDto>
     {
-        public AddCompanyDto AddCompanyDto { get; set; }
+        public AddCompanyDto Company { get; set; }
     }
 }

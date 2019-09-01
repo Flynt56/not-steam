@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Companies.Commands.AddCompany
         {
             return _mapper.Map<AddCompanyDto>(
                 await _companyRepository
-                .AddAsync(_mapper.Map<Company>(request.AddCompanyDto)));
+                .AddAsync(_mapper.Map<Company>(request.Company)));
         }
     }
 }

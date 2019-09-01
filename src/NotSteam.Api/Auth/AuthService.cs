@@ -38,36 +38,32 @@ namespace NotSteam.Api.Auth
             if (result.Succeeded)
             {
                 var appUser = UserManager.Users.SingleOrDefault(r => r.Email == email);
-                return GenerateJwtToken(email, appUser);
+
+                return GenerateJwtToken(appUser);
             }
 
             return null;
         }
 
-        public async Task<string> RegisterAsync(string email, string password)
+        public async Task<string> RegisterAsync(AuthUser user, string password)
         {
-            var user = new AuthUser
-            {
-                UserName = email,
-                Email = email
-            };
-
             var result = await UserManager.CreateAsync(user, password);
 
             if (result.Succeeded)
             {
                 await SignInManager.SignInAsync(user, false);
-                return GenerateJwtToken(email, user);
+
+                return GenerateJwtToken(user);
             }
 
             return null;
         }
 
-        private string GenerateJwtToken(string email, AuthUser user)
+        private string GenerateJwtToken(AuthUser user)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };

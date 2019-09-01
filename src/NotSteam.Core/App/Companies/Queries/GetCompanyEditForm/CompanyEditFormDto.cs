@@ -2,10 +2,12 @@
 using NotSteam.Core.Infrastructure.AutoMapper.Interfaces;
 using NotSteam.Model.Models;
 
-namespace NotSteam.Core.App.Companies.Commands.AddCompany
+namespace NotSteam.Core.App.Companies.Queries.GetCompanyEditForm
 {
-    public class AddCompanyDto : IHaveCustomMapping
+    public class CompanyEditFormDto : IHaveCustomMapping
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public string HomepageUri { get; set; }
@@ -13,7 +15,7 @@ namespace NotSteam.Core.App.Companies.Commands.AddCompany
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Company, AddCompanyDto>()
+            configuration.CreateMap<Company, CompanyEditFormDto>()
                 .ReverseMap();
         }
     }

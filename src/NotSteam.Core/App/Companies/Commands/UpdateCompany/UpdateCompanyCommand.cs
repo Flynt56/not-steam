@@ -6,6 +6,6 @@ namespace NotSteam.Core.App.Companies.Commands.UpdateCompany
     {
         public int Id { get; set; }
 
-        public UpdateCompanyDto UpdateCompanyDto { get; set; }
+        public UpdateCompanyDto Company { get; set; }
     }
 }

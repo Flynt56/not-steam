@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using NotSteam.Core.Exceptions;
 using NotSteam.Core.Interfaces.Repositories;
@@ -11,12 +10,10 @@ namespace NotSteam.Core.App.Companies.Commands.DeleteCompany
     public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     {
         private readonly IAsyncRepository<Company> _companyRepository;
-        private readonly IMapper _mapper;
 
-        public DeleteCompanyCommandHandler(IAsyncRepository<Company> companyRepository, IMapper mapper)
+        public DeleteCompanyCommandHandler(IAsyncRepository<Company> companyRepository)
         {
             _companyRepository = companyRepository;
-            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)

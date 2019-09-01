@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.Companies.Commands.AddCompany;
 using NotSteam.Core.App.Companies.Commands.DeleteCompany;
 using NotSteam.Core.App.Companies.Commands.UpdateCompany;
-using NotSteam.Core.App.Companies.Queries.GetCompaniesMap;
 using NotSteam.Core.App.Companies.Queries.GetCompanyDetail;
+using NotSteam.Core.App.Companies.Queries.GetCompanyEditForm;
 using NotSteam.Core.App.Companies.Queries.GetPaginatedCompaniesList;
 
 namespace NotSteam.Core.Controllers
@@ -23,25 +24,28 @@ namespace NotSteam.Core.Controllers
             return ApiOk(await Mediator.Send(query));
         }
 
-        [HttpGet("dropdown")]
-        public async Task<IActionResult> GetDropdown()
+        [HttpGet("edit/{id}")]
+        public async Task<IActionResult> GetEditData([FromRoute] GetCompanyEditFormRequest request)
         {
-            return ApiOk(await Mediator.Send(new GetCompaniesMapQuery()));
+            return ApiOk(await Mediator.Send(request));
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutOne(int id, [FromBody] UpdateCompanyDto game)
         {
-            return ApiOk(await Mediator.Send(new UpdateCompanyCommand { Id = id, UpdateCompanyDto = game }));
+            return ApiOk(await Mediator.Send(new UpdateCompanyCommand { Id = id, Company = game }));
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostOne([FromBody] AddCompanyDto game)
         {
-            return ApiOk(await Mediator.Send(new AddCompanyCommand { AddCompanyDto = game }));
+            return ApiOk(await Mediator.Send(new AddCompanyCommand { Company = game }));
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteOne([FromQuery] DeleteCompanyCommand command)
         {
             return ApiOk(await Mediator.Send(command));

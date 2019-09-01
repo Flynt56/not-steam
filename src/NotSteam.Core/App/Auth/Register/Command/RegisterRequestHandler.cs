@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using NotSteam.Core.Interfaces.Services;
+using NotSteam.Model.Identity;
 
 namespace NotSteam.Core.App.Auth.Register.Command
 {
@@ -22,7 +23,16 @@ namespace NotSteam.Core.App.Auth.Register.Command
 
         public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
         {
-            string token = await _authService.RegisterAsync(request.Email, request.Password);
+            var user = new AuthUser
+            {
+                Email = request.Email,
+                UserName = request.Email,
+                DateOfBirth = request.DateOfBirth,
+                Nickname = request.Nickname,
+                ProfileImageUri = request.ProfileImageUri
+            };
+
+            string token = await _authService.RegisterAsync(user, request.Password);
 
             if (string.IsNullOrEmpty(token))
             {

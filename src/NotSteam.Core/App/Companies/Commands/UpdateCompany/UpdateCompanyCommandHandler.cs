@@ -21,9 +21,9 @@ namespace NotSteam.Core.App.Companies.Commands.UpdateCompany
         public async Task<UpdateCompanyDto> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
             await _companyRepository
-                .UpdateAsync(_mapper.Map<Company>(request.UpdateCompanyDto));
+                .UpdateAsync(_mapper.Map<Company>(request.Company));
 
-            return request.UpdateCompanyDto;
+            return request.Company;
         }
     }
 }
