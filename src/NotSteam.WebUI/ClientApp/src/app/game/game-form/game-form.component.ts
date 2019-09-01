@@ -5,6 +5,7 @@ import { CompanyService } from 'src/app/company/company.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { CompanyDropdown } from 'src/app/company/model/CompanyDropdown';
 import { GameDetails } from '../model/GameDetails';
+import { GameEditForm } from '../model/GameEditForm';
 
 @Component({
   selector: 'app-game-form',
@@ -30,11 +31,21 @@ export class GameFormComponent implements OnInit {
       const gameId = params.get('id');
 
       if (gameId != null) {
-        this.getGame(gameId);
+        this.getGameEditForm(gameId);
+      } else {
+        this.getCompaniesMap();
       }
-
-      this.getCompanies();
     });
+  }
+
+  getGameEditForm(gameId) {
+    this.gameService.getEditFormById(gameId)
+      .subscribe((response: GameEditForm) => {
+        this.game = response.game;
+        this.companies = response.companies;
+
+        this.common.hide();
+      });
   }
 
   getGame(gameId) {
@@ -61,7 +72,7 @@ export class GameFormComponent implements OnInit {
       });
   }
 
-  getCompanies() {
+  getCompaniesMap() {
     this.companyService.getDropdown<CompanyDropdown>()
       .subscribe(response => {
         this.companies = response;

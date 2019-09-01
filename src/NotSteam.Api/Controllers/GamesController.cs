@@ -4,6 +4,7 @@ using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Commands.DeleteGame;
 using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
+using NotSteam.Core.App.Games.Queries.GetGameEditForm;
 using NotSteam.Core.App.Games.Queries.GetGamesMap;
 using NotSteam.Core.App.Games.Queries.GetGamesPage;
 
@@ -19,6 +20,12 @@ namespace NotSteam.Core.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne([FromRoute] GetGameDetailRequest request)
+        {
+            return ApiOk(await Mediator.Send(request));
+        }
+
+        [HttpGet("edit/{id}")]
+        public async Task<IActionResult> GetOneEdit([FromRoute] GetGameEditFormRequest request)
         {
             return ApiOk(await Mediator.Send(request));
         }

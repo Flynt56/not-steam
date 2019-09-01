@@ -11,27 +11,31 @@ import { map } from 'rxjs/operators';
 export class BaseService<TPaginationResponse, TDetailResponse> {
 
   constructor(
-    private routeUrl: string,
-    private http: HttpClient
+    protected routeUrl: string,
+    protected http: HttpClient
   ) { }
 
-  private getRootUrl(): string {
-    return environment.apiUrl + this.routeUrl;
+  protected getRootUrl(): string {
+    return `${environment.apiUrl}${this.routeUrl}`;
   }
 
-  private getPageUrl(page: any): string {
-    return this.getRootUrl() + '?page=' + page;
+  protected getPageUrl(page: any): string {
+    return `${this.getRootUrl()}?page=${page}`;
   }
 
-  private getOneUrl(id: number): string {
-    return this.getRootUrl() + '/' + id;
+  protected getOneUrl(id: number): string {
+    return `${this.getRootUrl()}/${id}`;
   }
 
-  private getOneArrayUrl(id: Array<number>): string {
+  protected getEditFormUrl(id: number): string {
+    return `${this.getRootUrl()}/edit/${id}`;
+  }
+
+  protected getOneArrayUrl(id: Array<number>): string {
     return this.getRootUrl() + Array.from(id).map((item: any) => '/' + item);
   }
 
-  private getDropdownUrl(): string {
+  protected getDropdownUrl(): string {
     return this.getRootUrl() + '/dropdown';
   }
 

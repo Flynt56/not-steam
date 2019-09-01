@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { GameDetails } from './model/GameDetails';
 import { GameList } from './model/GameList';
 import { BaseService } from '../shared/base.service';
+import { map } from 'rxjs/operators';
+import { DetailResponse } from '../shared/Response/DetailResponse';
+import { GameEditForm } from './model/GameEditForm';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +18,14 @@ export class GameService extends BaseService<GameList, GameDetails> {
     super('games', http);
   }
 
+  public getEditFormById(id: number) {
+    return this
+      .http
+      .get(this.getEditFormUrl(id))
+      .pipe(
+        map((raw: DetailResponse<GameEditForm>) => {
+          return raw.response;
+        })
+      );
+  }
 }
