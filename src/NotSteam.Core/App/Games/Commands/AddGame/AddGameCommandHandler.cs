@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Games.Commands.AddGame
         {
             return _mapper.Map<AddGameDto>(
                 await _gameRepository
-                .AddAsync(_mapper.Map<Game>(request.AddGameDto)));
+                .AddAsync(_mapper.Map<Game>(request.Game)));
         }
     }
 }

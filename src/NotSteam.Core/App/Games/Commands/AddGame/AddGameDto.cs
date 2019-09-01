@@ -7,8 +7,6 @@ namespace NotSteam.Core.App.Games.Commands.AddGame
 {
     public class AddGameDto : IHaveCustomMapping
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }

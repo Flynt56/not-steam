@@ -21,9 +21,9 @@ namespace NotSteam.Core.App.Games.Commands.UpdateGame
         public async Task<UpdateGameDto> Handle(UpdateGameCommand request, CancellationToken cancellationToken)
         {
             await _gameRepository
-                .UpdateAsync(_mapper.Map<Game>(request.UpdateGameDto));
+                .UpdateAsync(_mapper.Map<Game>(request.Game));
 
-            return request.UpdateGameDto;
+            return request.Game;
         }
     }
 }

@@ -6,6 +6,6 @@ namespace NotSteam.Core.App.Games.Commands.UpdateGame
     {
         public int Id { get; set; }
 
-        public UpdateGameDto UpdateGameDto { get; set; }
+        public UpdateGameDto Game { get; set; }
     }
 }

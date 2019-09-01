@@ -7,7 +7,6 @@ using NotSteam.Core.App.Games.Commands.UpdateGame;
 using NotSteam.Core.App.Games.Queries.GetGameAddForm;
 using NotSteam.Core.App.Games.Queries.GetGameDetail;
 using NotSteam.Core.App.Games.Queries.GetGameEditForm;
-using NotSteam.Core.App.Games.Queries.GetGamesMap;
 using NotSteam.Core.App.Games.Queries.GetGamesPage;
 
 namespace NotSteam.Core.Controllers
@@ -42,14 +41,14 @@ namespace NotSteam.Core.Controllers
         [Authorize]
         public async Task<IActionResult> PutOne(int id, [FromBody] UpdateGameDto game)
         {
-            return ApiOk(await Mediator.Send(new UpdateGameCommand { Id = id, UpdateGameDto = game }));
+            return ApiOk(await Mediator.Send(new UpdateGameCommand { Id = id, Game = game }));
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> PostOne([FromBody] AddGameDto game)
         {
-            return ApiOk(await Mediator.Send(new AddGameCommand { AddGameDto = game }));
+            return ApiOk(await Mediator.Send(new AddGameCommand { Game = game }));
         }
 
         [HttpDelete("{id}")]
