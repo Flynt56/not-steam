@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Tags.Commands.AddTag
         {
             return _mapper.Map<AddTagDto>(
                 await _tagRepository
-                .AddAsync(_mapper.Map<Tag>(request.AddTagDto)));
+                .AddAsync(_mapper.Map<Tag>(request.Tag)));
         }
     }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TagService } from '../tag.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { TagDetails } from '../model/TagDetails';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tag-form',
@@ -15,7 +16,8 @@ export class TagFormComponent implements OnInit {
     private route: ActivatedRoute,
     private tagService: TagService,
     private router: Router,
-    private common: CommonService
+    private common: CommonService,
+    private location: Location
   ) { }
 
   public tag: TagDetails = new TagDetails();
@@ -32,10 +34,11 @@ export class TagFormComponent implements OnInit {
   }
 
   getTag(tagId) {
-    this.tagService.getOneById(tagId).subscribe(response => {
-      this.tag = response;
-      this.common.hide();
-    });
+    this.tagService.getEditFormById<TagDetails>(tagId)
+      .subscribe((response: any) => {
+        this.tag = response.tag;
+        this.common.hide();
+      });
   }
 
   onSubmit() {
@@ -55,4 +58,8 @@ export class TagFormComponent implements OnInit {
       });
   }
 
+  goBack() {
+    this.location.back();
+    return false;
+  }
 }

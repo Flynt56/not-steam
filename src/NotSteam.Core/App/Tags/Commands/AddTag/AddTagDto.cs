@@ -6,8 +6,6 @@ namespace NotSteam.Core.App.Tags.Commands.AddTag
 {
     public class AddTagDto : IHaveCustomMapping
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
         public string Description { get; set; }
 

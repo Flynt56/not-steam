@@ -6,6 +6,6 @@ namespace NotSteam.Core.App.Tags.Commands.UpdateTag
     {
         public int Id { get; set; }
 
-        public UpdateTagDto UpdateTagDto { get; set; }
+        public UpdateTagDto Tag { get; set; }
     }
 }

@@ -32,16 +32,16 @@ namespace NotSteam.Core.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> PutOne(int id, [FromBody] UpdateCompanyDto game)
+        public async Task<IActionResult> PutOne(int id, [FromBody] UpdateCompanyDto company)
         {
-            return ApiOk(await Mediator.Send(new UpdateCompanyCommand { Id = id, Company = game }));
+            return ApiOk(await Mediator.Send(new UpdateCompanyCommand { Id = id, Company = company }));
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostOne([FromBody] AddCompanyDto game)
+        public async Task<IActionResult> PostOne([FromBody] AddCompanyDto company)
         {
-            return ApiOk(await Mediator.Send(new AddCompanyCommand { Company = game }));
+            return ApiOk(await Mediator.Send(new AddCompanyCommand { Company = company }));
         }
 
         [HttpDelete("{id}")]

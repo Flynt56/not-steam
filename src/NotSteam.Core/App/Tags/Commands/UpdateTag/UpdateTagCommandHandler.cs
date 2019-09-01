@@ -21,9 +21,9 @@ namespace NotSteam.Core.App.Tags.Commands.UpdateTag
         public async Task<UpdateTagDto> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
         {
             await _tagRepository
-                .UpdateAsync(_mapper.Map<Tag>(request.UpdateTagDto));
+                .UpdateAsync(_mapper.Map<Tag>(request.Tag));
 
-            return request.UpdateTagDto;
+            return request.Tag;
         }
     }
 }

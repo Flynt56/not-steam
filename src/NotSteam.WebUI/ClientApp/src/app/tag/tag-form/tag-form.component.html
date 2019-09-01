@@ -17,7 +17,10 @@
             <textarea type="text" id="description" name="description" class="form-control" rows="3" cols="50"
                 name="description" placeholder="Let us know!" [(ngModel)]="tag.description"></textarea>
         </div>
-        <button [disabled]="!tagForm.form.valid" type="submit" class="btn btn-primary">
+        <button (click)="goBack()" class="btn btn-outline-primary float-left">
+            Cancel
+        </button>
+        <button [disabled]="!tagForm.form.valid" type="submit" class="btn btn-primary float-right">
             Submit
         </button>
     </form>

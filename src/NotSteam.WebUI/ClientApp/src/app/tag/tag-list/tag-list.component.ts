@@ -45,12 +45,12 @@ export class TagListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['tags/new']);
+    this.router.navigate(['tags', 'new']);
   }
 
   onEdit(tagId) {
     this.common.show();
-    this.router.navigate(['tags', tagId]);
+    this.router.navigate(['tags', 'edit', tagId]);
   }
 
 }

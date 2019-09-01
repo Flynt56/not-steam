@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotSteam.Infrastructure.Data;
 
-namespace NotSteam.Infrastructure.Migrations
+namespace NotSteam.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(NotSteamContext))]
     partial class NotSteamContextModelSnapshot : ModelSnapshot
@@ -18,31 +18,6 @@ namespace NotSteam.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -127,7 +102,32 @@ namespace NotSteam.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NotSteam.Model.Models.AuthUser", b =>
+            modelBuilder.Entity("NotSteam.Model.Identity.AuthRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("NotSteam.Model.Identity.AuthUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -258,7 +258,7 @@ namespace NotSteam.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(2409),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(1539),
                             Description = "We make really cool games!",
                             HomepageUri = "https://www.methesda-softworks.com",
                             LogoImageUri = "https://cdn.notsteam.com/images/101",
@@ -267,7 +267,7 @@ namespace NotSteam.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(3709),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(2934),
                             Description = "We make tech demos!",
                             HomepageUri = "https://www.crymearivertek.com",
                             LogoImageUri = "https://cdn.notsteam.com/images/102",
@@ -276,7 +276,7 @@ namespace NotSteam.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(3721),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(2946),
                             Description = "We make great action-adventure, role-playing games!",
                             HomepageUri = "https://www.dvd-projekt-blue.com",
                             LogoImageUri = "https://cdn.notsteam.com/images/103",
@@ -322,7 +322,7 @@ namespace NotSteam.Infrastructure.Migrations
                             Id = 1,
                             BasePrice = 59.99m,
                             CompanyId = 3,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 568, DateTimeKind.Utc).AddTicks(4432),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 38, DateTimeKind.Utc).AddTicks(5164),
                             Description = "New year, new game!",
                             ReleaseDate = new DateTime(2019, 6, 22, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "C4ll of $$$$: Covert Ops"
@@ -332,7 +332,7 @@ namespace NotSteam.Infrastructure.Migrations
                             Id = 2,
                             BasePrice = 79.99m,
                             CompanyId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 568, DateTimeKind.Utc).AddTicks(6184),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 38, DateTimeKind.Utc).AddTicks(6703),
                             Description = "What we really want from EA.",
                             ReleaseDate = new DateTime(2018, 12, 12, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "Need for Speed: Underground 3"
@@ -342,7 +342,7 @@ namespace NotSteam.Infrastructure.Migrations
                             Id = 3,
                             BasePrice = 69.69m,
                             CompanyId = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 568, DateTimeKind.Utc).AddTicks(6197),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 38, DateTimeKind.Utc).AddTicks(6715),
                             Description = "One of these days…",
                             ReleaseDate = new DateTime(2022, 10, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             Title = "Age of Empires 4"
@@ -372,37 +372,37 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             GameId = 1,
                             TagId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(320)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(1219)
                         },
                         new
                         {
                             GameId = 1,
                             TagId = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(1375)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(2531)
                         },
                         new
                         {
                             GameId = 2,
                             TagId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(1387)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(2543)
                         },
                         new
                         {
                             GameId = 2,
                             TagId = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(1388)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(2544)
                         },
                         new
                         {
                             GameId = 2,
                             TagId = 3,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(1389)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(2545)
                         },
                         new
                         {
                             GameId = 3,
                             TagId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(1390)
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(2546)
                         });
                 });
 
@@ -435,17 +435,17 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 1,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(6389),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(8085),
                             DateAcquired = new DateTime(2019, 7, 20, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(6389),
+                            LastPlayedDate = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(8084),
                             TotalPlayTimeHours = 20
                         },
                         new
                         {
                             UserId = 1,
                             GameId = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(7622),
-                            DateAcquired = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(7621),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(9415),
+                            DateAcquired = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(9414),
                             LastPlayedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TotalPlayTimeHours = 0
                         },
@@ -453,10 +453,10 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 2,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(7691),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(9489),
                             DateAcquired = new DateTime(2019, 7, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            LastPlayedDate = new DateTime(2019, 8, 25, 15, 25, 51, 569, DateTimeKind.Utc).AddTicks(7691),
-                            TotalPlayTimeHours = 903
+                            LastPlayedDate = new DateTime(2019, 9, 1, 23, 23, 48, 39, DateTimeKind.Utc).AddTicks(9489),
+                            TotalPlayTimeHours = 1079
                         });
                 });
 
@@ -488,7 +488,7 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 1,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 570, DateTimeKind.Utc).AddTicks(2590),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 40, DateTimeKind.Utc).AddTicks(4942),
                             DateOfPurchase = new DateTime(2019, 7, 19, 0, 0, 0, 0, DateTimeKind.Utc),
                             TotalPrice = 59.99m
                         },
@@ -496,7 +496,7 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 1,
                             GameId = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 570, DateTimeKind.Utc).AddTicks(4090),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 40, DateTimeKind.Utc).AddTicks(6282),
                             DateOfPurchase = new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Utc),
                             TotalPrice = 64.99m
                         },
@@ -504,7 +504,7 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 2,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 570, DateTimeKind.Utc).AddTicks(4104),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 40, DateTimeKind.Utc).AddTicks(6295),
                             DateOfPurchase = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             TotalPrice = 24.99m
                         });
@@ -538,7 +538,7 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 1,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 570, DateTimeKind.Utc).AddTicks(7562),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 40, DateTimeKind.Utc).AddTicks(9864),
                             Description = "This is a really good game! You should get it too!",
                             Rating = 8
                         },
@@ -546,7 +546,7 @@ namespace NotSteam.Infrastructure.Migrations
                         {
                             UserId = 2,
                             GameId = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 570, DateTimeKind.Utc).AddTicks(8810),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 41, DateTimeKind.Utc).AddTicks(1287),
                             Description = "It's a good game, but I don't like \"surprise mechanics\".",
                             Rating = 6
                         });
@@ -582,21 +582,21 @@ namespace NotSteam.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(7328),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(7620),
                             Description = "This item contains single-player content (e.g. campaign, story mode, etc.)",
                             Name = "Single-Player"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(8483),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(8853),
                             Description = "This item contains multi-player content. Requires an internet connection.",
                             Name = "Multi-Player"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2019, 8, 25, 15, 25, 51, 567, DateTimeKind.Utc).AddTicks(8494),
+                            CreatedAt = new DateTime(2019, 9, 1, 23, 23, 48, 37, DateTimeKind.Utc).AddTicks(8865),
                             Description = "This item contains ce-op content. Requires an internet connection. A limited amount of players can group up and play!",
                             Name = "Co-Op"
                         });
@@ -604,7 +604,7 @@ namespace NotSteam.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>")
+                    b.HasOne("NotSteam.Model.Identity.AuthRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -612,7 +612,7 @@ namespace NotSteam.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("NotSteam.Model.Models.AuthUser")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -620,7 +620,7 @@ namespace NotSteam.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("NotSteam.Model.Models.AuthUser")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -628,12 +628,12 @@ namespace NotSteam.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>")
+                    b.HasOne("NotSteam.Model.Identity.AuthRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Model.Models.AuthUser")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -641,7 +641,7 @@ namespace NotSteam.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("NotSteam.Model.Models.AuthUser")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -675,7 +675,7 @@ namespace NotSteam.Infrastructure.Migrations
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Model.Models.AuthUser", "User")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser", "User")
                         .WithMany("Libraries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -688,7 +688,7 @@ namespace NotSteam.Infrastructure.Migrations
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Model.Models.AuthUser", "User")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser", "User")
                         .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -701,7 +701,7 @@ namespace NotSteam.Infrastructure.Migrations
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("NotSteam.Model.Models.AuthUser", "User")
+                    b.HasOne("NotSteam.Model.Identity.AuthUser", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
