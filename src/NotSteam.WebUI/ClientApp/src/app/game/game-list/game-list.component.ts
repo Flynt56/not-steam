@@ -50,6 +50,6 @@ export class GameListComponent implements OnInit {
 
   onEdit(gameId) {
     this.common.show();
-    this.router.navigate(['games', gameId]);
+    this.router.navigate(['games', 'edit', gameId]);
   }
 }

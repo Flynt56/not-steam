@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using NotSteam.Core.ApiResponse;
 using NotSteam.Core.Exceptions;
 
 namespace NotSteam.Core.Filters
@@ -13,12 +15,19 @@ namespace NotSteam.Core.Filters
         {
             if (context.Exception is ValidationException)
             {
-                context.HttpContext.Response.ContentType = "application/json";
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                var errors = new List<ApiErrorInformation>();
 
-                context.Result = new JsonResult(
-                    ((ValidationException)context.Exception).Failures);
+                foreach(var valErr in ((ValidationException)context.Exception).Failures)
+                {
+                    errors.Add(new ApiErrorInformation
+                    {
+                        Code = ApiErrorCode.VALIDATION,
+                        InternalMessage = valErr.ToString(),
+                        Message = valErr.Value[0]
+                    });
+                }
 
+                context.Result = new BadRequestObjectResult(ApiErrorResponse.Error(HttpStatusCode.BadRequest, errors));
                 return;
             }
 

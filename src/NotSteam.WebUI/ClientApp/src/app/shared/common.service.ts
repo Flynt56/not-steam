@@ -27,4 +27,12 @@ export class CommonService {
   public hide() {
     this.spinner.hide();
   }
+
+  public accessDeniedMessage() {
+    this.toastr.error('Access denied!');
+  }
+
+  public welcomeMessage() {
+    this.toastr.success('Welcome to NotSteam!');
+  }
 }

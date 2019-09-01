@@ -3,7 +3,7 @@ import { Login } from '../login';
 import { AuthService } from '../../auth.service';
 import { JwtService } from '../../jwt.service';
 import { CommonService } from 'src/app/shared/common.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -16,13 +16,19 @@ export class LoginFormComponent implements OnInit {
     private auth: AuthService,
     private jwt: JwtService,
     private common: CommonService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   public user: Login = new Login();
   public errorMessage = '';
 
+  public returnUrl = '';
+
   ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      this.returnUrl = params.get('returnUrl');
+    });
   }
 
   onSubmit() {
@@ -36,7 +42,11 @@ export class LoginFormComponent implements OnInit {
       this.jwt.setToken(token);
       this.jwt.setUser(response.user);
 
-      this.router.navigate(['/']);
+      if (this.returnUrl !== null && this.returnUrl.length > 0) {
+        this.router.navigate([this.returnUrl]);
+      } else {
+        this.router.navigate(['/']);
+      }
 
       setTimeout(() => {
         location.reload();
