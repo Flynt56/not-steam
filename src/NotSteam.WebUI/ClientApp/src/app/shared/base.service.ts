@@ -27,16 +27,16 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
     return `${this.getRootUrl()}/${id}`;
   }
 
+  protected getAddFormUrl(): string {
+    return `${this.getRootUrl()}/add`;
+  }
+
   protected getEditFormUrl(id: number): string {
     return `${this.getRootUrl()}/edit/${id}`;
   }
 
   protected getOneArrayUrl(id: Array<number>): string {
     return this.getRootUrl() + Array.from(id).map((item: any) => '/' + item);
-  }
-
-  protected getDropdownUrl(): string {
-    return this.getRootUrl() + '/dropdown';
   }
 
   public getAll() {
@@ -56,14 +56,26 @@ export class BaseService<TPaginationResponse, TDetailResponse> {
       );
   }
 
-  public getDropdown<TDropdown>() {
+  public getAddForm<TAddForm>() {
     return this
       .http
-      .get(this.getDropdownUrl())
+      .get(this.getAddFormUrl())
       .pipe(
-        map((raw: DetailResponse<Array<TDropdown>>) => {
+        map((raw: DetailResponse<TAddForm>) => {
           return raw.response;
-        }));
+        })
+      );
+  }
+
+  public getEditFormById<TEditForm>(id: number) {
+    return this
+      .http
+      .get(this.getEditFormUrl(id))
+      .pipe(
+        map((raw: DetailResponse<TEditForm>) => {
+          return raw.response;
+        })
+      );
   }
 
   public getOneById(id: number) {

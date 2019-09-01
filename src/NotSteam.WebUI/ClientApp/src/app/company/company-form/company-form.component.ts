@@ -26,16 +26,18 @@ export class CompanyFormComponent implements OnInit {
       const companyId = params.get('id');
 
       if (companyId != null) {
-        this.getCompany(companyId);
+        this.getCompanyEditForm(companyId);
       }
     });
   }
 
-  getCompany(companyId) {
-    this.companyService.getOneById(companyId).subscribe(response => {
-      this.company = response;
-      this.common.hide();
-    });
+  getCompanyEditForm(companyId) {
+    this.companyService.getEditFormById<CompanyDetails>(companyId)
+      .subscribe((response: any) => {
+        this.company = response.company;
+
+        this.common.hide();
+      });
   }
 
   onSubmit() {

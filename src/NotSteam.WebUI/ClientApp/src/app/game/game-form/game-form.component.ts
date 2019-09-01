@@ -35,26 +35,28 @@ export class GameFormComponent implements OnInit {
       if (gameId != null) {
         this.getGameEditForm(gameId);
       } else {
-        this.getCompaniesMap();
+        this.getGameAddForm();
       }
     });
   }
 
-  getGameEditForm(gameId) {
-    this.gameService.getEditFormById(gameId)
+  getGameAddForm() {
+    this.gameService.getAddForm<GameEditForm>()
       .subscribe((response: GameEditForm) => {
-        this.game = response.game;
         this.companies = response.companies;
 
         this.common.hide();
       });
   }
 
-  getGame(gameId) {
-    this.gameService.getOneById(gameId).subscribe(response => {
-      this.game = response;
-      this.common.hide();
-    });
+  getGameEditForm(gameId) {
+    this.gameService.getEditFormById<GameEditForm>(gameId)
+      .subscribe((response: GameEditForm) => {
+        this.game = response.game;
+        this.companies = response.companies;
+
+        this.common.hide();
+      });
   }
 
   onSubmit() {
@@ -71,13 +73,6 @@ export class GameFormComponent implements OnInit {
         const firstKey = Object.keys(firstError)[0];
         this.errorMessage = firstError[firstKey][0];
         this.common.hide();
-      });
-  }
-
-  getCompaniesMap() {
-    this.companyService.getDropdown<CompanyDropdown>()
-      .subscribe(response => {
-        this.companies = response;
       });
   }
 
