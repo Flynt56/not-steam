@@ -4,6 +4,8 @@ import { AuthService } from '../../auth.service';
 import { JwtService } from '../../jwt.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthResponse } from '../../models/AuthResponse';
+import { DetailResponse } from 'src/app/shared/Response/DetailResponse';
 
 @Component({
   selector: 'app-login-form',
@@ -29,6 +31,8 @@ export class LoginFormComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.returnUrl = params.get('returnUrl');
     });
+
+    this.common.hide();
   }
 
   onSubmit() {
@@ -36,11 +40,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLogin() {
-    this.auth.login(this.user).subscribe((response: any) => {
-      const token = response.token;
+    this.auth.login(this.user).subscribe((response: DetailResponse<AuthResponse>) => {
 
-      this.jwt.setToken(token);
-      this.jwt.setUser(response.user);
+      this.jwt.setToken(response.response.token);
+      this.jwt.setUser(response.response.user);
 
       if (this.returnUrl !== null && this.returnUrl.length > 0) {
         this.router.navigate([this.returnUrl]);

@@ -4,7 +4,7 @@ using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 {
-    public class GetGamesPageRequest : AbstractPagingRequest<GetGamesPageEntryResponseDto>, IRequest<PagedResult<GetGamesPageEntryResponseDto>>
+    public class GetGamesPageRequest : AbstractPagingRequest<GamesPageEntryDto>, IRequest<PagedResult<GamesPageEntryDto>>
     {
         private const string ValidOrderByValues = "title";
 
@@ -12,7 +12,7 @@ namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 
         public string OrderBy { get; set; }
 
-        public override IQueryable<GetGamesPageEntryResponseDto> GetFilteredQuery(IQueryable<GetGamesPageEntryResponseDto> query)
+        public override IQueryable<GamesPageEntryDto> GetFilteredQuery(IQueryable<GamesPageEntryDto> query)
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
@@ -22,7 +22,7 @@ namespace NotSteam.Core.App.Games.Queries.GetGamesPage
             return query;
         }
 
-        public override IQueryable<GetGamesPageEntryResponseDto> SetUpSorting(IQueryable<GetGamesPageEntryResponseDto> query)
+        public override IQueryable<GamesPageEntryDto> SetUpSorting(IQueryable<GamesPageEntryDto> query)
         {
             var sortInformation = ParseOrderBy(OrderBy, ValidOrderByValues);
 

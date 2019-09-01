@@ -10,7 +10,7 @@ using NotSteam.Shared.Pagination;
 
 namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 {
-    public class GetGamesPageRequestHandler : IRequestHandler<GetGamesPageRequest, PagedResult<GetGamesPageEntryResponseDto>>
+    public class GetGamesPageRequestHandler : IRequestHandler<GetGamesPageRequest, PagedResult<GamesPageEntryDto>>
     {
         private readonly IGameRepository _gameRepository;
         private readonly IMapper _mapper;
@@ -21,11 +21,11 @@ namespace NotSteam.Core.App.Games.Queries.GetGamesPage
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<GetGamesPageEntryResponseDto>> Handle(GetGamesPageRequest request, CancellationToken cancellationToken)
+        public async Task<PagedResult<GamesPageEntryDto>> Handle(GetGamesPageRequest request, CancellationToken cancellationToken)
         {
             return await _gameRepository.GetAll()
                 .Include(a => a.GameTags)
-                .ProjectTo<GetGamesPageEntryResponseDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<GamesPageEntryDto>(_mapper.ConfigurationProvider)
                 .ToPagedResultAsync(request);
         }
     }

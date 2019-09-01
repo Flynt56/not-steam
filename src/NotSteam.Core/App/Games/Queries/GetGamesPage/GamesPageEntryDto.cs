@@ -7,7 +7,7 @@ using NotSteam.Model.Models;
 
 namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 {
-    public class GetGamesPageEntryResponseDto : IHaveCustomMapping
+    public class GamesPageEntryDto : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace NotSteam.Core.App.Games.Queries.GetGamesPage
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Game, GetGamesPageEntryResponseDto>()
+            configuration.CreateMap<Game, GamesPageEntryDto>()
                 .ForMember(gDTO => gDTO.Tags, opt => opt.MapFrom(g => g.GameTags.Select(gt => gt.Tag.Name).ToList()))
                 .ReverseMap();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotSteam.Core.App.Games.Commands.AddGame;
 using NotSteam.Core.App.Games.Commands.DeleteGame;
@@ -37,25 +38,22 @@ namespace NotSteam.Core.Controllers
             return ApiOk(await Mediator.Send(request));
         }
 
-        [HttpGet("dropdown")]
-        public async Task<IActionResult> GetDropdown()
-        {
-            return ApiOk(await Mediator.Send(new GetGamesMapRequest()));
-        }
-
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutOne(int id, [FromBody] UpdateGameDto game)
         {
             return ApiOk(await Mediator.Send(new UpdateGameCommand { Id = id, UpdateGameDto = game }));
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostOne([FromBody] AddGameDto game)
         {
             return ApiOk(await Mediator.Send(new AddGameCommand { AddGameDto = game }));
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteOne([FromRoute] DeleteGameCommand command)
         {
             return ApiOk(await Mediator.Send(command));
