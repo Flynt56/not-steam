@@ -26,13 +26,13 @@ namespace NotSteam.Core.Controllers
         }
 
         [HttpGet("edit/{id}")]
-        public async Task<IActionResult> GetEditForm([FromRoute] GetGameEditFormRequest request)
+        public async Task<IActionResult> GetEditData([FromRoute] GetGameEditFormRequest request)
         {
             return ApiOk(await Mediator.Send(request));
         }
 
         [HttpGet("add")]
-        public async Task<IActionResult> GetAddForm([FromRoute] GetGameAddFormRequest request)
+        public async Task<IActionResult> GetAddData([FromRoute] GetGameAddFormRequest request)
         {
             return ApiOk(await Mediator.Send(request));
         }
