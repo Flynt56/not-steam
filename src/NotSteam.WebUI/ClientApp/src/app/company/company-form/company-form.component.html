@@ -17,19 +17,29 @@
       <textarea type="text" id="description" name="description" class="form-control" rows="3" cols="50"
         name="description" placeholder="Let us know!" [(ngModel)]="company.description"></textarea>
     </div>
-    <div class="form-group">
-      <label for="homepageUri">
-        Homepage URL
-      </label>
-      <input type="url" name="homepageUri" [(ngModel)]="company.homepageUri" class="form-control" id="homepageUri">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="homepageUri">
+            Homepage URL
+          </label>
+          <input type="url" name="homepageUri" [(ngModel)]="company.homepageUri" class="form-control" id="homepageUri">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="logoImageUri">
+            Logo Image URL
+          </label>
+          <input type="url" name="logoImageUri" [(ngModel)]="company.logoImageUri" class="form-control"
+            id="logoImageUri">
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="logoImageUri">
-        Logo Image URL
-      </label>
-      <input type="url" name="logoImageUri" [(ngModel)]="company.logoImageUri" class="form-control" id="logoImageUri">
-    </div>
-    <button [disabled]="!companyForm.form.valid" type="submit" class="btn btn-primary">
+    <button (click)="goBack()" class="btn btn-outline-primary float-left">
+      Cancel
+    </button>
+    <button [disabled]="!companyForm.form.valid" type="submit" class="btn btn-primary float-right">
       Submit
     </button>
   </form>

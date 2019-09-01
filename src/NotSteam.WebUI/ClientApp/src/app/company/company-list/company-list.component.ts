@@ -45,12 +45,12 @@ export class CompanyListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['companies/new']);
+    this.router.navigate(['companies', 'new']);
   }
 
   onEdit(companyId) {
     this.common.show();
-    this.router.navigate(['companies', companyId]);
+    this.router.navigate(['companies', 'edit', companyId]);
   }
 
 }

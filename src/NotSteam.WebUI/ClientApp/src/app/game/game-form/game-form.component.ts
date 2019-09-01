@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../game.service';
-import { CompanyService } from 'src/app/company/company.service';
 import { CommonService } from 'src/app/shared/common.service';
 import { CompanyDropdown } from 'src/app/company/model/CompanyDropdown';
 import { GameDetails } from '../model/GameDetails';
@@ -19,7 +18,6 @@ export class GameFormComponent implements OnInit {
     private route: ActivatedRoute,
     private gameService: GameService,
     private router: Router,
-    private companyService: CompanyService,
     private common: CommonService,
     private location: Location
   ) { }
@@ -62,18 +60,20 @@ export class GameFormComponent implements OnInit {
   onSubmit() {
     this.common.show();
 
-    this.gameService.submit(this.game).subscribe(
-      () => {
-        this.common.success('Uspješno izvršeno!');
-        this.router.navigate(['games']);
-        this.common.hide();
-      },
-      (response: any) => {
-        const firstError = response.error.errors;
-        const firstKey = Object.keys(firstError)[0];
-        this.errorMessage = firstError[firstKey][0];
-        this.common.hide();
-      });
+    this.gameService
+      .submit(this.game)
+      .subscribe(
+        () => {
+          this.common.success('Uspješno izvršeno!');
+          this.router.navigate(['games']);
+          this.common.hide();
+        },
+        (response: any) => {
+          const firstError = response.errors[0];
+          const firstKey = Object.keys(firstError)[0];
+          this.errorMessage = firstError[firstKey][0];
+          this.common.hide();
+        });
   }
 
   goBack() {

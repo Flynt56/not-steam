@@ -3,6 +3,7 @@ import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { CompanyDetails } from '../model/CompanyDetails';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-company-form',
@@ -15,7 +16,8 @@ export class CompanyFormComponent implements OnInit {
     private route: ActivatedRoute,
     private companyService: CompanyService,
     private common: CommonService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   private company: CompanyDetails = new CompanyDetails();
@@ -55,5 +57,10 @@ export class CompanyFormComponent implements OnInit {
         this.errorMessage = firstError[firstKey][0];
         this.common.hide();
       });
+  }
+
+  goBack() {
+    this.location.back();
+    return false;
   }
 }

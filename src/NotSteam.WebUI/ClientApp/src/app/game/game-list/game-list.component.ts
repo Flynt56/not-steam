@@ -45,7 +45,7 @@ export class GameListComponent implements OnInit {
   }
 
   onAdd() {
-    this.router.navigate(['games/new']);
+    this.router.navigate(['games', 'new']);
   }
 
   onEdit(gameId) {
