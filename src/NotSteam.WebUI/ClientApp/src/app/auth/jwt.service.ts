@@ -36,4 +36,9 @@ export class JwtService {
     return `Bearer ${this.getToken()}`;
   }
 
+  public logout() {
+    this.setUser();
+    this.setToken('');
+  }
+
 }
