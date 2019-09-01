@@ -5,6 +5,8 @@ import { JwtService } from '../../jwt.service';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/common.service';
 import { format } from 'path';
+import { DetailResponse } from 'src/app/shared/Response/DetailResponse';
+import { AuthResponse } from '../../models/AuthResponse';
 
 @Component({
   selector: 'app-register-form',
@@ -24,6 +26,7 @@ export class RegisterFormComponent implements OnInit {
   public errorMessage = '';
 
   ngOnInit() {
+    this.common.hide();
   }
 
   onSubmit() {
@@ -31,11 +34,8 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onRegister() {
-    this.auth.register(this.user).subscribe((response: any) => {
-      const token = response.token;
-
-      this.jwt.setToken(token);
-      this.jwt.setUser(response.user);
+    this.auth.register(this.user).subscribe((response: DetailResponse<AuthResponse>) => {
+      this.jwt.updateUserAuth(response.response.token, response.response.user);
 
       this.router.navigate(['/']);
 

@@ -41,11 +41,9 @@ export class LoginFormComponent implements OnInit {
 
   onLogin() {
     this.auth.login(this.user).subscribe((response: DetailResponse<AuthResponse>) => {
+      this.jwt.updateUserAuth(response.response.token, response.response.user);
 
-      this.jwt.setToken(response.response.token);
-      this.jwt.setUser(response.response.user);
-
-      if (this.returnUrl !== null && this.returnUrl.length > 0) {
+      if (this.hasReturnUrl()) {
         this.router.navigate([this.returnUrl]);
       } else {
         this.router.navigate(['/']);
@@ -67,4 +65,9 @@ export class LoginFormComponent implements OnInit {
 
     return false;
   }
+
+  private hasReturnUrl() {
+    return this.returnUrl !== null && this.returnUrl.length > 0;
+  }
+
 }

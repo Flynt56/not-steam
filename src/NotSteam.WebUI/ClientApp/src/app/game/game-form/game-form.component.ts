@@ -6,6 +6,7 @@ import { CommonService } from 'src/app/shared/common.service';
 import { CompanyDropdown } from 'src/app/company/model/CompanyDropdown';
 import { GameDetails } from '../model/GameDetails';
 import { GameEditForm } from '../model/GameEditForm';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-game-form',
@@ -19,7 +20,8 @@ export class GameFormComponent implements OnInit {
     private gameService: GameService,
     private router: Router,
     private companyService: CompanyService,
-    private common: CommonService
+    private common: CommonService,
+    private location: Location
   ) { }
 
   public game: GameDetails = new GameDetails();
@@ -77,6 +79,11 @@ export class GameFormComponent implements OnInit {
       .subscribe(response => {
         this.companies = response;
       });
+  }
+
+  goBack() {
+    this.location.back();
+    return false;
   }
 
 }

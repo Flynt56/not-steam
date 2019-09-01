@@ -22,6 +22,11 @@ export class JwtService {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
+  public updateUserAuth(token: string, user = {}) {
+    this.setToken(token);
+    this.setUser(user);
+  }
+
   public getUser() {
     return JSON.parse(localStorage.getItem(this.USER_KEY));
   }
